@@ -50,7 +50,7 @@ div.divMain {
 				<tr>
 					<td>密碼:</td>
 					<td><input name="mPassword" value="${param.mPassword}"
-						type="password" size="10"> <font size="-1" color="red">${msgMap.passwordError}</font>
+						type="password" size="10"> <font size="-1" color="red">${msgMap.errorPassword}</font>
 					</td>
 				</tr>
 				<tr>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,22 +24,24 @@ table {
 </head>
 <body>
 	<div class="mainDiv">
-		<form method="post" action="<c:url value='login.do'/>">
+		<form method="POST" action="<c:url value='login.do'/>">
 			<table>
 				<tr>
 					<td>帳號:</td>
-					<td style="width: 150px;"><input name="mAccount" type="text" size="10"></td>
+					<td style="width: 150px;"><input name="mAccount" type="text"
+						size="10" value="${param.mAccount}"></td>
 				</tr>
 				<tr>
 					<td>密碼:</td>
-					<td style="width: 150px;"><input name="mPassword" type="password" size="10"></td>
+					<td style="width: 150px;"><input name="mPassword"
+						type="password" size="10"></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: center"><p>
-					<input type="checkbox" name="rememberMe">記住密碼
-					</p>
-					<p><font size="-1" color="red">${errorMsgMap.LoginError}</font></p>
-					<input type="submit" value="登入"></td>
+							<input type="checkbox" name="rememberMe">記住密碼
+						</p>
+					<p>	<font size="-1" color="red">${errorMsgKey.LoginError}</font> </p>
+						<input type="submit" value="登入"></td>
 				</tr>
 			</table>
 		</form>
