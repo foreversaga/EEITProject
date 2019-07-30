@@ -22,7 +22,9 @@ import register.model.MemberBean;
 /**
  * Servlet Filter implementation class checkLoginFilter
  */
-@WebFilter(urlPatterns = { "/*" }, initParams = { @WebInitParam(name = "mustLogin1", value = "/product/*") }
+@WebFilter(urlPatterns = { "/*" }, initParams = { 
+		@WebInitParam(name = "mustLogin1", value = "/product/*"),
+		@WebInitParam(name = "mustLogin2", value = "/login/MemberInfo.jsp") }
 
 )
 public class checkLoginFilter implements Filter {
@@ -49,11 +51,11 @@ public class checkLoginFilter implements Filter {
 			if (mustLogin()) {
 				if (checkLogin(req)) {
 					chain.doFilter(request, response);
-				} else {//need login but not, move to login.jsp
+				} else {// need login but not, move to login.jsp
 					HttpSession session = req.getSession();
 					if (!requestSessionValid) {
 						session.setAttribute("timeOut", "使用逾時請重新登入");
-					} else {//session is valid, return to last requestURI
+					} else {// session is valid, return to last requestURI
 						session.setAttribute("requestURI", requestURI);
 					}
 					resp.sendRedirect(contextPath + "/login/login.jsp");

@@ -26,7 +26,7 @@ public class productServiceImpl implements productService {
 	}
 
 	@Override
-	public List<productBean> getAllOrders() {
+	public List<productBean> getAllProject() {
 		// TODO Auto-generated method stub
 		return null;
 	}

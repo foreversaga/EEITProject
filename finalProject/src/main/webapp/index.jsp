@@ -17,6 +17,9 @@ div {
 <body>
 	<div>
 		<a href="register/register.jsp">註冊</a> <a href="product/product.jsp">商品頁面</a>
+		<c:if test="${!empty MemberInfo}">
+		<a href="login/MemberInfo.jsp">會員資料</a>
+		</c:if>
 		<c:choose>
 			<c:when test="${empty LoginOK}">
 				<a href="login/login.jsp">登入</a>

@@ -82,11 +82,14 @@ public class loginServlet extends HttpServlet {
 
 		MemberService memberService = new MemberServiceImpl();
 		MemberBean mb = null;
+		MemberBean mbinfo = null;
 		try {// use checkPassword method to get bean, if bean is exist then set attribute
 				// object in session
 			mb = memberService.checkPassword(mAccount, mPassword);
+			mbinfo=memberService.queryMember(mAccount);
 			if (mb != null) {
 				session.setAttribute("LoginOK", mb);
+				session.setAttribute("MemberInfo", mbinfo);
 			} else {
 				errorMsgMap.put("LoginError", "帳號不存在或密碼錯誤");
 			}
