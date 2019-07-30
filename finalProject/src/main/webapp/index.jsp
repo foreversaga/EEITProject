@@ -16,7 +16,8 @@ div {
 </head>
 <body>
 	<div>
-		<a href="register/register.jsp">註冊</a> <a href="product/ProductPage.html">商品頁面</a>
+		<a href="register/register.jsp">註冊</a> <a href="product/ProductPage.html">商品頁面(js)</a>
+		<a href="product.do">商品頁面(mvc)</a>
 		<c:if test="${!empty MemberInfo}">
 		<a href="login/MemberInfo.jsp">會員資料</a>
 		</c:if>

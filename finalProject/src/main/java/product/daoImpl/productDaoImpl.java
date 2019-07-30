@@ -45,15 +45,16 @@ public class productDaoImpl implements productDao{
 		{
 			while(rs.next()) {
 				pb=new productBean();
-				pb.setpID(rs.getInt("pID"));
+				pb.setpDateRange(rs.getDate("pDateRange"));
 				pb.setpName(rs.getString("pName"));
 				pb.setPinStock(rs.getInt("PinStock"));
 				pb.setpPrice(rs.getInt("pPrice"));
+				pb.setpAvgRating(rs.getDouble("pAvgRating"));
 				list.add(pb);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new RuntimeException("productSer");
+			throw new RuntimeException("productDaoImpl發生錯誤:"+e.getMessage());
 		}
 		return list;
 	}

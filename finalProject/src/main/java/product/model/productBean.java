@@ -9,7 +9,7 @@ public class productBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 private Integer pID;
 private String pName;
-private Integer pinStock;
+private Integer PinStock;
 private Integer pPrice;
 private String pContent;
 private String pType;
@@ -35,10 +35,10 @@ public void setpName(String pName) {
 	this.pName = pName;
 }
 public Integer getPinStock() {
-	return pinStock;
+	return PinStock;
 }
-public void setPinStock(Integer pinStock) {
-	this.pinStock = pinStock;
+public void setPinStock(Integer PinStock) {
+	this.PinStock = PinStock;
 }
 public Integer getpPrice() {
 	return pPrice;
@@ -88,18 +88,13 @@ public Double getpAvgRating() {
 public void setpAvgRating(Double pAvgRating) {
 	this.pAvgRating = pAvgRating;
 }
-public Blob getpPicture() {
-	return pPicture;
-}
-public void setpPicture(Blob pPicture) {
-	this.pPicture = pPicture;
-}
-public productBean(Integer pID, String pName, Integer pinStock, Integer pPrice, String pContent, String pType,
-		String pArea, Integer pPopular, Integer pRating, Date pDateRange, Double pAvgRating, Blob pPicture) {
+
+public productBean(Integer pID, String pName, Integer PinStock, Integer pPrice, String pContent, String pType,
+		String pArea, Integer pPopular, Integer pRating, Date pDateRange, Double pAvgRating) {
 	super();
 	this.pID = pID;
 	this.pName = pName;
-	this.pinStock = pinStock;
+	this.PinStock = PinStock;
 	this.pPrice = pPrice;
 	this.pContent = pContent;
 	this.pType = pType;
@@ -108,6 +103,6 @@ public productBean(Integer pID, String pName, Integer pinStock, Integer pPrice, 
 	this.pRating = pRating;
 	this.pDateRange = pDateRange;
 	this.pAvgRating = pAvgRating;
-	this.pPicture = pPicture;
+	
 }
 }
