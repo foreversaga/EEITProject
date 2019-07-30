@@ -6,6 +6,6 @@ import product.model.productBean;
 
 public interface productDao {
  List<productBean> getProduct();
-
+void insertOrder()
 
 }

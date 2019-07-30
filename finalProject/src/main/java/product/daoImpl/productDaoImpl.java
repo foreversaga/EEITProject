@@ -1,4 +1,4 @@
-package productDaoImpl;
+package product.daoImpl;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -26,7 +26,7 @@ public class productDaoImpl implements productDao,Serializable{
 	public productDaoImpl() {
 try {
 	Context ctx=new InitialContext();
-	ds=(DataSource) ctx.lookup("java:comp/env/jdbc/ProjectDataSQLver");
+	ds=(DataSource) ctx.lookup(GlobalService.JNDI_DB);
 }catch(Exception e) {
 	e.printStackTrace();
 	throw new RuntimeException("productDaoImpl建構子發生例外:"+e.getMessage());
@@ -62,6 +62,11 @@ try {
 		throw new RuntimeException("productDaoImpl_getProduct發生例外:"+e.getMessage());
 	}
 		return list;
+	}
+	@Override
+	public void insertOrder() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
