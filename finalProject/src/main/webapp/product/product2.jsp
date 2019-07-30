@@ -12,8 +12,13 @@ div {
 	margin: 100px auto;
 	text-align: center;
 }
-td{width:100px;
-border: 1px solid black;}
+table{
+border-collapse: collapse;
+}
+td{
+width:100px;
+border: 1px solid black;
+}
 </style>
 </head>
 <body>
