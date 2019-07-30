@@ -2,33 +2,22 @@ package product.serviceImpl;
 
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
-
-import product.dao.productDao;
+import product.Dao.productDao;
+import product.daoImpl.productDaoImpl;
 import product.model.productBean;
 import product.service.productService;
-import register.dao.MemberDao;
 
 public class productServiceImpl implements productService {
-	private DataSource ds;
-	private productDao pdao;
-	private MemberDao mdao;
+	productDao pdao;
 
 	public productServiceImpl() {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ProjectDataSQLver");
-		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage());
-		}
+		this.pdao = new productDaoImpl();
 	}
 
 	@Override
-	public List<productBean> getAllProject() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<productBean> getAllProduct() {
+
+		return pdao.getAllProduct();
 	}
 
 }

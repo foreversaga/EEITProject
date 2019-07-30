@@ -5,5 +5,5 @@ import java.util.List;
 import product.model.productBean;
 
 public interface productService {
-List<productBean> getAllProject();
+	List<productBean> getAllProduct();
 }
