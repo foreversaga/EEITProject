@@ -8,7 +8,7 @@
 <title>首頁</title>
 <style>
 div {
-	width: 200px;
+	width: 300px;
 	text-align: center;
 	margin: 100px auto;
 }
@@ -16,7 +16,7 @@ div {
 </head>
 <body>
 	<div>
-		<a href="register/register.jsp">註冊</a> <a href="product/product.jsp">商品頁面</a>
+		<a href="register/register.jsp">註冊</a> <a href="product/ProductPage.html">商品頁面</a>
 		<c:if test="${!empty MemberInfo}">
 		<a href="login/MemberInfo.jsp">會員資料</a>
 		</c:if>
