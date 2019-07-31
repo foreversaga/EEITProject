@@ -8,7 +8,7 @@
 <title>首頁</title>
 <style>
 div {
-	width: 300px;
+	width: 500px;
 	text-align: center;
 	margin: 100px auto;
 }
@@ -26,6 +26,7 @@ div {
 				<a href="login/login.jsp">登入</a>
 			</c:when>
 			<c:otherwise>
+			<a href="maintain/maintain.jsp">維護商品</a>
 				<a href="login/logout.jsp">登出</a>
 			</c:otherwise>
 		</c:choose>

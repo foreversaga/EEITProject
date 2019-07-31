@@ -20,4 +20,10 @@ public class productServiceImpl implements productService {
 		return pdao.getAllProduct();
 	}
 
+	@Override
+	public int insertNewProduct(productBean pb) {
+	
+		return pdao.insertNewProduct(pb);
+	}
+
 }

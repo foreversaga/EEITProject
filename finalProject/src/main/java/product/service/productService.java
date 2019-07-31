@@ -6,4 +6,6 @@ import product.model.productBean;
 
 public interface productService {
 	List<productBean> getAllProduct();
+	
+	int insertNewProduct(productBean pb);
 }

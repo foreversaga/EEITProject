@@ -60,7 +60,7 @@ public class productDaoImpl implements productDao {
 
 	@Override
 	public int insertNewProduct(productBean pb) {
-		String sql = "INSERT INTO product (pName,pPrice,PinStock,pDateRange,pContent) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO product (pName,pPrice,PinStock,pDateRange,pContent,pID) VALUES (?,?,?,?,?,?)";
 		int n=0;
 		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
 			ps.setString(1, pb.getpName());
@@ -68,6 +68,7 @@ public class productDaoImpl implements productDao {
 			ps.setInt(3, pb.getPinStock());
 			ps.setDate(4, pb.getpDateRange());
 			ps.setString(5, pb.getpContent());
+			ps.setInt(6, pb.getpID());
 			n = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
