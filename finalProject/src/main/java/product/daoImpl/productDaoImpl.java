@@ -44,6 +44,7 @@ public class productDaoImpl implements productDao {
 				ResultSet rs = ps.executeQuery();) {
 			while (rs.next()) {
 				pb = new productBean();
+				pb.setpID(rs.getInt("pID"));
 				pb.setpDateRange(rs.getDate("pDateRange"));
 				pb.setpName(rs.getString("pName"));
 				pb.setPinStock(rs.getInt("PinStock"));
