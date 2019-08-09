@@ -29,19 +29,23 @@ table {
 				<tr>
 					<td>帳號:</td>
 					<td style="width: 150px;"><input name="mAccount" type="text"
-						size="10" value="${param.mAccount}"></td>
+						size="10" value="${requestScope.user }${param.mAccount}"></td>
 				</tr>
 				<tr>
 					<td>密碼:</td>
 					<td style="width: 150px;"><input name="mPassword"
-						type="password" size="10"></td>
+						type="password" size="10" value="${requestScope.password }"></td>
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align: center"><p>
-							<input type="checkbox" name="rememberMe">記住密碼
+							<input type="checkbox" name="rememberMe"
+								<c:if test='${requestScope.rememberMe==true}'>
+							ckecked='checked'
+							</c:if> value="true">記住密碼
 						</p>
-					<p>	<font size="-1" color="red">${errorMsgKey.LoginError}</font> </p>
-						<input type="submit" value="登入"></td>
+						<p>
+							<font size="-1" color="red">${errorMsgKey.LoginError}</font>
+						</p> <input type="submit" value="登入"></td>
 				</tr>
 			</table>
 		</form>

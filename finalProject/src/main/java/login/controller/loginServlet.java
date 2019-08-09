@@ -35,6 +35,7 @@ public class loginServlet extends HttpServlet {
 		String mPassword = request.getParameter("mPassword");
 		String rememberMe = request.getParameter("rememberMe");
 		String requestURI = (String) session.getAttribute("requestURI");
+		
 
 		if (mAccount == null || mAccount.trim().length() == 0) {
 			errorMsgMap.put("AccountError", "帳號欄必須輸入");
@@ -60,7 +61,7 @@ public class loginServlet extends HttpServlet {
 			cookiePasswrod.setMaxAge(7 * 24 * 60 * 60);
 			cookiePasswrod.setPath(request.getContextPath());
 
-			cookieRememberMe = new Cookie("rm", "true");
+			cookieRememberMe = new Cookie("rememberMe", "true");
 			cookieRememberMe.setMaxAge(7 * 24 * 60 * 60);
 			cookieRememberMe.setPath(request.getContextPath());
 		} else {// no remember, set maxage=0 to remove cookie
@@ -72,7 +73,7 @@ public class loginServlet extends HttpServlet {
 			cookiePasswrod.setMaxAge(0);
 			cookiePasswrod.setPath(request.getContextPath());
 
-			cookieRememberMe = new Cookie("rm", "true");
+			cookieRememberMe = new Cookie("rememberMe", "true");
 			cookieRememberMe.setMaxAge(0);
 			cookieRememberMe.setPath(request.getContextPath());
 		}
