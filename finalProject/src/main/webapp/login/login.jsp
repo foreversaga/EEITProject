@@ -39,9 +39,10 @@ table {
 				<tr>
 					<td colspan="2" style="text-align: center"><p>
 							<input type="checkbox" name="rememberMe"
-								<c:if test='${requestScope.rememberMe==true}'>
-							ckecked='checked'
-							</c:if> value="true">記住密碼
+								<c:if test='${!empty requestScope.rememberMe}'>
+							checked='checked'
+							</c:if>
+								value="true">記住密碼
 						</p>
 						<p>
 							<font size="-1" color="red">${errorMsgKey.LoginError}</font>
