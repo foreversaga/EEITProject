@@ -20,7 +20,7 @@
 <title>維護商品</title>
 <style>
 div.main {
-	width: 300px;
+	width: 350px;
 	margin: 100px auto;
 	text-align: center;
 }
@@ -37,21 +37,21 @@ text-align: left;}
 <body>
 
 <div class="main">
-<form action="maintain.do" method="POST">
+<form action="maintain.do" method="POST" enctype="multipart/form-data">
 <table>
 <tr><th>新增產品</th></tr>
-<tr><td>產品編號</td><td><input name="pID" type="text" size="10" value="${param.pID}">
-<font size="-1" color="red">${msgMap.idError}</font></td>
 <tr><td>產品名稱</td><td><input name="pName" type="text" size="10" value="${param.pName}">
-<font size="-1" color="red">${msgMap.nameError}</font></td>
+<font size="-1" color="red">${msgMap.nameError}</font></td></tr>
 <tr><td>產品價格</td><td><input name="pPrice" type="text" size="10" value="${param.pPrice}">
-<font size="-1" color="red">${msgMap.priceError}</font></td>
-<tr><td>產品庫存量</td><td><input name="PinStock" type="text" size="10" value="${param.PinStock}">
-<font size="-1" color="red">${msgMap.stockError}</font></td>
+<font size="-1" color="red">${msgMap.priceError}</font></td></tr>
+<tr><td>產品庫存量</td><td><input name="pInstock" type="text" size="10" value="${param.pInstock}">
+<font size="-1" color="red">${msgMap.stockError}</font></td></tr>
 <tr><td>產品有效日期</td><td><input id="datepicker" name="pDateRange" type="text" size="10" value="${param.pDateRange}">
-<font size="-1" color="red">${msgMap.dateError}</font></td>
+<font size="-1" color="red">${msgMap.dateError}</font></td></tr>
 <tr><td>產品說明</td><td><input name="pContent" type="text" size="20" value="${param.pContent}">
 <font size="-1" color="red">${msgMap.countentError}</font></td></tr>
+<tr><td>產品圖片</td><td><input name="pPicture" type="file">
+<font size="-1" color="red">${msgMap.errorPic}</font></td></tr>
 <tr><td colspan="2" style="text-align: center"><input type="submit" value="送出"></td></tr>
 
 </table>

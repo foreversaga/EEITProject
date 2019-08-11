@@ -24,20 +24,20 @@ border: 1px solid black;
 <body>
 <div>
 <a href="checkBill.do">結帳</a>
-<a href="index.jsp">回首頁</a>
+<a href="../index.jsp">回首頁</a>
 </div>
 <div>
 
 <c:forEach varStatus="stVar"  var="productBean"  items="${productList}" >
 <table>
-<tr><td>商品名稱</td><td>庫存數量</td><td>商品價格</td><td>使用日期</td><td>商品評價</td><td rowspan="2" style="width:150px">
+<tr><td>商品圖片</td><td>商品名稱</td><td>商品價格</td><td>使用日期</td><td>商品評價</td><td rowspan="2" style="width:150px">
 <form>
-<c:if test="${productBean.pinStock==0 }">
+<c:if test="${productBean.pInstock==0 }">
 <p>已售完</p>
 </c:if>
-<c:if test="${productBean.pinStock!=0 }">
+<c:if test="${productBean.pInstock!=0 }">
 <select name="oAmount">
-<c:forEach var="stock" begin="1" end="${productBean.pinStock}">
+<c:forEach var="stock" begin="1" end="${productBean.pInstock}">
 <option value="${stock}">${stock}</option>
 </c:forEach>
 </select>
@@ -46,10 +46,12 @@ border: 1px solid black;
 <input type="hidden" name="pName" value="${productBean.pName }">
 <input type="hidden" name="pPrice" value="${productBean.pPrice }">
 <input type="hidden" name="pDateRange" value="${productBean.pDateRange }">
+<c:if test="${productBean.pInstock!=0 }">
 <input type="submit" value="加到購物車">
+</c:if>
 </form>
 </td></tr>
-<tr><td>${productBean.pName}</td><td>${productBean.pinStock}</td><td>${productBean.pPrice}</td>
+<tr><td><img src="${productBean.pPicture}"></td><td>${productBean.pName}</td><td>${productBean.pPrice}</td>
 <td>${productBean.pDateRange}</td><td>${productBean.pAvgRating}</td></tr>
 </table>
 <br>

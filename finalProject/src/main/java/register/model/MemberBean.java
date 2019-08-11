@@ -3,7 +3,12 @@ package register.model;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "Member")
 public class MemberBean implements Serializable {
 
 	public MemberBean() {
@@ -11,8 +16,9 @@ public class MemberBean implements Serializable {
 	}
 
 	private static final long serialVersionUID = 1L;
-	private String mPassword;
+	@Id
 	private String mAccount;
+	private String mPassword;
 	private String mName;
 	private Date mDate;
 	private Integer mPhone;

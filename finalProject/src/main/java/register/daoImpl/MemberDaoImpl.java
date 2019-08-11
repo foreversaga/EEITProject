@@ -1,102 +1,69 @@
 package register.daoImpl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import login.HibernateUtils;
 import register.dao.MemberDao;
 import register.model.MemberBean;
 
 public class MemberDaoImpl implements MemberDao {
-	private DataSource ds = null;
-	private Connection conn = null;
+	SessionFactory factory;
 
 	public MemberDaoImpl() {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/ProjectDataSQLver");
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("MemberDaoImpl類別建構子發生例外:" + ex.getMessage());
-		}
+		this.factory = HibernateUtils.getSessionFactory();
 	}
 
 	@Override
 	public void setConnection(Connection conn) {
-		this.conn = conn;
-
+//		this.conn = conn;
 	}
 
 	@Override
 	public boolean checkAccount(String mAccount) {
 		boolean exist = false;
-		String sql = "SELECT * FROM member WHERE mAccount=?";
-		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
-			ps.setString(1, mAccount);
-			try (ResultSet rs = ps.executeQuery();) {
-				if (rs.next()) {
-					exist = true;
-				}
+		String sql = "FROM MemberBean m WHERE m.mAccount=:mid";
+		Session session = factory.getCurrentSession();
+		try {
+			MemberBean mb = (MemberBean) session.createQuery(sql).setParameter("mid", mAccount).uniqueResult();
+			if (mb != null) {
+				exist = true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException("MemberDaoImpl類別checkAccount()發生例外:" + e.getMessage());
+		} catch (NoResultException ex) {
+			exist = false;
+		} catch (NonUniqueResultException ex) {
+			exist = true;
 		}
 		return exist;
 	}
 
 	@Override
 	public int registerMember(MemberBean mb) {
-		String sql = "INSERT INTO member(mAccount,mPassword,mName,mBirth,mPhone,mAddress,mID,mGender,mEmail)"
-				+ "VALUES (?,?,?,?,?,?,?,?,?)";
 		int n = 0;
-		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
-			ps.setString(1, mb.getmAccount());
-			ps.setString(2, mb.getmPassword());
-			ps.setString(3, mb.getmName());
-			ps.setDate(4, mb.getmDate());
-			ps.setInt(5, mb.getmPhone());
-			ps.setString(6, mb.getmAddress());
-			ps.setString(7, mb.getmID());
-			ps.setString(8, mb.getmGender());
-			ps.setString(9, mb.getmEmail());
-			n = ps.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("MemberDaoImpl類別registerMember()發生例外:" + e.getMessage());
-		}
+		Session session = factory.getCurrentSession();
+		session.save(mb);
+		n++;
+
 		return n;
 	}
 
 	@Override
 	public MemberBean queryMember(String mAccount) {
 		MemberBean mb = null;
-		String sql = "SELECT * FROM member WHERE mAccount=?";
-		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
-			ps.setString(1, mAccount);
-			try (ResultSet rs = ps.executeQuery();) {
-				if (rs.next()) {
-					mb = new MemberBean();
-					mb.setmAccount(rs.getString("mAccount"));
-					mb.setmPassword(rs.getString("mPassword"));
-					mb.setmName(rs.getString("mName"));
-					mb.setmDate(rs.getDate("mBirth"));
-					mb.setmPhone(rs.getInt("mPhone"));
-					mb.setmAddress(rs.getString("mAddress"));
-					mb.setmID(rs.getString("mID"));
-					mb.setmGender(rs.getString("mGender"));
-					mb.setmEmail(rs.getString("mEmail"));
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException("MemberDaoImpl類別queryMember()發生例外:" + e.getMessage());
+		Session session = factory.getCurrentSession();
+		String sql = "FROM MemberBean m WHERE m.mAccount=:mid";
+		try {
+			mb = (MemberBean) session.createQuery(sql).setParameter("mid", mAccount).uniqueResult();
+		} catch (NonUniqueResultException ex) {
+			mb = null;
 		}
 		return mb;
 	}
@@ -104,28 +71,15 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public MemberBean checkPassword(String mAccount, String mPassword) {
 		MemberBean mb = null;
-		String sql = "SELECT * FROM member m WHERE m.mAccount=? AND m.mPassword=?";
-		try (Connection con = ds.getConnection(); PreparedStatement ps = con.prepareStatement(sql);) {
-			ps.setString(1, mAccount);
-			ps.setString(2, mPassword);
-			try (ResultSet rs = ps.executeQuery();) {
-				if (rs.next()) {
-					mb = new MemberBean();
-					mb.setmAccount(rs.getString("mAccount"));
-					mb.setmPassword(rs.getString("mPassword"));
-					mb.setmName(rs.getString("mName"));
-					mb.setmDate(rs.getDate("mBirth"));
-					mb.setmPhone(rs.getInt("mPhone"));
-					mb.setmAddress(rs.getString("mAddress"));
-					mb.setmID(rs.getString("mID"));
-					mb.setmGender(rs.getString("mGender"));
-					mb.setmEmail(rs.getString("mEmail"));
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new RuntimeException("MemberDaoImpl類別checkPassword()發生例外:" + e.getMessage());
+		Session session = factory.getCurrentSession();
+		String sql = "FROM MemberBean m WHERE m.mAccount=:mid and m.mPassword=:pswd";
+		try {
+			mb = (MemberBean) session.createQuery(sql).setParameter("mid", mAccount).setParameter("pswd", mPassword)
+					.uniqueResult();
+		} catch (NoResultException ex) {
+			mb = null;
 		}
+
 		return mb;
 	}
 

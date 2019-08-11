@@ -4,12 +4,22 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Product")
 public class productBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer pID;
 	private String pName;
-	private Integer PinStock;
+	private Integer pInstock;
 	private Integer pPrice;
 	private String pContent;
 	private String pType;
@@ -40,12 +50,12 @@ public class productBean implements Serializable {
 		this.pName = pName;
 	}
 
-	public Integer getPinStock() {
-		return PinStock;
+	public Integer getpInstock() {
+		return pInstock;
 	}
 
-	public void setPinStock(Integer PinStock) {
-		this.PinStock = PinStock;
+	public void setPinStock(Integer pInstock) {
+		this.pInstock = pInstock;
 	}
 
 	public Integer getpPrice() {
@@ -112,12 +122,13 @@ public class productBean implements Serializable {
 		this.pAvgRating = pAvgRating;
 	}
 
-	public productBean(Integer pID, String pName, Integer PinStock, Integer pPrice, String pContent, String pType,
-			String pArea, Integer pPopular, Integer pRating, Date pDateRange, Double pAvgRating) {
+
+	public productBean(Integer pID, String pName, Integer pInstock, Integer pPrice, String pContent, String pType,
+			String pArea, Integer pPopular, Integer pRating, Date pDateRange, Double pAvgRating, Blob pPicture) {
 		super();
 		this.pID = pID;
 		this.pName = pName;
-		this.PinStock = PinStock;
+		this.pInstock = pInstock;
 		this.pPrice = pPrice;
 		this.pContent = pContent;
 		this.pType = pType;
@@ -126,6 +137,14 @@ public class productBean implements Serializable {
 		this.pRating = pRating;
 		this.pDateRange = pDateRange;
 		this.pAvgRating = pAvgRating;
+		this.pPicture = pPicture;
+	}
 
+	public Blob getpPicture() {
+		return pPicture;
+	}
+
+	public void setpPicture(Blob pPicture) {
+		this.pPicture = pPicture;
 	}
 }
