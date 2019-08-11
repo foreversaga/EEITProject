@@ -29,6 +29,7 @@ public class productBean implements Serializable {
 	private java.sql.Date pDateRange;
 	private Double pAvgRating;
 	private Blob pPicture;
+	private String pFileName;
 
 	public productBean() {
 
@@ -122,9 +123,9 @@ public class productBean implements Serializable {
 		this.pAvgRating = pAvgRating;
 	}
 
-
 	public productBean(Integer pID, String pName, Integer pInstock, Integer pPrice, String pContent, String pType,
-			String pArea, Integer pPopular, Integer pRating, Date pDateRange, Double pAvgRating, Blob pPicture) {
+			String pArea, Integer pPopular, Integer pRating, Date pDateRange, Double pAvgRating, Blob pPicture,
+			String pFileName) {
 		super();
 		this.pID = pID;
 		this.pName = pName;
@@ -138,6 +139,7 @@ public class productBean implements Serializable {
 		this.pDateRange = pDateRange;
 		this.pAvgRating = pAvgRating;
 		this.pPicture = pPicture;
+		this.pFileName = pFileName;
 	}
 
 	public Blob getpPicture() {
@@ -146,5 +148,13 @@ public class productBean implements Serializable {
 
 	public void setpPicture(Blob pPicture) {
 		this.pPicture = pPicture;
+	}
+
+	public String getpFileName() {
+		return pFileName;
+	}
+
+	public void setpFileName(String pFileName) {
+		this.pFileName = pFileName;
 	}
 }

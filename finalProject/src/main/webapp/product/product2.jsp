@@ -51,7 +51,7 @@ border: 1px solid black;
 </c:if>
 </form>
 </td></tr>
-<tr><td><img src="${productBean.pPicture}"></td><td>${productBean.pName}</td><td>${productBean.pPrice}</td>
+<tr><td><img src="${pageContext.servletContext.contextPath}/ShowPicServlet?pID=${productBean.pID}"></td><td>${productBean.pName}</td><td>${productBean.pPrice}</td>
 <td>${productBean.pDateRange}</td><td>${productBean.pAvgRating}</td></tr>
 </table>
 <br>

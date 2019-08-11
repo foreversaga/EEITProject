@@ -23,7 +23,7 @@ import product.service.productService;
 import product.serviceImpl.productServiceImpl;
 
 @MultipartConfig(location = "", fileSizeThreshold = 5 * 1024 * 1024, maxFileSize = 1024 * 1024
-* 500, maxRequestSize = 1024 * 1024 * 500 * 5)
+		* 500, maxRequestSize = 1024 * 1024 * 500 * 5)
 
 @WebServlet({ "/maintain.do", "/maintain/maintain.do" })
 public class maintainServlet extends HttpServlet {
@@ -50,6 +50,7 @@ public class maintainServlet extends HttpServlet {
 			String pContent = "";
 			long filesize = 0;
 			InputStream is = null;
+			String pFileName = "";
 
 			for (Part p : parts) {
 				String upName = p.getName();
@@ -94,15 +95,15 @@ public class maintainServlet extends HttpServlet {
 						}
 					}
 				} else {
-					String fName = "";
 					for (String content : p.getHeader("content-disposition").split(";")) {
 						if (content.trim().startsWith("filename")) {
-							fName = content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
+							pFileName = content.substring(content.indexOf('=') + 1).trim().replace("\"", "");
 						}
 					}
-					if (fName != null && fName.trim().length() > 0) {
+					if (pFileName != null && pFileName.trim().length() > 0) {
 						filesize = p.getSize();
 						is = p.getInputStream();
+						request.setAttribute("pFileName", pFileName);
 					} else {
 						errorMsg.put("errorPic", "必須挑選圖片檔");
 					}
@@ -111,7 +112,7 @@ public class maintainServlet extends HttpServlet {
 			byte[] b = new byte[(int) filesize];
 			SerialBlob blob = new SerialBlob(b);
 			productBean pb = new productBean(null, pName, pInstock, pPrice, pContent, null, null, null, null,
-					pDateRange, null, blob);
+					pDateRange, null, blob, pFileName);
 			productService service = new productServiceImpl();
 			int n = service.insertNewProduct(pb);
 			if (n == 1) {

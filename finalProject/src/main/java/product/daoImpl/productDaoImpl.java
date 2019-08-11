@@ -47,4 +47,13 @@ public class productDaoImpl implements productDao {
 		return n;
 	}
 
+	@Override
+	public productBean getProduct(int pID) {
+	productBean pb=null;
+	Session session=factory.getCurrentSession();
+	String sql="FROM productBean p WHERE p.pID=:pid";
+	pb=(productBean) session.createQuery(sql).setParameter("pid", pID).uniqueResult();
+		return pb;
+	}
+
 }

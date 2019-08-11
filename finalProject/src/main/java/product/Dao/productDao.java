@@ -11,4 +11,6 @@ public interface productDao {
 	public List<productBean> getAllProduct();
 	
 	public int insertNewProduct(productBean pb);
+	
+	public productBean getProduct(int pID);
 }

@@ -59,4 +59,22 @@ public class productServiceImpl implements productService {
 		return n;
 	}
 
+	@Override
+	public productBean getProduct(int pID) {
+		productBean pb=null;
+		Session session=factory.getCurrentSession();
+		Transaction tx=null;
+		try {
+			tx=session.beginTransaction();
+			pb=pdao.getProduct(pID);
+			tx.commit();
+		}catch(Exception e) {
+			if(tx!=null) {
+				tx.rollback();
+				throw new RuntimeException(e);
+			}
+		}
+		return null;
+	}
+
 }
