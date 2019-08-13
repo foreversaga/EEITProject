@@ -8,7 +8,7 @@
 <title>購物車清單</title>
 <style>
 div {
-	width: 600px;
+	width: 400px;
 	margin: 50px auto;
 	text-align: center;
 }
@@ -17,6 +17,9 @@ border-collapse: collapse;
 }
 td{
 width:100px;
+border: 1px solid black;
+}
+th{
 border: 1px solid black;
 }
 </style>
@@ -39,9 +42,10 @@ border: 1px solid black;
 </tr>
 </c:forEach>
 </table>
-
 </div>
-
+<div>
+<a href="checkout.jsp">結帳</a>
+</div>
 
 </body>
 </html>
