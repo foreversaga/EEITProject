@@ -55,8 +55,8 @@ public class registerServlet extends HttpServlet {
 		if (tempBirth == null || tempBirth.trim().length() == 0) {
 			errorMsg.put("errorBirth", "請輸入生日");
 		}
-		String tempPhone = request.getParameter("mPhone");
-		if (tempPhone == null || tempPhone.trim().length() == 0) {
+		String mPhone = request.getParameter("mPhone");
+		if (mPhone == null || mPhone.trim().length() == 0) {
 			errorMsg.put("errorPhone", "請輸入電話");
 		}
 		String mAddress = request.getParameter("mAddress");
@@ -96,7 +96,6 @@ public class registerServlet extends HttpServlet {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				java.util.Date d = sdf.parse(tempBirth);
 				Date mBirth = new Date(d.getTime());
-				Integer mPhone = Integer.parseInt(tempPhone);
 				MemberBean mb = new MemberBean(mPassword, mAccount, mName, mBirth, mPhone, mAddress, mID, mGender,
 						mEmail);
 

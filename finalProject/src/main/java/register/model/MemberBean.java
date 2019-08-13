@@ -21,11 +21,11 @@ public class MemberBean implements Serializable {
 	private String mPassword;
 	private String mName;
 	private Date mDate;
-	private Integer mPhone;
+	private String mPhone;
 	private String mAddress;
 	private String mID;
 
-	public MemberBean(String mPassword, String mAccount, String mName, Date mDate, Integer mPhone, String mAddress,
+	public MemberBean(String mPassword, String mAccount, String mName, Date mDate, String mPhone, String mAddress,
 			String mID, String mGender, String mEmail) {
 		super();
 		this.mPassword = mPassword;
@@ -74,11 +74,11 @@ public class MemberBean implements Serializable {
 		this.mDate = mDate;
 	}
 
-	public Integer getmPhone() {
+	public String getmPhone() {
 		return mPhone;
 	}
 
-	public void setmPhone(Integer mPhone) {
+	public void setmPhone(String mPhone) {
 		this.mPhone = mPhone;
 	}
 

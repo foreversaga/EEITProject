@@ -19,7 +19,7 @@ import product.serviceImpl.productServiceImpl;
 /**
  * Servlet implementation class ShowPicServlet
  */
-@WebServlet("/ShowPicServlet")
+@WebServlet("/ShowPic")
 public class ShowPicServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

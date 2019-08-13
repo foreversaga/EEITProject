@@ -110,6 +110,7 @@ public class maintainServlet extends HttpServlet {
 				}
 			}
 			byte[] b = new byte[(int) filesize];
+			is.read(b);
 			SerialBlob blob = new SerialBlob(b);
 			productBean pb = new productBean(null, pName, pInstock, pPrice, pContent, null, null, null, null,
 					pDateRange, null, blob, pFileName);

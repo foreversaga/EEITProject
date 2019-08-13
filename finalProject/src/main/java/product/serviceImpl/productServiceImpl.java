@@ -74,7 +74,7 @@ public class productServiceImpl implements productService {
 				throw new RuntimeException(e);
 			}
 		}
-		return null;
+		return pb;
 	}
 
 }
