@@ -33,24 +33,28 @@ public class BuyServlet extends HttpServlet {
 			cart = new shoppingCart();
 			session.setAttribute("shoppingCart", cart);
 		}
-		String pName=request.getParameter("pName");
-		String oQtyStr=request.getParameter("oQty");
-		String pIdStr=request.getParameter("pId");
-		String pPriceStr=request.getParameter("pPrice");
-		
-		int oQty=0;
-		int pId=0;
-		int pPrice=0;
+		String pName = request.getParameter("pName");
+		String oQtyStr = request.getParameter("oQty");
+		String pIdStr = request.getParameter("pId");
+		String pPriceStr = request.getParameter("pPrice");
+		String pageNoStr = session.getAttribute("pageNo").toString();
+
+		int pageNo = 0;
+		int oQty = 0;
+		int pId = 0;
+		int pPrice = 0;
 		try {
-			oQty=Integer.parseInt(oQtyStr);
-			pId=Integer.parseInt(pIdStr);
-			pPrice=Integer.parseInt(pPriceStr);
-		}catch(NumberFormatException e) {
+			pageNo = Integer.parseInt(pageNoStr);
+			oQty = Integer.parseInt(oQtyStr);
+			pId = Integer.parseInt(pIdStr);
+			pPrice = Integer.parseInt(pPriceStr);
+		} catch (NumberFormatException e) {
 			throw new ServletException(e);
 		}
-		orderItem oi =new orderItem(null,pPrice,pId,oQty,pName);
+		orderItem oi = new orderItem(pPrice, pId, oQty, pName);
 		cart.addToCart(pId, oi);
-		RequestDispatcher rd=request.getRequestDispatcher("/product/product2.jsp");
+		session.setAttribute("pageNo", pageNo);
+		RequestDispatcher rd = request.getRequestDispatcher("product.do?pageNo="+pageNo);
 		rd.forward(request, response);
 	}
 

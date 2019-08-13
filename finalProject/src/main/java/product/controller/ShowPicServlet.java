@@ -47,7 +47,11 @@ public class ShowPicServlet extends HttpServlet {
 			if (pb != null) {
 				blob = pb.getpPicture();
 				if (blob != null) {
-					is = blob.getBinaryStream();
+					try {
+						is = blob.getBinaryStream();
+					} catch (NullPointerException e) {
+						;// catch exception when picture is null
+					}
 				}
 				fileName = pb.getpFileName();
 			}
@@ -56,9 +60,15 @@ public class ShowPicServlet extends HttpServlet {
 			os = response.getOutputStream();
 			int len = 0;
 			byte[] bytes = new byte[8192];
-			while ((len = is.read(bytes)) != -1) {
-				os.write(bytes, 0, len);
+
+			try {
+				while ((len = is.read(bytes)) != -1) {
+					os.write(bytes, 0, len);
+				}
+			} catch (NullPointerException e) {
+				;// catch exception when picture is null
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException("showPictureServlet發生錯誤:" + e.getMessage());

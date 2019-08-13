@@ -1,27 +1,27 @@
 package cart.model;
 
 public class orderItem {
-	private Integer oNo;
-	private Integer iPrice;
+	
+	private Integer pPrice;
 	private Integer pId;
 	private Integer iQty;
 	private String pName;
 
-	public orderItem(Integer oNo, Integer iPrice, Integer pId, Integer iQty, String pName) {
+	public orderItem(Integer pPrice, Integer pId, Integer iQty, String pName) {
 		super();
-		this.oNo = oNo;
-		this.iPrice = iPrice;
+		
+		this.pPrice = pPrice;
 		this.pId = pId;
 		this.iQty = iQty;
 		this.pName = pName;
 	}
 
-	public Integer getiPrice() {
-		return iPrice;
+	public Integer getpPrice() {
+		return pPrice;
 	}
 
-	public void setiPrice(Integer iPrice) {
-		this.iPrice = iPrice;
+	public void setpPrice(Integer pPrice) {
+		this.pPrice = pPrice;
 	}
 
 	public Integer getpId() {
@@ -48,12 +48,5 @@ public class orderItem {
 		this.pName = pName;
 	}
 
-	public Integer getoNo() {
-		return oNo;
-	}
-
-	public void setoNo(Integer oNo) {
-		this.oNo = oNo;
-	}
 
 }

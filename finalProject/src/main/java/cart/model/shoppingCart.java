@@ -11,7 +11,7 @@ public class shoppingCart {
 	public shoppingCart() {
 	}
 
-	public Map<Integer, orderItem> getContent() {
+	public Map<Integer, orderItem> getContent() {//let checkCart.jsp get cart object via session
 		return cart;
 	}
 
@@ -31,7 +31,7 @@ public class shoppingCart {
 		int totalAmount = 0;
 		Set<Integer> set = cart.keySet();
 		for (int n : set) {
-			int price = cart.get(n).getiPrice();
+			int price = cart.get(n).getpPrice();
 			int qty = cart.get(n).getiQty();
 			totalAmount = price * qty;
 		}
