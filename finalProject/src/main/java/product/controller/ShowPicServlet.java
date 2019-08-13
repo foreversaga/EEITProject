@@ -36,7 +36,7 @@ public class ShowPicServlet extends HttpServlet {
 		Blob blob = null;
 		String fileName = null;
 		try {
-			String id = request.getParameter("pID");
+			String id = request.getParameter("pId");
 			productService productService = new productServiceImpl();
 			int nid = 0;
 			try {

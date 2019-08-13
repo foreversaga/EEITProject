@@ -15,7 +15,8 @@ import product.Dao.productDao;
 import product.model.productBean;
 
 public class productDaoImpl implements productDao {
-	private DataSource ds;
+	int pageNo = 0;
+	int dataPerPage = 3;
 	SessionFactory factory;
 
 	public productDaoImpl() {
@@ -34,7 +35,8 @@ public class productDaoImpl implements productDao {
 		List<productBean> list = new ArrayList<productBean>();
 		Session session = factory.getCurrentSession();
 		String sql = "FROM productBean";
-		list = session.createQuery(sql).list();
+		int startPage = (pageNo - 1) * dataPerPage;
+		list = session.createQuery(sql).setFirstResult(startPage).setMaxResults(dataPerPage).list();
 		return list;
 	}
 
@@ -48,12 +50,33 @@ public class productDaoImpl implements productDao {
 	}
 
 	@Override
-	public productBean getProduct(int pID) {
-	productBean pb=null;
-	Session session=factory.getCurrentSession();
-	String sql="FROM productBean p WHERE p.pID=:pid";
-	pb=(productBean) session.createQuery(sql).setParameter("pid", pID).uniqueResult();
+	public productBean getProduct(int pId) {
+		productBean pb = null;
+		Session session = factory.getCurrentSession();
+		String sql = "FROM productBean p WHERE p.pId=:pid";
+		pb = (productBean) session.createQuery(sql).setParameter("pid", pId).uniqueResult();
 		return pb;
+	}
+
+	@Override
+	public int getPageNo() {
+		return pageNo;
+	}
+
+	@Override
+	public int getDataPerPage() {
+		return dataPerPage;
+	}
+
+	@Override
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+
+	@Override
+	public void setDataPerPage(int dataPerPage) {
+		this.dataPerPage = dataPerPage;
+
 	}
 
 }

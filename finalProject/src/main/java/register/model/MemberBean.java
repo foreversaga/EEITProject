@@ -2,31 +2,52 @@ package register.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import cart.model.orderBean;
 
 @Entity
 @Table(name = "Member")
 public class MemberBean implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	public MemberBean() {
 
 	}
 
-	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer mId;
 	private String mAccount;
 	private String mPassword;
 	private String mName;
 	private Date mDate;
 	private String mPhone;
 	private String mAddress;
-	private String mID;
+	private String mGender;
+	private String mEmail;
+	@OneToMany(mappedBy = "mId", cascade = CascadeType.ALL)//set object mapped by mId
+	Set<orderBean> set = new LinkedHashSet<>();
+
+	public Set<orderBean> getSet() {
+		return set;
+	}
+
+	public void setSet(Set<orderBean> set) {
+		this.set = set;
+	}
 
 	public MemberBean(String mPassword, String mAccount, String mName, Date mDate, String mPhone, String mAddress,
-			String mID, String mGender, String mEmail) {
+			Integer mId, String mGender, String mEmail) {
 		super();
 		this.mPassword = mPassword;
 		this.mAccount = mAccount;
@@ -34,14 +55,19 @@ public class MemberBean implements Serializable {
 		this.mDate = mDate;
 		this.mPhone = mPhone;
 		this.mAddress = mAddress;
-		this.mID = mID;
+		this.mId = mId;
 		this.mGender = mGender;
 		this.mEmail = mEmail;
 	}
 
-	private String mGender;
-	private String mEmail;
+	public Integer getmId() {
+		return mId;
+	}
 
+	public void setmId(Integer mId) {
+		this.mId = mId;
+	}
+	
 	public String getmPassword() {
 		return mPassword;
 	}
@@ -88,14 +114,6 @@ public class MemberBean implements Serializable {
 
 	public void setmAddress(String mAddress) {
 		this.mAddress = mAddress;
-	}
-
-	public String getmID() {
-		return mID;
-	}
-
-	public void setmID(String mID) {
-		this.mID = mID;
 	}
 
 	public String getmGender() {

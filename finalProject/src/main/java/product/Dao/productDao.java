@@ -12,5 +12,13 @@ public interface productDao {
 	
 	public int insertNewProduct(productBean pb);
 	
-	public productBean getProduct(int pID);
+	public productBean getProduct(int pId);
+	
+	public int getPageNo();
+	
+	public int getDataPerPage();
+	
+	public void setPageNo(int pageNo);
+	
+	public void setDataPerPage(int dataPerPage);
 }

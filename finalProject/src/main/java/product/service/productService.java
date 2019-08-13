@@ -9,5 +9,11 @@ public interface productService {
 	
 	int insertNewProduct(productBean pb);
 	
-	productBean getProduct(int pID);
+	productBean getProduct(int pId);
+	
+	void setPageNo(int pageNo);
+	int getPageNo();
+	
+	void setDataPerPage(int dataPerPage);
+	int getDataPerPage();
 }

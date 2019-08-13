@@ -96,7 +96,7 @@ public class registerServlet extends HttpServlet {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				java.util.Date d = sdf.parse(tempBirth);
 				Date mBirth = new Date(d.getTime());
-				MemberBean mb = new MemberBean(mPassword, mAccount, mName, mBirth, mPhone, mAddress, mID, mGender,
+				MemberBean mb = new MemberBean(mPassword, mAccount, mName, mBirth, mPhone, mAddress, null, mGender,
 						mEmail);
 
 				int n = service.registerMember(mb);

@@ -17,7 +17,7 @@ public class productBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer pID;
+	private Integer pId;
 	private String pName;
 	private Integer pInstock;
 	private Integer pPrice;
@@ -35,12 +35,12 @@ public class productBean implements Serializable {
 
 	}
 
-	public Integer getpID() {
-		return pID;
+	public Integer getpId() {
+		return pId;
 	}
 
-	public void setpID(Integer pID) {
-		this.pID = pID;
+	public void setpId(Integer pId) {
+		this.pId = pId;
 	}
 
 	public String getpName() {
@@ -123,11 +123,11 @@ public class productBean implements Serializable {
 		this.pAvgRating = pAvgRating;
 	}
 
-	public productBean(Integer pID, String pName, Integer pInstock, Integer pPrice, String pContent, String pType,
+	public productBean(Integer pId, String pName, Integer pInstock, Integer pPrice, String pContent, String pType,
 			String pArea, Integer pPopular, Integer pRating, Date pDateRange, Double pAvgRating, Blob pPicture,
 			String pFileName) {
 		super();
-		this.pID = pID;
+		this.pId = pId;
 		this.pName = pName;
 		this.pInstock = pInstock;
 		this.pPrice = pPrice;

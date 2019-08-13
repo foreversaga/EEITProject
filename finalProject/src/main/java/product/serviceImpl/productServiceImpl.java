@@ -60,21 +60,43 @@ public class productServiceImpl implements productService {
 	}
 
 	@Override
-	public productBean getProduct(int pID) {
-		productBean pb=null;
-		Session session=factory.getCurrentSession();
-		Transaction tx=null;
+	public productBean getProduct(int pId) {
+		productBean pb = null;
+		Session session = factory.getCurrentSession();
+		Transaction tx = null;
 		try {
-			tx=session.beginTransaction();
-			pb=pdao.getProduct(pID);
+			tx = session.beginTransaction();
+			pb = pdao.getProduct(pId);
 			tx.commit();
-		}catch(Exception e) {
-			if(tx!=null) {
+		} catch (Exception e) {
+			if (tx != null) {
 				tx.rollback();
 				throw new RuntimeException(e);
 			}
 		}
 		return pb;
+	}
+
+	@Override
+	public void setPageNo(int pageNo) {
+		pdao.setPageNo(pageNo);
+
+	}
+
+	@Override
+	public void setDataPerPage(int dataPerPage) {
+		pdao.setDataPerPage(dataPerPage);
+
+	}
+
+	@Override
+	public int getPageNo() {
+		return pdao.getPageNo();
+	}
+
+	@Override
+	public int getDataPerPage() {
+		return pdao.getDataPerPage();
 	}
 
 }
