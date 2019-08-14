@@ -1,6 +1,8 @@
 package cart.model;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,10 +35,24 @@ public class shoppingCart {
 		for (int n : set) {
 			int price = cart.get(n).getpPrice();
 			int qty = cart.get(n).getiQty();
-			totalAmount = price * qty;
+			totalAmount += price * qty;
 		}
-
 		return totalAmount;
 	}
+	
+	public List<orderItem> getCartItem() {
+		List<orderItem> list=new ArrayList<>();
+		Set<Integer> set=cart.keySet();
+		for(Integer k:set) {
+			orderItem oi = null;
+			oi.setiQty(cart.get(k).getiQty());
+			oi.setpId(cart.get(k).getpId());
+			oi.setpName(cart.get(k).getpName());
+			oi.setpPrice(cart.get(k).getpPrice());
+			list.add(oi);
+		}
+		return list;
+	}
+	
 
 }

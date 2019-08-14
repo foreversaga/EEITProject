@@ -16,6 +16,9 @@ public class orderItem {
 		this.pName = pName;
 	}
 
+	public orderItem() {
+	}
+
 	public Integer getpPrice() {
 		return pPrice;
 	}

@@ -32,6 +32,6 @@
 		<mapping class="register.model.MemberBean" />
 		<mapping class="product.model.productBean" />
 		<mapping class="cart.model.orderBean" />
-
+		<mapping class="cart.model.orderItemBean" />
 	</session-factory>
 </hibernate-configuration>

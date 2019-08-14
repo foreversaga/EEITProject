@@ -17,7 +17,7 @@ import register.model.MemberBean;
 import register.service.MemberService;
 import register.serviceImpl.MemberServiceImpl;
 
-@WebServlet("/login/login.do")
+@WebServlet("/login.do")
 public class loginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

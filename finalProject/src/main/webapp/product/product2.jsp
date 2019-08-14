@@ -23,7 +23,7 @@ border: 1px solid black;
 </head>
 <body>
 <div>
-<a href="checkCart.do">購物車</a>
+<a href="checkout/checkCart.jsp">購物車</a>
 <a href="index.jsp">回首頁</a>
 </div>
 <div>

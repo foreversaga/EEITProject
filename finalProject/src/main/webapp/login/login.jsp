@@ -24,7 +24,7 @@ table {
 </head>
 <body>
 	<div class="mainDiv">
-		<form method="POST" action="<c:url value='login.do'/>">
+		<form method="POST" action="<c:url value='/login.do'/>">
 			<table>
 				<tr>
 					<td>帳號:</td>

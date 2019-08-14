@@ -26,8 +26,8 @@ border: 1px solid black;
 </head>
 <body>
 <div>
-<a href="product.do">回商品頁面</a>
-<a href="index.jsp">回首頁</a>
+<a href="../product.do">回商品頁面</a>
+<a href="../index.jsp">回首頁</a>
 </div>
 <div>
 
@@ -44,7 +44,7 @@ border: 1px solid black;
 </table>
 </div>
 <div>
-<a href="checkout.jsp">結帳</a>
+<a href="../checkOut.do">結帳</a>
 </div>
 
 </body>
