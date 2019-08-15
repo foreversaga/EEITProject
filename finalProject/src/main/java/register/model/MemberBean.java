@@ -35,16 +35,16 @@ public class MemberBean implements Serializable {
 	private String mAddress;
 	private String mGender;
 	private String mEmail;
-	@OneToMany(mappedBy = "mId", cascade = CascadeType.ALL)//set object mapped by mId
-	Set<orderBean> set = new LinkedHashSet<>();
+//	@OneToMany(mappedBy = "mId", cascade = CascadeType.ALL)//set object mapped by mId
+//	Set<orderBean> set = new LinkedHashSet<>();
 
-	public Set<orderBean> getSet() {
-		return set;
-	}
-
-	public void setSet(Set<orderBean> set) {
-		this.set = set;
-	}
+//	public Set<orderBean> getSet() {
+//		return set;
+//	}
+//
+//	public void setSet(Set<orderBean> set) {
+//		this.set = set;
+//	}
 
 	public MemberBean(String mPassword, String mAccount, String mName, Date mDate, String mPhone, String mAddress,
 			Integer mId, String mGender, String mEmail) {

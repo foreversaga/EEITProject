@@ -15,7 +15,6 @@ public class orderItemBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer seqno;
-	private Integer orderNo;
 	private Integer pId;
 	private String description;
 	private Integer iQty;
@@ -36,11 +35,10 @@ public class orderItemBean {
 
 	}
 
-	public orderItemBean(Integer seqno, Integer orderNo, Integer pId, String description, Integer iQty,
+	public orderItemBean(Integer seqno, Integer pId, String description, Integer iQty,
 			Integer unitPrice) {
 		super();
 		this.seqno = seqno;
-		this.orderNo = orderNo;
 		this.pId = pId;
 		this.description = description;
 		this.iQty = iQty;
@@ -56,13 +54,6 @@ public class orderItemBean {
 		this.seqno = seqno;
 	}
 
-	public Integer getOrderNo() {
-		return orderNo;
-	}
-
-	public void setOrderNo(Integer orderNo) {
-		this.orderNo = orderNo;
-	}
 
 	public Integer getpId() {
 		return pId;

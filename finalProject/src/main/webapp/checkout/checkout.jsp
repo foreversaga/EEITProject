@@ -42,7 +42,7 @@ border: 1px solid black;
 
 </div>
 <div>
-<form method="POST" action="">
+<form method="POST" action="orderConfirm.do">
 <input type="submit" value="送出">
 </form>
 

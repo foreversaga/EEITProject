@@ -27,9 +27,9 @@ public class orderBean implements Serializable {
 	private Integer oTotalAmount;
 	private java.sql.Timestamp oTimestamp;
 	private String oPayment;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_account") // prepare MemberBean class's instance variable to mapping
-	private MemberBean mId;
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "FK_account") // prepare MemberBean class's instance variable to mapping
+//	private MemberBean mId;
 	private String mAccount;
 	@OneToMany(mappedBy = "orderBean", cascade = CascadeType.ALL)
 	Set<orderItemBean> itemSet = new LinkedHashSet<>();
@@ -86,13 +86,13 @@ public class orderBean implements Serializable {
 		this.oPayment = oPayment;
 	}
 
-	public MemberBean getmId() {
-		return mId;
-	}
-
-	public void setmId(MemberBean mId) {
-		this.mId = mId;
-	}
+//	public MemberBean getmId() {
+//		return mId;
+//	}
+//
+//	public void setmId(MemberBean mId) {
+//		this.mId = mId;
+//	}
 
 	public String getmAccount() {
 		return mAccount;
