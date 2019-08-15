@@ -53,13 +53,15 @@ public class orderConfirm extends HttpServlet {
 			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp");
 			return;
 		}
+		//
 		Set<orderItemBean> items = new HashSet<orderItemBean>();
 		Map<Integer, orderItem> cart = sc.getContent();
 		Set<Integer> set = cart.keySet();
 		for (Integer k : set) {
 			orderItem oi = cart.get(k);
-			String description = "";
-			orderItemBean oib = new orderItemBean(null, oi.getpId(), description, oi.getiQty(), oi.getpPrice());
+			Integer subtotal = (oi.getiQty() * oi.getpPrice());
+			String iDes = oi.getpName() + " 共 " + oi.getiQty().toString() + "個，金額小計:" + subtotal.toString();
+			orderItemBean oib = new orderItemBean(null, oi.getpId(), iDes, oi.getiQty(), oi.getpPrice());
 			oib.setOrderBean(ob);
 			items.add(oib);
 		}

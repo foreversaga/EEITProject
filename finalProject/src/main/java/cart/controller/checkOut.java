@@ -35,8 +35,7 @@ public class checkOut extends HttpServlet {
 		}
 		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
 		if (mb == null) {
-			RequestDispatcher rd = request.getRequestDispatcher("login/login.jsp");
-			rd.forward(request, response);
+			response.sendRedirect(response.encodeRedirectURL("login/login.jsp"));
 			return;
 		}
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
@@ -47,10 +46,8 @@ public class checkOut extends HttpServlet {
 		String mAccount = mb.getmAccount();
 		Integer totalAmount = cart.getTotal();
 		java.sql.Timestamp orderTime = new Timestamp(new java.util.Date().getTime());
-//		List<orderItem> cartItem = cart.getCartItem();
 		orderBean ob = new orderBean(null, totalAmount, orderTime, null, mAccount);
 		session.setAttribute("orderList", ob);// bean class must have constructor before use jsp:useBean
-//		session.setAttribute("cartItem", cartItem);
 		RequestDispatcher rd = request.getRequestDispatcher("checkout/checkout.jsp");
 		rd.forward(request, response);
 		return;

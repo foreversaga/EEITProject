@@ -14,9 +14,9 @@ import javax.persistence.Table;
 public class orderItemBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer seqno;
+	private Integer iNo;
 	private Integer pId;
-	private String description;
+	private String iDes;
 	private Integer iQty;
 	private Integer unitPrice;
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -35,23 +35,23 @@ public class orderItemBean {
 
 	}
 
-	public orderItemBean(Integer seqno, Integer pId, String description, Integer iQty,
+	public orderItemBean(Integer iNo, Integer pId, String iDes, Integer iQty,
 			Integer unitPrice) {
 		super();
-		this.seqno = seqno;
+		this.iNo = iNo;
 		this.pId = pId;
-		this.description = description;
+		this.iDes = iDes;
 		this.iQty = iQty;
 		this.unitPrice = unitPrice;
 
 	}
 
-	public Integer getSeqno() {
-		return seqno;
+	public Integer getiNo() {
+		return iNo;
 	}
 
-	public void setSeqno(Integer seqno) {
-		this.seqno = seqno;
+	public void setiNo(Integer iNo) {
+		this.iNo = iNo;
 	}
 
 
@@ -63,12 +63,12 @@ public class orderItemBean {
 		this.pId = pId;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getiDes() {
+		return iDes;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setiDes(String iDes) {
+		this.iDes = iDes;
 	}
 
 	public Integer getiQty() {

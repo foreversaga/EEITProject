@@ -23,7 +23,7 @@ import register.serviceImpl.MemberServiceImpl;
 @WebServlet("/register/register.do")
 public class registerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String PasswordPattern = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,})";
+	private static final String PasswordPattern = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*^[!@#$%!^'\\\"]).{8,})";
 	private Pattern pattern = null;
 	private Matcher matcher = null;
 
