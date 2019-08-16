@@ -111,7 +111,7 @@ public class loginServlet extends HttpServlet {
 				return;
 			}
 		} else {// there is no LoginOK object, back to login.jsp
-			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("login/login.jsp");
 			rd.forward(request, response);
 			return;
 		}
