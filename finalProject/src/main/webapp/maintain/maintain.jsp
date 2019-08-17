@@ -61,5 +61,6 @@ text-align: left;}
 	<p><font size="-1" color="red">${msgOK.insertOK}${msgMap.insertError}</font></p>
 		<a href="../index.jsp">回首頁</a>
 	</div>
+<c:remove var="msgOK" scope="session"/>
 </body>
 </html>
