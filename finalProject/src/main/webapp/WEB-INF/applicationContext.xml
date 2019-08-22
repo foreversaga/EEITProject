@@ -13,30 +13,30 @@
     
     <context:component-scan base-package="cart, product, register, checkout, login" />
    
-    <bean id="dataSource" destroy-method='close' scope="prototype"
-      class="com.mchange.v2.c3p0.ComboPooledDataSource" >
-      <property name="driverClass" value="${jdbc.driverClass}"/>
-      <property name="jdbcUrl" value="${jdbc.jdbcUrl}"/>
-      <property name="user" value="${jdbc.user}"/>
-      <property name="password" value="${jdbc.password}"/>
-      <property name="initialPoolSize" value="${jdbc.initPoolSize}"/>
-      <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
-   </bean>
+<!--     <bean id="dataSource" destroy-method='close' scope="prototype" -->
+<!--       class="com.mchange.v2.c3p0.ComboPooledDataSource" > -->
+<!--       <property name="driverClass" value="${jdbc.driverClass}"/> -->
+<!--       <property name="jdbcUrl" value="${jdbc.jdbcUrl}"/> -->
+<!--       <property name="user" value="${jdbc.user}"/> -->
+<!--       <property name="password" value="${jdbc.password}"/> -->
+<!--       <property name="initialPoolSize" value="${jdbc.initPoolSize}"/> -->
+<!--       <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/> -->
+<!--    </bean> -->
    
-   <bean id='sessionFactory'
-        class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-        <property name="dataSource" ref='dataSource' />
-        <property name="packagesToScan" 
-        	value='product.model, register.model, login.model, cart.model, checkout' />
-        <property name="configLocation"
-            value='classpath:hibernate.cfg.xml' />
-    </bean>
-    <!-- 配置交易管理器 -->
-    <bean id='transactionManager'
-        class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-    <tx:annotation-driven />
+<!--    <bean id='sessionFactory' -->
+<!--         class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"> -->
+<!--         <property name="dataSource" ref='dataSource' /> -->
+<!--         <property name="packagesToScan"  -->
+<!--         	value='product.model, register.model, login.model, cart.model, checkout' /> -->
+<!--         <property name="configLocation" -->
+<!--             value='classpath:hibernate.cfg.xml' /> -->
+<!--     </bean> -->
+<!--     配置交易管理器 -->
+<!--     <bean id='transactionManager' -->
+<!--         class="org.springframework.orm.hibernate5.HibernateTransactionManager"> -->
+<!--         <property name="sessionFactory" ref="sessionFactory" /> -->
+<!--     </bean> -->
+<!--     <tx:annotation-driven /> -->
    
 
 </beans>
