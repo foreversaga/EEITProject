@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -12,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import register.model.MemberBean;
 import register.service.MemberService;
@@ -35,7 +39,6 @@ public class loginServlet extends HttpServlet {
 		String mPassword = request.getParameter("mPassword");
 		String rememberMe = request.getParameter("rememberMe");
 		String requestURI = (String) session.getAttribute("requestURI");
-		
 
 		if (mAccount == null || mAccount.trim().length() == 0) {
 			errorMsgMap.put("AccountError", "帳號欄必須輸入");
@@ -81,13 +84,16 @@ public class loginServlet extends HttpServlet {
 		response.addCookie(cookiePasswrod);
 		response.addCookie(cookieRememberMe);
 
-		MemberService memberService = new MemberServiceImpl();
+//		MemberService memberService = new MemberServiceImpl();
+		ServletContext sc = getServletContext();
+		WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(sc);
+		MemberService memberService = ctx.getBean(MemberService.class);
 		MemberBean mb = null;
 		MemberBean mbinfo = null;
 		try {// use checkPassword method to get bean, if bean is exist then set attribute
 				// object in session
 			mb = memberService.checkPassword(mAccount, mPassword);
-			mbinfo=memberService.queryMember(mAccount);
+			mbinfo = memberService.queryMember(mAccount);
 			if (mb != null) {
 				session.setAttribute("LoginOK", mb);
 				session.setAttribute("MemberInfo", mbinfo);

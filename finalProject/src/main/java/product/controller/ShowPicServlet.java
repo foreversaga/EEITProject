@@ -6,11 +6,15 @@ import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import product.model.productBean;
 import product.service.productService;
@@ -37,13 +41,16 @@ public class ShowPicServlet extends HttpServlet {
 		String fileName = null;
 		try {
 			String id = request.getParameter("pId");
-			productService productService = new productServiceImpl();
+//			productService productService = new productServiceImpl();
+			ServletContext sc = getServletContext();
+			WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(sc);
+			productService Service=ctx.getBean(productService.class);
 			int nid = 0;
 			try {
 				nid = Integer.parseInt(id);
 			} catch (NumberFormatException ex) {
 			}
-			productBean pb = productService.getProduct(nid);
+			productBean pb = Service.getProduct(nid);
 			if (pb != null) {
 				blob = pb.getpPicture();
 				if (blob != null) {

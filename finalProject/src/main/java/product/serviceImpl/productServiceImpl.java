@@ -5,6 +5,9 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import login.HibernateUtils;
 import product.Dao.productDao;
@@ -12,68 +15,45 @@ import product.daoImpl.productDaoImpl;
 import product.model.productBean;
 import product.service.productService;
 
+@Service
+@Transactional
 public class productServiceImpl implements productService {
 	productDao pdao;
 	SessionFactory factory;
 
+	@Autowired
+	public void setPdao(productDao pdao) {
+		this.pdao = pdao;
+	}
+
+	@Autowired
+	public void setFactory(SessionFactory factory) {
+		this.factory = factory;
+	}
+
 	public productServiceImpl() {
-		this.pdao = new productDaoImpl();
-		factory = HibernateUtils.getSessionFactory();
+
 	}
 
 	@Override
 	public List<productBean> getAllProduct() {
 		List<productBean> list = null;
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			list = pdao.getAllProduct();
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-				throw new RuntimeException(e);
-			}
-		}
+		list = pdao.getAllProduct();
 		return list;
 	}
 
 	@Override
 	public int insertNewProduct(productBean pb) {
 		int n = 0;
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			pdao.insertNewProduct(pb);
-			tx.commit();
-			n++;
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-				throw new RuntimeException(e);
-			}
-		}
-
+		pdao.insertNewProduct(pb);
+		n++;
 		return n;
 	}
 
 	@Override
 	public productBean getProduct(int pId) {
 		productBean pb = null;
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			pb = pdao.getProduct(pId);
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-				throw new RuntimeException(e);
-			}
-		}
+		pb = pdao.getProduct(pId);
 		return pb;
 	}
 

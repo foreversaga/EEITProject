@@ -4,12 +4,16 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import product.model.productBean;
 import product.service.productService;
@@ -39,7 +43,10 @@ public class productServlet extends HttpServlet {
 			}
 		}
 
-		productService service = new productServiceImpl();
+//		productService service = new productServiceImpl();
+		ServletContext sc = getServletContext();
+		WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(sc);
+		productService service = ctx.getBean(productService.class);
 		session.setAttribute("pageNo", String.valueOf(pageNo));
 		service.setPageNo(pageNo);
 		List<productBean> list = service.getAllProduct();

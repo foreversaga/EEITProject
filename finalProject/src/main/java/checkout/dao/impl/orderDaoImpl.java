@@ -4,27 +4,40 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import cart.model.orderBean;
 import checkout.dao.orderDao;
 import login.HibernateUtils;
 
+@Repository
 public class orderDaoImpl implements orderDao {
 	SessionFactory factory;
+
+	@Autowired
+	public void setFactory(SessionFactory factory) {
+		this.factory = factory;
+	}
+
+	public SessionFactory getFactory() {
+		return factory;
+	}
+
 	private String mAccount = null;
 	int oId = 0;
 
 	public orderDaoImpl() {
-		factory = HibernateUtils.getSessionFactory();
+//		factory = HibernateUtils.getSessionFactory();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<orderBean> getMemberOrders(String mAccount) {
 		List<orderBean> list = null;
-		Session session=factory.getCurrentSession();
-		String hql="FROM orderBean ob WHERE ob.mAccount=:mid";
-		list=session.createQuery(hql).setParameter("mid", mAccount).list();
+		Session session = factory.getCurrentSession();
+		String hql = "FROM orderBean ob WHERE ob.mAccount=:mid";
+		list = session.createQuery(hql).setParameter("mid", mAccount).list();
 		return list;
 	}
 

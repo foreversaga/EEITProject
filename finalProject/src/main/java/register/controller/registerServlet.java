@@ -1,14 +1,15 @@
 package register.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,9 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import register.model.MemberBean;
 import register.service.MemberService;
-import register.serviceImpl.MemberServiceImpl;
 
 @WebServlet("/register/register.do")
 public class registerServlet extends HttpServlet {
@@ -89,7 +92,10 @@ public class registerServlet extends HttpServlet {
 			return;
 		}
 		try {
-			MemberService service = new MemberServiceImpl();
+//			MemberService service = new MemberServiceImpl();
+			ServletContext sc = getServletContext();
+			WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(sc);
+			MemberService service = ctx.getBean(MemberService.class);
 			if (service.accountCheck(mAccount)) {
 				errorMsg.put("DuplicateID", "此帳號已存在");
 			} else {

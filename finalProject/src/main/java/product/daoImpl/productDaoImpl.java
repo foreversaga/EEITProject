@@ -9,18 +9,26 @@ import javax.sql.DataSource;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import login.HibernateUtils;
 import product.Dao.productDao;
 import product.model.productBean;
 
+@Repository
 public class productDaoImpl implements productDao {
 	int pageNo = 0;
 	int dataPerPage = 3;
 	SessionFactory factory;
 
+	@Autowired
+	public void setFactory(SessionFactory factory) {
+		this.factory = factory;
+	}
+
 	public productDaoImpl() {
-		factory = HibernateUtils.getSessionFactory();
+//		factory = HibernateUtils.getSessionFactory();
 	}
 
 	@Override

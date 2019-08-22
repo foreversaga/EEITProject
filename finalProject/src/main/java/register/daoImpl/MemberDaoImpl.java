@@ -10,16 +10,24 @@ import javax.persistence.NonUniqueResultException;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import login.HibernateUtils;
 import register.dao.MemberDao;
 import register.model.MemberBean;
 
+@Repository
 public class MemberDaoImpl implements MemberDao {
 	SessionFactory factory;
 
+	@Autowired
+	public void setFactory(SessionFactory factory) {
+		this.factory = factory;
+	}
+
 	public MemberDaoImpl() {
-		this.factory = HibernateUtils.getSessionFactory();
+//		this.factory = HibernateUtils.getSessionFactory();
 	}
 
 	@Override

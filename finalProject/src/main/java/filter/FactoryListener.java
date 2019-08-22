@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebListener;
 
 import login.HibernateUtils;
 
-@WebListener
+//@WebListener
 public class FactoryListener implements ServletContextListener {
 
 	@Override

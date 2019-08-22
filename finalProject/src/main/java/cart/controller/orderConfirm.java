@@ -5,12 +5,16 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cart.model.orderBean;
 import cart.model.orderItem;
@@ -68,12 +72,15 @@ public class orderConfirm extends HttpServlet {
 		ob.setItemSet(items);
 
 		try {
-			orderService orderService = new orderServiceImpl();
-			orderService.saveOrder(ob);
+//			orderService orderService = new orderServiceImpl();
+			ServletContext sContext=getServletContext();
+			WebApplicationContext ctx=WebApplicationContextUtils.getWebApplicationContext(sContext);
+			orderService service=ctx.getBean(orderService.class);
+			service.saveOrder(ob);
 			session.removeAttribute("shoppingCart");
 			response.sendRedirect(response.encodeRedirectURL(getServletContext().getContextPath() + "/index.jsp"));
 		} catch (RuntimeException e) {
-			;
+			e.printStackTrace();
 		}
 
 	}
