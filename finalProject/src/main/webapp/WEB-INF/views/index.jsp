@@ -17,7 +17,7 @@ div {
 <body>
 	<div>
 		<a href="register">註冊</a>
-		<a href="product.do">商品頁面(mvc)</a>
+		<a href="products">商品頁面(mvc)</a>
 		<c:if test="${!empty MemberInfo}">
 		<a href="MemberInfo">會員資料</a>
 		</c:if>
