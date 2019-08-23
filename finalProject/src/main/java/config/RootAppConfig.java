@@ -29,7 +29,7 @@ public class RootAppConfig {
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
-		ds.setJdbcUrl("jdbc:sqlserver://localhost:1433;databaseName=JSPDB");
+		ds.setJdbcUrl("jdbc:sqlserver://localhost:1433;databaseName=PDB");
 		ds.setInitialPoolSize(4);
 		ds.setMaxPoolSize(8);
 		return ds;
@@ -39,7 +39,7 @@ public class RootAppConfig {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
 		factory.setDataSource(dataSource());
-		factory.setPackagesToScan(new String[] { "product.model, register.model, login.model, cart.model, checkout" });
+		factory.setPackagesToScan(new String[] { "product, register, login, cart, checkout" });
 		factory.setHibernateProperties(additionalProperties());
 		return factory;
 	}

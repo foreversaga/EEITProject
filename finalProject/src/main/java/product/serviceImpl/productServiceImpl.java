@@ -14,12 +14,19 @@ import product.Dao.productDao;
 import product.daoImpl.productDaoImpl;
 import product.model.productBean;
 import product.service.productService;
-
-@Service
 @Transactional
+@Service
 public class productServiceImpl implements productService {
 	productDao pdao;
 	SessionFactory factory;
+
+	public productDao getPdao() {
+		return pdao;
+	}
+
+	public SessionFactory getFactory() {
+		return factory;
+	}
 
 	@Autowired
 	public void setPdao(productDao pdao) {

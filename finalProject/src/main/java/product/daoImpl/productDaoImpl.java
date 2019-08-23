@@ -22,6 +22,10 @@ public class productDaoImpl implements productDao {
 	int dataPerPage = 3;
 	SessionFactory factory;
 
+	public SessionFactory getFactory() {
+		return factory;
+	}
+
 	@Autowired
 	public void setFactory(SessionFactory factory) {
 		this.factory = factory;
