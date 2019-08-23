@@ -86,4 +86,10 @@ public class productServiceImpl implements productService {
 		return pdao.getDataPerPage();
 	}
 
+	@Override
+	public int getTotalPages() {
+
+		return pdao.getTotalPages;
+	}
+
 }

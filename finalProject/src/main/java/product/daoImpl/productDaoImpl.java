@@ -4,12 +4,10 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 
 import product.Dao.productDao;
 import product.model.productBean;
@@ -69,6 +67,15 @@ public class productDaoImpl implements productDao {
 	}
 
 	@Override
+	public int getTotalPages() {
+		int n = 0;
+		Session session = factory.getCurrentSession();
+		String sql = "SELECT COUNT(*) FROM productBean";
+
+		return n;
+	}
+
+	@Override
 	public int getPageNo() {
 		return pageNo;
 	}
@@ -86,7 +93,6 @@ public class productDaoImpl implements productDao {
 	@Override
 	public void setDataPerPage(int dataPerPage) {
 		this.dataPerPage = dataPerPage;
-
 	}
 
 }

@@ -7,13 +7,17 @@ import product.model.productBean;
 public interface productService {
 	List<productBean> getAllProduct();
 	
+	int getTotalPages();
+	
 	int insertNewProduct(productBean pb);
 	
 	productBean getProduct(int pId);
 	
 	void setPageNo(int pageNo);
+	
 	int getPageNo();
 	
 	void setDataPerPage(int dataPerPage);
+	
 	int getDataPerPage();
 }

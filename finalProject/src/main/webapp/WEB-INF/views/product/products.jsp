@@ -51,7 +51,7 @@ border: 1px solid black;
 </c:if>
 </form>
 </td></tr>
-<tr><td><img style="width:100px;height:100px;" src="${pageContext.servletContext.contextPath}/ShowPic?pId=${productBean.pId}"></td><td>${productBean.pName}</td><td>${productBean.pPrice}</td>
+<tr><td><img style="width:100px;height:100px;" src="<c:url value='/showPic/${productBean.pId}'/>"></td><td>${productBean.pName}</td><td>${productBean.pPrice}</td>
 <td>${productBean.pDateRange}</td><td>${productBean.pAvgRating}</td></tr>
 </table>
 <br>
@@ -62,16 +62,16 @@ border: 1px solid black;
 <tr>
 <td width="76">
 <c:if test="${pageNo>1}">
-<a href="product.do?pageNo=1">第一頁</a>
+<a href="${pageNo-1}">第一頁</a>
 </c:if>
 </td>
 <td width="76">
 <c:if test="${pageNo>1}">
-<a href="product.do?pageNo=${pageNo-1}">上一頁</a>
+<a href="${pageNo-1}">上一頁</a>
 </c:if>
 </td>
 <td width="76">
-<a href="product.do?pageNo=${pageNo+1}">下一頁</a>
+<a href="${pageNo+1}">下一頁</a>
 </td>
 </tr>
 
