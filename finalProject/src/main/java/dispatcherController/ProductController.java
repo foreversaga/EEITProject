@@ -37,6 +37,8 @@ public class ProductController {
 		}
 		service.setPageNo(pageNo);
 		List<productBean> list = service.getAllProduct();
+		int n = service.getTotalPages();
+		model.addAttribute("totalPages", n);
 		model.addAttribute("productList", list);
 		model.addAttribute("pageNo", String.valueOf(pageNo));
 		return "product/products";

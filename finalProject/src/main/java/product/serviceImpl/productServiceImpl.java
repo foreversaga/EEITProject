@@ -89,7 +89,7 @@ public class productServiceImpl implements productService {
 	@Override
 	public int getTotalPages() {
 
-		return pdao.getTotalPages;
+		return pdao.getTotalPages();
 	}
 
 }
