@@ -16,10 +16,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "dispatcherController, register, product, cart, checkout"
-//, includeFilters = @Filter(type = FilterType.ANNOTATION, value = Controller.class)
-//, excludeFilters = @Filter(type = FilterType.ANNOTATION, value = Service.class)
-)
+@ComponentScan(basePackages = "dispatcherController, register, product, cart, checkout")
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public ViewResolver internalResourceViewResolver() {

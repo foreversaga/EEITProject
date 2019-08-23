@@ -1,18 +1,16 @@
 package product.daoImpl;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import login.HibernateUtils;
+
 import product.Dao.productDao;
 import product.model.productBean;
 

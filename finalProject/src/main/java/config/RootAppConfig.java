@@ -39,7 +39,7 @@ public class RootAppConfig {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
 		factory.setDataSource(dataSource());
-		factory.setPackagesToScan(new String[] { "product, register, login, cart, checkout" });
+		factory.setPackagesToScan(new String[] { "product.model","register.model","cart.model" });
 		factory.setHibernateProperties(additionalProperties());
 		return factory;
 	}
