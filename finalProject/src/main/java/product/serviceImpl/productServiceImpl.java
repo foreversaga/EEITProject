@@ -87,7 +87,7 @@ public class productServiceImpl implements productService {
 	}
 
 	@Override
-	public int getTotalPages() {
+	public Long getTotalPages() {
 
 		return pdao.getTotalPages();
 	}

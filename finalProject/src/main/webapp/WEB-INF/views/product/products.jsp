@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +33,7 @@ border: 1px solid black;
 <c:forEach varStatus="stVar"  var="productBean"  items="${productList}" >
 <table>
 <tr><td>商品圖片</td><td>商品名稱</td><td>商品價格</td><td>使用日期</td><td>商品評價</td><td rowspan="2" style="width:150px">
-<form method="POST" action="Buy.do">
+<form:form method="POST" action="${pageContext.request.contextPath}/Buy" >
 <c:if test="${productBean.pInstock==0 }">
 <p>已售完</p>
 </c:if>
@@ -49,7 +51,7 @@ border: 1px solid black;
 <c:if test="${productBean.pInstock!=0 }">
 <input type="submit" value="加到購物車">
 </c:if>
-</form>
+</form:form>
 </td></tr>
 <tr><td><img style="width:100px;height:100px;" src="<c:url value='/showPic/${productBean.pId}'/>"></td><td>${productBean.pName}</td><td>${productBean.pPrice}</td>
 <td>${productBean.pDateRange}</td><td>${productBean.pAvgRating}</td></tr>
@@ -71,7 +73,8 @@ border: 1px solid black;
 </c:if>
 </td>
 <td width="76">
-<a href="${pageNo+1}">下一頁</a>
+<c:if test="${pageNo!=totalPages }">
+<a href="${pageNo+1}">下一頁</a></c:if>
 </td>
 </tr>
 

@@ -10,7 +10,7 @@ public interface productDao {
 
 	public List<productBean> getAllProduct();
 	
-	public int getTotalPages();
+	public Long getTotalPages();
 	
 	public int insertNewProduct(productBean pb);
 	

@@ -22,12 +22,12 @@ import register.model.MemberBean;
 /**
  * Servlet Filter implementation class checkLoginFilter
  */
-@WebFilter(urlPatterns = { "/*" }, initParams = { 
-		@WebInitParam(name = "mustLogin1", value = "/product/*"),
-		@WebInitParam(name = "mustLogin1", value = "/maintain/*"),
-		@WebInitParam(name = "mustLogin2", value = "/login/MemberInfo.jsp") }
-
-)
+//@WebFilter(urlPatterns = { "/*" }, initParams = { 
+//		@WebInitParam(name = "mustLogin1", value = "/product/*"),
+//		@WebInitParam(name = "mustLogin1", value = "/maintain/*"),
+//		@WebInitParam(name = "mustLogin2", value = "/login/MemberInfo.jsp") }
+//
+//)
 public class checkLoginFilter implements Filter {
 	List<String> url = new ArrayList<String>();
 	String servletPath;

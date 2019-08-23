@@ -7,7 +7,7 @@ import product.model.productBean;
 public interface productService {
 	List<productBean> getAllProduct();
 	
-	int getTotalPages();
+	Long getTotalPages();
 	
 	int insertNewProduct(productBean pb);
 	
