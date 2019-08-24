@@ -25,29 +25,28 @@ border: 1px solid black;
 </head>
 <body>
 <div>
-<a href="checkout/checkCart.jsp">購物車</a>
-<a href="index.jsp">回首頁</a>
+<a href="${pageContext.request.contextPath }/CheckCart">購物車</a>
+<a href="${pageContext.request.contextPath }/">回首頁</a>
 </div>
 <div>
 
 <c:forEach varStatus="stVar"  var="productBean"  items="${productList}" >
 <table>
 <tr><td>商品圖片</td><td>商品名稱</td><td>商品價格</td><td>使用日期</td><td>商品評價</td><td rowspan="2" style="width:150px">
-<form:form method="POST" action="${pageContext.request.contextPath}/Buy" >
+<form:form method="POST" action="${pageContext.request.contextPath}/Buy" modelAttribute="orderItem">
 <c:if test="${productBean.pInstock==0 }">
 <p>已售完</p>
 </c:if>
 <c:if test="${productBean.pInstock!=0 }">
-<select name="oQty">
+<form:select path="iQty">
 <c:forEach var="stock" begin="1" end="${productBean.pInstock}">
 <option value="${stock}">${stock}</option>
 </c:forEach>
-</select>
+</form:select>
 </c:if>
-<input type="hidden" name="pId" value="${productBean.pId }">
-<input type="hidden" name="pName" value="${productBean.pName }">
-<input type="hidden" name="pPrice" value="${productBean.pPrice }">
-<input type="hidden" name="pDateRange" value="${productBean.pDateRange }">
+<form:input type="hidden" path="pId" value="${productBean.pId }"/>
+<form:input type="hidden" path="pName" value="${productBean.pName }"/>
+<form:input type="hidden" path="pPrice" value="${productBean.pPrice }"/>
 <c:if test="${productBean.pInstock!=0 }">
 <input type="submit" value="加到購物車">
 </c:if>

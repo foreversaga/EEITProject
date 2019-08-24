@@ -26,8 +26,8 @@ border: 1px solid black;
 </head>
 <body>
 <div>
-<a href="../product.do">回商品頁面</a>
-<a href="../index.jsp">回首頁</a>
+<a href="${pageContext.request.contextPath }/products/1">回商品頁面</a>
+<a href="${pageContext.request.contextPath }/">回首頁</a>
 </div>
 <div>
 
@@ -35,7 +35,7 @@ border: 1px solid black;
 <tr><th>商品圖片</th><th>商品名稱</th><th>購買數量</th><th>商品單價</th></tr>
 <c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
 <tr>
-<td><img style="width:100px;height:100px;" src="${pageContext.servletContext.contextPath}/ShowPic?pId=${cart.value.pId}"></td>
+<td><img style="width:100px;height:100px;" src="<c:url value='/showPic/${cart.value.pId}'/>"></td>
 <td>${cart.value.pName}</td>
 <td>${cart.value.iQty}</td>
 <td>${cart.value.pPrice}</td>
@@ -44,7 +44,7 @@ border: 1px solid black;
 </table>
 </div>
 <div>
-<a href="../checkOut.do">結帳</a>
+<a href="${pageContext.request.contextPath }/CheckOut">結帳</a>
 </div>
 
 </body>

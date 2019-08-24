@@ -71,7 +71,7 @@ public class productDaoImpl implements productDao {
 		Long n = null;
 		Session session = factory.getCurrentSession();
 		String sql = "SELECT COUNT(*) FROM productBean";
-		n =  (Long) session.createQuery(sql).uniqueResult();
+		n =  (Long) session.createQuery(sql).uniqueResult()/3;
 		return n;
 	}
 
