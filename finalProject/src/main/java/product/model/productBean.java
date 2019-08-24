@@ -9,6 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "Product")
@@ -30,6 +34,17 @@ public class productBean implements Serializable {
 	private Double pAvgRating;
 	private Blob pPicture;
 	private String pFileName;
+	@Transient
+	@XmlTransient
+	private MultipartFile productImage;
+
+	public void setProductImage(MultipartFile productImage) {
+		this.productImage = productImage;
+	}
+
+	public MultipartFile getProductImage() {
+		return productImage;
+	}
 
 	public productBean() {
 
@@ -157,4 +172,5 @@ public class productBean implements Serializable {
 	public void setpFileName(String pFileName) {
 		this.pFileName = pFileName;
 	}
+
 }

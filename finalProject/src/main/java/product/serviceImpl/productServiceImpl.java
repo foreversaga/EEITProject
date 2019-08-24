@@ -14,6 +14,7 @@ import product.Dao.productDao;
 import product.daoImpl.productDaoImpl;
 import product.model.productBean;
 import product.service.productService;
+
 @Transactional
 @Service
 public class productServiceImpl implements productService {
@@ -87,9 +88,15 @@ public class productServiceImpl implements productService {
 	}
 
 	@Override
-	public Long getTotalPages() {
+	public int getTotalPages() {
+		int totalPages = (int) (Math.ceil(getDataCount()/3.0));
+		return totalPages;
+	}
 
-		return pdao.getTotalPages();
+	@Override
+	public Long getDataCount() {
+
+		return pdao.getDataCount();
 	}
 
 }

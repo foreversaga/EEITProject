@@ -67,11 +67,11 @@ public class productDaoImpl implements productDao {
 	}
 
 	@Override
-	public Long getTotalPages() {
+	public Long getDataCount() {
 		Long n = null;
 		Session session = factory.getCurrentSession();
 		String sql = "SELECT COUNT(*) FROM productBean";
-		n =  (Long) session.createQuery(sql).uniqueResult()/3;
+		n =  (Long) session.createQuery(sql).uniqueResult();
 		return n;
 	}
 

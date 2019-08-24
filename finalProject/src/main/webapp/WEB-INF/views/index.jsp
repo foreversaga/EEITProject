@@ -24,10 +24,11 @@ div {
 		<c:choose>
 			<c:when test="${empty LoginOK}">
 				<a href="login">登入</a>
+							<a href="AddProduct">維護商品</a>
+				<a href="logout">登出</a>
 			</c:when>
 			<c:otherwise>
-			<a href="maintain">維護商品</a>
-				<a href="logout">登出</a>
+
 			</c:otherwise>
 		</c:choose>
 

@@ -1,5 +1,9 @@
 package dispatcherController;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -13,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
@@ -21,11 +26,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import cart.model.orderBean;
@@ -53,7 +60,7 @@ public class ProductController {
 		ModelAndView mav = new ModelAndView("product/products");
 		pService.setPageNo(pageNo);
 		List<productBean> list = pService.getAllProduct();
-		Long totalPages = pService.getTotalPages();
+		int totalPages = pService.getTotalPages();
 		orderItem oi = new orderItem();
 		mav.addObject("totalPages", totalPages);
 		mav.addObject("productList", list);
@@ -63,9 +70,27 @@ public class ProductController {
 		return mav;
 	}
 
+	private byte[] toByte(String filePath) {
+		byte[] b = null;
+		String realpath = context.getRealPath(filePath);
+		try {
+			File file = new File(realpath);
+			long size = file.length();
+			b = new byte[(int) size];
+			InputStream fis = context.getResourceAsStream(filePath);
+			fis.read(b);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return b;
+	}
+
 	@RequestMapping(value = "/showPic/{pId}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> showPic(HttpServletResponse resp, @PathVariable Integer pId) {
 		productBean pb = pService.getProduct(pId);
+		String filePath = "/resource/img/NoImage.jpg";
 		String filename = "";
 		int len = 0;
 		HttpHeaders headers = new HttpHeaders();
@@ -80,12 +105,16 @@ public class ProductController {
 					String mimeType = context.getMimeType(filename);
 					MediaType mediaType = MediaType.valueOf(mimeType);
 					headers.setContentType(mediaType);
+				} else {
+					filename = filePath;
+					mediaByte = toByte(filePath);
 				}
 			} catch (SQLException e) {
 				throw new RuntimeException("ProductController的getPic發生例外:" + e.getMessage());
 			}
 		} else {
-			throw new RuntimeException("ProductController的getPic無法取得bean物件");
+			filename = filePath;
+			mediaByte = toByte(filePath);
 		}
 		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
 		ResponseEntity<byte[]> resEntity = new ResponseEntity<>(mediaByte, headers, HttpStatus.OK);
@@ -145,5 +174,31 @@ public class ProductController {
 		oService.saveOrder(ob);
 		session.removeAttribute("shoppingCart");
 		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/AddProduct", method = RequestMethod.GET)
+	public String AddForm(Model model) {
+		productBean bb = new productBean();
+		model.addAttribute("productBean", bb);
+		return "maintain/maintain";
+	}
+
+	@RequestMapping(value = "/ProcessAdd", method = RequestMethod.POST)
+	public String AddProduct(@ModelAttribute("productBean") productBean bb, BindingResult result) {
+		MultipartFile productImage = bb.getProductImage();
+		String originFilename = productImage.getOriginalFilename();
+		bb.setpFileName(originFilename);
+		if (productImage != null && !productImage.isEmpty()) {
+			try {
+				byte[] b = productImage.getBytes();
+				Blob blob = new SerialBlob(b);
+				bb.setpPicture(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常:" + e.getMessage());
+			}
+		}
+		pService.insertNewProduct(bb);
+		return "redirect:/products/1";
 	}
 }
