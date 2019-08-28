@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
+import javax.swing.text.html.FormSubmitEvent.MethodType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
@@ -52,7 +53,7 @@ public class ProductController {
 	@Autowired
 	orderService oService;
 
-	@RequestMapping("/products/{pageNo}")
+	@RequestMapping(value = "/products/{pageNo}",method = RequestMethod.GET)
 	public ModelAndView productsPage(@PathVariable Integer pageNo, HttpServletRequest request) {
 		if (pageNo == null) {
 			pageNo = 1;
