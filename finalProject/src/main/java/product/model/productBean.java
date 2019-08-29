@@ -70,7 +70,7 @@ public class productBean implements Serializable {
 		return pInstock;
 	}
 
-	public void setPinStock(Integer pInstock) {
+	public void setpInstock(Integer pInstock) {
 		this.pInstock = pInstock;
 	}
 

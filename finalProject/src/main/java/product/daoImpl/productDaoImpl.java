@@ -15,7 +15,7 @@ import product.model.productBean;
 @Repository
 public class productDaoImpl implements productDao {
 	int pageNo = 0;
-	int dataPerPage = 3;
+	public static int dataPerPage = 4;
 	SessionFactory factory;
 
 	public SessionFactory getFactory() {

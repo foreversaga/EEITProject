@@ -8,32 +8,78 @@
 <head>
 <meta charset="UTF-8">
 <title>商品頁面Servlet</title>
+<link rel=stylesheet type="text/css" href="<c:url value='/css/navbar.css'/>">
 <style>
-div {
-	width: 600px;
-	margin: 50px auto;
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 170px;
+  border-radius: 5px;
+  display:inline-block;
+  margin:20px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  padding: 2px 16px;
+}
+
+div.ProductMainPage {
+	width: 900px;
+	margin: 30px auto;
 	text-align: center;
 }
-table{
-border-collapse: collapse;
+.PageButtonDiv{
+margin: 10px;
 }
-td{
-width:100px;
-border: 1px solid black;
+.PageButton {
+color: #20bf6b !important;
+text-transform: uppercase;
+background: #ffffff;
+padding: 10px;
+border: 4px solid #20bf6b !important;
+border-radius: 6px;
+display: inline-block;
+transition: all 0.3s ease 0s;
+text-decoration: none;
+}
+.PageButton:hover {
+color: #494949 !important;
+border-radius: 50px;
+border-color: #494949 !important;
+transition: all 0.3s ease 0s;
 }
 </style>
 </head>
 <body>
-<div>
-<a href="${pageContext.request.contextPath }/CheckCart">購物車</a>
-<a href="${pageContext.request.contextPath }/">回首頁</a>
-</div>
-<div>
+<ul>
+<li class="logo">旅遊去</li>
+  <li class="item"><a class="active" href="<c:url value='/'/>">Home</a></li>
+  <li class="item"><a href="<c:url value='/products/1'/>">商品頁面</a></li>
+  <li class="item"><a href="<c:url value='/login'/>">會員登入</a></li>
+  <li class="item"><a href="<c:url value='/AddProduct'/>">新增商品</a></li>
+  <li class="item"><a href="<c:url value='/logout'/>">會員登出</a></li>
+</ul>
 
+<div class="ProductMainPage">
+<a href="${pageContext.request.contextPath }/CheckCart">購物車</a>
+
+</div>
+<div class="ProductMainPage">
 <c:forEach varStatus="stVar"  var="productBean"  items="${productList}" >
-<table>
-<tr><td>商品圖片</td><td>商品名稱</td><td>商品價格</td><td>使用日期</td><td>商品評價</td><td rowspan="2" style="width:150px">
-<form:form method="POST" action="${pageContext.request.contextPath}/Buy" modelAttribute="orderItem">
+<div class="card">
+  <img src="<c:url value='/showPic/${productBean.pId}'/>" style="width:100%">
+  <div class="container">
+    <p><b>商品名稱:${productBean.pName}</b></p> 
+    <p>價格:${productBean.pPrice}</p>
+    <form:form method="GET" action="${pageContext.request.contextPath}/Buy" modelAttribute="orderItem">
 <c:if test="${productBean.pInstock==0 }">
 <p>已售完</p>
 </c:if>
@@ -50,40 +96,25 @@ border: 1px solid black;
 <c:if test="${productBean.pInstock!=0 }">
 <input type="submit" value="加到購物車">
 </c:if>
-</form:form>
-</td></tr>
-<tr><td><img style="width:100px;height:100px;" src="<c:url value='/showPic/${productBean.pId}'/>"></td><td>${productBean.pName}</td><td>${productBean.pPrice}</td>
-<td>${productBean.pDateRange}</td><td>${productBean.pAvgRating}</td></tr>
-</table>
-<br>
+</form:form>	
+  </div>
+</div>
 </c:forEach>
 
-<div>
-<table>
-<tr>
-<td width="76">
+<div class="PageButtonDiv">
 <c:if test="${pageNo>1}">
-<a href="${pageNo-1}">第一頁</a>
-</c:if>
-</td>
-<td width="76">
+<a class="PageButton" href="<c:url value='/products/1'/>">
+第一頁</a></c:if>
 <c:if test="${pageNo>1}">
-<a href="${pageNo-1}">上一頁</a>
-</c:if>
-</td>
-<td width="76">
-<c:if test="${pageNo!=totalPages }">
-<a href="${pageNo+1}">下一頁</a></c:if>
-</td>
-</tr>
-
-
-</table>
-
-
-
+<a class="PageButton" href="<c:url value='/products/${pageNo-1}'/>">
+上一頁</a></c:if>
+<c:if test="${pageNo!=totalPages}">
+<a class="PageButton" href="<c:url value='/products/${pageNo+1}'/>">
+下一頁</a></c:if>
 </div>
 </div>
+
+
 
 </body>
 </html>

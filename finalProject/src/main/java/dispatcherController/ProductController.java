@@ -122,7 +122,7 @@ public class ProductController {
 		return resEntity;
 	}
 
-	@RequestMapping(value = "/Buy", method = RequestMethod.POST)
+	@RequestMapping(value = "/Buy", method = RequestMethod.GET)
 	public ModelAndView AddToCart(HttpSession session, ModelAndView mav, @ModelAttribute("orderItem") orderItem oi,
 			BindingResult result) throws ServletException {
 		int pageNo = (int) session.getAttribute("pageNo");

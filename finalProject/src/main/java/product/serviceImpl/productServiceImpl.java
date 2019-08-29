@@ -89,7 +89,7 @@ public class productServiceImpl implements productService {
 
 	@Override
 	public int getTotalPages() {
-		int totalPages = (int) (Math.ceil(getDataCount()/3.0));
+		int totalPages = (int) (Math.ceil(getDataCount()/(double)productDaoImpl.dataPerPage));
 		return totalPages;
 	}
 
