@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+ul {
+  list-style-type: none;
+  margin: 0 100px;
+  padding: 0;
+  overflow: hidden;
+  background-color: #E0FFFF;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+
+li {
+  float: left;
+}
+li.logo{
+display: block;
+  color: orange;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  cursor: default;
+}
+li.item a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  cursor: default;
+}
+
+li a:hover {
+  background-color: #AFEEEE;
+  text-decoration: none;
+}
+
+.active {
+  background-color: #4CAF50;
+}
