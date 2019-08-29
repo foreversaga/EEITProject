@@ -13,7 +13,7 @@ public class shoppingCart {
 	public shoppingCart() {
 	}
 
-	public Map<Integer, orderItem> getContent() {//let checkCart.jsp get cart object via session
+	public Map<Integer, orderItem> getContent() {// let checkCart.jsp get cart object via session
 		return cart;
 	}
 
@@ -39,11 +39,11 @@ public class shoppingCart {
 		}
 		return totalAmount;
 	}
-	
+
 	public List<orderItem> getCartItem() {
-		List<orderItem> list=new ArrayList<>();
-		Set<Integer> set=cart.keySet();
-		for(Integer k:set) {
+		List<orderItem> list = new ArrayList<>();
+		Set<Integer> set = cart.keySet();
+		for (Integer k : set) {
 			orderItem oi = null;
 			oi.setiQty(cart.get(k).getiQty());
 			oi.setpId(cart.get(k).getpId());
@@ -53,6 +53,14 @@ public class shoppingCart {
 		}
 		return list;
 	}
-	
+
+	public int deleteProduct(int pId) {
+		if (cart.get(pId) != null) {
+			cart.remove(pId);
+			return 1;
+		} else {
+			return 0;
+		}
+	}
 
 }

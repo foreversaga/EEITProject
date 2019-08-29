@@ -53,7 +53,7 @@ public class ProductController {
 	@Autowired
 	orderService oService;
 
-	@RequestMapping(value = "/products/{pageNo}",method = RequestMethod.GET)
+	@RequestMapping(value = "/products/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView productsPage(@PathVariable Integer pageNo, HttpServletRequest request) {
 		if (pageNo == null) {
 			pageNo = 1;
@@ -91,7 +91,7 @@ public class ProductController {
 	@RequestMapping(value = "/showPic/{pId}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> showPic(HttpServletResponse resp, @PathVariable Integer pId) {
 		productBean pb = pService.getProduct(pId);
-		String filePath = "/resource/img/NoImage.jpg";
+		String filePath = "/WEB-INF/resource/img/NoImage.jpg";
 		String filename = "";
 		int len = 0;
 		HttpHeaders headers = new HttpHeaders();
@@ -201,5 +201,19 @@ public class ProductController {
 		}
 		pService.insertNewProduct(bb);
 		return "redirect:/products/1";
+	}
+@RequestMapping("DeleteCartProduct")
+	public String deleteProduct(HttpSession session, ModelAndView mav, HttpServletRequest request) {
+		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
+		int targetProduct = Integer.parseInt(request.getParameter("pId"));
+		Map<Integer, orderItem> sc = cart.getContent();
+		Set<Integer> set = sc.keySet();
+		for (Integer k : set) {
+			orderItem oi = sc.get(k);
+			if (oi.getpId() == targetProduct) {
+				sc.remove(k);
+			}
+		}
+		return "checkout/checkCart";
 	}
 }

@@ -9,6 +9,7 @@ ul {
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
+  border-radius: 20px;
 }
 
 li {
@@ -29,11 +30,13 @@ li.item a {
   padding: 14px 16px;
   text-decoration: none;
   cursor: default;
+  border-radius: 20px;
 }
 
 li a:hover {
   background-color: #AFEEEE;
   text-decoration: none;
+  transition: all 0.5s ease 0s;
 }
 
 .active {
