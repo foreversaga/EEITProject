@@ -208,7 +208,7 @@ public class ProductController {
 	public String deleteProduct(HttpSession session, ModelAndView mav, HttpServletRequest request) {
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
 		int pId = Integer.parseInt(request.getParameter("pId"));
-		cart.deleteProduct(pId);
+		cart.deleteProduct(pId); 
 		return "checkout/checkCart";
 	}
 }
