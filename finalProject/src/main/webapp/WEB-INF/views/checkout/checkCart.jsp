@@ -32,14 +32,21 @@ border: 1px solid black;
 <div>
 
 <table>
+<c:choose><c:when test="${empty shoppingCart.content }">
+購物車內已無商品。
+</c:when>
+<c:otherwise>
 <tr><th>商品圖片</th><th>商品名稱</th><th>購買數量</th><th>商品單價</th><th></th></tr>
+
+</c:otherwise>
+</c:choose>
 <c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
 <tr>
 <td><img style="width:100px;height:100px;" src="<c:url value='/showPic/${cart.value.pId}'/>"></td>
 <td>${cart.value.pName}</td>
 <td>${cart.value.iQty}</td>
 <td>${cart.value.pPrice}</td>
-<td><form action="<c:url value='/DeleteCartProduct'/>">
+<td><form action="<c:url value='/DeleteCartProduct'/>" method="post">
 <input type="hidden" name="pId" value="${cart.value.pId}" />
 <input type="submit" value="刪除"/></form></td>
 </tr>

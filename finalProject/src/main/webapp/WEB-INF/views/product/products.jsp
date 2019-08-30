@@ -35,7 +35,6 @@ img {
 div.ProductMainPage {
 	width: 900px;
 	margin: 30px auto;
-	border: 1px solid black;
 }
 
 .PageButtonDiv {
@@ -70,12 +69,9 @@ div.ProductMainPage {
 		<li class="item"><a href="<c:url value='/login'/>">會員登入</a></li>
 		<li class="item"><a href="<c:url value='/AddProduct'/>">新增商品</a></li>
 		<li class="item"><a href="<c:url value='/logout'/>">會員登出</a></li>
+		<li class="item"><a href="<c:url value='/CheckCart'/>">購物車</a></li>
 	</ul>
 
-	<div class="ProductMainPage">
-		<a href="${pageContext.request.contextPath }/CheckCart">購物車</a>
-
-	</div>
 	<div class="ProductMainPage">
 		<c:forEach varStatus="stVar" var="productBean" items="${productList}">
 			<c:if test="${stVar.index%3==0 }">

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.management.MemoryType;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -202,18 +203,12 @@ public class ProductController {
 		pService.insertNewProduct(bb);
 		return "redirect:/products/1";
 	}
-@RequestMapping("DeleteCartProduct")
+
+	@RequestMapping(value = "DeleteCartProduct",method = RequestMethod.POST)
 	public String deleteProduct(HttpSession session, ModelAndView mav, HttpServletRequest request) {
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
-		int targetProduct = Integer.parseInt(request.getParameter("pId"));
-		Map<Integer, orderItem> sc = cart.getContent();
-		Set<Integer> set = sc.keySet();
-		for (Integer k : set) {
-			orderItem oi = sc.get(k);
-			if (oi.getpId() == targetProduct) {
-				sc.remove(k);
-			}
-		}
+		int pId = Integer.parseInt(request.getParameter("pId"));
+		cart.deleteProduct(pId);
 		return "checkout/checkCart";
 	}
 }
