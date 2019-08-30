@@ -49,7 +49,7 @@ border: 1px solid black;
 <td><form action="<c:url value='/DeleteCartProduct'/>" method="post">
 <input type="hidden" name="pId" value="${cart.value.pId}" />
 <input type="submit" value="刪除"/></form></td>
-</tr> 
+</tr>  
 </c:forEach>
 </table>
 </div>

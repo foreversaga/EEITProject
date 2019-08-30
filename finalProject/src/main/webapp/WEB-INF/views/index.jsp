@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>首頁</title>
+<title>首頁</title>  
 <link rel=stylesheet type="text/css" href="<c:url value='/css/navbar.css'/>">
 <style>
 body {
