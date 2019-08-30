@@ -106,7 +106,7 @@ div.ProductMainPage {
 						<c:if test="${productBean.pInstock!=0 }">
 							<input type="submit" value="加到購物車">
 						</c:if>
- 					</form:form>
+ 	 				</form:form>
 				</div>
 			</div>
 		</c:forEach>
