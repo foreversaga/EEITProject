@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.management.MemoryType;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
-import javax.swing.text.html.FormSubmitEvent.MethodType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
@@ -164,6 +162,9 @@ public class ProductController {
 		Set<orderItemBean> items = new HashSet<orderItemBean>();
 		Map<Integer, orderItem> cart = sc.getContent();
 		Set<Integer> set = cart.keySet();
+		Integer newStock = 0;
+		int n = 0;
+		productBean mb = null;
 		for (Integer k : set) {
 			orderItem oi = cart.get(k);
 			Integer subtotal = (oi.getiQty() * oi.getpPrice());
@@ -171,6 +172,9 @@ public class ProductController {
 			orderItemBean oib = new orderItemBean(null, oi.getpId(), iDes, oi.getiQty(), oi.getpPrice());
 			oib.setOrderBean(ob);
 			items.add(oib);
+			mb = pService.getProduct(oi.getpId());
+			newStock = mb.getpInstock() - oi.getiQty();
+			n = pService.updateStock(mb.getpId(), newStock);
 		}
 		ob.setItemSet(items);
 		oService.saveOrder(ob);
@@ -204,11 +208,11 @@ public class ProductController {
 		return "redirect:/products/1";
 	}
 
-	@RequestMapping(value = "DeleteCartProduct",method = RequestMethod.POST)
+	@RequestMapping(value = "DeleteCartProduct", method = RequestMethod.POST)
 	public String deleteProduct(HttpSession session, ModelAndView mav, HttpServletRequest request) {
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
 		int pId = Integer.parseInt(request.getParameter("pId"));
-		cart.deleteProduct(pId);  
+		cart.deleteProduct(pId);
 		return "checkout/checkCart";
 	}
 }

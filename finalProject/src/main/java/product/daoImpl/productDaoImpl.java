@@ -1,6 +1,5 @@
 package product.daoImpl;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,13 +27,6 @@ public class productDaoImpl implements productDao {
 	}
 
 	public productDaoImpl() {
-//		factory = HibernateUtils.getSessionFactory();
-	}
-
-	@Override
-	public void setConnection(Connection conn) {
-//		this.conn = conn;
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -71,7 +63,7 @@ public class productDaoImpl implements productDao {
 		Long n = null;
 		Session session = factory.getCurrentSession();
 		String sql = "SELECT COUNT(*) FROM productBean";
-		n =  (Long) session.createQuery(sql).uniqueResult();
+		n = (Long) session.createQuery(sql).uniqueResult();
 		return n;
 	}
 
@@ -80,13 +72,18 @@ public class productDaoImpl implements productDao {
 		return pageNo;
 	}
 
-
-
 	@Override
 	public void setPageNo(int pageNo) {
 		this.pageNo = pageNo;
 	}
 
-
+	@Override
+	public int updateStock(int pId, int newStock) {
+		int n = 0;
+		Session session = factory.getCurrentSession();
+		String sql = "UPDATE productBean b SET b.pInstock = :stock WHERE b.pId = :id";
+		n = session.createQuery(sql).setParameter("stock", newStock).setParameter("id", pId).executeUpdate();
+		return n;
+	}
 
 }

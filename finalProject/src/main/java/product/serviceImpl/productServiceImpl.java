@@ -85,4 +85,9 @@ public class productServiceImpl implements productService {
 		return pdao.getDataCount();
 	}
 
+	@Override
+	public int updateStock(int pId, int newStock) {
+		return pdao.updateStock(pId, newStock);
+	}
+
 }

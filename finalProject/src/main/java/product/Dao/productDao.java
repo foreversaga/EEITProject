@@ -1,12 +1,11 @@
 package product.Dao;
 
-import java.sql.Connection;
+
 import java.util.List;
 
 import product.model.productBean;
 
 public interface productDao {
-	public void setConnection(Connection conn);
 
 	public List<productBean> getAllProduct();
 
@@ -19,5 +18,7 @@ public interface productDao {
 	public int getPageNo();
 
 	public void setPageNo(int pageNo);
+	
+	public int updateStock(int pId, int newStock);
 
 }
