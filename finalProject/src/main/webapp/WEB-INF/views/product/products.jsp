@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>商品頁面Servlet</title>
 <link rel=stylesheet type="text/css"
@@ -14,7 +15,7 @@
 .card {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	transition: 0.3s;
-	width: 170px;
+	width: 190px;
 	border-radius: 5px;
 	display: inline-block;
 	margin: 20px;
@@ -33,7 +34,7 @@ img {
 }
 
 div.ProductMainPage {
-	width: 900px;
+	width: 940px; 
 	margin: 30px auto;
 }
 
@@ -62,6 +63,7 @@ div.ProductMainPage {
 </style>
 </head>
 <body>
+<img style="width:100%" src="<c:url value='/img/index-banner.jpg'/>">
 	<ul>
 		<li class="logo">旅遊去</li>
 		<li class="item"><a class="active" href="<c:url value='/'/>">Home</a></li>
@@ -74,7 +76,7 @@ div.ProductMainPage {
 
 	<div class="ProductMainPage">
 		<c:forEach varStatus="stVar" var="productBean" items="${productList}">
-			<c:if test="${stVar.index%3==0 }">
+			<c:if test="${stVar.index%4==0 }">
 				<br>
 			</c:if>
 			<div class="card">

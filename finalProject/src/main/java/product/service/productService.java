@@ -19,7 +19,4 @@ public interface productService {
 	
 	int getPageNo();
 	
-	void setDataPerPage(int dataPerPage);
-	
-	int getDataPerPage();
 }

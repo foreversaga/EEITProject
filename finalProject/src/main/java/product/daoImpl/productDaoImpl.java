@@ -9,13 +9,13 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import config.GlobalService;
 import product.Dao.productDao;
 import product.model.productBean;
 
 @Repository
 public class productDaoImpl implements productDao {
 	int pageNo = 0;
-	public static int dataPerPage = 6;
 	SessionFactory factory;
 
 	public SessionFactory getFactory() {
@@ -43,8 +43,8 @@ public class productDaoImpl implements productDao {
 		List<productBean> list = new ArrayList<productBean>();
 		Session session = factory.getCurrentSession();
 		String sql = "FROM productBean";
-		int startPage = (pageNo - 1) * dataPerPage;
-		list = session.createQuery(sql).setFirstResult(startPage).setMaxResults(dataPerPage).list();
+		int startPage = (pageNo - 1) * GlobalService.dataPerPage;
+		list = session.createQuery(sql).setFirstResult(startPage).setMaxResults(GlobalService.dataPerPage).list();
 		return list;
 	}
 
@@ -80,19 +80,13 @@ public class productDaoImpl implements productDao {
 		return pageNo;
 	}
 
-	@Override
-	public int getDataPerPage() {
-		return dataPerPage;
-	}
+
 
 	@Override
 	public void setPageNo(int pageNo) {
 		this.pageNo = pageNo;
 	}
 
-	@Override
-	public void setDataPerPage(int dataPerPage) {
-		this.dataPerPage = dataPerPage;
-	}
+
 
 }

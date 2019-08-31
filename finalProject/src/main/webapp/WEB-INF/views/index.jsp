@@ -16,12 +16,10 @@ body {
   background-color: #4CAF50;
 }
 </style>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script>
 // function login() {
 // 	$.ajax({url : "<c:url value='/login'/>",type : "POST",
@@ -30,7 +28,7 @@ body {
 </script>
 </head>
 <body>
-<h1></h1>
+<img style="width:100%" src="<c:url value='/img/index-banner.jpg'/>">
 <ul>
 <li class="logo">旅遊去</li>
   <li class="item"><a class="active" href="<c:url value='/'/>">Home</a></li>

@@ -2,16 +2,13 @@ package product.serviceImpl;
 
 import java.util.List;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import login.HibernateUtils;
+import config.GlobalService;
 import product.Dao.productDao;
-import product.daoImpl.productDaoImpl;
 import product.model.productBean;
 import product.service.productService;
 
@@ -72,24 +69,13 @@ public class productServiceImpl implements productService {
 	}
 
 	@Override
-	public void setDataPerPage(int dataPerPage) {
-		pdao.setDataPerPage(dataPerPage);
-
-	}
-
-	@Override
 	public int getPageNo() {
 		return pdao.getPageNo();
 	}
 
 	@Override
-	public int getDataPerPage() {
-		return pdao.getDataPerPage();
-	}
-
-	@Override
 	public int getTotalPages() {
-		int totalPages = (int) (Math.ceil(getDataCount()/(double)productDaoImpl.dataPerPage));
+		int totalPages = (int) (Math.ceil(getDataCount() / (double) GlobalService.dataPerPage));
 		return totalPages;
 	}
 
