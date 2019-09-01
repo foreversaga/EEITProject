@@ -6,9 +6,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	
+</script>
 <meta charset="UTF-8">
-<title>商品頁面Servlet</title>
+<title>商品頁面</title>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#click").click(function() {
+		$("#show").slideToggle("fast");
+	});
+		var cartdiv = document.getElementById("click");
+	$("body").click(function() {
+		cartdiv.style.display == "block" ? cartdiv.style.display == "none":cartdiv.style.display == "none";
+	});
+});
+</script>
 <link rel=stylesheet type="text/css"
 	href="<c:url value='/css/navbar.css'/>">
 <style>
@@ -34,8 +50,9 @@ img {
 }
 
 div.ProductMainPage {
-	width: 940px; 
+	width: 940px;
 	margin: 30px auto;
+	z-index: 1;
 }
 
 .PageButtonDiv {
@@ -60,10 +77,20 @@ div.ProductMainPage {
 	border-color: #494949 !important;
 	transition: all 0.3s ease 0s;
 }
+
+#show {
+	display: none;
+	width: 100px;
+	height: 123px;
+	border: 1px solid black;
+	z-index: 2;
+	margin-right: 20%;
+	float: right;
+}
 </style>
 </head>
 <body>
-<img style="width:100%" src="<c:url value='/img/index-banner.jpg'/>">
+	<img style="width: 100%" src="<c:url value='/img/index-banner.jpg'/>">
 	<ul>
 		<li class="logo">旅遊去</li>
 		<li class="item"><a class="active" href="<c:url value='/'/>">Home</a></li>
@@ -72,7 +99,12 @@ div.ProductMainPage {
 		<li class="item"><a href="<c:url value='/AddProduct'/>">新增商品</a></li>
 		<li class="item"><a href="<c:url value='/logout'/>">會員登出</a></li>
 		<li class="item"><a href="<c:url value='/CheckCart'/>">購物車</a></li>
+		<li class="item" style="float: right; margin-right: 20%;"><a
+			id="click">click</a></li>
 	</ul>
+
+	<div id="show"></div>
+
 
 	<div class="ProductMainPage">
 		<c:forEach varStatus="stVar" var="productBean" items="${productList}">
@@ -89,7 +121,7 @@ div.ProductMainPage {
 					<p>價格:${productBean.pPrice}</p>
 					<form:form method="GET"
 						action="${pageContext.request.contextPath}/Buy"
-						modelAttribute="orderItem">
+						modelAttribute="orderItem" id="idform">
 						<c:if test="${productBean.pInstock==0 }">
 							<p>已售完</p>
 						</c:if>
@@ -108,7 +140,7 @@ div.ProductMainPage {
 						<c:if test="${productBean.pInstock!=0 }">
 							<input type="submit" value="加到購物車">
 						</c:if>
- 	  				</form:form>
+					</form:form>
 				</div>
 			</div>
 		</c:forEach>

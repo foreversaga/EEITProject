@@ -26,8 +26,8 @@ border: 1px solid black;
 </head>
 <body>
 <div>
-<a href="${pageContext.request.contextPath }/products/1">回商品頁面</a>
-<a href="${pageContext.request.contextPath }/">回首頁</a>
+<a href="<c:url value='/products/1'/>">回商品頁面</a>
+<a href="<c:url value='/'/>">回首頁</a>
 </div>
 <div>
 
@@ -54,7 +54,8 @@ border: 1px solid black;
 </table>
 </div>
 <div>
-<a href="${pageContext.request.contextPath }/CheckOut">結帳</a>
+<c:if test="${!empty shoppingCart.content }"><a href="<c:url value='/CheckOut'/>">結帳</a></c:if>
+
 </div>
 
 </body>
