@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
-@EnableTransactionManagement
 public class RootAppConfig {
 
 	@Bean
@@ -39,7 +38,7 @@ public class RootAppConfig {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
 		factory.setDataSource(dataSource());
-		factory.setPackagesToScan(new String[] { "product.model","register.model","cart.model" });
+		factory.setPackagesToScan(new String[] { "product","register","cart" });
 		factory.setHibernateProperties(additionalProperties());
 		return factory;
 	}
