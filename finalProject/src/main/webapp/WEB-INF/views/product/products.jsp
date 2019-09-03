@@ -53,6 +53,7 @@ div.ProductMainPage {
 	width: 940px;
 	margin: 30px auto;
 	z-index: 1;
+	position: absolute;
 }
 
 .PageButtonDiv {
@@ -80,12 +81,14 @@ div.ProductMainPage {
 
 #show {
 	display: none;
-	width: 100px;
-	height: 123px;
+	width: 300px;
+	height: 423px;
 	border: 1px solid black;
 	z-index: 2;
-	margin-right: 20%;
+	margin-right: 7%;
 	float: right;
+	position: absolute;
+	background-color: blue;
 }
 </style>
 </head>
@@ -99,12 +102,11 @@ div.ProductMainPage {
 		<li class="item"><a href="<c:url value='/AddProduct'/>">新增商品</a></li>
 		<li class="item"><a href="<c:url value='/logout'/>">會員登出</a></li>
 		<li class="item"><a href="<c:url value='/CheckCart'/>">購物車</a></li>
-		<li class="item" style="float: right; margin-right: 20%;"><a
+		<li class="item" style="float: right; margin-right: 18%;"><a
 			id="click">click</a></li>
 	</ul>
 
 	<div id="show"></div>
-
 
 	<div class="ProductMainPage">
 		<c:forEach varStatus="stVar" var="productBean" items="${productList}">
