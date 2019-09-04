@@ -209,9 +209,10 @@ public class ProductController {
 		return "redirect:/products/1";
 	}
 
-	@RequestMapping(value = "DeleteCartProduct", method = RequestMethod.POST)
+	@RequestMapping(value = "DeleteCartProduct", method = RequestMethod.GET)
 	public String deleteProduct(HttpSession session, ModelAndView mav, HttpServletRequest request) {
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
+		mav.setViewName("forward:checkout/checkCart");
 		int pId = Integer.parseInt(request.getParameter("pId"));
 		cart.deleteProduct(pId);
 		return "checkout/checkCart";

@@ -15,15 +15,32 @@
 <meta charset="UTF-8">
 <title>商品頁面</title>
 <script type="text/javascript">
-$(document).ready(function() {
-	$("#click").click(function() {
-		$("#show").slideToggle("fast");
-	});
-		var cartdiv = document.getElementById("click");
-	$("body").click(function() {
-		cartdiv.style.display == "block" ? cartdiv.style.display == "none":cartdiv.style.display == "none";
-	});
-});
+	function DeleteItem() {
+		var pId = document.getElementById("DeleteId").value;
+		var url = "<c:url value='/DeleteCartProduct?pId="+pId+"'/>";
+		$.ajax({
+			url : url,
+			type : "get",
+			success : function(data) {
+				$("#showcart").html(data);
+			}
+		});
+	};
+
+	$(document)
+			.ready(
+					function() {
+						$("#click").click(function() {
+							$("#showcart").slideToggle("fast");
+						});
+						var cartdiv = document.getElementById("click");
+						$("body")
+								.click(
+										function() {
+											cartdiv.style.display == "block" ? cartdiv.style.display == "none"
+													: cartdiv.style.display == "none";
+										});
+					});
 </script>
 <link rel=stylesheet type="text/css"
 	href="<c:url value='/css/navbar.css'/>">
@@ -53,7 +70,6 @@ div.ProductMainPage {
 	width: 940px;
 	margin: 30px auto;
 	z-index: 1;
-	position: absolute;
 }
 
 .PageButtonDiv {
@@ -79,16 +95,16 @@ div.ProductMainPage {
 	transition: all 0.3s ease 0s;
 }
 
-#show {
+#showcart {
 	display: none;
 	width: 300px;
 	height: 423px;
-	border: 1px solid black;
 	z-index: 2;
-	margin-right: 7%;
+	right: 200px;
 	float: right;
 	position: absolute;
-	background-color: blue;
+	background-color: #f0f0f0;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 </style>
 </head>
@@ -105,9 +121,29 @@ div.ProductMainPage {
 		<li class="item" style="float: right; margin-right: 18%;"><a
 			id="click">click</a></li>
 	</ul>
-
-	<div id="show"></div>
-
+	<!-- dropdown cart button -->
+	<div id="showcart">
+		<c:if test="${empty shoppingCart.content }">
+			<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
+		</c:if>
+		<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
+			<table>
+				<tr>
+					<td><img style="width: 50px; height: 50px;"
+						src="<c:url value='/showPic/${cart.value.pId}'/>"></td>
+					<td>${cart.value.pName}</td>
+					<td>${cart.value.iQty}</td>
+					<td>${cart.value.pPrice}</td>
+					<td>
+						<%-- <form action="javascript:DeleteItem()" method="get"> --%> <input
+						type="hidden" id="DeleteId" name="pId" value="${cart.value.pId}" />
+						<input type="button" onclick="DeleteItem()" value="刪除" /> <%-- </form> --%>
+					</td>
+				</tr>
+			</table>
+		</c:forEach>
+	</div>
+	<!-- end of dropdown cart button -->
 	<div class="ProductMainPage">
 		<c:forEach varStatus="stVar" var="productBean" items="${productList}">
 			<c:if test="${stVar.index%4==0 }">

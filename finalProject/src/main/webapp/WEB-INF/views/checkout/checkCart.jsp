@@ -46,7 +46,7 @@ border: 1px solid black;
 <td>${cart.value.pName}</td>
 <td>${cart.value.iQty}</td>
 <td>${cart.value.pPrice}</td>
-<td><form action="<c:url value='/DeleteCartProduct'/>" method="post">
+<td><form action="<c:url value='/DeleteCartProduct'/>" method="get">
 <input type="hidden" name="pId" value="${cart.value.pId}" />
 <input type="submit" value="刪除"/></form></td>
 </tr>  
