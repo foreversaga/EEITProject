@@ -16,13 +16,12 @@
 <title>商品頁面</title>
 <script type="text/javascript">
 	function DeleteItem() {
-		var pId = document.getElementById("DeleteId").value;
-		var url = "<c:url value='/DeleteCartProduct?pId="+pId+"'/>";
 		$.ajax({
-			url : url,
+			url : "<c:url value='/DeleteCartProduct'/>",
+			data : $("#DeleteForm").serialize(),
 			type : "get",
 			success : function(data) {
-				$("#showcart").html(data);
+// 				$(".ProductMainPage").html(data);
 			}
 		});
 	};
@@ -135,9 +134,10 @@ div.ProductMainPage {
 					<td>${cart.value.iQty}</td>
 					<td>${cart.value.pPrice}</td>
 					<td>
-						<%-- <form action="javascript:DeleteItem()" method="get"> --%> <input
-						type="hidden" id="DeleteId" name="pId" value="${cart.value.pId}" />
-						<input type="button" onclick="DeleteItem()" value="刪除" /> <%-- </form> --%>
+						<form id="DeleteForm" method="get"> 
+						<input type="hidden" id="DeleteId" name="pId" value="${cart.value.pId}" />
+						<input type="button" onclick="DeleteItem()" value="刪除" /> 
+						</form>
 					</td>
 				</tr>
 			</table>

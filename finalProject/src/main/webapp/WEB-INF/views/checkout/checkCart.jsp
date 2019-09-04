@@ -8,7 +8,8 @@
 <title>購物車清單</title>
 <style>
 div {
-	width: 400px;
+	width: 300px;
+	height:423px;
 	margin: 50px auto;
 	text-align: center;
 }

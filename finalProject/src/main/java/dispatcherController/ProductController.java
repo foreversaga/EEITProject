@@ -26,7 +26,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -209,12 +209,13 @@ public class ProductController {
 		return "redirect:/products/1";
 	}
 
-	@RequestMapping(value = "DeleteCartProduct", method = RequestMethod.GET)
-	public String deleteProduct(HttpSession session, ModelAndView mav, HttpServletRequest request) {
+	@RequestMapping(value = "/DeleteCartProduct", method = RequestMethod.GET)
+	public ModelAndView deleteProduct(HttpSession session, ModelAndView mav, HttpServletRequest request) {
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
-		mav.setViewName("forward:checkout/checkCart");
+		int pageNo = (int) session.getAttribute("pageNo");
+		mav.setViewName("forward:products/" + pageNo);
 		int pId = Integer.parseInt(request.getParameter("pId"));
 		cart.deleteProduct(pId);
-		return "checkout/checkCart";
+		return mav;
 	}
 }
