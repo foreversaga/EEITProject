@@ -126,7 +126,7 @@ public class ProductController {
 	public ModelAndView AddToCart(HttpSession session, ModelAndView mav, @ModelAttribute("orderItem") orderItem oi,
 			BindingResult result) throws ServletException {
 		int pageNo = (int) session.getAttribute("pageNo");
-		mav.setViewName("forward:products/" + pageNo);
+		mav.setViewName("redirect:products/" + pageNo);
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
 		if (cart == null) {
 			cart = new shoppingCart();
@@ -212,8 +212,7 @@ public class ProductController {
 	@RequestMapping(value = "/DeleteCartProduct", method = RequestMethod.GET)
 	public ModelAndView deleteProduct(HttpSession session, ModelAndView mav, HttpServletRequest request) {
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
-		int pageNo = (int) session.getAttribute("pageNo");
-		mav.setViewName("forward:products/" + pageNo);
+		mav.setViewName("checkout/checkCart");
 		int pId = Integer.parseInt(request.getParameter("pId"));
 		cart.deleteProduct(pId);
 		return mav;

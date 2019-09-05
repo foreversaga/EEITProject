@@ -6,58 +6,46 @@
 <head>
 <meta charset="UTF-8">
 <title>購物車清單</title>
+<script type="text/javascript">
+function DeleteItem(clicked_id) {
+	var url = "<c:url value='/DeleteCartProduct?pId="+clicked_id+"'/>";
+	$.ajax({
+		url : url,
+		type : "get",
+		success : function(data) {
+			$("#showcart").html(data);
+		}
+	});
+};
+</script>
 <style>
-div {
+.cartdiv {
 	width: 300px;
 	height:423px;
-	margin: 50px auto;
-	text-align: center;
 }
-table{
-border-collapse: collapse;
-}
-td{
-width:100px;
-border: 1px solid black;
-}
-th{
-border: 1px solid black;
-}
+
 </style>
 </head>
 <body>
-<div>
-<a href="<c:url value='/products/1'/>">回商品頁面</a>
-<a href="<c:url value='/'/>">回首頁</a>
-</div>
-<div>
-
+<div class="cartdiv">
 <table>
-<c:choose><c:when test="${empty shoppingCart.content }">
-購物車內已無商品。
-</c:when>
-<c:otherwise>
-<tr><th>商品圖片</th><th>商品名稱</th><th>購買數量</th><th>商品單價</th><th></th></tr>
-
-</c:otherwise>
-</c:choose>
+<c:if test="${empty shoppingCart.content }">
+<p style="text-align: center;">購物車內已無商品。<p>
+</c:if>
 <c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
-<tr>
-<td><img style="width:100px;height:100px;" src="<c:url value='/showPic/${cart.value.pId}'/>"></td>
-<td>${cart.value.pName}</td>
-<td>${cart.value.iQty}</td>
-<td>${cart.value.pPrice}</td>
-<td><form action="<c:url value='/DeleteCartProduct'/>" method="get">
-<input type="hidden" name="pId" value="${cart.value.pId}" />
-<input type="submit" value="刪除"/></form></td>
-</tr>  
+<hr>
+<img style="width:50px;height:50px;float: left;" src="<c:url value='/showPic/${cart.value.pId}'/>">
+<p style="line-height: 10px">${cart.value.pName}</p>
+<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
+<span><input id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)" value="刪除" />
+</span>
+<c:if test="${vs.last}"><hr></c:if>
 </c:forEach>
 </table>
-</div>
-<div>
 <c:if test="${!empty shoppingCart.content }"><a href="<c:url value='/CheckOut'/>">結帳</a></c:if>
-
 </div>
+
+
 
 </body>
 </html>
