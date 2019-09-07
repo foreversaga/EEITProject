@@ -29,4 +29,9 @@ public class MainController {
 	public String register() {
 		return "/register/register";
 	}
+	
+	@RequestMapping("/review")
+	public String review() {
+		return "review/reivew";
+	}	
 }

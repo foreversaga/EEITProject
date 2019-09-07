@@ -30,12 +30,7 @@ public class reviewBean implements Serializable {
 	
 //@ManyToOne(cascade=CascadeType.ALL)
 //	Set<reviewBean> reviewSet = new LinkedHashSet<>();
-//	public Set<reviewBean> getReviewSet() {
-//		return reviewSet;
-//	}
-//	public void setReviewSet(Set<reviewBean> reviewSet) {
-//		this.reviewSet = reviewSet;
-//	}
+
 	
 	
 	public Integer getrId() {

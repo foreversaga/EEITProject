@@ -19,7 +19,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<reviewBean> getAllReview() {
-		String hql = "FROM Review";
+		String hql = "FROM reviewBean";
 		Session session = null;
 		List<reviewBean> list = new ArrayList<>();
 		session = factory.getCurrentSession();
