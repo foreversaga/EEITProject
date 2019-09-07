@@ -12,16 +12,18 @@ import review.service.ReviewService;
 
 @Controller
 public class reviewController {
-//	@Autowired
-//	ReviewService service;
-//	@RequestMapping("/review")
-//	public String welcome(Model model) {
-////		model.addAttribute("reviewtitle", "的個人評價");
-//		List<reviewBean>  list = service.getAllReviews();
-//		model.addAttribute("review", list);
-//		return "review";
-//	}
-	
+
+	@Autowired
+	ReviewService service;
+
+	@RequestMapping(value="/reviews")
+	public String review (Model model) {
+//		model.addAttribute("reviewtitle", "的個人評價");
+		List<reviewBean> list = service.getAllReviews();
+		model.addAttribute("review", list);
+		return "review";
+	}
+
 //	@RequestMapping("/memberreview")
 //	public String  memberReview() {
 //		return "memberReview";
@@ -36,7 +38,5 @@ public class reviewController {
 //	public String  productReview() {
 //		return "memberReview";
 //	}
-	
-	
 
 }

@@ -32,6 +32,7 @@ public class MainController {
 	
 	@RequestMapping("/review")
 	public String review() {
-		return "review/reivew";
+		return "review/review";
+//		return "/review/review";
 	}	
 }

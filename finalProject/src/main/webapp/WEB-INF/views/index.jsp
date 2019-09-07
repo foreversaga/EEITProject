@@ -43,6 +43,7 @@ body {
 		<li class="item"><a href="login">會員登入</a></li>
 		<li class="item"><a href="AddProduct">新增商品</a></li>
 		<li class="item"><a href="logout">會員登出</a></li>
+		<li class="item"><a href="review">會員評價</a></li>
 	</ul>
 </body>
 </html>
