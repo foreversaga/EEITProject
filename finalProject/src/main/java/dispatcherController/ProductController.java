@@ -150,16 +150,20 @@ public class ProductController {
 		String mAccount = "test5";
 		Integer total = cart.getTotal();
 		java.sql.Timestamp orderTime = new Timestamp(new java.util.Date().getTime());
-		orderBean ob = new orderBean(null, total, orderTime, null, mAccount);
-		session.setAttribute("orderList", ob);
+		orderBean ob = new orderBean();
+		ob.setmAccount(mAccount);
+		ob.setoTimestamp(orderTime);
+		ob.setoTotalAmount(total);
+		mav.addObject("orderInfo", ob);
+//		session.setAttribute("orderList", ob);
 		mav.setViewName("checkout/checkout");
 		return mav;
 	}
 
 	@RequestMapping(value = "/ConfirmOrder")
-	public String ConfirmOrder(HttpSession session) {
+	public String ConfirmOrder(@ModelAttribute("orderInfo") orderBean ob, HttpSession session) {
 		shoppingCart sc = (shoppingCart) session.getAttribute("shoppingCart");
-		orderBean ob = (orderBean) session.getAttribute("orderList");
+//		orderBean ob = (orderBean) session.getAttribute("orderList");
 		Set<orderItemBean> items = new HashSet<orderItemBean>();
 		Map<Integer, orderItem> cart = sc.getContent();
 		Set<Integer> set = cart.keySet();
@@ -180,7 +184,12 @@ public class ProductController {
 		ob.setItemSet(items);
 		oService.saveOrder(ob);
 		session.removeAttribute("shoppingCart");
-		return "redirect:/";
+		return "redirect:/OrderThank";
+	}
+
+	@RequestMapping("/OrderThank")
+	public String OrderThank() {
+		return "checkout/orderThank";
 	}
 
 	@RequestMapping(value = "/AddProduct", method = RequestMethod.GET)
@@ -217,4 +226,22 @@ public class ProductController {
 		cart.deleteProduct(pId);
 		return mav;
 	}
+
+	@RequestMapping("/orderDetails")
+	public ModelAndView GetOrderlist(HttpSession session, ModelAndView mav) {
+		List<orderBean> list = oService.getMemberOrders("test5");
+		mav.addObject("orderList", list);
+		mav.setViewName("checkout/orderDetails");
+		return mav;
+	}
+
+	@RequestMapping("/showOrderItem/{oId}")
+	public ModelAndView GetOrderItem(@PathVariable Integer oId, HttpSession session, ModelAndView mav,
+			HttpServletRequest request) {
+		List<orderItemBean> list = oService.getOrderItem(oId);
+		mav.addObject("orderItemList", list);
+		mav.setViewName("checkout/orderItem");
+		return mav;
+	}
+
 }

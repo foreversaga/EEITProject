@@ -27,8 +27,10 @@ border: 1px solid black;
 <body>
 <div>
 <table>
-<tr><th>訂單編號</th><th>訂單內容</th></tr>
-<c:forEach varStatus="vs" var="oItem" items="orderItem"></c:forEach>
+<tr><th>訂單編號</th><th>訂單金額</th></tr>
+<c:forEach varStatus="vs" var="orderBean" items="${orderList}">
+<tr><td><a href="<c:url value='/showOrderItem/${orderBean.oId}'/>">${orderBean.oId}</a></td><td>${orderBean.oTotalAmount}</td></tr>
+</c:forEach>
 </table>
 </div>
 </body>

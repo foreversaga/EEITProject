@@ -28,7 +28,6 @@ public class orderDaoImpl implements orderDao {
 	int oId = 0;
 
 	public orderDaoImpl() {
-//		factory = HibernateUtils.getSessionFactory();
 	}
 
 	@SuppressWarnings("unchecked")
