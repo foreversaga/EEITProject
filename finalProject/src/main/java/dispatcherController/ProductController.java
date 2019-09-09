@@ -26,7 +26,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,6 +42,7 @@ import cart.model.shoppingCart;
 import checkout.service.orderService;
 import product.model.productBean;
 import product.service.productService;
+import register.model.MemberBean;
 
 @Controller
 public class ProductController {
@@ -54,7 +54,7 @@ public class ProductController {
 	orderService oService;
 
 	@RequestMapping(value = "/products/{pageNo}", method = RequestMethod.GET)
-	public ModelAndView productsPage(@PathVariable Integer pageNo, HttpServletRequest request) {
+	public ModelAndView productsPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
 		if (pageNo == null) {
 			pageNo = 1;
 		}
@@ -66,7 +66,6 @@ public class ProductController {
 		mav.addObject("totalPages", totalPages);
 		mav.addObject("productList", list);
 		mav.addObject("orderItem", oi);
-		HttpSession session = request.getSession(false);
 		session.setAttribute("pageNo", pageNo);
 		return mav;
 	}
@@ -147,7 +146,8 @@ public class ProductController {
 	@RequestMapping(value = "/CheckOut")
 	public ModelAndView ToCheckOut(HttpSession session, ModelAndView mav) {
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
-		String mAccount = "test5";
+		MemberBean mb=(MemberBean) session.getAttribute("LoginOK");
+		String mAccount = mb.getmAccount();
 		Integer total = cart.getTotal();
 		java.sql.Timestamp orderTime = new Timestamp(new java.util.Date().getTime());
 		orderBean ob = new orderBean();
@@ -229,7 +229,8 @@ public class ProductController {
 
 	@RequestMapping("/orderDetails")
 	public ModelAndView GetOrderlist(HttpSession session, ModelAndView mav) {
-		List<orderBean> list = oService.getMemberOrders("test5");
+		MemberBean mb=(MemberBean) session.getAttribute("LoginOK");
+		List<orderBean> list = oService.getMemberOrders(mb.getmAccount());
 		mav.addObject("orderList", list);
 		mav.setViewName("checkout/orderDetails");
 		return mav;

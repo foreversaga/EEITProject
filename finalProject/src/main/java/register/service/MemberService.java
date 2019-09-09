@@ -10,4 +10,9 @@ public interface MemberService {
 	MemberBean queryMember(String mAccount);
 
 	public MemberBean checkPassword(String mAccount, String mPassword);
+			
+	 MemberBean getMemberBymId(int mId);
+	
+	void updateMember(MemberBean mb );
+	
 }

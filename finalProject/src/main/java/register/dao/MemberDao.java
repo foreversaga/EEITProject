@@ -1,7 +1,9 @@
 package register.dao;
 
 import java.sql.Connection;
+import java.util.List;
 
+import product.model.productBean;
 import register.model.MemberBean;
 
 public interface MemberDao {
@@ -15,4 +17,7 @@ public interface MemberDao {
 
 	public MemberBean checkPassword(String mAccount, String mPassword);
 
+	public void updateMember(MemberBean mb);
+	
+	public MemberBean getMemberBymId(int mId);
 }
