@@ -30,9 +30,5 @@ public class MainController {
 		return "/register/register";
 	}
 	
-	@RequestMapping("/review")
-	public String review() {
-		return "review/review";
-//		return "/review/review";
-	}	
+
 }

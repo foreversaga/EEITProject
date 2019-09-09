@@ -19,7 +19,7 @@ public class ReviewServiceImpl implements ReviewService {
 	@Transactional
 	@Override
 	public List<reviewBean> getAllReviews() {
-		return dao.getAllReview();
+		return dao.getAllReviews();
 	}
 
 }

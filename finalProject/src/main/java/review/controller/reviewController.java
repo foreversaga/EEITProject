@@ -15,13 +15,13 @@ public class reviewController {
 
 	@Autowired
 	ReviewService service;
-
-	@RequestMapping(value="/reviews")
+	
+	@RequestMapping(value="/review")
 	public String review (Model model) {
 //		model.addAttribute("reviewtitle", "的個人評價");
 		List<reviewBean> list = service.getAllReviews();
 		model.addAttribute("review", list);
-		return "review";
+		return "review/review";
 	}
 
 //	@RequestMapping("/memberreview")
