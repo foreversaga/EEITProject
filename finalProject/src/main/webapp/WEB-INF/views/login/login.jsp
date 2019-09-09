@@ -10,20 +10,39 @@
 <meta charset="UTF-8">
 <title>登入畫面</title>
 <style>
+.LoginBackground {/*使圖片隨著瀏覽器尺寸自動縮放，不因大小出現縫隙*/
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: -999;
+}
+
+.LoginBackground img {
+	min-height: 100%;
+	width: 100%;
+}
+
+@media screen and (max-width: 2000px) {/*使圖片保持長寬比不能變形，2000是圖片原始寬度*/
+	img.LoginBackground {
+		left: 50%;
+		margin-left: -500px;
+	}
+}
+
 body {
 	background: #eee !important;
 }
 
 .wrapper {
-	    height: 200px;
-    width: 400px;
-
- 
-    position: absolute;     /*絕對位置*/
-    top: 50%;               /*從上面開始算，下推 50% (一半) 的位置*/
-    left: 50%;              /*從左邊開始算，右推 50% (一半) 的位置*/
-    margin-top: -100px;     /*高度的一半*/
-    margin-left: -200px;
+	height: 200px;
+	width: 400px;
+	position: absolute; /*絕對位置*/
+	top: 50%; /*從上面開始算，下推 50% (一半) 的位置*/
+	left: 50%; /*從左邊開始算，右推 50% (一半) 的位置*/
+	margin-top: -100px; /*高度的一半*/
+	margin-left: -200px;
 }
 
 .form-signin {
@@ -78,6 +97,9 @@ input[type="password"] {
 </style>
 </head>
 <body>
+	<div class="LoginBackground">
+		<img src="<c:url value='/img/LoginBackground.jpg'/>">
+	</div>
 	<div class="wrapper">
 		<form class="form-signin" method="POST"
 			action="<c:url value='checklogin'/>">
@@ -88,8 +110,10 @@ input[type="password"] {
 
 
 			<input name="mPassword" class="form-control" placeholder="密碼"
-				type="password" value="${requestScope.password }" /> 
-				<p><font size="-1" color="red">${errorMsgKey.LoginError}</font></p>
+				type="password" value="${requestScope.password }" />
+			<p>
+				<font size="-1" color="red">${errorMsgKey.LoginError}</font>
+			</p>
 			<!-- 						</p> <input type="submit" value="登入"></td> -->
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 		</form>

@@ -65,10 +65,10 @@ body {
 				<li class="nav-item"><a class="nav-link" href="<c:url value='/products/1'/>">商品頁面</a></li>
 				<li class="nav-item"><a class="nav-link" href="<c:url value='/login'/>">會員登入</a></li>
 				<li class="nav-item"><a class="nav-link" href="<c:url value='/AddProduct'/>">新增商品</a></li>
+				<li class="nav-item"><a class="nav-link" href="<c:url value='/UpdateMemberForm'/>">會員資料更新</a></li>					
 				<li class="nav-item"><a class="nav-link" href="<c:url value='/logout'/>">會員登出</a></li>
 				<li class="nav-item"><a class="nav-link" href="<c:url value='/orderDetails'/>">訂單明細</a></li>
 				<li class="nav-item"><a class="nav-link" href="<c:url value='/register/add'/>">會員註冊</a></li>
-				<li class="nav-item"><a class="nav-link" href="<c:url value='/register/add'/>">會員註冊2</a></li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
 				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

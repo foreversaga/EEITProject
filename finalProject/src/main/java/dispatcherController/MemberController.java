@@ -69,7 +69,14 @@ public class MemberController {
 		return "index";
 	}
 	
-
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String Logout(Model model,HttpSession session) {		
+//		request.getSession().invalidate();
+		session.invalidate();
+		return"index";
+	
+	}
+	
 	@RequestMapping(value = "/register/add", method = RequestMethod.GET)
 	public String getRegisterData(Model model) {
 		MemberBean mb= new MemberBean();
@@ -93,13 +100,14 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/UpdateMemberForm", method = RequestMethod.POST)
-	public String UpdateMember(@ModelAttribute("MemberBean")MemberBean mb, Model model,BindingResult result ) {
-//		session.getAttribute("LoginOK");
-//		session.getAttribute("mAccount");
-//		session.getAttribute("mPassword");
-//		model.addAttribute("LoginOK", mb);
-//		memberservice.getMemberBymId(mId);
-		memberservice.updateMember(mb);
+	public String UpdateMember(@ModelAttribute("MemberBean")MemberBean mb, Model model,HttpSession session,BindingResult result ) {
+		MemberBean LoginOK =(MemberBean) session.getAttribute("LoginOK");
+		LoginOK.setmPassword(mb.getmPassword());
+		LoginOK.setmAccount(mb.getmAccount());
+		LoginOK.setmAddress(mb.getmAddress());
+		LoginOK.setmEmail(mb.getmEmail());
+		LoginOK.setmPhone(mb.getmPhone());
+		memberservice.updateMember(LoginOK);
 		return "index";
 	}
 }

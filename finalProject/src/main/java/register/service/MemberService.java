@@ -11,7 +11,6 @@ public interface MemberService {
 
 	public MemberBean checkPassword(String mAccount, String mPassword);
 			
-	 MemberBean getMemberBymId(int mId);
 	
 	void updateMember(MemberBean mb );
 	

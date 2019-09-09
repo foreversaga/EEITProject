@@ -9,12 +9,34 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
+.registerBackground {			/*使圖片隨著瀏覽器尺寸自動縮放，不因大小出現縫隙*/
+	position: fixed;
+	top: 0;
+	left: 0;			
+	bottom: 0;
+	right: 0;
+	z-index: -999;
+}
+
+.registerBackground img {
+	min-height: 100%;
+	width: 100%;
+}
+
+@media screen and (max-width: 2000px) {/*使圖片保持長寬比不能變形，2000是圖片原始寬度*/
+	img.registerBackground {
+		left: 50%;
+		margin-left: -500px;
+	}
+}
+
 body {
 	background: #eee !important;
 }
 
 .wrapper {
 	margin: 200px auto;
+	opacity:0.6;/*配合背景調整半透明 */
 }
 
 .form-signup {
@@ -78,7 +100,9 @@ input[type="password"] {
 
 </head>
 <body>
-
+	<div class="registerBackground">
+		<img src="<c:url value='/img/registerBackground.jpg'/>">
+	</div>
 	<div class="wrapper">
 		<form:form class="form-signup" method="POST" modelAttribute="MemberBean">
 			<h2 class="form-signin-heading">Sign up</h2>
