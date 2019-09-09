@@ -20,7 +20,7 @@
 		var url = "<c:url value='/DeleteCartProduct?pId=" + clicked_id + "'/>";
 		$.ajax({
 			url : url,
-			type : "get",
+			type : "post",
 			success : function(data) {
 				$("div.dropdown-menu").html(data);
 			}
@@ -174,7 +174,7 @@ div.dropdown-menu {
 						<b>商品名稱:${productBean.pName}</b>
 					</p>
 					<p>價格:${productBean.pPrice}</p>
-					<form:form method="GET"
+					<form:form method="POST"
 						action="${pageContext.request.contextPath}/Buy"
 						modelAttribute="orderItem" id="idform">
 						<c:if test="${productBean.pInstock==0 }">

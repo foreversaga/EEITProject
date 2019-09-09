@@ -23,7 +23,6 @@ import product.model.productBean;
 import register.model.MemberBean;
 import register.service.MemberService;
 
-
 @Controller
 public class MemberController {
 
@@ -68,38 +67,39 @@ public class MemberController {
 		}
 		return "index";
 	}
-	
 
 	@RequestMapping(value = "/register/add", method = RequestMethod.GET)
 	public String getRegisterData(Model model) {
-		MemberBean mb= new MemberBean();
-		model.addAttribute("MemberBean",mb);
+		MemberBean mb = new MemberBean();
+		model.addAttribute("MemberBean", mb);
 		return "register/register";
 	}
-	
+
 	@RequestMapping(value = "/register/add", method = RequestMethod.POST)
 	public String porcessAddNewRegistertoForm(@ModelAttribute("MemberBean") MemberBean mb, BindingResult result) {
 		memberservice.registerMember(mb);
 		return "index";
-		
+
 	}
 
-			
-	@RequestMapping(value = "/UpdateMemberForm", method = RequestMethod.GET)
-	public String AddLoginMemberBeantoUpdateForm(Model model,HttpSession session) {
-		MemberBean mb= new MemberBean();
+	@RequestMapping(value = "/UpdateMemberForm1", method = RequestMethod.GET)
+	public String AddLoginMemberBeantoUpdateForm(Model model, HttpSession session) {
+		MemberBean mb = new MemberBean();
 		model.addAttribute("MemberBean", mb);
 		return "register/updateMember";
 	}
 
-	@RequestMapping(value = "/UpdateMemberForm", method = RequestMethod.POST)
-	public String UpdateMember(@ModelAttribute("MemberBean")MemberBean mb, Model model,BindingResult result ) {
+	@RequestMapping(value = "/UpdateMemberForm2", method = RequestMethod.GET)
+	public String UpdateMember(@ModelAttribute("MemberBean") MemberBean mb, HttpSession session, Model model,
+			BindingResult result) {
 //		session.getAttribute("LoginOK");
 //		session.getAttribute("mAccount");
 //		session.getAttribute("mPassword");
 //		model.addAttribute("LoginOK", mb);
 //		memberservice.getMemberBymId(mId);
-		memberservice.updateMember(mb);
+		MemberBean LoginOK = (MemberBean) session.getAttribute("LoginOK");
+		LoginOK.setmPassword("changepw");
+		memberservice.updateMember(LoginOK);
 		return "index";
 	}
 }

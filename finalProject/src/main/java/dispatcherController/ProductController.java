@@ -121,7 +121,7 @@ public class ProductController {
 		return resEntity;
 	}
 
-	@RequestMapping(value = "/Buy", method = RequestMethod.GET)
+	@RequestMapping(value = "/Buy", method = RequestMethod.POST)
 	public ModelAndView AddToCart(HttpSession session, ModelAndView mav, @ModelAttribute("orderItem") orderItem oi,
 			BindingResult result) throws ServletException {
 		int pageNo = (int) session.getAttribute("pageNo");
@@ -218,7 +218,7 @@ public class ProductController {
 		return "redirect:/products/1";
 	}
 
-	@RequestMapping(value = "/DeleteCartProduct", method = RequestMethod.GET)
+	@RequestMapping(value = "/DeleteCartProduct", method = RequestMethod.POST)
 	public ModelAndView deleteProduct(HttpSession session, ModelAndView mav, HttpServletRequest request) {
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
 		mav.setViewName("checkout/checkCart");
