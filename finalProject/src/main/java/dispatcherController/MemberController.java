@@ -23,6 +23,7 @@ import product.model.productBean;
 import register.model.MemberBean;
 import register.service.MemberService;
 
+
 @Controller
 public class MemberController {
 
@@ -67,38 +68,45 @@ public class MemberController {
 		}
 		return "index";
 	}
-
+	
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String Logout(Model model,HttpSession session) {		
+//		request.getSession().invalidate();
+		session.invalidate();
+		return"index";
+	
+	}
+	
 	@RequestMapping(value = "/register/add", method = RequestMethod.GET)
 	public String getRegisterData(Model model) {
-		MemberBean mb = new MemberBean();
-		model.addAttribute("MemberBean", mb);
+		MemberBean mb= new MemberBean();
+		model.addAttribute("MemberBean",mb);
 		return "register/register";
 	}
-
+	
 	@RequestMapping(value = "/register/add", method = RequestMethod.POST)
 	public String porcessAddNewRegistertoForm(@ModelAttribute("MemberBean") MemberBean mb, BindingResult result) {
 		memberservice.registerMember(mb);
 		return "index";
-
+		
 	}
 
-	@RequestMapping(value = "/UpdateMemberForm1", method = RequestMethod.GET)
-	public String AddLoginMemberBeantoUpdateForm(Model model, HttpSession session) {
-		MemberBean mb = new MemberBean();
+			
+	@RequestMapping(value = "/UpdateMemberForm", method = RequestMethod.GET)
+	public String AddLoginMemberBeantoUpdateForm(Model model,HttpSession session) {
+		MemberBean mb= new MemberBean();
 		model.addAttribute("MemberBean", mb);
 		return "register/updateMember";
 	}
 
-	@RequestMapping(value = "/UpdateMemberForm2", method = RequestMethod.GET)
-	public String UpdateMember(@ModelAttribute("MemberBean") MemberBean mb, HttpSession session, Model model,
-			BindingResult result) {
-//		session.getAttribute("LoginOK");
-//		session.getAttribute("mAccount");
-//		session.getAttribute("mPassword");
-//		model.addAttribute("LoginOK", mb);
-//		memberservice.getMemberBymId(mId);
-		MemberBean LoginOK = (MemberBean) session.getAttribute("LoginOK");
-		LoginOK.setmPassword("changepw");
+	@RequestMapping(value = "/UpdateMemberForm", method = RequestMethod.POST)
+	public String UpdateMember(@ModelAttribute("MemberBean")MemberBean mb, Model model,HttpSession session,BindingResult result ) {
+		MemberBean LoginOK =(MemberBean) session.getAttribute("LoginOK");
+		LoginOK.setmPassword(mb.getmPassword());
+		LoginOK.setmAccount(mb.getmAccount());
+		LoginOK.setmAddress(mb.getmAddress());
+		LoginOK.setmEmail(mb.getmEmail());
+		LoginOK.setmPhone(mb.getmPhone());
 		memberservice.updateMember(LoginOK);
 		return "index";
 	}

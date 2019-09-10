@@ -19,5 +19,5 @@ public interface MemberDao {
 
 	public void updateMember(MemberBean mb);
 	
-	public MemberBean getMemberBymId(int mId);
+	
 }

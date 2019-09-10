@@ -74,18 +74,12 @@ public class MemberServiceImpl implements MemberService {
 		mb = dao.checkPassword(mAccount, mPassword);
 		return mb;
 	}
-	@Transactional
-	@Override
-	public MemberBean getMemberBymId(int mId) {
-		MemberBean mb = null;
-		mb = dao.getMemberBymId(mId);
-		return mb;
-	}
+
 	
 	@Transactional
 	@Override
 	public void updateMember(MemberBean mb) {
-		if (mb.getmAccount() != null && mb.getmPassword() != null) {
+		if (mb.getmAccount() != null && mb.getmPassword() != null && mb.getmAddress() != null && mb.getmEmail() != null && mb.getmPhone() != null) {
 			dao.updateMember(mb);
 		}
 	}

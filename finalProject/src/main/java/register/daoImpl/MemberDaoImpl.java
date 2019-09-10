@@ -88,23 +88,16 @@ public class MemberDaoImpl implements MemberDao {
 
 		return mb;
 	}
-	@Override
-	public MemberBean getMemberBymId(int mId) {
-		MemberBean mb = null;
-		Session session = factory.getCurrentSession();
-		String sql = "FROM MemberBean mb WHERE mb.mId=:mid";
-		mb = (MemberBean) session.createQuery(sql).setParameter("mid", mId).uniqueResult();
-		return mb;
-	}
+
 	
 	@Override
 	public void updateMember(MemberBean mb) {
 		
-		String hql = "UPDATE MemberBean mb SET mb.mAccount =:mAccount , mb.mPassword =:mPassword WHERE mId =:mId";
+		String hql = "UPDATE MemberBean mb SET mb.mAccount =:mAccount , mb.mPassword =:mPassword , mb.mAddress =:mAddress , mb.mEmail =:mEmail , mb.mPhone =:mPhone WHERE mId =:mId";
 		Session session = factory.getCurrentSession();
 //		session.saveOrUpdate(mb);
 		
-		session.saveOrUpdate(mb);
+		session.update(mb);
 		
 	}
 
