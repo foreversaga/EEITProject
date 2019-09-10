@@ -35,6 +35,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/resource/css/");
 		registry.addResourceHandler("/img/**").addResourceLocations("/WEB-INF/resource/img/");
+		registry.addResourceHandler("/ECconfig/**").addResourceLocations("/WEB-INF/resource/ECconfig/");
 	}
 
 	public WebAppConfig() {

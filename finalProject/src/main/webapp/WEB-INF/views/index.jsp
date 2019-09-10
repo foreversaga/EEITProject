@@ -63,12 +63,16 @@ body {
 				<li class="nav-item active"><a class="nav-link" href="<c:url value='/'/>">Home <span
 						class="sr-only">(current)</span></a></li>
 				<li class="nav-item"><a class="nav-link" href="<c:url value='/products/1'/>">商品頁面</a></li>
-				<li class="nav-item"><a class="nav-link" href="<c:url value='/login'/>">會員登入</a></li>
+				<c:if test="${empty LoginOK}">
+					<li class="nav-item"><a class="nav-link" href="<c:url value='/login'/>">會員登入</a></li>
+					<li class="nav-item"><a class="nav-link" href="<c:url value='/register/add'/>">會員註冊</a></li>
+				</c:if>
 				<li class="nav-item"><a class="nav-link" href="<c:url value='/AddProduct'/>">新增商品</a></li>
-				<li class="nav-item"><a class="nav-link" href="<c:url value='/logout'/>">會員登出</a></li>
-				<li class="nav-item"><a class="nav-link" href="<c:url value='/orderDetails'/>">訂單明細</a></li>
-				<li class="nav-item"><a class="nav-link" href="<c:url value='/register/add'/>">會員註冊</a></li>
-        <li class="nav-item"><a class="nav-link" href="<c:url value='/review'/>">會員評價</a></li>
+				<c:if test="${!empty LoginOK}">
+					<li class="nav-item"><a class="nav-link" href="<c:url value='/logout'/>">會員登出</a></li>
+					<li class="nav-item"><a class="nav-link" href="<c:url value='/orderDetails'/>">訂單明細</a></li>
+					<li class="nav-item"><a class="nav-link" href="<c:url value='/review'/>">會員評價</a></li>
+				</c:if>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
 				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

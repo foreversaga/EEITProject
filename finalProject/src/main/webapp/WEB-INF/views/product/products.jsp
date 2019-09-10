@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -107,44 +106,42 @@ div.dropdown-menu {
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand">旅遊去</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
+			data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+			aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link"
-					href="<c:url value='/'/>">Home <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item"><a class="nav-link"
-					href="<c:url value='/products/1'/>">商品頁面</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="<c:url value='/login'/>">會員登入</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="<c:url value='/AddProduct'/>">新增商品</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="<c:url value='/logout'/>">會員登出</a></li>
+				<li class="nav-item active"><a class="nav-link" href="<c:url value='/'/>">Home <span
+						class="sr-only">(current)</span></a></li>
+				<li class="nav-item"><a class="nav-link" href="<c:url value='/products/1'/>">商品頁面</a></li>
+				<c:if test="${empty LoginOK}">
+					<li class="nav-item"><a class="nav-link" href="<c:url value='/login'/>">會員登入</a></li>
+					<li class="nav-item"><a class="nav-link" href="<c:url value='/register/add'/>">會員註冊</a></li>
+				</c:if>
+				<li class="nav-item"><a class="nav-link" href="<c:url value='/AddProduct'/>">新增商品</a></li>
+				<c:if test="${!empty LoginOK}">
+					<li class="nav-item"><a class="nav-link" href="<c:url value='/logout'/>">會員登出</a></li>
+					<li class="nav-item"><a class="nav-link" href="<c:url value='/orderDetails'/>">訂單明細</a></li>
+					<li class="nav-item"><a class="nav-link" href="<c:url value='/review'/>">會員評價</a></li>
+				</c:if>
 			</ul>
 			<ul class="navbar-nav mr-right">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
+					id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">購物車</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<c:if test="${empty shoppingCart.content }">
 							<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
 						</c:if>
-						<c:forEach varStatus="vs" var="cart"
-							items="${shoppingCart.content }">
+						<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
 							<hr>
 							<img style="width: 50px; height: 50px; float: left;"
 								src="<c:url value='/showPic/${cart.value.pId}'/>">
 							<p style="line-height: 10px">${cart.value.pName}</p>
-							<span style="line-height: 5px">數量:${cart.value.iQty}
-								價格:${cart.value.pPrice}</span>
-							<span><input id="${cart.value.pId}" type="button"
-								onclick="DeleteItem(this.id)" value="刪除" /> </span>
+							<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
+							<span><input id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)"
+								value="刪除" /> </span>
 							<c:if test="${vs.last}">
 								<hr>
 							</c:if>
@@ -155,8 +152,7 @@ div.dropdown-menu {
 					</div></li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
+				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
 		</div>
@@ -167,15 +163,13 @@ div.dropdown-menu {
 				<br>
 			</c:if>
 			<div id="card">
-				<img src="<c:url value='/showPic/${productBean.pId}'/>"
-					style="width: 100px; height: 100px;">
+				<img src="<c:url value='/showPic/${productBean.pId}'/>" style="width: 100px; height: 100px;">
 				<div class="container">
 					<p>
 						<b>商品名稱:${productBean.pName}</b>
 					</p>
 					<p>價格:${productBean.pPrice}</p>
-					<form:form method="POST"
-						action="${pageContext.request.contextPath}/Buy"
+					<form:form method="POST" action="${pageContext.request.contextPath}/Buy"
 						modelAttribute="orderItem" id="idform">
 						<c:if test="${productBean.pInstock==0 }">
 							<p>已售完</p>
@@ -188,10 +182,8 @@ div.dropdown-menu {
 							</form:select>
 						</c:if>
 						<form:input type="hidden" path="pId" value="${productBean.pId }" />
-						<form:input type="hidden" path="pName"
-							value="${productBean.pName }" />
-						<form:input type="hidden" path="pPrice"
-							value="${productBean.pPrice }" />
+						<form:input type="hidden" path="pName" value="${productBean.pName }" />
+						<form:input type="hidden" path="pPrice" value="${productBean.pPrice }" />
 						<c:if test="${productBean.pInstock!=0 }">
 							<input type="submit" value="加到購物車">
 						</c:if>
@@ -205,12 +197,10 @@ div.dropdown-menu {
 				<a class="PageButton" href="<c:url value='/products/1'/>"> 第一頁</a>
 			</c:if>
 			<c:if test="${pageNo>1}">
-				<a class="PageButton" href="<c:url value='/products/${pageNo-1}'/>">
-					上一頁</a>
+				<a class="PageButton" href="<c:url value='/products/${pageNo-1}'/>"> 上一頁</a>
 			</c:if>
 			<c:if test="${pageNo!=totalPages}">
-				<a class="PageButton" href="<c:url value='/products/${pageNo+1}'/>">
-					下一頁</a>
+				<a class="PageButton" href="<c:url value='/products/${pageNo+1}'/>"> 下一頁</a>
 			</c:if>
 		</div>
 	</div>

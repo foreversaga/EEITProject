@@ -23,7 +23,6 @@ import product.model.productBean;
 import register.model.MemberBean;
 import register.service.MemberService;
 
-
 @Controller
 public class MemberController {
 
@@ -66,42 +65,47 @@ public class MemberController {
 		} else {// there is no LoginOK object, back to login.jsp
 			return "login/login";
 		}
-		return "index";
+		String requestURI = (String) session.getAttribute("requestURI");
+		if (requestURI != null) {
+			return "redirect:" + requestURI;
+		} else {
+			return "index";
+		}
 	}
-	
-	@RequestMapping(value="/logout", method = RequestMethod.GET)
-	public String Logout(Model model,HttpSession session) {		
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String Logout(Model model, HttpSession session) {
 //		request.getSession().invalidate();
 		session.invalidate();
-		return"index";
-	
+		return "index";
+
 	}
-	
+
 	@RequestMapping(value = "/register/add", method = RequestMethod.GET)
 	public String getRegisterData(Model model) {
-		MemberBean mb= new MemberBean();
-		model.addAttribute("MemberBean",mb);
+		MemberBean mb = new MemberBean();
+		model.addAttribute("MemberBean", mb);
 		return "register/register";
 	}
-	
+
 	@RequestMapping(value = "/register/add", method = RequestMethod.POST)
 	public String porcessAddNewRegistertoForm(@ModelAttribute("MemberBean") MemberBean mb, BindingResult result) {
 		memberservice.registerMember(mb);
 		return "index";
-		
+
 	}
 
-			
 	@RequestMapping(value = "/UpdateMemberForm", method = RequestMethod.GET)
-	public String AddLoginMemberBeantoUpdateForm(Model model,HttpSession session) {
-		MemberBean mb= new MemberBean();
+	public String AddLoginMemberBeantoUpdateForm(Model model, HttpSession session) {
+		MemberBean mb = new MemberBean();
 		model.addAttribute("MemberBean", mb);
 		return "register/updateMember";
 	}
 
 	@RequestMapping(value = "/UpdateMemberForm", method = RequestMethod.POST)
-	public String UpdateMember(@ModelAttribute("MemberBean")MemberBean mb, Model model,HttpSession session,BindingResult result ) {
-		MemberBean LoginOK =(MemberBean) session.getAttribute("LoginOK");
+	public String UpdateMember(@ModelAttribute("MemberBean") MemberBean mb, Model model, HttpSession session,
+			BindingResult result) {
+		MemberBean LoginOK = (MemberBean) session.getAttribute("LoginOK");
 		LoginOK.setmPassword(mb.getmPassword());
 		LoginOK.setmAccount(mb.getmAccount());
 		LoginOK.setmAddress(mb.getmAddress());

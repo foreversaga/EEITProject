@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,8 @@ import cart.model.orderItem;
 import cart.model.orderItemBean;
 import cart.model.shoppingCart;
 import checkout.service.orderService;
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutOneTime;
 import product.model.productBean;
 import product.service.productService;
 import register.model.MemberBean;
@@ -52,6 +55,7 @@ public class ProductController {
 	ServletContext context;
 	@Autowired
 	orderService oService;
+	
 
 	@RequestMapping(value = "/products/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView productsPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
@@ -135,56 +139,86 @@ public class ProductController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/CheckCart")
-	public ModelAndView CheckCart(HttpSession session, ModelAndView mav) {
-		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
-		mav.setViewName("checkout/checkCart");
-		mav.addObject("shoppingCart", cart);
-		return mav;
-	}
+//	@RequestMapping(value = "/CheckCart")
+//	public ModelAndView CheckCart(HttpSession session, ModelAndView mav) {
+//		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
+//		mav.setViewName("checkout/checkCart");
+//		mav.addObject("shoppingCart", cart);
+//		return mav;
+//	}
 
 	@RequestMapping(value = "/CheckOut")
 	public ModelAndView ToCheckOut(HttpSession session, ModelAndView mav) {
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
-		MemberBean mb=(MemberBean) session.getAttribute("LoginOK");
-		String mAccount = mb.getmAccount();
-		Integer total = cart.getTotal();
-		java.sql.Timestamp orderTime = new Timestamp(new java.util.Date().getTime());
-		orderBean ob = new orderBean();
-		ob.setmAccount(mAccount);
-		ob.setoTimestamp(orderTime);
-		ob.setoTotalAmount(total);
-		mav.addObject("orderInfo", ob);
-//		session.setAttribute("orderList", ob);
-		mav.setViewName("checkout/checkout");
-		return mav;
+		if (cart == null) {
+			mav.setViewName("redirect:/products/1");
+			return mav;
+		}
+		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
+		if (mb != null) {
+			String mAccount = mb.getmAccount();
+			Integer total = cart.getTotal();
+			java.sql.Timestamp orderTime = new Timestamp(new java.util.Date().getTime());
+			orderBean ob = new orderBean();
+			ob.setmAccount(mAccount);
+			ob.setoTimestamp(orderTime);
+			ob.setoTotalAmount(total);
+			mav.addObject("orderInfo", ob);
+			mav.setViewName("checkout/checkout");
+			return mav;
+		} else {
+			session.setAttribute("requestURI", "/CheckOut");
+			mav.setViewName("redirect:/login");
+			return mav;
+		}
 	}
 
 	@RequestMapping(value = "/ConfirmOrder")
 	public String ConfirmOrder(@ModelAttribute("orderInfo") orderBean ob, HttpSession session) {
 		shoppingCart sc = (shoppingCart) session.getAttribute("shoppingCart");
-//		orderBean ob = (orderBean) session.getAttribute("orderList");
-		Set<orderItemBean> items = new HashSet<orderItemBean>();
-		Map<Integer, orderItem> cart = sc.getContent();
-		Set<Integer> set = cart.keySet();
-		Integer newStock = 0;
-		int n = 0;
-		productBean mb = null;
-		for (Integer k : set) {
-			orderItem oi = cart.get(k);
-			Integer subtotal = (oi.getiQty() * oi.getpPrice());
-			String iDes = oi.getpName() + " 共 " + oi.getiQty().toString() + "個，金額小計:" + subtotal.toString();
-			orderItemBean oib = new orderItemBean(null, oi.getpId(), iDes, oi.getiQty(), oi.getpPrice());
-			oib.setOrderBean(ob);
-			items.add(oib);
-			mb = pService.getProduct(oi.getpId());
-			newStock = mb.getpInstock() - oi.getiQty();
-			n = pService.updateStock(mb.getpId(), newStock);
+		if (sc == null) {
+			return "redirect:/products/1";
 		}
-		ob.setItemSet(items);
-		oService.saveOrder(ob);
-		session.removeAttribute("shoppingCart");
-		return "redirect:/OrderThank";
+		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
+		if (mb != null) {
+			Set<orderItemBean> items = new HashSet<orderItemBean>();
+			Map<Integer, orderItem> cart = sc.getContent();
+			Set<Integer> set = cart.keySet();
+			Integer newStock = 0;
+			int n = 0;
+			productBean pb = null;
+			for (Integer k : set) {
+				orderItem oi = cart.get(k);
+				Integer subtotal = (oi.getiQty() * oi.getpPrice());
+				String iDes = oi.getpName() + " 共 " + oi.getiQty().toString() + "個，金額小計:" + subtotal.toString();
+				orderItemBean oib = new orderItemBean(null, oi.getpId(), iDes, oi.getiQty(), oi.getpPrice());
+				oib.setOrderBean(ob);
+				items.add(oib);
+				pb = pService.getProduct(oi.getpId());
+				newStock = pb.getpInstock() - oi.getiQty();
+				n = pService.updateStock(pb.getpId(), newStock);
+			}
+			ob.setItemSet(items);
+			oService.saveOrder(ob);
+			session.removeAttribute("shoppingCart");
+//			AioCheckOutOneTime obj = new AioCheckOutOneTime();
+//			obj.setMerchantTradeNo("testCompany0008");
+//			String tradedate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(ob.getoTimestamp());
+//			obj.setMerchantTradeDate(tradedate);
+//			obj.setTotalAmount(ob.getoTotalAmount().toString());
+//			obj.setTradeDesc("test Description");
+//			obj.setItemName("TestItem");
+//			obj.setReturnURL("http://211.23.128.214:5000");
+//			obj.setNeedExtraPaidInfo("N");
+//			obj.setRedeem("Y");
+//			AllInOne all=new AllInOne("");
+//			String form = all.aioCheckOut(obj, null);
+//			return form;
+			return "redirect:/OrderThank";
+		} else {
+			session.setAttribute("requestURI", "/ConfirmOrder");
+			return "redirect:/login";
+		}
 	}
 
 	@RequestMapping("/OrderThank")
@@ -229,7 +263,7 @@ public class ProductController {
 
 	@RequestMapping("/orderDetails")
 	public ModelAndView GetOrderlist(HttpSession session, ModelAndView mav) {
-		MemberBean mb=(MemberBean) session.getAttribute("LoginOK");
+		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
 		List<orderBean> list = oService.getMemberOrders(mb.getmAccount());
 		mav.addObject("orderList", list);
 		mav.setViewName("checkout/orderDetails");
