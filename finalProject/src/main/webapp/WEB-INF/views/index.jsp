@@ -68,6 +68,7 @@ body {
 				<li class="nav-item"><a class="nav-link" href="<c:url value='/logout'/>">會員登出</a></li>
 				<li class="nav-item"><a class="nav-link" href="<c:url value='/orderDetails'/>">訂單明細</a></li>
 				<li class="nav-item"><a class="nav-link" href="<c:url value='/register/add'/>">會員註冊</a></li>
+        <li class="nav-item"><a class="nav-link" href="<c:url value='/review'/>">會員評價</a></li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
 				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
