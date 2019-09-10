@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="3;url=../index.jsp" />
+<meta http-equiv="refresh" content="3;url=<c:url value='/'/>" />
 <title>登出畫面</title>
 <style>
 div {

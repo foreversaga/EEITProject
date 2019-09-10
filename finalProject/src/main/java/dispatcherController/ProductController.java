@@ -26,7 +26,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,6 +42,7 @@ import cart.model.shoppingCart;
 import checkout.service.orderService;
 import product.model.productBean;
 import product.service.productService;
+import register.model.MemberBean;
 
 @Controller
 public class ProductController {
@@ -54,7 +54,7 @@ public class ProductController {
 	orderService oService;
 
 	@RequestMapping(value = "/products/{pageNo}", method = RequestMethod.GET)
-	public ModelAndView productsPage(@PathVariable Integer pageNo, HttpServletRequest request) {
+	public ModelAndView productsPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
 		if (pageNo == null) {
 			pageNo = 1;
 		}
@@ -66,7 +66,6 @@ public class ProductController {
 		mav.addObject("totalPages", totalPages);
 		mav.addObject("productList", list);
 		mav.addObject("orderItem", oi);
-		HttpSession session = request.getSession(false);
 		session.setAttribute("pageNo", pageNo);
 		return mav;
 	}
@@ -122,11 +121,11 @@ public class ProductController {
 		return resEntity;
 	}
 
-	@RequestMapping(value = "/Buy", method = RequestMethod.GET)
+	@RequestMapping(value = "/Buy", method = RequestMethod.POST)
 	public ModelAndView AddToCart(HttpSession session, ModelAndView mav, @ModelAttribute("orderItem") orderItem oi,
 			BindingResult result) throws ServletException {
 		int pageNo = (int) session.getAttribute("pageNo");
-		mav.setViewName("forward:products/" + pageNo);
+		mav.setViewName("redirect:products/" + pageNo);
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
 		if (cart == null) {
 			cart = new shoppingCart();
@@ -147,19 +146,24 @@ public class ProductController {
 	@RequestMapping(value = "/CheckOut")
 	public ModelAndView ToCheckOut(HttpSession session, ModelAndView mav) {
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
-		String mAccount = "test5";
+		MemberBean mb=(MemberBean) session.getAttribute("LoginOK");
+		String mAccount = mb.getmAccount();
 		Integer total = cart.getTotal();
 		java.sql.Timestamp orderTime = new Timestamp(new java.util.Date().getTime());
-		orderBean ob = new orderBean(null, total, orderTime, null, mAccount);
-		session.setAttribute("orderList", ob);
+		orderBean ob = new orderBean();
+		ob.setmAccount(mAccount);
+		ob.setoTimestamp(orderTime);
+		ob.setoTotalAmount(total);
+		mav.addObject("orderInfo", ob);
+//		session.setAttribute("orderList", ob);
 		mav.setViewName("checkout/checkout");
 		return mav;
 	}
 
 	@RequestMapping(value = "/ConfirmOrder")
-	public String ConfirmOrder(HttpSession session) {
+	public String ConfirmOrder(@ModelAttribute("orderInfo") orderBean ob, HttpSession session) {
 		shoppingCart sc = (shoppingCart) session.getAttribute("shoppingCart");
-		orderBean ob = (orderBean) session.getAttribute("orderList");
+//		orderBean ob = (orderBean) session.getAttribute("orderList");
 		Set<orderItemBean> items = new HashSet<orderItemBean>();
 		Map<Integer, orderItem> cart = sc.getContent();
 		Set<Integer> set = cart.keySet();
@@ -180,7 +184,12 @@ public class ProductController {
 		ob.setItemSet(items);
 		oService.saveOrder(ob);
 		session.removeAttribute("shoppingCart");
-		return "redirect:/";
+		return "redirect:/OrderThank";
+	}
+
+	@RequestMapping("/OrderThank")
+	public String OrderThank() {
+		return "checkout/orderThank";
 	}
 
 	@RequestMapping(value = "/AddProduct", method = RequestMethod.GET)
@@ -209,13 +218,31 @@ public class ProductController {
 		return "redirect:/products/1";
 	}
 
-	@RequestMapping(value = "/DeleteCartProduct", method = RequestMethod.GET)
+	@RequestMapping(value = "/DeleteCartProduct", method = RequestMethod.POST)
 	public ModelAndView deleteProduct(HttpSession session, ModelAndView mav, HttpServletRequest request) {
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
-		int pageNo = (int) session.getAttribute("pageNo");
-		mav.setViewName("forward:products/" + pageNo);
+		mav.setViewName("checkout/checkCart");
 		int pId = Integer.parseInt(request.getParameter("pId"));
 		cart.deleteProduct(pId);
 		return mav;
 	}
+
+	@RequestMapping("/orderDetails")
+	public ModelAndView GetOrderlist(HttpSession session, ModelAndView mav) {
+		MemberBean mb=(MemberBean) session.getAttribute("LoginOK");
+		List<orderBean> list = oService.getMemberOrders(mb.getmAccount());
+		mav.addObject("orderList", list);
+		mav.setViewName("checkout/orderDetails");
+		return mav;
+	}
+
+	@RequestMapping("/showOrderItem/{oId}")
+	public ModelAndView GetOrderItem(@PathVariable Integer oId, HttpSession session, ModelAndView mav,
+			HttpServletRequest request) {
+		List<orderItemBean> list = oService.getOrderItem(oId);
+		mav.addObject("orderItemList", list);
+		mav.setViewName("checkout/orderItem");
+		return mav;
+	}
+
 }

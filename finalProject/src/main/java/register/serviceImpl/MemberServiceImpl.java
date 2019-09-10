@@ -1,19 +1,22 @@
 package register.serviceImpl;
 
-import org.hibernate.SessionFactory;
+import java.util.List;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import product.model.productBean;
 import register.dao.MemberDao;
 import register.model.MemberBean;
 import register.service.MemberService;
 
 @Service
 public class MemberServiceImpl implements MemberService {
+	@Autowired
 	MemberDao dao;
+	@Autowired
 	SessionFactory factory;
 
 	public MemberDao getDao() {
@@ -71,5 +74,21 @@ public class MemberServiceImpl implements MemberService {
 		mb = dao.checkPassword(mAccount, mPassword);
 		return mb;
 	}
+	@Transactional
+	@Override
+	public MemberBean getMemberBymId(int mId) {
+		MemberBean mb = null;
+		mb = dao.getMemberBymId(mId);
+		return mb;
+	}
+	
+	@Transactional
+	@Override
+	public void updateMember(MemberBean mb) {
+		if (mb.getmAccount() != null && mb.getmPassword() != null) {
+			dao.updateMember(mb);
+		}
+	}
+
 
 }

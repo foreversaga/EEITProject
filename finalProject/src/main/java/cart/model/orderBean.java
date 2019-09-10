@@ -27,10 +27,11 @@ public class orderBean implements Serializable {
 	private Integer oTotalAmount;
 	private java.sql.Timestamp oTimestamp;
 	private String oPayment;
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "FK_account") // prepare MemberBean class's instance variable to mapping
-//	private MemberBean mId;
+	private String oAddress;
 	private String mAccount;
+	private String oReceiveName;
+	private String oReceivePhone;
+	private String oNote;
 	@OneToMany(mappedBy = "orderBean", cascade = CascadeType.ALL)
 	Set<orderItemBean> itemSet = new LinkedHashSet<>();
 
@@ -41,13 +42,15 @@ public class orderBean implements Serializable {
 	public void setItemSet(Set<orderItemBean> itemSet) {
 		this.itemSet = itemSet;
 	}
-
-	public orderBean(Integer oId, Integer oTotalAmount, Timestamp oTimestamp, String oPayment, String mAccount) {
+	
+	public orderBean(Integer oId, Integer oTotalAmount, Timestamp oTimestamp, String oPayment, String oAddress,
+			String mAccount) {
 		super();
 		this.oId = oId;
 		this.oTotalAmount = oTotalAmount;
 		this.oTimestamp = oTimestamp;
 		this.oPayment = oPayment;
+		this.oAddress = oAddress;
 		this.mAccount = mAccount;
 	}
 
@@ -86,20 +89,44 @@ public class orderBean implements Serializable {
 		this.oPayment = oPayment;
 	}
 
-//	public MemberBean getmId() {
-//		return mId;
-//	}
-//
-//	public void setmId(MemberBean mId) {
-//		this.mId = mId;
-//	}
-
 	public String getmAccount() {
 		return mAccount;
 	}
 
 	public void setmAccount(String mAccount) {
 		this.mAccount = mAccount;
+	}
+
+	public String getoAddress() {
+		return oAddress;
+	}
+
+	public void setoAddress(String oAddress) {
+		this.oAddress = oAddress;
+	}
+
+	public String getoReceiveName() {
+		return oReceiveName;
+	}
+
+	public void setoReceiveName(String oReceiveName) {
+		this.oReceiveName = oReceiveName;
+	}
+
+	public String getoReceivePhone() {
+		return oReceivePhone;
+	}
+
+	public void setoReceivePhone(String oReceivePhone) {
+		this.oReceivePhone = oReceivePhone;
+	}
+
+	public String getoNote() {
+		return oNote;
+	}
+
+	public void setoNote(String oNote) {
+		this.oNote = oNote;
 	}
 
 }

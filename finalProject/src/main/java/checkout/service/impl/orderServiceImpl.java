@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cart.model.orderBean;
+import cart.model.orderItemBean;
 import checkout.dao.orderDao;
 import checkout.dao.orderItemDao;
 import checkout.dao.impl.orderDaoImpl;
@@ -18,7 +19,7 @@ import checkout.service.orderService;
 import login.HibernateUtils;
 import register.dao.MemberDao;
 import register.daoImpl.MemberDaoImpl;
-
+@Transactional
 @Service
 public class orderServiceImpl implements orderService {
 	private SessionFactory factory;
@@ -46,33 +47,43 @@ public class orderServiceImpl implements orderService {
 		this.oidao = oidao;
 	}
 
+	public SessionFactory getFactory() {
+		return factory;
+	}
+
+	public orderDao getOdao() {
+		return odao;
+	}
+
+	public MemberDao getMdao() {
+		return mdao;
+	}
+
+	public orderItemDao getOidao() {
+		return oidao;
+	}
+
 	public orderServiceImpl() {
-//		factory = HibernateUtils.getSessionFactory();
-//		oidao = new orderItemDaoImpl();
-//		odao = new orderDaoImpl();
-//		mdao = new MemberDaoImpl();
 	}
 
 	@Override
-	@Transactional
 	public List<orderBean> getMemberOrders(String mAccount) {
-		List<orderBean> list = null;
-		list = odao.getMemberOrders(mAccount);
-		return list;
+		return odao.getMemberOrders(mAccount);
 	}
 
 	@Override
-	@Transactional
 	public orderBean getOrder(int getoId) {
-		orderBean ob = null;
-		ob = odao.getOrder(getoId);
-		return ob;
+		return odao.getOrder(getoId);
 	}
 
 	@Override
-	@Transactional
 	public void saveOrder(orderBean ob) {
 		odao.saveOrder(ob);
+	}
+
+	@Override
+	public List<orderItemBean> getOrderItem(int oId) {
+		return oidao.getOrderItem(oId);
 	}
 
 }

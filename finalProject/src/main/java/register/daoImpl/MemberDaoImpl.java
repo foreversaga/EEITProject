@@ -1,9 +1,6 @@
 package register.daoImpl;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
@@ -13,12 +10,13 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import login.HibernateUtils;
+import product.model.productBean;
 import register.dao.MemberDao;
 import register.model.MemberBean;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
+	@Autowired
 	SessionFactory factory;
 
 	@Autowired
@@ -89,6 +87,25 @@ public class MemberDaoImpl implements MemberDao {
 		}
 
 		return mb;
+	}
+	@Override
+	public MemberBean getMemberBymId(int mId) {
+		MemberBean mb = null;
+		Session session = factory.getCurrentSession();
+		String sql = "FROM MemberBean mb WHERE mb.mId=:mid";
+		mb = (MemberBean) session.createQuery(sql).setParameter("mid", mId).uniqueResult();
+		return mb;
+	}
+	
+	@Override
+	public void updateMember(MemberBean mb) {
+		
+		String hql = "UPDATE MemberBean mb SET mb.mAccount =:mAccount , mb.mPassword =:mPassword WHERE mId =:mId";
+		Session session = factory.getCurrentSession();
+//		session.saveOrUpdate(mb);
+		
+		session.saveOrUpdate(mb);
+		
 	}
 
 }

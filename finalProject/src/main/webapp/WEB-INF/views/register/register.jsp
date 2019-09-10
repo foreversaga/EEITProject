@@ -1,36 +1,76 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-	$(function() {
-		$("#datepicker").datepicker({
-			dateFormat : 'yy-mm-dd',
-			changeMonth : true,
-			changeYear : true
-		});
-	});
-</script>
 <style>
-td {
-	border: 2px solid black;
-	width: 110px;
-	height: 30px;
+body {
+	background: #eee !important;
 }
 
-table {
-	border-collapse: collapse;
+.wrapper {
+	margin: 200px auto;
 }
 
-div.divMain {
-	width: 450px;
-	margin: 100px auto;
+.form-signup {
+	max-width: 380px;
+	padding: 15px 35px 45px;
+	margin: 0 auto;
+	background-color: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	.
+	form-signin-heading
+	,
+	.checkbox
+	{
+	margin-bottom
+	:
+	30px;
+}
+
+.checkbox {
+	font-weight: normal;
+}
+
+.form-control {
+	position: relative;
+	font-size: 16px;
+	height: auto;
+	padding: 10px;
+	@
+	include
+	box-sizing(border-box);
+	&:
+	focus
+	{
+	z-index
+	:
+	2;
+}
+
+}
+input[type="text"] {
+	margin-bottom: -1px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+radiobutton {
+	margin-bottom: -1px;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+input[type="password"] {
+	margin-bottom: 20px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
 }
 </style>
 <meta charset="UTF-8">
@@ -38,69 +78,39 @@ div.divMain {
 
 </head>
 <body>
-	<div class="divMain">
-		<form method="post" action="<c:url value='register.do'/>">
-			<table>
-				<tr>
-					<td>帳號:</td>
-					<td><input name="mAccount" type="text" size="10"
-						value="${param.mAccount}"> <font size="-1" color="red">${msgMap.errorAccount}${msgMap.DuplicateID}</font>
-					</td>
-				</tr>
-				<tr>
-					<td>密碼:</td>
-					<td><input name="mPassword" value="${param.mPassword}"
-						type="password" size="10"> <font size="-1" color="red">${msgMap.errorPassword}</font>
-					</td>
-				</tr>
-				<tr>
-					<td>信箱:</td>
-					<td><input name="mEmail" value="${param.mEmail}" type="text"
-						size="30"> <font size="-1" color="red">${msgMap.errorEmail}</font>
-					</td>
-				</tr>
-				<tr>
-					<td>姓名:</td>
-					<td><input name="mName" value="${param.mName}" type="text" size="5">
-						<font size="-1" color="red">${msgMap.errorName}</font></td>
-				</tr>
-				<tr>
-					<td>性別:</td>
-					<td><label> <input type="radio" value="male" name="mGender">男
-					</label> <label><input type="radio"
-							value="female" name="mGender">女</label> <font size="-1"
-						color="red">${msgMap.errorGender}</font></td>
-				</tr>
-				<tr>
-					<td>生日:</td>
-					<td><input name="mBirth" id="datepicker"
-						value="${param.mBirth}" type="text" size="20"> <font
-						size="-1" color="red">${msgMap.errorBirth}</font></td>
-				</tr>
-				<tr>
-					<td>電話:</td>
-					<td><input name="mPhone" value="${param.mPhone}" type="text"
-						size="10"> <font size="-1" color="red">${msgMap.errorPhone}</font>
-					</td>
-				</tr>
-				<tr>
-					<td>地址:</td>
-					<td><input name="mAddress" value="${param.mAddress}"
-						type="text" size="50"> <font size="-1" color="red">${msgMap.errorAddress}</font>
-					</td>
-				</tr>
-				<tr>
-					<td>身分證:</td>
-					<td><input name="mID" value="${param.mID}" type="text"
-						size="10"> <font size="-1" color="red">${msgMap.errorID}</font>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" style="text-align: center"><input
-						type="submit" value="送出"></td>
-				</tr>
-			</table>
-		</form>
+
+	<div class="wrapper">
+		<form:form class="form-signup" method="POST" modelAttribute="MemberBean">
+			<h2 class="form-signin-heading">Sign up</h2>
+			<form:input id="mAccount" path="mAccount" type="text" class="form-control" placeholder="帳號" />
+			<br>
+			<form:input id="mPassword" path="mPassword" type="password" class="form-control" placeholder="密碼" />
+			<br>
+
+			<form:input id="mEmail" path="mEmail" class="form-control" type="text" placeholder="電子信箱" />
+			<br>
+
+			<form:input id="mName" path="mName" class="form-control" type="text" placeholder="姓名" />
+			<br>
+			<tr>
+				<td>性別</td>
+				<td><label> <form:radiobutton value="male" id="mGender" path="mGender" />男
+				</label> <label><form:radiobutton value="female" id="mGender" path="mGender" />女</label></td>
+			</tr>
+			<form:input path="mDate" id="datepicker" class="form-control" type="text" placeholder="出身年-月-日" />
+			<br>
+			<form:input id="mPhone" path="mPhone" class="form-control" type="text" placeholder="電話號碼" />
+			<br>
+
+			<form:input id="mAddress" path="mAddress" class="form-control" type="text" placeholder="地址" />
+			<br>
+
+			<form:input id="mId" path="mId" type="text" class="form-control" placeholder="身分證" />
+			<br>
+
+			<button class="btn btn-lg btn-primary btn-block" type="submit">register</button>
+
+		</form:form>
 	</div>
 </body>
 </html>
