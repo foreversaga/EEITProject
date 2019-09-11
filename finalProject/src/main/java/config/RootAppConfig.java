@@ -1,6 +1,7 @@
 package config;
 
 import java.beans.PropertyVetoException;
+
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
+@EnableTransactionManagement
 @Configuration
 public class RootAppConfig {
 

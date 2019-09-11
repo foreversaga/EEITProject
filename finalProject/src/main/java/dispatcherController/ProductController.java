@@ -4,14 +4,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigInteger;
+import java.net.URLEncoder;
+import java.security.MessageDigest;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -43,6 +49,7 @@ import cart.model.shoppingCart;
 import checkout.service.orderService;
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutOneTime;
+import ecpay.payment.integration.ecpayOperator.EcpayFunction;
 import product.model.productBean;
 import product.service.productService;
 import register.model.MemberBean;
@@ -55,7 +62,6 @@ public class ProductController {
 	ServletContext context;
 	@Autowired
 	orderService oService;
-	
 
 	@RequestMapping(value = "/products/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView productsPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
@@ -139,14 +145,6 @@ public class ProductController {
 		return mav;
 	}
 
-//	@RequestMapping(value = "/CheckCart")
-//	public ModelAndView CheckCart(HttpSession session, ModelAndView mav) {
-//		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
-//		mav.setViewName("checkout/checkCart");
-//		mav.addObject("shoppingCart", cart);
-//		return mav;
-//	}
-
 	@RequestMapping(value = "/CheckOut")
 	public ModelAndView ToCheckOut(HttpSession session, ModelAndView mav) {
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
@@ -202,7 +200,10 @@ public class ProductController {
 			oService.saveOrder(ob);
 			session.removeAttribute("shoppingCart");
 			AioCheckOutOneTime obj = new AioCheckOutOneTime();
-			obj.setMerchantTradeNo("testCompany0008");
+			Date today = new Date();
+			String todayStr = new SimpleDateFormat("yyyyMMddHHmmss").format(today);
+			String TradeNo = todayStr + "No" + ob.getoId().toString();
+			obj.setMerchantTradeNo(TradeNo);
 			String tradedate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(ob.getoTimestamp());
 			obj.setMerchantTradeDate(tradedate);
 			obj.setTotalAmount(ob.getoTotalAmount().toString());
@@ -211,14 +212,21 @@ public class ProductController {
 			obj.setReturnURL("http://211.23.128.214:5000");
 			obj.setNeedExtraPaidInfo("N");
 			obj.setRedeem("Y");
-			AllInOne all=new AllInOne("");
+			obj.setReturnURL("http://localhost:8080/finalProject/paySuccess");
+			AllInOne all = new AllInOne("");
 			String form = all.aioCheckOut(obj, null);
-			return form;
-//			return "redirect:/OrderThank";
+			session.setAttribute("form", form);
+			return "checkout/ECpage";
 		} else {
 			session.setAttribute("requestURI", "/ConfirmOrder");
 			return "redirect:/login";
 		}
+	}
+
+	@RequestMapping("/paySuccess")
+	public String TestEC(HttpSession session, HttpServletRequest request) {
+
+		return "/";
 	}
 
 	@RequestMapping("/OrderThank")

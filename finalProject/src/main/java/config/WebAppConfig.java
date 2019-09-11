@@ -19,8 +19,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@EnableTransactionManagement
-@ComponentScan(basePackages = "dispatcherController, register, product, cart, checkout,review")
+@ComponentScan(basePackages = {"dispatcherController", "register", "product", "cart", "checkout","review","config"})
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public ViewResolver internalResourceViewResolver() {

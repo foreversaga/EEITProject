@@ -1,16 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <meta charset="UTF-8">
 <title>登入畫面</title>
 <style>
-.LoginBackground {/*使圖片隨著瀏覽器尺寸自動縮放，不因大小出現縫隙*/
+.LoginBackground { /*使圖片隨著瀏覽器尺寸自動縮放，不因大小出現縫隙*/
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -24,7 +22,7 @@
 	width: 100%;
 }
 
-@media screen and (max-width: 2000px) {/*使圖片保持長寬比不能變形，2000是圖片原始寬度*/
+@media screen and (max-width: 2000px) { /*使圖片保持長寬比不能變形，2000是圖片原始寬度*/
 	img.LoginBackground {
 		left: 50%;
 		margin-left: -500px;
@@ -101,16 +99,16 @@ input[type="password"] {
 		<img src="<c:url value='/img/LoginBackground.jpg'/>">
 	</div>
 	<div class="wrapper">
-		<form class="form-signin" method="POST"
-			action="<c:url value='checklogin'/>">
+		<form class="form-signin" method="POST" action="<c:url value='checklogin'/>">
 			<h2 class="form-signin-heading">Login</h2>
 
-			<input name="mAccount" type="text" class="form-control"
-				placeholder="帳號" value="${requestScope.user }${param.mAccount}" /><br>
+			<input name="mAccount" type="text" class="form-control" placeholder="帳號"
+				value="${requestScope.user }${param.mAccount}" />
+			<br>
 
 
-			<input name="mPassword" class="form-control" placeholder="密碼"
-				type="password" value="${requestScope.password }" />
+			<input name="mPassword" class="form-control" placeholder="密碼" type="password"
+				value="${requestScope.password }" />
 			<p>
 				<font size="-1" color="red">${errorMsgKey.LoginError}</font>
 			</p>
