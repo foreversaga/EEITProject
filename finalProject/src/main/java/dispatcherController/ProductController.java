@@ -212,7 +212,8 @@ public class ProductController {
 			obj.setReturnURL("http://211.23.128.214:5000");
 			obj.setNeedExtraPaidInfo("N");
 			obj.setRedeem("Y");
-			obj.setReturnURL("http://localhost:8080/finalProject/paySuccess");
+			obj.setOrderResultURL("http://localhost:8080/finalProject/paySuccess");
+			obj.setCustomField1(ob.getmAccount());
 			AllInOne all = new AllInOne("");
 			String form = all.aioCheckOut(obj, null);
 			session.setAttribute("form", form);
@@ -225,8 +226,15 @@ public class ProductController {
 
 	@RequestMapping("/paySuccess")
 	public String TestEC(HttpSession session, HttpServletRequest request) {
+		try {
+			String requestBody = request.getReader().lines().collect(Collectors.joining());
+			System.out.println("requestBody=" + requestBody);
 
-		return "/";
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		return "redirect:/";
 	}
 
 	@RequestMapping("/OrderThank")

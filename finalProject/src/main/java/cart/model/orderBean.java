@@ -26,7 +26,8 @@ public class orderBean implements Serializable {
 	private Integer oId;
 	private Integer oTotalAmount;
 	private java.sql.Timestamp oTimestamp;
-	private String oPayment;
+	private String oPaymentDate;
+	private String oPaymentStatus;
 	private String oAddress;
 	private String mAccount;
 	private String oReceiveName;
@@ -43,13 +44,12 @@ public class orderBean implements Serializable {
 		this.itemSet = itemSet;
 	}
 	
-	public orderBean(Integer oId, Integer oTotalAmount, Timestamp oTimestamp, String oPayment, String oAddress,
+	public orderBean(Integer oId, Integer oTotalAmount, Timestamp oTimestamp, String oAddress,
 			String mAccount) {
 		super();
 		this.oId = oId;
 		this.oTotalAmount = oTotalAmount;
 		this.oTimestamp = oTimestamp;
-		this.oPayment = oPayment;
 		this.oAddress = oAddress;
 		this.mAccount = mAccount;
 	}
@@ -79,14 +79,6 @@ public class orderBean implements Serializable {
 
 	public void setoTimestamp(java.sql.Timestamp oTimestamp) {
 		this.oTimestamp = oTimestamp;
-	}
-
-	public String getoPayment() {
-		return oPayment;
-	}
-
-	public void setoPayment(String oPayment) {
-		this.oPayment = oPayment;
 	}
 
 	public String getmAccount() {
@@ -127,6 +119,22 @@ public class orderBean implements Serializable {
 
 	public void setoNote(String oNote) {
 		this.oNote = oNote;
+	}
+
+	public String getoPaymentDate() {
+		return oPaymentDate;
+	}
+
+	public void setoPaymentDate(String oPaymentDate) {
+		this.oPaymentDate = oPaymentDate;
+	}
+
+	public String getoPaymentStatus() {
+		return oPaymentStatus;
+	}
+
+	public void setoPaymentStatus(String oPaymentStatus) {
+		this.oPaymentStatus = oPaymentStatus;
 	}
 
 }
