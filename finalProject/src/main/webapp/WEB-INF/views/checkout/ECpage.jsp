@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>前往付款頁面</title>
 </head>
 <body>
 ${sessionScope.form}

@@ -26,10 +26,11 @@ public class orderBean implements Serializable {
 	private Integer oId;
 	private Integer oTotalAmount;
 	private java.sql.Timestamp oTimestamp;
-	private String oPaymentDate;
+	private java.sql.Timestamp oPaymentDate;
 	private String oPaymentStatus;
 	private String oAddress;
 	private String mAccount;
+	private String mName;
 	private String oReceiveName;
 	private String oReceivePhone;
 	private String oNote;
@@ -121,11 +122,11 @@ public class orderBean implements Serializable {
 		this.oNote = oNote;
 	}
 
-	public String getoPaymentDate() {
+	public java.sql.Timestamp getoPaymentDate() {
 		return oPaymentDate;
 	}
 
-	public void setoPaymentDate(String oPaymentDate) {
+	public void setoPaymentDate(java.sql.Timestamp oPaymentDate) {
 		this.oPaymentDate = oPaymentDate;
 	}
 
@@ -135,6 +136,14 @@ public class orderBean implements Serializable {
 
 	public void setoPaymentStatus(String oPaymentStatus) {
 		this.oPaymentStatus = oPaymentStatus;
+	}
+
+	public String getmName() {
+		return mName;
+	}
+
+	public void setmName(String mName) {
+		this.mName = mName;
 	}
 
 }

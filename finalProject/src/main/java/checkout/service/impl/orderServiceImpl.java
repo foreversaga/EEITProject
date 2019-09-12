@@ -1,5 +1,6 @@
 package checkout.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -19,6 +20,7 @@ import checkout.service.orderService;
 import login.HibernateUtils;
 import register.dao.MemberDao;
 import register.daoImpl.MemberDaoImpl;
+
 @Transactional
 @Service
 public class orderServiceImpl implements orderService {
@@ -84,6 +86,11 @@ public class orderServiceImpl implements orderService {
 	@Override
 	public List<orderItemBean> getOrderItem(int oId) {
 		return oidao.getOrderItem(oId);
+	}
+
+	@Override
+	public orderBean updateOrderAfterCheckout(int TradeNoDB, Timestamp paymentDate, String mAccount) {
+		return odao.updateOrderAfterCheckout(TradeNoDB, paymentDate, mAccount);
 	}
 
 }

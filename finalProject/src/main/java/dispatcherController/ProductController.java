@@ -4,16 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigInteger;
-import java.net.URLEncoder;
-import java.security.MessageDigest;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -49,7 +47,6 @@ import cart.model.shoppingCart;
 import checkout.service.orderService;
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutOneTime;
-import ecpay.payment.integration.ecpayOperator.EcpayFunction;
 import product.model.productBean;
 import product.service.productService;
 import register.model.MemberBean;
@@ -161,6 +158,7 @@ public class ProductController {
 			ob.setmAccount(mAccount);
 			ob.setoTimestamp(orderTime);
 			ob.setoTotalAmount(total);
+			ob.setmName(mb.getmName());
 			mav.addObject("orderInfo", ob);
 			mav.setViewName("checkout/checkout");
 			return mav;
@@ -197,6 +195,7 @@ public class ProductController {
 				n = pService.updateStock(pb.getpId(), newStock);
 			}
 			ob.setItemSet(items);
+			ob.setmName(mb.getmName());
 			oService.saveOrder(ob);
 			session.removeAttribute("shoppingCart");
 			AioCheckOutOneTime obj = new AioCheckOutOneTime();
@@ -212,7 +211,7 @@ public class ProductController {
 			obj.setReturnURL("http://211.23.128.214:5000");
 			obj.setNeedExtraPaidInfo("N");
 			obj.setRedeem("Y");
-			obj.setOrderResultURL("http://localhost:8080/finalProject/paySuccess");
+			obj.setOrderResultURL("http://localhost:8080/finalProject/PaySuccess");
 			obj.setCustomField1(ob.getmAccount());
 			AllInOne all = new AllInOne("");
 			String form = all.aioCheckOut(obj, null);
@@ -224,22 +223,57 @@ public class ProductController {
 		}
 	}
 
-	@RequestMapping("/paySuccess")
+	@RequestMapping("/PaySuccess")
 	public String TestEC(HttpSession session, HttpServletRequest request) {
 		try {
 			String requestBody = request.getReader().lines().collect(Collectors.joining());
-			System.out.println("requestBody=" + requestBody);
+//			String requestBody = "CustomField1=test&CustomField2=&CustomField3=&CustomField4=&"
+//					+ "MerchantID=2000132&MerchantTradeNo=20190911212122No36&"
+//					+ "PaymentDate=2019%2F09%2F11+21%3A22%3A13&PaymentType=Credit_CreditCard&"
+//					+ "PaymentTypeChargeFee=1&RtnCode=1&RtnMsg=Succeeded&SimulatePaid=0&"
+//					+ "StoreID=&TradeAmt=500&TradeDate=2019%2F09%2F11+21%3A21%3A29&"
+//					+ "TradeNo=1909112121291895&CheckMacValue="
+//					+ "67DAB16C73726978E468116160C1EFB5609622FF903152D572F2962B07CEEE4B";
+			int TradeNoDB = 0;
+			Timestamp paymentDate = new Timestamp(System.currentTimeMillis());
+			String mAccount = "";
+			String ReturnCode = "";
+			orderBean ob = null;
+			String[] bodys = requestBody.split("&");
+			for (int i = 0; i < bodys.length; i++) {
+				if (bodys[i].substring(0, bodys[i].indexOf("=")).equals("MerchantTradeNo")) {
+					// get tradeNo
+					String MerchantTradeNo = bodys[i].substring(bodys[i].indexOf("=") + 1, bodys[i].length());
+					String TradeNoDBStr = MerchantTradeNo.substring(MerchantTradeNo.indexOf("No") + 2,
+							MerchantTradeNo.length());
+					TradeNoDB = Integer.parseInt(TradeNoDBStr);
 
+				} else if (bodys[i].substring(0, bodys[i].indexOf("=")).equals("PaymentDate")) {
+					// get payment date
+					String tempPaymentDate = bodys[i].substring(bodys[i].indexOf("=") + 1, bodys[i].length());
+					try {
+						String PaymentDateStr = (URLDecoder.decode(tempPaymentDate, "UTF-8")).replace("/", "-");
+						paymentDate = Timestamp.valueOf(PaymentDateStr);
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					}
+				} else if (bodys[i].substring(0, bodys[i].indexOf("=")).equals("CustomField1")) {
+					// get account
+					mAccount = bodys[i].substring(bodys[i].indexOf("=") + 1, bodys[i].length());
+					System.out.println(mAccount);
+				} else if (bodys[i].substring(0, bodys[i].indexOf("=")).equals("RtnCode")) {
+					// get return code
+					ReturnCode = bodys[i].substring(bodys[i].indexOf("=") + 1, bodys[i].length());
+				}
+			}
+			if (ReturnCode.equals("1")) {
+				ob = oService.updateOrderAfterCheckout(TradeNoDB, paymentDate, mAccount);
+			}
+			session.setAttribute("paymentInfo", ob);
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
-		return "redirect:/";
-	}
-
-	@RequestMapping("/OrderThank")
-	public String OrderThank() {
-		return "checkout/orderThank";
+		return "checkout/paidPage";
 	}
 
 	@RequestMapping(value = "/AddProduct", method = RequestMethod.GET)

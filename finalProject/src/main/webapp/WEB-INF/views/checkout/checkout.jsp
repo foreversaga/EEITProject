@@ -24,7 +24,7 @@
 					<table>
 						<tr>
 							<td><h5 class="card-title">購買人姓名:</h5></td>
-							<td><h5>${orderInfo.mAccount}</h5></td>
+							<td><h5>${orderInfo.mName}</h5></td>
 						</tr>
 						<tr>
 							<td><h5>收件人姓名:</h5></td>
@@ -43,7 +43,7 @@
 							<td><form:input class="card-title" type="text" path="oNote" /></td>
 						</tr>
 						<tr>
-							<td><input type="submit" class="btn btn-primary" value="送出"></td>
+							<td><input type="submit" class="btn btn-outline-primary" value="送出"></td>
 						</tr>
 					</table>
 
@@ -68,7 +68,6 @@
 					</table>
 					<!--end of 購物明細 -->
 				</div>
-
 			</div>
 			<form:input type="hidden" value="${orderInfo.mAccount}" path="mAccount" />
 			<form:input type="hidden" value="${orderInfo.oTimestamp}" path="oTimestamp" />

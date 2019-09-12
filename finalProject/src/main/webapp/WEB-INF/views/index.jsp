@@ -66,6 +66,7 @@ body {
 				<c:if test="${empty LoginOK}">
 					<li class="nav-item"><a class="nav-link" href="<c:url value='/login'/>">會員登入</a></li>
 					<li class="nav-item"><a class="nav-link" href="<c:url value='/register/add'/>">會員註冊</a></li>
+					<li class="nav-item"><a class="nav-link" href="<c:url value='/paySuccess'/>">更新帳單測試</a></li>
 				</c:if>
 				<li class="nav-item"><a class="nav-link" href="<c:url value='/AddProduct'/>">新增商品</a></li>
 				<c:if test="${!empty LoginOK}">

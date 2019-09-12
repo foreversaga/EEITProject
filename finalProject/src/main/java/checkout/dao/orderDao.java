@@ -9,5 +9,7 @@ public interface orderDao {
 
 	orderBean getOrder(int oId);
 
+	orderBean updateOrderAfterCheckout(int TradeNoDB, java.sql.Timestamp paymentDate, String mAccount);
+
 	void saveOrder(orderBean ob);
 }

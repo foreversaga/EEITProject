@@ -9,6 +9,8 @@ public interface orderService {
 	List<orderBean> getMemberOrders(String mAccount);
 
 	orderBean getOrder(int getoId);
+	
+	orderBean updateOrderAfterCheckout(int TradeNoDB,java.sql.Timestamp paymentDate,String mAccount);
 
 	void saveOrder(orderBean ob);
 
