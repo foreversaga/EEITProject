@@ -4,20 +4,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>DirEngine - Free Bootstrap 4 Template by Colorlib</title>
+<title>Product</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="<c:url value='/css/RWDcss/js/jquery.min.js'/>"></script>
 <script type="text/javascript">
 	function DeleteItem(clicked_id) {
 		var url = "<c:url value='/DeleteCartProduct?pId=" + clicked_id + "'/>";
 		$.ajax({
 			url : url,
-			type : "post",
+			type : "get",
 			success : function(data) {
 				$("div.dropdown-menu").html(data);
 			}
 		});
 	};
+	$(document).ready(function() {
+		$("input:button").click(function(e) {
+			e.preventDefault();
+			var form = $(this.form);
+			var url = form.attr('action');
+			$.ajax({
+				type : "POST",
+				url : url,
+				data : form.serialize(),
+				success : function(data) {
+					$("div.dropdown-menu").html(data);
+				}
+			});
+		});
+	});
 </script>
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
@@ -80,7 +96,7 @@ div.dropdown-menu {
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="<c:url value='/'/>">dirEngine.</a>
+			<a class="navbar-brand" href="<c:url value='/'/>">旅遊趣</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
@@ -193,6 +209,7 @@ div.dropdown-menu {
 							</div>
 						</form>
 					</div>
+					<!--用評價方式搜尋商品(slider bar) -->
 					<!--         		<div class="sidebar-wrap bg-light ftco-animate"> -->
 					<!--         			<h3 class="heading mb-4">Star Rating</h3> -->
 					<!--         			<form method="post" class="star-rating"> -->
@@ -236,7 +253,6 @@ div.dropdown-menu {
 							<c:if test="${stVar.index%3==0}">
 								<br>
 							</c:if>
-
 							<div class="col-md-4 ftco-animate">
 								<div class="destination">
 									<a href="" class="img img-2 d-flex justify-content-center align-items-center"
@@ -277,7 +293,7 @@ div.dropdown-menu {
 												<form:input type="hidden" path="pName" value="${productBean.pName }" />
 												<form:input type="hidden" path="pPrice" value="${productBean.pPrice }" />
 												<c:if test="${productBean.pInstock!=0 }">
-													<input type="submit" value="加到購物車">
+													<input class="btn btn-outline-info" style="float: right;" type="button" value="加到購物車">
 												</c:if>
 											</form:form>
 										</p>
@@ -389,7 +405,8 @@ div.dropdown-menu {
 	</div>
 
 
-	<script src="<c:url value='/css/RWDcss/js/jquery.min.js'/>"></script>
+
+
 	<script src="<c:url value='/css/RWDcss/js/jquery-migrate-3.0.1.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/popper.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/bootstrap.min.js'/>"></script>
@@ -401,12 +418,9 @@ div.dropdown-menu {
 	<script src="<c:url value='/css/RWDcss/js/aos.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/jquery.animateNumber.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/bootstrap-datepicker.js'/>"></script>
-	<script src="<c:url value='/css/RWDcss/js/jquery.timepicker.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/scrollax.min.js'/>"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="<c:url value='/css/RWDcss/js/google-map.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/main.js'/>"></script>
+	<script src="http://malsup.github.io/jquery.form.js"></script>
 
 </body>
 </html>

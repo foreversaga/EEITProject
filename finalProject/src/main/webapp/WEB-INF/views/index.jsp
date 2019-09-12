@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<title>DirEngine - Free Bootstrap 4 Template by Colorlib</title>
+<title>旅遊趣</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -34,7 +34,7 @@
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="<c:url value='/'/>">dirEngine.</a>
+			<a class="navbar-brand" href="<c:url value='/'/>">旅遊趣</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
@@ -163,9 +163,9 @@
 							<div class="destination">
 								<a href="#" class="img d-flex justify-content-center align-items-center"
 									style="background-image: url(<c:url value='/css/RWDcss/images/destination-1.jpg'/>);">
-									<div class="icon d-flex justify-content-center align-items-center">
-										<span class="icon-search2"></span>
-									</div>
+<!-- 									<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 										<span class="icon-search2"></span> -->
+<!-- 									</div> -->
 								</a>
 								<div class="text p-3">
 									<h3>
@@ -179,9 +179,9 @@
 							<div class="destination">
 								<a href="#" class="img d-flex justify-content-center align-items-center"
 									style="background-image: url(<c:url value='/css/RWDcss/images/destination-2.jpg'/>);">
-									<div class="icon d-flex justify-content-center align-items-center">
-										<span class="icon-search2"></span>
-									</div>
+<!-- 									<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 										<span class="icon-search2"></span> -->
+<!-- 									</div> -->
 								</a>
 								<div class="text p-3">
 									<h3>
@@ -195,9 +195,9 @@
 							<div class="destination">
 								<a href="#" class="img d-flex justify-content-center align-items-center"
 									style="background-image: url(<c:url value='/css/RWDcss/images/destination-3.jpg'/>;">
-									<div class="icon d-flex justify-content-center align-items-center">
-										<span class="icon-search2"></span>
-									</div>
+<!-- 									<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 										<span class="icon-search2"></span> -->
+<!-- 									</div> -->
 								</a>
 								<div class="text p-3">
 									<h3>
@@ -211,9 +211,9 @@
 							<div class="destination">
 								<a href="#" class="img d-flex justify-content-center align-items-center"
 									style="background-image: url(<c:url value='/css/RWDcss/images/destination-4.jpg'/>);">
-									<div class="icon d-flex justify-content-center align-items-center">
-										<span class="icon-search2"></span>
-									</div>
+<!-- 									<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 										<span class="icon-search2"></span> -->
+<!-- 									</div> -->
 								</a>
 								<div class="text p-3">
 									<h3>
@@ -227,9 +227,9 @@
 							<div class="destination">
 								<a href="#" class="img d-flex justify-content-center align-items-center"
 									style="background-image: url(<c:url value='/css/RWDcss/images/destination-5.jpg'/>);">
-									<div class="icon d-flex justify-content-center align-items-center">
-										<span class="icon-search2"></span>
-									</div>
+<!-- 									<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 										<span class="icon-search2"></span> -->
+<!-- 									</div> -->
 								</a>
 								<div class="text p-3">
 									<h3>
@@ -243,9 +243,9 @@
 							<div class="destination">
 								<a href="#" class="img d-flex justify-content-center align-items-center"
 									style="background-image: url(<c:url value='/css/RWDcss/images/destination-6.jpg'/>);">
-									<div class="icon d-flex justify-content-center align-items-center">
-										<span class="icon-search2"></span>
-									</div>
+<!-- 									<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 										<span class="icon-search2"></span> -->
+<!-- 									</div> -->
 								</a>
 								<div class="text p-3">
 									<h3>
@@ -278,9 +278,9 @@
 					<div class="destination">
 						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
 							style="background-image: url(<c:url value='/css/RWDcss/images/destination-1.jpg'/>);">
-							<div class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
+<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 								<span class="icon-search2"></span> -->
+<!-- 							</div> -->
 						</a>
 						<div class="text p-3">
 							<div class="d-flex">
@@ -313,9 +313,9 @@
 					<div class="destination">
 						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
 							style="background-image: url(<c:url value='/css/RWDcss/images/destination-2.jpg'/>);">
-							<div class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
+<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 								<span class="icon-search2"></span> -->
+<!-- 							</div> -->
 						</a>
 						<div class="text p-3">
 							<div class="d-flex">
@@ -348,9 +348,9 @@
 					<div class="destination">
 						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
 							style="background-image: url(<c:url value='/css/RWDcss/images/destination-3.jpg'/>);">
-							<div class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
+<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 								<span class="icon-search2"></span> -->
+<!-- 							</div> -->
 						</a>
 						<div class="text p-3">
 							<div class="d-flex">
@@ -383,9 +383,9 @@
 					<div class="destination">
 						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
 							style="background-image: url(<c:url value='/css/RWDcss/images/destination-4.jpg'/>);">
-							<div class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
+<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 								<span class="icon-search2"></span> -->
+<!-- 							</div> -->
 						</a>
 						<div class="text p-3">
 							<div class="d-flex">
@@ -418,9 +418,9 @@
 					<div class="destination">
 						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
 							style="background-image: url(<c:url value='/css/RWDcss/images/destination-5.jpg' />);">
-							<div class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
+<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 								<span class="icon-search2"></span> -->
+<!-- 							</div> -->
 						</a>
 						<div class="text p-3">
 							<div class="d-flex">
@@ -471,9 +471,9 @@
 					<div class="destination">
 						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
 							style="background-image: url(images/hotel-1.jpg);">
-							<div class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
+<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 								<span class="icon-search2"></span> -->
+<!-- 							</div> -->
 						</a>
 						<div class="text p-3">
 							<div class="d-flex">
@@ -504,9 +504,9 @@
 					<div class="destination">
 						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
 							style="background-image: url(images/hotel-2.jpg);">
-							<div class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
+<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 								<span class="icon-search2"></span> -->
+<!-- 							</div> -->
 						</a>
 						<div class="text p-3">
 							<div class="d-flex">
@@ -537,9 +537,9 @@
 					<div class="destination">
 						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
 							style="background-image: url(images/hotel-3.jpg);">
-							<div class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
+<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 								<span class="icon-search2"></span> -->
+<!-- 							</div> -->
 						</a>
 						<div class="text p-3">
 							<div class="d-flex">
@@ -570,9 +570,9 @@
 					<div class="destination">
 						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
 							style="background-image: url(images/hotel-4.jpg);">
-							<div class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
+<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 								<span class="icon-search2"></span> -->
+<!-- 							</div> -->
 						</a>
 						<div class="text p-3">
 							<div class="d-flex">
@@ -603,9 +603,9 @@
 					<div class="destination">
 						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
 							style="background-image: url(images/hotel-5.jpg);">
-							<div class="icon d-flex justify-content-center align-items-center">
-								<span class="icon-search2"></span>
-							</div>
+<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
+<!-- 								<span class="icon-search2"></span> -->
+<!-- 							</div> -->
 						</a>
 						<div class="text p-3">
 							<div class="d-flex">
@@ -923,14 +923,14 @@
 
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
-		<svg class="circular" width="48px" height="48px">
-			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-				stroke="#F96D00" /></svg>
+<!-- 		<svg class="circular" width="48px" height="48px"> -->
+<%-- 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /> --%>
+<%-- 			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" --%>
+<%-- 				stroke="#F96D00" /></svg> --%>
 	</div>
 
 
-	<script src="<c:url value='/css/RWDcss/js/jquery.min.js'/>"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="<c:url value='/css/RWDcss/js/jquery-migrate-3.0.1.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/popper.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/bootstrap.min.js'/>"></script>

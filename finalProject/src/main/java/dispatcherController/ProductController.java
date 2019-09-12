@@ -132,7 +132,7 @@ public class ProductController {
 	public ModelAndView AddToCart(HttpSession session, ModelAndView mav, @ModelAttribute("orderItem") orderItem oi,
 			BindingResult result) throws ServletException {
 		int pageNo = (int) session.getAttribute("pageNo");
-		mav.setViewName("redirect:products/" + pageNo);
+		mav.setViewName("checkout/checkCart");
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
 		if (cart == null) {
 			cart = new shoppingCart();
@@ -302,7 +302,7 @@ public class ProductController {
 		return "redirect:/products/1";
 	}
 
-	@RequestMapping(value = "/DeleteCartProduct", method = RequestMethod.POST)
+	@RequestMapping(value = "/DeleteCartProduct", method = RequestMethod.GET)
 	public ModelAndView deleteProduct(HttpSession session, ModelAndView mav, HttpServletRequest request) {
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
 		mav.setViewName("checkout/checkCart");
