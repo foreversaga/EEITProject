@@ -311,7 +311,7 @@ public class ProductController {
 		return mav;
 	}
 
-	@RequestMapping("/orderDetails")
+	@RequestMapping("/OrderDetails")
 	public ModelAndView GetOrderlist(HttpSession session, ModelAndView mav) {
 		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
 		List<orderBean> list = oService.getMemberOrders(mb.getmAccount());

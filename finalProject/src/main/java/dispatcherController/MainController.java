@@ -30,4 +30,8 @@ public class MainController {
 		return "/register/register";
 	}
 
+	@RequestMapping("/rwd")
+	public String indexRWD() {
+		return "indexRWD";
+	}
 }
