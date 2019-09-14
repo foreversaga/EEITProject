@@ -51,6 +51,7 @@
 					</c:if>
 					<li class="nav-item"><a href="<c:url value='/AddProduct'/>" class="nav-link">新增商品</a></li>
 					<c:if test="${!empty LoginOK}">
+					<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
 					<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 					<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">訂單查詢</a></li>
 					<li class="nav-item"><a href="<c:url value='/review'/>" class="nav-link">評價查詢</a></li>

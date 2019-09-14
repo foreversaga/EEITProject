@@ -96,22 +96,22 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/UpdateMemberForm", method = RequestMethod.GET)
-	public String AddLoginMemberBeantoUpdateForm(Model model, HttpSession session) {
-		MemberBean mb = new MemberBean();
+	public String AddLoginMemberBeantoUpdateForm(Model model,HttpSession session) {
+		MemberBean mb= new MemberBean();
 		model.addAttribute("MemberBean", mb);
-		return "register/updateMember";
+		return "UserDashboard/UserDashboardUpdateMember";
 	}
 
 	@RequestMapping(value = "/UpdateMemberForm", method = RequestMethod.POST)
-	public String UpdateMember(@ModelAttribute("MemberBean") MemberBean mb, Model model, HttpSession session,
-			BindingResult result) {
-		MemberBean LoginOK = (MemberBean) session.getAttribute("LoginOK");
+	public String UpdateMember(@ModelAttribute("MemberBean")MemberBean mb, Model model,HttpSession session,BindingResult result ) {
+		MemberBean LoginOK =(MemberBean) session.getAttribute("LoginOK");
 		LoginOK.setmPassword(mb.getmPassword());
 		LoginOK.setmAccount(mb.getmAccount());
 		LoginOK.setmAddress(mb.getmAddress());
 		LoginOK.setmEmail(mb.getmEmail());
 		LoginOK.setmPhone(mb.getmPhone());
 		memberservice.updateMember(LoginOK);
-		return "index";
+		return "redirect:/UserDashboard";
+//		return "index";
 	}
 }
