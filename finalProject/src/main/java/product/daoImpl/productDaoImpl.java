@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import config.GlobalService;
-import config.SystemUtils2018;
+import config.SystemUtils;
 import product.Dao.productDao;
 import product.model.productBean;
 
@@ -124,9 +124,9 @@ public class productDaoImpl implements productDao {
 				java.sql.Date sqldate = new java.sql.Date(dateRange.getTime());
 				pb.setpDateRange(sqldate);
 				String realPath = context.getRealPath(token[4].trim());
-				Blob blob = SystemUtils2018.fileToBlob(realPath);
+				Blob blob = SystemUtils.fileToBlob(realPath);
 				pb.setpPicture(blob);
-				pb.setpFileName(SystemUtils2018.extractFileName(token[4].trim()));
+				pb.setpFileName(SystemUtils.extractFileName(token[4].trim()));
 				pb.setpInstock(Integer.parseInt(token[5]));
 				pb.setpName(token[6]);
 				pb.setpPopular(Integer.parseInt(token[7]));

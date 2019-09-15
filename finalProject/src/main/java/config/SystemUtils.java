@@ -17,7 +17,9 @@ import java.sql.SQLException;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialClob;
 
-public class SystemUtils2018 {
+
+public class SystemUtils {
+
 
 	public static Blob fileToBlob(String imageFileName) throws IOException, SQLException {
 		File imageFile = new File(imageFileName);
