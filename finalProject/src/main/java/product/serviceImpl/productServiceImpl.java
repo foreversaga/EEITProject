@@ -89,5 +89,8 @@ public class productServiceImpl implements productService {
 	public int updateStock(int pId, int newStock) {
 		return pdao.updateStock(pId, newStock);
 	}
-
+	@Override
+	public void addProductDB() {
+		pdao.addProductDB();
+	}
 }

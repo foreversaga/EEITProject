@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
@@ -59,7 +60,9 @@ public class ProductController {
 	ServletContext context;
 	@Autowired
 	orderService oService;
-
+	@Autowired
+	SessionFactory factory;
+//顯示商品頁面
 	@RequestMapping(value = "/products/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView productsPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
 		if (pageNo == null) {
@@ -76,7 +79,7 @@ public class ProductController {
 		session.setAttribute("pageNo", pageNo);
 		return mav;
 	}
-
+//轉換圖檔
 	private byte[] toByte(String filePath) {
 		byte[] b = null;
 		String realpath = context.getRealPath(filePath);
@@ -93,7 +96,7 @@ public class ProductController {
 		}
 		return b;
 	}
-
+//顯示商品圖片
 	@RequestMapping(value = "/showPic/{pId}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> showPic(HttpServletResponse resp, @PathVariable Integer pId) {
 		productBean pb = pService.getProduct(pId);
@@ -127,7 +130,7 @@ public class ProductController {
 		ResponseEntity<byte[]> resEntity = new ResponseEntity<>(mediaByte, headers, HttpStatus.OK);
 		return resEntity;
 	}
-
+//新增商品至購物車
 	@RequestMapping(value = "/Buy", method = RequestMethod.POST)
 	public ModelAndView AddToCart(HttpSession session, ModelAndView mav, @ModelAttribute("orderItem") orderItem oi,
 			BindingResult result) throws ServletException {
@@ -141,7 +144,7 @@ public class ProductController {
 		session.setAttribute("shoppingCart", cart);
 		return mav;
 	}
-
+//確認訂單頁面顯示
 	@RequestMapping(value = "/CheckOut")
 	public ModelAndView ToCheckOut(HttpSession session, ModelAndView mav) {
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
@@ -168,7 +171,7 @@ public class ProductController {
 			return mav;
 		}
 	}
-
+//送出訂單
 	@RequestMapping(value = "/ConfirmOrder")
 	public String ConfirmOrder(@ModelAttribute("orderInfo") orderBean ob, HttpSession session) {
 		shoppingCart sc = (shoppingCart) session.getAttribute("shoppingCart");
@@ -222,7 +225,7 @@ public class ProductController {
 			return "redirect:/login";
 		}
 	}
-
+//綠界結帳完成頁面顯示
 	@RequestMapping("/PaySuccess")
 	public String TestEC(HttpSession session, HttpServletRequest request) {
 		try {
@@ -275,14 +278,14 @@ public class ProductController {
 		}
 		return "checkout/paidPage";
 	}
-
+//新增商品表格
 	@RequestMapping(value = "/AddProduct", method = RequestMethod.GET)
 	public String AddForm(Model model) {
 		productBean bb = new productBean();
 		model.addAttribute("productBean", bb);
 		return "maintain/maintain";
 	}
-
+//新增商品
 	@RequestMapping(value = "/ProcessAdd", method = RequestMethod.POST)
 	public String AddProduct(@ModelAttribute("productBean") productBean bb, BindingResult result) {
 		MultipartFile productImage = bb.getProductImage();
@@ -301,7 +304,7 @@ public class ProductController {
 		pService.insertNewProduct(bb);
 		return "redirect:/products/1";
 	}
-
+//刪除購物車商品
 	@RequestMapping(value = "/DeleteCartProduct", method = RequestMethod.GET)
 	public ModelAndView deleteProduct(HttpSession session, ModelAndView mav, HttpServletRequest request) {
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
@@ -310,7 +313,7 @@ public class ProductController {
 		cart.deleteProduct(pId);
 		return mav;
 	}
-
+//顯示訂單
 	@RequestMapping("/OrderDetails")
 	public ModelAndView GetOrderlist(HttpSession session, ModelAndView mav) {
 		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
@@ -319,7 +322,7 @@ public class ProductController {
 		mav.setViewName("checkout/orderDetails");
 		return mav;
 	}
-
+//顯示訂單明細
 	@RequestMapping("/showOrderItem/{oId}")
 	public ModelAndView GetOrderItem(@PathVariable Integer oId, HttpSession session, ModelAndView mav,
 			HttpServletRequest request) {
@@ -327,6 +330,12 @@ public class ProductController {
 		mav.addObject("orderItemList", list);
 		mav.setViewName("checkout/orderItem");
 		return mav;
+	}
+//建立商品資料庫
+	@RequestMapping("/AddProductDB")
+	public String AddProductDB() {
+		pService.addProductDB();
+		return "index";
 	}
 
 }

@@ -25,12 +25,10 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	public MemberDaoImpl() {
-//		this.factory = HibernateUtils.getSessionFactory();
 	}
 
 	@Override
 	public void setConnection(Connection conn) {
-//		this.conn = conn;
 	}
 
 	@Override

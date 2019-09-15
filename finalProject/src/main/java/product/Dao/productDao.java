@@ -1,6 +1,5 @@
 package product.Dao;
 
-
 import java.util.List;
 
 import product.model.productBean;
@@ -18,7 +17,8 @@ public interface productDao {
 	public int getPageNo();
 
 	public void setPageNo(int pageNo);
-	
+
 	public int updateStock(int pId, int newStock);
 
+	public void addProductDB();
 }

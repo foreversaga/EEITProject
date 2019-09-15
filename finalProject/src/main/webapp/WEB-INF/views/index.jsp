@@ -47,9 +47,9 @@
 					<c:if test="${empty LoginOK}">
 					<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
 					<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
-					<li class="nav-item"><a href="<c:url value='/paySuccess'/>" class="nav-link">帳單測試</a></li>
 					</c:if>
 					<li class="nav-item"><a href="<c:url value='/AddProduct'/>" class="nav-link">新增商品</a></li>
+					<li class="nav-item"><a href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li>
 					<c:if test="${!empty LoginOK}">
 					<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
 					<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>

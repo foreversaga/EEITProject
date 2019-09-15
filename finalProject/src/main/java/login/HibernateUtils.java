@@ -12,7 +12,7 @@ public class HibernateUtils {
 
 	private static SessionFactory buildSessionFactory() {
 		try {
-			// Hibernate 5.x 的寫法
+//			 Hibernate 5.x 的寫法
 			StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
 					.configure("hibernate.cfg.xml").build();
 

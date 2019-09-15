@@ -3,9 +3,7 @@ package checkout.service.impl;
 import java.sql.Timestamp;
 import java.util.List;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,12 +12,8 @@ import cart.model.orderBean;
 import cart.model.orderItemBean;
 import checkout.dao.orderDao;
 import checkout.dao.orderItemDao;
-import checkout.dao.impl.orderDaoImpl;
-import checkout.dao.impl.orderItemDaoImpl;
 import checkout.service.orderService;
-import login.HibernateUtils;
 import register.dao.MemberDao;
-import register.daoImpl.MemberDaoImpl;
 
 @Transactional
 @Service

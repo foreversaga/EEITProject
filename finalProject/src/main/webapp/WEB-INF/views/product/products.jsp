@@ -15,7 +15,7 @@
 			url : url,
 			type : "get",
 			success : function(data) {
-				$("div.dropdown-menu").html(data);
+				$("div#shoppingCartMenu").html(data);
 			}
 		});
 	};
@@ -29,7 +29,7 @@
 				url : url,
 				data : form.serialize(),
 				success : function(data) {
-					$("div.dropdown-menu").html(data);
+					$("div#shoppingCartMenu").html(data);
 				}
 			});
 		});
@@ -104,25 +104,25 @@ div.dropdown-menu {
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a href="<c:url value='/'/>" class="nav-link">Home</a></li>
-					<li class="nav-item active"><a href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
+					<li class="nav-item active"><a href="<c:url value='/'/>" class="nav-link">Home</a></li>
+					<li class="nav-item"><a href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
 					<c:if test="${empty LoginOK}">
-						<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
-						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
-						<li class="nav-item"><a href="<c:url value='/paySuccess'/>" class="nav-link">帳單測試</a></li>
+					<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
+					<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
 					</c:if>
 					<li class="nav-item"><a href="<c:url value='/AddProduct'/>" class="nav-link">新增商品</a></li>
 					<c:if test="${!empty LoginOK}">
-						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
-						<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">訂單查詢</a></li>
-						<li class="nav-item"><a href="<c:url value='/review'/>" class="nav-link">評價查詢</a></li>
+					<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
+					<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
+					<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">訂單查詢</a></li>
+					<li class="nav-item"><a href="<c:url value='/review'/>" class="nav-link">評價查詢</a></li>
 					</c:if>
 				</ul>
 				<ul class="navbar-nav mr-right">
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false">購物車</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<div id="shoppingCartMenu" class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<c:if test="${empty shoppingCart.content }">
 								<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
 							</c:if>
@@ -271,7 +271,7 @@ div.dropdown-menu {
 												</p>
 											</div>
 											<div class="two">
-												<span class="price per-price">$${productBean.pPrice}<br> <small>/night</small></span>
+												<span class="price per-price">$${productBean.pPrice}<br> <small>這邊放字</small></span>
 											</div>
 										</div>
 										<p>這邊要放商品簡介文字</p>
@@ -283,7 +283,7 @@ div.dropdown-menu {
 													<p>已售完</p>
 												</c:if>
 												<c:if test="${productBean.pInstock!=0 }">
-													<form:select path="iQty">
+													<form:select path="iQty" style="margin-top:10px;">
 														<c:forEach var="stock" begin="1" end="${productBean.pInstock}">
 															<option value="${stock}">${stock}</option>
 														</c:forEach>
@@ -305,13 +305,13 @@ div.dropdown-menu {
 
 					<div class="PageButtonDiv">
 						<c:if test="${pageNo>1}">
-							<a class="PageButton" href="<c:url value='/productsRWD/1'/>"> 第一頁</a>
+							<a class="PageButton" href="<c:url value='/products/1'/>"> 第一頁</a>
 						</c:if>
 						<c:if test="${pageNo>1}">
-							<a class="PageButton" href="<c:url value='/productsRWD/${pageNo-1}'/>"> 上一頁</a>
+							<a class="PageButton" href="<c:url value='/products/${pageNo-1}'/>"> 上一頁</a>
 						</c:if>
 						<c:if test="${pageNo!=totalPages}">
-							<a class="PageButton" href="<c:url value='/productsRWD/${pageNo+1}'/>"> 下一頁</a>
+							<a class="PageButton" href="<c:url value='/products/${pageNo+1}'/>"> 下一頁</a>
 						</c:if>
 					</div>
 					<!-- .col-md-8 -->

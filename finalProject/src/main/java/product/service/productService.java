@@ -20,4 +20,6 @@ public interface productService {
 	int getPageNo();
 
 	int updateStock(int pId, int newStock);
+	
+	public void addProductDB();
 }

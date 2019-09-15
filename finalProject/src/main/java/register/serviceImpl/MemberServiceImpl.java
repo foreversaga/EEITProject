@@ -1,13 +1,10 @@
 package register.serviceImpl;
 
-import java.util.List;
-
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import product.model.productBean;
 import register.dao.MemberDao;
 import register.model.MemberBean;
 import register.service.MemberService;
@@ -38,8 +35,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	public MemberServiceImpl() {
-//		this.dao = new MemberDaoImpl();
-//		factory = HibernateUtils.getSessionFactory();
 	}
 
 	@Override
