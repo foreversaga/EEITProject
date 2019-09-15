@@ -29,6 +29,11 @@ public class MainController {
 	public String register() {
 		return "/register/register";
 	}
+	
+	@RequestMapping("/UserDashboard")
+	public String UserDashboard() {
+		return "/UserDashboard/UserDashboard";
+	}
 
 	@RequestMapping("/rwd")
 	public String indexRWD() {
