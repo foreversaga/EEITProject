@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<jsp:useBean id="orderInfo" class="cart.model.orderBean" scope="session" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,7 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 <script src="<c:url value='/css/RWDcss/js/jquery.min.js'/>"></script>
-<script type="text/javascript">
+<script>
 	$(document).ready(function() {
 
 		$('[data-toggle=offcanvas]').click(function() {
@@ -39,7 +40,8 @@
 		});
 
 	});
-// 	購物車
+
+	// 	購物車
 	function DeleteItem(clicked_id) {
 		var url = "<c:url value='/DeleteCartProduct?pId=" + clicked_id + "'/>";
 		$.ajax({
@@ -50,7 +52,7 @@
 			}
 		});
 	};
-	
+
 	// 天氣預報javaScript:https://weatherwidget.io/
 	!function(d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0];
@@ -140,14 +142,14 @@ body {
 						aria-label="Search">
 				</form:form>
 			</ul>
-			<ul class="navbar-nav ml-auto ">
+			<ul class="navbar-nav ml-auto">
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle fa fa-shopping-cart  fa-pull-right "
 					style="color: white;" id="navbarDropdown" role="button"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">購物車</a>
 					<div class="dropdown-menu dropdown-menu-right" id="shoppingCartMenu" 
 						style="width: 300px; height: 340px; background-color: #f0f0f0; font-family: 'Noto Serif TC', serif; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); overflow-y: auto;"
-						aria-labelledby="navbarDropdown">
+						aria-labelledby="navbarDropdown2">
 						<c:if test="${empty shoppingCart.content }">
 							<p style="text-align: center; margin-top: 10%">購物車暫無商品</p>
 						</c:if>
@@ -189,15 +191,16 @@ body {
 						<a class="dropdown-item" href="<c:url value='/UpdateMemberForm'/>">
 							<i class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
 							帳戶設定
-						</a> <a class="dropdown-item" href="<c:url value='/UserOrderDetail'/>"> <i
-							class="  mr-2 text-gray-400 fa fa-shopping-bag"
+						</a> <a class="dropdown-item" href="<c:url value='/UserOrderDetail'/>">
+							<i class="  mr-2 text-gray-400 fa fa-shopping-bag"
 							style="color: #99E64D;"></i> 我的訂單
 						</a> <a class="dropdown-item" href="#"> <i
 							class="  mr-2 text-gray-400 fa fa-gratipay" style="color: pink;"></i>
 							我的評價
 						</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="<c:url value='/logout'/>"> <i
+						<a class="dropdown-item" href="<c:url value='/logout'/>"
+							data-toggle="modal" data-target="#logoutModal"> <i
 							class=" mr-2 text-gray-400 fa fa-sign-out" style="color: gray;"></i>
 							Logout
 						</a>
@@ -216,15 +219,17 @@ body {
                     <li class=" list-group-item list-group-item-action "><a class="nav-link" href="#">帳戶設定</a></li> -->
 			<!-- </ul>
             </div> -->
-			<div class="sidebar-heading col-md-3  sidebar-offcanvas bg-light "
+			<div
+				class="container sidebar-heading col-md-3  sidebar-offcanvas bg-light "
 				id="sidebar" role="navigation" style="text-align: center">
 				<div
 					class="list-group list-group-flush flex-column sticky-top  p-0 pt-5 "
 					style="font-family: 'Noto Serif TC', serif">
 					<a href="<c:url value='/UserDashboard'/>"
 						class="list-group-item list-group-item-action bg-light ">個人中心</a>
-					<a href="<c:url value='/UserOrderDetail'/>" class="list-group-item list-group-item-action bg-light">我的訂單</a>
-					<a href="#" class="list-group-item list-group-item-action bg-light">我的評價</a>
+					<a href="<c:url value='/UserOrderDetail'/>"
+						class="list-group-item list-group-item-action bg-light">我的訂單</a> <a
+						href="#" class="list-group-item list-group-item-action bg-light">我的評價</a>
 					<a href="<c:url value='/UpdateMemberForm'/>"
 						class="list-group-item list-group-item-action bg-light">帳戶設定</a> <a
 						href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
@@ -232,71 +237,42 @@ body {
 				</div>
 			</div>
 			<!--/col-->
+			<div class="container col-md-9 p-0 ">
 
-			<div class="col main pt-5 ml-2 bg-white">
-				<div class="d-flex justify-content-center flex-row  ">
-					<img src="<c:url value='/img/TravelIcon.png'/>" class="img-fluid" />
-				</div>
-				<span class="lead d-none d-sm-block"
-					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">下一個旅程去邊好？選擇你的目的地並計劃行程吧！</span>
-				<center>
-					<button type="button" class="btn btn-warning btn-lg "
-						onclick="location.href=<c:url value='/'/>">返回首頁</button>
-				</center>
+				<div class="container flex-column">
 
-				<hr>
-				<!-- 天氣預報欄位 -->
-				<div>
-					<a class="weatherwidget-io"
-						href="https://forecast7.com/zh-tw/25d03121d57/taipei-city/"
-						data-label_1="台北市" data-label_2="WEATHER" data-font="Noto Sans TC"
-						data-theme="marine">台北市 WEATHER</a>
-				</div>
-				<!--/row-->
-
-				<hr>
-				<div id="carouselExampleIndicators" class="carousel slide "
-					data-ride="carousel">
-					<ol class="carousel-indicators">
-						<li data-target="#carouselExampleIndicators" data-slide-to="0"
-							class="active"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-					</ol>
-					<div class="carousel-inner ">
-						<div class=" carousel-item active ">
-							<img class=" d-block w-100"
-								src="<c:url value='/img/Discover.JPG'/>" alt="First slide">
-							<span
-								style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">樂活體驗，探索無限可能</span>
-						</div>
-						<div class="carousel-item">
-							<img class="d-block w-100" src="<c:url value='/img/food.JPG'/>"
-								alt="Second slide"> <span
-								style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">吃飯皇帝大，優惠票券替您省下荷包</span>
-						</div>
-						<div class="carousel-item">
-							<img class="d-block w-100" src="<c:url value='/img/rail.jpg'/>"
-								alt="Third slide"> <span
-								style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">各式交通票券讓您暢通無阻</span>
-						</div>
-					</div>
-					<a class="carousel-control-prev" href="#carouselExampleIndicators"
-						role="button" data-slide="prev"> <span
-						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-						class="sr-only">Previous</span>
-					</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
-						role="button" data-slide="next"> <span
-						class="carousel-control-next-icon" aria-hidden="true"></span> <span
-						class="sr-only">Next</span>
-					</a>
-				</div>
-
-
-				<a id="layouts"></a>
-				<hr>
+					<div class="  pt-5">
+						<div class="card ">
+							<form:form method="POST"
+								action="${pageContext.request.contextPath }/ConfirmOrder"
+								modelAttribute="orderInfo">
+								<div class="card-header card-header-primary">
+									<h4 class="card-title ">訂單管理</h4>
+									<p class="card-category">以下資訊僅用於顯示您目前的訂單資訊</p>
+								</div>
+								<div style="height: 450px;">
+									<table>
+										<c:forEach varStatus="vs" var="cart"
+											items="${shoppingCart.content}">
+											<tr>
+												<td>${cart.value.pName}</td>
+												<td>數量:${cart.value.iQty}</td>
+												<td>單價:${cart.value.pPrice}</td>
+												<td>小計:${cart.value.iQty * cart.value.pPrice}</td>
+											</tr>
+										</c:forEach>
+										<tr>
+											<td>金額總計:</td>
+											<td><jsp:getProperty property="oTotalAmount"
+													name="orderInfo" /></td>
+										</tr>
+									</table>
+									<!--end of 購物明細 -->
+								</div>
+							</form:form>
+													<hr>
 				<h2 class="sub-header mt-5 mb-5"
-					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">熱門地區</h2>
+					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">熱銷活動</h2>
 				<div class="container row mb-3 ml-1 d-flex justify-content-center"
 					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">
 					<div class="card-deck">
@@ -328,57 +304,63 @@ body {
 					</div>
 					<!--/col-->
 				</div>
-<!-- 				熱門地區商品超連結要在img外面包一層<a href=""></a>,原本在img內的超連結不要用 -->
-				<!--/row-->
-
+						</div>
+					</div>
+				</div>
+	
 			</div>
-			<!--/main col-->
 		</div>
 
-		<footer class="container  navbar-fixed-bottom ">
-			<div
-				class=" container align-items-end row featurette bg-dark col-md-12 p-5 pt-0 mt-2"
-				style="color: white">
-				<div class="  justify-content-end col-md-5 order-md-7">
-					<h3 class="title2">聯絡我們</h3>
-					<div class="form-group">
-						<label for="txtName">寄件人姓名</label> <input type="text"
-							class="form-control" name="txtName" id="txtName" required>
-					</div>
-					<div class="form-group">
-						<label for="txtEmail">信箱</label> <input type="email"
-							class="form-control" name="txtEmail" id="txtEmail" required>
-					</div>
-					<div class="form-group">
-						<label for="msg">訊息</label>
-						<textarea class="form-control" required></textarea>
-					</div>
-					<button type="submit" class="btn btn-primary" style="width: 100%;">傳送</button>
+		<!--/main col-->
+	</div>
+
+
+
+
+	<footer class="container  navbar-fixed-bottom flex-column ">
+		<div
+			class=" container align-items-end row featurette bg-dark  p-5  mt-1 "
+			style="color: white">
+			<div class="  justify-content-end col-md-5 order-md-7">
+				<h3 class="title2">聯絡我們</h3>
+				<div class="form-group">
+					<label for="txtName">寄件人姓名</label> <input type="text"
+						class="form-control" name="txtName" id="txtName" required>
 				</div>
-				<div class=" align-self-center col-md-7" style="color: white">
-					<ul>
-						<li style="margin-top: 3px;">©2019 Travel Fun Technology</li>
-						<li style="margin-top: 3px;">Limited. All Rights Reserved.</li>
-						<li style="margin-top: 3px;">電話：02-23766198</li>
-						<li style="margin-top: 3px;">信箱：EEIT108@outlook.com</li>
-						<li style="margin-top: 3px;">地址：106台北市大安區復興南路一段390號 2,3號</li>
-						<li style="margin-top: 3px;">粉專：https://www.travelFun.com/EEIT108/</li>
-					</ul>
-					<ul>
-						<li style="margin-top: 3px;">支付方式</li>
-						<img class=" mt-2" src="<c:url value='/img/visa.png'/>"
-							height="40px" href="">
-						<img class=" mt-2" src="<c:url value='/img/master.png'/>"
-							height="40px" href="">
-						<img class=" mt-2" src="<c:url value='/img/jcb.png'/>"
-							height="40px" href="">
-						<img class=" mt-2" src="<c:url value='/img/american.png'/>"
-							height="40px" href="">
-						<img class=" mt-2" src="<c:url value='/img/paypal.png'/>"
-							height="40px" href="">
-					</ul>
+				<div class="form-group">
+					<label for="txtEmail">信箱</label> <input type="email"
+						class="form-control" name="txtEmail" id="txtEmail" required>
 				</div>
+				<div class="form-group">
+					<label for="msg">訊息</label>
+					<textarea class="form-control" required></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary" style="width: 100%;">傳送</button>
 			</div>
-		</footer>
+			<div class=" align-self-center col-md-7" style="color: white">
+				<ul>
+					<li style="margin-top: 3px;">©2019 Travel Fun Technology</li>
+					<li style="margin-top: 3px;">Limited. All Rights Reserved.</li>
+					<li style="margin-top: 3px;">電話：02-23766198</li>
+					<li style="margin-top: 3px;">信箱：EEIT108@outlook.com</li>
+					<li style="margin-top: 3px;">地址：106台北市大安區復興南路一段390號 2,3號</li>
+					<li style="margin-top: 3px;">粉專：https://www.travelFun.com/EEIT108/</li>
+				</ul>
+				<ul>
+					<li style="margin-top: 3px;">支付方式</li>
+					<img class=" mt-2" src="<c:url value='/img/visa.png'/>"
+						height="40px" href="">
+					<img class=" mt-2" src="<c:url value='/img/master.png'/>"
+						height="40px" href="">
+					<img class=" mt-2" src="<c:url value='/img/jcb.png'/>"
+						height="40px" href="">
+					<img class=" mt-2" src="<c:url value='/img/american.png'/>"
+						height="40px" href="">
+					<img class=" mt-2" src="<c:url value='/img/paypal.png'/>"
+						height="40px" href="">
+				</ul>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>

@@ -30,6 +30,7 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
+<script src="<c:url value='/css/RWDcss/js/jquery.min.js'/>"></script>
 <script>
 	$(document).ready(function() {
 
@@ -38,6 +39,19 @@
 		});
 
 	});
+
+	// 	購物車
+	function DeleteItem(clicked_id) {
+		var url = "<c:url value='/DeleteCartProduct?pId=" + clicked_id + "'/>";
+		$.ajax({
+			url : url,
+			type : "get",
+			success : function(data) {
+				$("div#shoppingCartMenu").html(data);
+			}
+		});
+	};
+
 	// 天氣預報javaScript:https://weatherwidget.io/
 	!function(d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0];
@@ -90,7 +104,8 @@ body {
 				data-toggle="offcanvas" title="Toggle responsive left sidebar">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<a class="navbar-brand" href="<c:url value='/UserDashboard'/>" title="User Dashboard">會員中心</a>
+			<a class="navbar-brand" href="<c:url value='/UserDashboard'/>"
+				title="User Dashboard">會員中心</a>
 		</div>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsingNavbar">
@@ -98,8 +113,8 @@ body {
 		</button>
 		<div class="navbar-collapse collapse" id="collapsingNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link" href="<c:url value='/'/>">旅遊趣<span
-						class="sr-only"></span></a></li>
+				<li class="nav-item active"><a class="nav-link"
+					href="<c:url value='/'/>">旅遊趣<span class="sr-only"></span></a></li>
 				<!-- <li class="nav-item">
                     <a class="nav-link" href="//www.codeply.com">Link</a>
                 </li> -->
@@ -127,10 +142,36 @@ body {
 				</form:form>
 			</ul>
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item "><a
-					class="nav-link fa fa-shopping-cart  fa-pull-left "
-					style="color: white;" href="#myAlert" data-toggle="collapse">購物車</a>
-					<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle fa fa-shopping-cart  fa-pull-right "
+					style="color: white;" id="navbarDropdown" role="button"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">購物車</a>
+					<div class="dropdown-menu dropdown-menu-right" id="shoppingCartMenu" 
+						style="width: 300px; height: 340px; background-color: #f0f0f0; font-family: 'Noto Serif TC', serif; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); overflow-y: auto;"
+						aria-labelledby="navbarDropdown">
+						<c:if test="${empty shoppingCart.content }">
+							<p style="text-align: center; margin-top: 10%">購物車暫無商品</p>
+						</c:if>
+						<c:forEach varStatus="vs" var="cart"
+							items="${shoppingCart.content }">
+							<hr>
+							<img style="width: 50px; height: 50px; float: left;"
+								src="<c:url value='/showPic/${cart.value.pId}'/>">
+							<p style="line-height: 30px">${cart.value.pName}</p>
+							<span style="line-height: 5px">數量:${cart.value.iQty}
+								價格:${cart.value.pPrice}</span>
+							<span><input id="${cart.value.pId}" type="button"
+								onclick="DeleteItem(this.id)" value="刪除" /> </span>
+							<c:if test="${vs.last}">
+								<hr>
+							</c:if>
+						</c:forEach>
+						<c:if test="${!empty shoppingCart.content }">
+							<a href="<c:url value='/CheckOut'/>"><input type="button"
+								class="btn btn-primary btn-lg mr-1" style="float: right;"
+								value="前往結帳" /></a>
+						</c:if>
+					</div> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
 				</li>
 				<!-- <li class="nav-item">
                     <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
@@ -146,10 +187,10 @@ body {
 					<div
 						class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 						aria-labelledby="userDropdown">
-						<a class="dropdown-item" href="<c:url value='/UpdateMemberForm'/>"> <i
-							class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
+						<a class="dropdown-item" href="<c:url value='/UpdateMemberForm'/>">
+							<i class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
 							帳戶設定
-						</a> <a class="dropdown-item" href="#"> <i
+						</a> <a class="dropdown-item" href="<c:url value='/UserOrderDetail'/>"> <i
 							class="  mr-2 text-gray-400 fa fa-shopping-bag"
 							style="color: #99E64D;"></i> 我的訂單
 						</a> <a class="dropdown-item" href="#"> <i
@@ -157,8 +198,8 @@ body {
 							我的評價
 						</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="<c:url value='/logout'/>" data-toggle="modal"
-							data-target="#logoutModal"> <i
+						<a class="dropdown-item" href="<c:url value='/logout'/>"
+							data-toggle="modal" data-target="#logoutModal"> <i
 							class=" mr-2 text-gray-400 fa fa-sign-out" style="color: gray;"></i>
 							Logout
 						</a>
@@ -185,10 +226,11 @@ body {
 					style="font-family: 'Noto Serif TC', serif">
 					<a href="<c:url value='/UserDashboard'/>"
 						class="list-group-item list-group-item-action bg-light ">個人中心</a>
-					<a href="#" class="list-group-item list-group-item-action bg-light">我的訂單</a>
+					<a href="<c:url value='/UserOrderDetail'/>" class="list-group-item list-group-item-action bg-light">我的訂單</a>
 					<a href="#" class="list-group-item list-group-item-action bg-light">我的評價</a>
-					<a href="<c:url value='/UpdateMemberForm'/>" class="list-group-item list-group-item-action bg-light">帳戶設定</a>
-					<a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
+					<a href="<c:url value='/UpdateMemberForm'/>"
+						class="list-group-item list-group-item-action bg-light">帳戶設定</a> <a
+						href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
 					<a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
 				</div>
 			</div>
@@ -199,12 +241,12 @@ body {
 					<div class="  pt-5">
 						<div class="card ">
 							<form:form method="POST" modelAttribute="MemberBean">
-							<div class="card-header card-header-primary">
-								<h4 class="card-title ">個人資訊管理</h4>
-								<p class="card-category">以下資訊僅用於幫助你在支付時自動填寫你的個人資料，你的資料將會安全地被客路保存且不會公開</p>
-							</div>
-							<div class="card-body">
-								
+								<div class="card-header card-header-primary">
+									<h4 class="card-title ">個人資訊管理</h4>
+									<p class="card-category">以下資訊僅用於幫助你在支付時自動填寫你的個人資料，你的資料將會安全地被保存且不會公開</p>
+								</div>
+								<div class="card-body">
+
 									<div class="row">
 										<div class="col-md-4">
 											<div class="form-group">
@@ -275,13 +317,13 @@ body {
 											</div>
 										</div>
 									</div>
-								
-							</div>
-							<div class="row"></div>
-							<button type="submit"
-								class="btn btn-primary pull-right col-md-4 align-self-end m-1">Update
-								Profile</button>
-							<div class="clearfix"></div>
+
+								</div>
+								<div class="row"></div>
+								<button type="submit"
+									class="btn btn-primary pull-right col-md-4 align-self-end m-1">Update
+									Profile</button>
+								<div class="clearfix"></div>
 							</form:form>
 						</div>
 					</div>
