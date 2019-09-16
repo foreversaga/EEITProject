@@ -1,15 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
 <title>旅遊趣</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
-
+<script src="<c:url value='/css/RWDcss/js/jquery.min.js'/>"></script>
+<script type="text/javascript">
+	function DeleteItem(clicked_id) {
+		var url = "<c:url value='/DeleteCartProduct?pId=" + clicked_id + "'/>";
+		$.ajax({
+			url : url,
+			type : "get",
+			success : function(data) {
+				$("div#shoppingCartMenu").html(data);
+			}
+		});
+	};
+	$(document).ready(function() {
+		$("input:button").click(function(e) {
+			e.preventDefault();
+			var form = $(this.form);
+			var url = form.attr('action');
+			$.ajax({
+				type : "POST",
+				url : url,
+				data : form.serialize(),
+				success : function(data) {
+					$("div#shoppingCartMenu").html(data);
+				}
+			});
+		});
+	});
+</script>
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/open-iconic-bootstrap.min.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/animate.css'/>">
 
@@ -28,6 +53,7 @@
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/flaticon.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/icomoon.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/style.css'/>">
+
 </head>
 <body>
 
@@ -45,24 +71,50 @@
 					<li class="nav-item active"><a href="<c:url value='/'/>" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
 					<c:if test="${empty LoginOK}">
-					<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
-					<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
+						<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
+						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
 					</c:if>
 					<li class="nav-item"><a href="<c:url value='/AddProduct'/>" class="nav-link">新增商品</a></li>
 					<li class="nav-item"><a href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li>
 					<c:if test="${!empty LoginOK}">
-					<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
-					<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
-					<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">訂單查詢</a></li>
-					<li class="nav-item"><a href="<c:url value='/review'/>" class="nav-link">評價查詢</a></li>
+						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
+						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
+						<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">訂單查詢</a></li>
+						<li class="nav-item"><a href="<c:url value='/review'/>" class="nav-link">評價查詢</a></li>
 					</c:if>
+				</ul>
+				<ul class="navbar-nav mr-right">
+					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">購物車</a>
+						<div id="shoppingCartMenu" class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<c:if test="${empty shoppingCart.content }">
+								<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
+							</c:if>
+							<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
+								<hr>
+								<img style="width: 50px; height: 50px; float: left;"
+									src="<c:url value='/showPic/${cart.value.pId}'/>">
+								<p style="line-height: 10px">${cart.value.pName}</p>
+								<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
+								<span><input id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)"
+										value="刪除" /> </span>
+								<c:if test="${vs.last}">
+									<hr>
+								</c:if>
+							</c:forEach>
+							<c:if test="${!empty shoppingCart.content }">
+								<a href="<c:url value='/CheckOut'/>">結帳</a>
+							</c:if>
+						</div></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<!-- END nav -->
 
-	<div class="hero-wrap js-fullheight" style="background-image: url(<c:url value='/css/RWDcss/images/bg_1.jpg'/>);">
+	<div class="hero-wrap js-fullheight"
+		style="background-image: url(<c:url value='/css/RWDcss/images/bg_1.jpg'/>);">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
@@ -99,8 +151,8 @@
 							</div>
 						</div>
 						<div class="media-body p-2 mt-2">
-							<h3 class="heading mb-3">Best Price Guarantee</h3>
-							<p>A small river named Duden flows by their place and supplies.</p>
+							<h3 class="heading mb-3">保證最低價</h3>
+							<p>極致的優惠價，低到老闆開始懷疑人生。</p>
 						</div>
 					</div>
 				</div>
@@ -112,8 +164,8 @@
 							</div>
 						</div>
 						<div class="media-body p-2 mt-2">
-							<h3 class="heading mb-3">Travellers Love Us</h3>
-							<p>A small river named Duden flows by their place and supplies.</p>
+							<h3 class="heading mb-3">旅行者的最愛</h3>
+							<p>愉快的旅行，美好的回憶，我們的回頭客絡繹不絕。</p>
 						</div>
 					</div>
 				</div>
@@ -125,8 +177,8 @@
 							</div>
 						</div>
 						<div class="media-body p-2 mt-2">
-							<h3 class="heading mb-3">Best Travel Agent</h3>
-							<p>A small river named Duden flows by their place and supplies.</p>
+							<h3 class="heading mb-3">不停在全世界探索</h3>
+							<p>我們隨時更新全世界最新的商品，不怕你買過，怕你沒看過。</p>
 						</div>
 					</div>
 				</div>
@@ -138,8 +190,8 @@
 							</div>
 						</div>
 						<div class="media-body p-2 mt-2">
-							<h3 class="heading mb-3">Our Dedicated Support</h3>
-							<p>A small river named Duden flows by their place and supplies.</p>
+							<h3 class="heading mb-3">24小時客服</h3>
+							<p>讓旅行中的你遇到疑問時，不用擔心任何時差。</p>
 						</div>
 					</div>
 				</div>
@@ -164,9 +216,8 @@
 							<div class="destination">
 								<a href="#" class="img d-flex justify-content-center align-items-center"
 									style="background-image: url(<c:url value='/css/RWDcss/images/destination-1.jpg'/>);">
-<!-- 									<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 										<span class="icon-search2"></span> -->
-<!-- 									</div> -->
+									<!-- 									<div class="icon d-flex justify-content-center align-items-center"> --> <!-- 										<span class="icon-search2"></span> -->
+									<!-- 									</div> -->
 								</a>
 								<div class="text p-3">
 									<h3>
@@ -180,9 +231,8 @@
 							<div class="destination">
 								<a href="#" class="img d-flex justify-content-center align-items-center"
 									style="background-image: url(<c:url value='/css/RWDcss/images/destination-2.jpg'/>);">
-<!-- 									<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 										<span class="icon-search2"></span> -->
-<!-- 									</div> -->
+									<!-- 									<div class="icon d-flex justify-content-center align-items-center"> --> <!-- 										<span class="icon-search2"></span> -->
+									<!-- 									</div> -->
 								</a>
 								<div class="text p-3">
 									<h3>
@@ -195,10 +245,8 @@
 						<div class="item">
 							<div class="destination">
 								<a href="#" class="img d-flex justify-content-center align-items-center"
-									style="background-image: url(<c:url value='/css/RWDcss/images/destination-3.jpg'/>;">
-<!-- 									<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 										<span class="icon-search2"></span> -->
-<!-- 									</div> -->
+									style="background-image: url(<c:url value='/css/RWDcss/images/destination-3.jpg'/>;"> <!-- 									<div class="icon d-flex justify-content-center align-items-center"> -->
+									<!-- 										<span class="icon-search2"></span> --> <!-- 									</div> -->
 								</a>
 								<div class="text p-3">
 									<h3>
@@ -212,9 +260,8 @@
 							<div class="destination">
 								<a href="#" class="img d-flex justify-content-center align-items-center"
 									style="background-image: url(<c:url value='/css/RWDcss/images/destination-4.jpg'/>);">
-<!-- 									<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 										<span class="icon-search2"></span> -->
-<!-- 									</div> -->
+									<!-- 									<div class="icon d-flex justify-content-center align-items-center"> --> <!-- 										<span class="icon-search2"></span> -->
+									<!-- 									</div> -->
 								</a>
 								<div class="text p-3">
 									<h3>
@@ -228,9 +275,8 @@
 							<div class="destination">
 								<a href="#" class="img d-flex justify-content-center align-items-center"
 									style="background-image: url(<c:url value='/css/RWDcss/images/destination-5.jpg'/>);">
-<!-- 									<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 										<span class="icon-search2"></span> -->
-<!-- 									</div> -->
+									<!-- 									<div class="icon d-flex justify-content-center align-items-center"> --> <!-- 										<span class="icon-search2"></span> -->
+									<!-- 									</div> -->
 								</a>
 								<div class="text p-3">
 									<h3>
@@ -244,9 +290,8 @@
 							<div class="destination">
 								<a href="#" class="img d-flex justify-content-center align-items-center"
 									style="background-image: url(<c:url value='/css/RWDcss/images/destination-6.jpg'/>);">
-<!-- 									<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 										<span class="icon-search2"></span> -->
-<!-- 									</div> -->
+									<!-- 									<div class="icon d-flex justify-content-center align-items-center"> --> <!-- 										<span class="icon-search2"></span> -->
+									<!-- 									</div> -->
 								</a>
 								<div class="text p-3">
 									<h3>
@@ -261,383 +306,73 @@
 			</div>
 		</div>
 	</section>
-
 	<section class="ftco-section bg-light">
 		<div class="container">
 			<div class="row justify-content-start mb-5 pb-3">
 				<div class="col-md-7 heading-section ftco-animate">
-					<span class="subheading">Special Offers</span>
+					<span class="subheading">好評不斷</span>
 					<h2 class="mb-4">
-						<strong>Top</strong> Tour Packages
+						<strong>最熱門</strong> 隨時更新TOP5
 					</h2>
 				</div>
 			</div>
 		</div>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(<c:url value='/css/RWDcss/images/destination-1.jpg'/>);">
-<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 								<span class="icon-search2"></span> -->
-<!-- 							</div> -->
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<h3>
-										<a href="#">Paris, Italy</a>
-									</h3>
-									<p class="rate">
-										<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
-									</p>
+				<c:forEach varStatus="vs" var="Top5" items="${TopFiveList}">
+					<div class="col-sm col-md-6 col-lg ftco-animate">
+						<div class="destination">
+							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
+								style="background-image: url(<c:url value='/showPic/${Top5.pId}'/>);"> <!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
+								<!-- 								<span class="icon-search2"></span> --> <!-- 							</div> -->
+							</a>
+							<div class="text p-3">
+								<div class="d-flex">
+									<div class="one">
+										<h3>
+											<a href="#">${Top5.pName}</a>
+										</h3>
+										<p class="rate">
+											<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
+												class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
+										</p>
+									</div>
+									<div class="two">
+										<span class="price per-price">${Top5.pPrice}<br> <small>/night</small></span>
+									</div>
 								</div>
-								<div class="two">
-									<span class="price">$200</span>
-								</div>
+								<p>${Top5.pContent}</p>
+								<hr>
+								<p class="bottom-area d-flex">
+									<form:form method="POST" action="${pageContext.request.contextPath}/Buy"
+										modelAttribute="orderItem" id="idform">
+										<c:if test="${Top5.pInstock==0 }">
+											<p>已售完</p>
+										</c:if>
+										<c:if test="${Top5.pInstock!=0 }">
+											<form:select path="iQty" style="margin-top:10px;">
+												<c:forEach var="stock" begin="1" end="${Top5.pInstock}">
+													<option value="${stock}">${stock}</option>
+												</c:forEach>
+											</form:select>
+										</c:if>
+										<form:input type="hidden" path="pId" value="${Top5.pId }" />
+										<form:input type="hidden" path="pName" value="${Top5.pName }" />
+										<form:input type="hidden" path="pPrice" value="${Top5.pPrice }" />
+										<c:if test="${Top5.pInstock!=0 }">
+											<input class="btn btn-outline-info" style="float: right;" type="button" value="加到購物車">
+										</c:if>
+									</form:form>
+								</p>
 							</div>
-							<p>Far far away, behind the word mountains, far from the countries</p>
-							<p class="days">
-								<span>2 days 3 nights</span>
-							</p>
-							<hr>
-							<p class="bottom-area d-flex">
-								<span><i class="icon-map-o"></i> San Franciso, CA</span> <span class="ml-auto"><a
-									href="#">Discover</a></span>
-							</p>
 						</div>
 					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(<c:url value='/css/RWDcss/images/destination-2.jpg'/>);">
-<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 								<span class="icon-search2"></span> -->
-<!-- 							</div> -->
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<h3>
-										<a href="#">Paris, Italy</a>
-									</h3>
-									<p class="rate">
-										<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
-									</p>
-								</div>
-								<div class="two">
-									<span class="price">$200</span>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the countries</p>
-							<p class="days">
-								<span>2 days 3 nights</span>
-							</p>
-							<hr>
-							<p class="bottom-area d-flex">
-								<span><i class="icon-map-o"></i> San Franciso, CA</span> <span class="ml-auto"><a
-									href="#">Discover</a></span>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(<c:url value='/css/RWDcss/images/destination-3.jpg'/>);">
-<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 								<span class="icon-search2"></span> -->
-<!-- 							</div> -->
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<h3>
-										<a href="#">Paris, Italy</a>
-									</h3>
-									<p class="rate">
-										<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
-									</p>
-								</div>
-								<div class="two">
-									<span class="price">$200</span>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the countries</p>
-							<p class="days">
-								<span>2 days 3 nights</span>
-							</p>
-							<hr>
-							<p class="bottom-area d-flex">
-								<span><i class="icon-map-o"></i> San Franciso, CA</span> <span class="ml-auto"><a
-									href="#">Discover</a></span>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(<c:url value='/css/RWDcss/images/destination-4.jpg'/>);">
-<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 								<span class="icon-search2"></span> -->
-<!-- 							</div> -->
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<h3>
-										<a href="#">Paris, Italy</a>
-									</h3>
-									<p class="rate">
-										<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
-									</p>
-								</div>
-								<div class="two">
-									<span class="price">$200</span>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the countries</p>
-							<p class="days">
-								<span>2 days 3 nights</span>
-							</p>
-							<hr>
-							<p class="bottom-area d-flex">
-								<span><i class="icon-map-o"></i> San Franciso, CA</span> <span class="ml-auto"><a
-									href="#">Discover</a></span>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(<c:url value='/css/RWDcss/images/destination-5.jpg' />);">
-<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 								<span class="icon-search2"></span> -->
-<!-- 							</div> -->
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<h3>
-										<a href="#">Paris, Italy</a>
-									</h3>
-									<p class="rate">
-										<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
-									</p>
-								</div>
-								<div class="two">
-									<span class="price">$200</span>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the countries</p>
-							<p class="days">
-								<span>2 days 3 nights</span>
-							</p>
-							<hr>
-							<p class="bottom-area d-flex">
-								<span><i class="icon-map-o"></i> San Franciso, CA</span> <span class="ml-auto"><a
-									href="#">Discover</a></span>
-							</p>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</section>
 
-
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-start mb-5 pb-3">
-				<div class="col-md-7 heading-section ftco-animate">
-					<span class="subheading">Special Offers</span>
-					<h2 class="mb-4">
-						<strong>Popular</strong> Hotels &amp; Rooms
-					</h2>
-				</div>
-			</div>
-		</div>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(images/hotel-1.jpg);">
-<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 								<span class="icon-search2"></span> -->
-<!-- 							</div> -->
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<h3>
-										<a href="#">Hotel, Italy</a>
-									</h3>
-									<p class="rate">
-										<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
-									</p>
-								</div>
-								<div class="two">
-									<span class="price per-price">$40<br>
-									<small>/night</small></span>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the countries</p>
-							<hr>
-							<p class="bottom-area d-flex">
-								<span><i class="icon-map-o"></i> Miami, Fl</span> <span class="ml-auto"><a href="#">Book
-										Now</a></span>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(images/hotel-2.jpg);">
-<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 								<span class="icon-search2"></span> -->
-<!-- 							</div> -->
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<h3>
-										<a href="#">Hotel, Italy</a>
-									</h3>
-									<p class="rate">
-										<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
-									</p>
-								</div>
-								<div class="two">
-									<span class="price per-price">$40<br>
-									<small>/night</small></span>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the countries</p>
-							<hr>
-							<p class="bottom-area d-flex">
-								<span><i class="icon-map-o"></i> Miami, Fl</span> <span class="ml-auto"><a href="#">Book
-										Now</a></span>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(images/hotel-3.jpg);">
-<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 								<span class="icon-search2"></span> -->
-<!-- 							</div> -->
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<h3>
-										<a href="#">Hotel, Italy</a>
-									</h3>
-									<p class="rate">
-										<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
-									</p>
-								</div>
-								<div class="two">
-									<span class="price per-price">$40<br>
-									<small>/night</small></span>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the countries</p>
-							<hr>
-							<p class="bottom-area d-flex">
-								<span><i class="icon-map-o"></i> Miami, Fl</span> <span class="ml-auto"><a href="#">Book
-										Now</a></span>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(images/hotel-4.jpg);">
-<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 								<span class="icon-search2"></span> -->
-<!-- 							</div> -->
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<h3>
-										<a href="#">Hotel, Italy</a>
-									</h3>
-									<p class="rate">
-										<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
-									</p>
-								</div>
-								<div class="two">
-									<span class="price per-price">$40<br>
-									<small>/night</small></span>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the countries</p>
-							<hr>
-							<p class="bottom-area d-flex">
-								<span><i class="icon-map-o"></i> Miami, Fl</span> <span class="ml-auto"><a href="#">Book
-										Now</a></span>
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm col-md-6 col-lg ftco-animate">
-					<div class="destination">
-						<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
-							style="background-image: url(images/hotel-5.jpg);">
-<!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
-<!-- 								<span class="icon-search2"></span> -->
-<!-- 							</div> -->
-						</a>
-						<div class="text p-3">
-							<div class="d-flex">
-								<div class="one">
-									<h3>
-										<a href="#">Hotel, Italy</a>
-									</h3>
-									<p class="rate">
-										<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
-											class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
-									</p>
-								</div>
-								<div class="two">
-									<span class="price per-price">$40<br>
-									<small>/night</small></span>
-								</div>
-							</div>
-							<p>Far far away, behind the word mountains, far from the countries</p>
-							<hr>
-							<p class="bottom-area d-flex">
-								<span><i class="icon-map-o"></i> Miami, Fl</span> <span class="ml-auto"><a href="#">Book
-										Now</a></span>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="ftco-section testimony-section bg-light">
+	<section class="ftco-section testimony-section">
 		<div class="container">
 			<div class="row justify-content-start">
 				<div class="col-md-5 heading-section ftco-animate">
@@ -716,7 +451,7 @@
 		</div>
 	</section>
 
-	<section class="ftco-section">
+	<section class="ftco-section bg-light">
 		<div class="container">
 			<div class="row justify-content-start mb-5 pb-3">
 				<div class="col-md-7 heading-section ftco-animate">
@@ -822,31 +557,6 @@
 			</div>
 		</div>
 	</section>
-
-	<section class="ftco-section-parallax">
-		<div class="parallax-img d-flex align-items-center">
-			<div class="container">
-				<div class="row d-flex justify-content-center">
-					<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-						<h2>Subcribe to our Newsletter</h2>
-						<p>Far far away, behind the word mountains, far from the countries Vokalia and
-							Consonantia, there live the blind texts. Separated they live in</p>
-						<div class="row d-flex justify-content-center mt-5">
-							<div class="col-md-8">
-								<form action="#" class="subscribe-form">
-									<div class="form-group d-flex">
-										<input type="text" class="form-control" placeholder="Enter email address">
-										<input type="submit" value="Subscribe" class="submit px-3">
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
 	<footer class="ftco-footer ftco-bg-dark ftco-section">
 		<div class="container">
 			<div class="row mb-5">
@@ -924,14 +634,14 @@
 
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
-<!-- 		<svg class="circular" width="48px" height="48px"> -->
-<%-- 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /> --%>
-<%-- 			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" --%>
-<%-- 				stroke="#F96D00" /></svg> --%>
+		<!-- 		<svg class="circular" width="48px" height="48px"> -->
+		<%-- 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /> --%>
+		<%-- 			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" --%>
+		<%-- 				stroke="#F96D00" /></svg> --%>
 	</div>
 
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
 	<script src="<c:url value='/css/RWDcss/js/jquery-migrate-3.0.1.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/popper.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/bootstrap.min.js'/>"></script>
@@ -943,12 +653,8 @@
 	<script src="<c:url value='/css/RWDcss/js/aos.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/jquery.animateNumber.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/bootstrap-datepicker.js'/>"></script>
-	<script src="<c:url value='/css/RWDcss/js/jquery.timepicker.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/scrollax.min.js'/>"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="<c:url value='/css/RWDcss/js/google-map.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/main.js'/>"></script>
-
+	<script src="http://malsup.github.io/jquery.form.js"></script>
 </body>
 </html>

@@ -21,4 +21,6 @@ public interface productDao {
 	public int updateStock(int pId, int newStock);
 
 	public void addProductDB();
+	
+	public List<productBean> getPopularFive();
 }

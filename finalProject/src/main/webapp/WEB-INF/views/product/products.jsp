@@ -35,9 +35,6 @@
 		});
 	});
 </script>
-<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
-
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/open-iconic-bootstrap.min.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/animate.css'/>">
 

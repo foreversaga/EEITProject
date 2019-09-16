@@ -93,4 +93,9 @@ public class productServiceImpl implements productService {
 	public void addProductDB() {
 		pdao.addProductDB();
 	}
+
+	@Override
+	public List<productBean> getPopularFive() {
+		return pdao.getPopularFive();
+	}
 }

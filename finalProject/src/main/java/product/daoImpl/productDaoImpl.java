@@ -144,4 +144,14 @@ public class productDaoImpl implements productDao {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<productBean> getPopularFive() {
+		Session session = factory.getCurrentSession();
+		List<productBean> list = null;
+		String hql = "FROM productBean";
+		list = session.createQuery(hql).setMaxResults(5).list();
+		return list;
+	}
+
 }
