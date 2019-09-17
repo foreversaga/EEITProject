@@ -18,14 +18,15 @@
 	};
 </script>
 <style>
-.cartdiv {
-	width: 300px;
-	height: 423px;
+div#shoppingCartMenu {
+	width: 280px;
+
 }
+
 </style>
 </head>
 <body>
-	<div class="cartdiv">
+	<div id="shoppingCartMenu">
 		<table>
 			<c:if test="${empty shoppingCart.content }">
 				<p style="text-align: center;">購物車內已無商品。
@@ -33,12 +34,18 @@
 			</c:if>
 			<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
 				<hr>
-				<img style="width: 50px; height: 50px; float: left;"
-					src="<c:url value='/showPic/${cart.value.pId}'/>">
-				<p style="line-height: 10px">${cart.value.pName}</p>
-				<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
-				<span><input id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)"
-					value="刪除" /> </span>
+				<table>
+					<tr>
+						<td rowspan="2"><img style="width: 80px; height: 80px;"
+							src="<c:url value='/showPic/${cart.value.pId}'/>"></td>
+						<td style="padding: 0 10px;">${cart.value.pName}</td>
+					</tr>
+					<tr>
+						<td style="padding: 0 5px;">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</td> 
+						<td><input style="margin-left: 10px;" id="${cart.value.pId}" type="button"
+								onclick="DeleteItem(this.id)" value="刪除" /></td>
+					</tr>
+				</table>
 				<c:if test="${vs.last}">
 					<hr>
 				</c:if>

@@ -79,11 +79,15 @@
 }
 
 div.dropdown-menu {
-	width: 300px;
-	height: 423px;
+	/* 	width: 300px; */
+	/* 	height: 423px; */
 	background-color: #f0f0f0;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	overflow-y: auto;
+}
+
+div#shoppingCartMenu {
+	width: 280px;
 }
 </style>
 
@@ -104,15 +108,15 @@ div.dropdown-menu {
 					<li class="nav-item active"><a href="<c:url value='/'/>" class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
 					<c:if test="${empty LoginOK}">
-					<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
-					<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
+						<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
+						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
 					</c:if>
 					<li class="nav-item"><a href="<c:url value='/AddProduct'/>" class="nav-link">新增商品</a></li>
 					<c:if test="${!empty LoginOK}">
-					<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
-					<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
-					<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">訂單查詢</a></li>
-					<li class="nav-item"><a href="<c:url value='/review'/>" class="nav-link">評價查詢</a></li>
+						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
+						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
+						<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">訂單查詢</a></li>
+						<li class="nav-item"><a href="<c:url value='/review'/>" class="nav-link">評價查詢</a></li>
 					</c:if>
 				</ul>
 				<ul class="navbar-nav mr-right">
@@ -125,12 +129,18 @@ div.dropdown-menu {
 							</c:if>
 							<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
 								<hr>
-								<img style="width: 50px; height: 50px; float: left;"
-									src="<c:url value='/showPic/${cart.value.pId}'/>">
-								<p style="line-height: 10px">${cart.value.pName}</p>
-								<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
-								<span><input id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)"
-										value="刪除" /> </span>
+								<table>
+									<tr>
+										<td rowspan="2"><img style="width: 80px; height: 80px;"
+											src="<c:url value='/showPic/${cart.value.pId}'/>"></td>
+										<td style="padding: 0 10px;">${cart.value.pName}</td>
+									</tr>
+									<tr>
+										<td style="padding: 0 5px;">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</td>
+										<td><input style="margin-left: 10px;" id="${cart.value.pId}" type="button"
+												onclick="DeleteItem(this.id)" value="刪除" /></td>
+									</tr>
+								</table>
 								<c:if test="${vs.last}">
 									<hr>
 								</c:if>
