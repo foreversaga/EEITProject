@@ -144,10 +144,10 @@ div#shoppingCartMenu {
 					<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find great places to
 						stay, eat, shop, or visit from local experts</p>
 					<div class="block-17 my-4" style="width: 80%;">
-						<form action="" method="post" class="d-block d-flex">
+						<form action="<c:url value='/QueryProduct/1'/>" method="get" class="d-block d-flex">
 							<div class="fields d-block d-flex">
 								<div class="textfield-search one-third">
-									<input type="text" class="form-control" placeholder="Ex: food, service, hotel">
+									<input name="QueryString" type="text" class="form-control" placeholder="Ex: food, service, hotel">
 								</div>
 							</div>
 							<input type="submit" class="search-submit btn btn-primary" value="Search">
@@ -351,12 +351,48 @@ div#shoppingCartMenu {
 											<a href="#">${Top5.pName}</a>
 										</h3>
 										<p class="rate">
-											<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
-												class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
+											<c:choose>
+												<c:when test="${Top5.pAvgRating>=1&&Top5.pAvgRating<2 }">
+													<i class="icon-star"></i>
+													<i class="icon-star-o"></i>
+													<i class="icon-star-o"></i>
+													<i class="icon-star-o"></i>
+													<i class="icon-star-o"></i>
+												</c:when>
+												<c:when test="${Top5.pAvgRating>=2&&Top5.pAvgRating<3 }">
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star-o"></i>
+													<i class="icon-star-o"></i>
+													<i class="icon-star-o"></i>
+												</c:when>
+												<c:when test="${Top5.pAvgRating>=3&&Top5.pAvgRating<4 }">
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star-o"></i>
+													<i class="icon-star-o"></i>
+												</c:when>
+												<c:when test="${Top5.pAvgRating>=4&&Top5.pAvgRating<5 }">
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star-o"></i>
+												</c:when>
+												<c:otherwise>
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+												</c:otherwise>
+											</c:choose>
+											<span>${Top5.pAvgRating}</span>
 										</p>
 									</div>
 									<div class="two">
-										<span class="price per-price">${Top5.pPrice}<br> <small>/night</small></span>
+										<span class="price per-price">$${Top5.pPrice}<br> <small>/night</small></span>
 									</div>
 								</div>
 								<p>${Top5.pContent}</p>

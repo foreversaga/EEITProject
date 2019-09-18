@@ -102,17 +102,17 @@ public class registerServlet extends HttpServlet {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				java.util.Date d = sdf.parse(tempBirth);
 				Date mBirth = new Date(d.getTime());
-				MemberBean mb = new MemberBean(mPassword, mAccount, mName, mBirth, mPhone, mAddress, null, mGender,
-						mEmail);
+//				MemberBean mb = new MemberBean(mPassword, mAccount, mName, mBirth, mPhone, mAddress, null, mGender,
+//						mEmail);
 
-				int n = service.registerMember(mb);
-				if (n == 1) {
-					msgOk.put("InsertOk", "會員新增成功");
-					response.sendRedirect("../index.jsp");
-					return;
-				} else {
-					errorMsg.put("DuplicateID", "新增此筆會員資料有誤");
-				}
+//				int n = service.registerMember(mb);
+//				if (n == 1) {
+//					msgOk.put("InsertOk", "會員新增成功");
+//					response.sendRedirect("../index.jsp");
+//					return;
+//				} else {
+//					errorMsg.put("DuplicateID", "新增此筆會員資料有誤");
+//				}
 			}
 			if (!errorMsg.isEmpty()) {
 				RequestDispatcher rd = request.getRequestDispatcher("register.jsp");

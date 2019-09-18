@@ -8,15 +8,19 @@ public interface productDao {
 
 	public List<productBean> getAllProduct();
 
-	public List<productBean> getProductByPriceDesc();
+	public List<productBean> getProductByPriceDesc(String QueryString);
 	
-	public List<productBean> getProductByPriceAsc();
+	public List<productBean> getProductByPriceAsc(String QueryString);
 	
-	public List<productBean> getProductByReviewDesc();
+	public List<productBean> getProductByReviewDesc(String QueryString);
 	
-	public List<productBean> getProductByReviewAsc();
+	public List<productBean> getProductByReviewAsc(String QueryString);
+	
+	public List<productBean> QueryProduct(String QueryString);
 	
 	public Long getDataCount();
+	
+	public Long getQueryCount(String QueryString);
 
 	public int insertNewProduct(productBean pb);
 

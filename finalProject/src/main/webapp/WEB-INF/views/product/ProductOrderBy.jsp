@@ -176,10 +176,10 @@ div#shoppingCartMenu {
 				<div class="col-lg-3 sidebar">
 					<div class="sidebar-wrap bg-light ftco-animate">
 						<h3 class="heading mb-4">Find City</h3>
-						<form action="#">
+							<form action="<c:url value='/QueryProduct/1'/>" method="get">
 							<div class="fields">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Destination, City">
+									<input name="QueryString" type="text" class="form-control" placeholder="搜尋關鍵字">
 								</div>
 								<div class="form-group">
 									<div class="select-wrap one-third">
@@ -195,21 +195,21 @@ div#shoppingCartMenu {
 										</select>
 									</div>
 								</div>
-								<div class="form-group">
-									<input type="text" id="checkin_date" class="form-control" placeholder="Date from">
-								</div>
-								<div class="form-group">
-									<input type="text" id="checkin_date" class="form-control" placeholder="Date to">
-								</div>
-								<div class="form-group">
-									<div class="range-slider">
-										<span> <input type="number" value="25000" min="0" max="120000" /> - <input
-												type="number" value="50000" min="0" max="120000" />
-										</span>
-										<input value="1000" min="0" max="120000" step="500" type="range" />
-										<input value="50000" min="0" max="120000" step="500" type="range" />
-									</div>
-								</div>
+<!-- 								<div class="form-group"> -->
+<!-- 									<input type="text" id="checkin_date" class="form-control" placeholder="Date from"> -->
+<!-- 								</div> -->
+<!-- 								<div class="form-group"> -->
+<!-- 									<input type="text" id="checkin_date" class="form-control" placeholder="Date to"> -->
+<!-- 								</div> -->
+<!-- 								<div class="form-group"> -->
+<!-- 									<div class="range-slider"> -->
+<!-- 										<span> <input type="number" value="25000" min="0" max="120000" /> - <input -->
+<!-- 												type="number" value="50000" min="0" max="120000" /> -->
+<!-- 										</span> -->
+<!-- 										<input value="1000" min="0" max="120000" step="500" type="range" /> -->
+<!-- 										<input value="50000" min="0" max="120000" step="500" type="range" /> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
 								<div class="form-group">
 									<input type="submit" value="Search" class="btn btn-primary py-3 px-5">
 								</div>
@@ -256,7 +256,7 @@ div#shoppingCartMenu {
 
 				<div class="col-lg-9">
 					<div class="row">
-						<div style="width: 100%; margin: 0 5% 5% 2%; border: 1px solid black;">
+						<div style="width: 100%; margin: 0 5% 5% 2%; border-bottom: 1px solid gray;">
 							<table>
 								<tr>
 									<td style="width: 20%">排序方式:</td>
@@ -286,8 +286,44 @@ div#shoppingCartMenu {
 													<a href="">${productBean.pName}</a>
 												</h3>
 												<p class="rate">
-													<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
-														class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
+													<c:choose>
+														<c:when test="${productBean.pAvgRating>=1&&productBean.pAvgRating<2 }">
+															<i class="icon-star"></i>
+															<i class="icon-star-o"></i>
+															<i class="icon-star-o"></i>
+															<i class="icon-star-o"></i>
+															<i class="icon-star-o"></i>
+														</c:when>
+														<c:when test="${productBean.pAvgRating>=2&&productBean.pAvgRating<3 }">
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star-o"></i>
+															<i class="icon-star-o"></i>
+															<i class="icon-star-o"></i>
+														</c:when>
+														<c:when test="${productBean.pAvgRating>=3&&productBean.pAvgRating<4 }">
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star-o"></i>
+															<i class="icon-star-o"></i>
+														</c:when>
+														<c:when test="${productBean.pAvgRating>=4&&productBean.pAvgRating<5 }">
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star-o"></i>
+														</c:when>
+														<c:otherwise>
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+														</c:otherwise>
+													</c:choose>
+													<span>${productBean.pAvgRating}</span>
 												</p>
 											</div>
 											<div class="two">
@@ -325,13 +361,13 @@ div#shoppingCartMenu {
 
 					<div class="PageButtonDiv">
 						<c:if test="${pageNo>1}">
-							<a class="PageButton" href="<c:url value='/products/1'/>"> 第一頁</a>
+							<a class="PageButton" href="<c:url value='/${MappingPath}/1'/>"> 第一頁</a>
 						</c:if>
 						<c:if test="${pageNo>1}">
-							<a class="PageButton" href="<c:url value='/products/${pageNo-1}'/>"> 上一頁</a>
+							<a class="PageButton" href="<c:url value='/${MappingPath}/${pageNo-1}'/>"> 上一頁</a>
 						</c:if>
 						<c:if test="${pageNo!=totalPages}">
-							<a class="PageButton" href="<c:url value='/products/${pageNo+1}'/>"> 下一頁</a>
+							<a class="PageButton" href="<c:url value='/${MappingPath}/${pageNo+1}'/>"> 下一頁</a>
 						</c:if>
 					</div>
 					<!-- .col-md-8 -->

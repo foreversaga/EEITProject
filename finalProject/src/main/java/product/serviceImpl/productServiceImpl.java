@@ -76,9 +76,20 @@ public class productServiceImpl implements productService {
 	}
 
 	@Override
+	public int getQueryPages(String QueryString) {
+		int QueryPages = (int) (Math.ceil(getQueryCount(QueryString) / (double) GlobalService.dataPerPage));
+		return QueryPages;
+	}
+	
+	@Override
 	public Long getDataCount() {
 
 		return pdao.getDataCount();
+	}
+	
+	@Override
+	public Long getQueryCount(String QueryString) {
+		return pdao.getQueryCount(QueryString);
 	}
 
 	@Override
@@ -99,22 +110,29 @@ public class productServiceImpl implements productService {
 
 
 	@Override
-	public List<productBean> getProductByPriceDesc() {
-		return pdao.getProductByPriceDesc();
+	public List<productBean> getProductByPriceDesc(String QueryString) {
+		return pdao.getProductByPriceDesc(QueryString);
 	}
 
 	@Override
-	public List<productBean> getProductByPriceAsc() {
-		return pdao.getProductByPriceAsc();
+	public List<productBean> getProductByPriceAsc(String QueryString) {
+		return pdao.getProductByPriceAsc(QueryString);
 	}
 
 	@Override
-	public List<productBean> getProductByReviewDesc() {
-		return pdao.getProductByReviewDesc();
+	public List<productBean> getProductByReviewDesc(String QueryString) {
+		return pdao.getProductByReviewDesc(QueryString);
 	}
 
 	@Override
-	public List<productBean> getProductByReviewAsc() {
-		return pdao.getProductByReviewAsc();
+	public List<productBean> getProductByReviewAsc(String QueryString) {
+		return pdao.getProductByReviewAsc(QueryString);
 	}
+
+	@Override
+	public List<productBean> QueryProduct(String QueryString) {
+		return pdao.QueryProduct(QueryString);
+	}
+
+
 }

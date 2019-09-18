@@ -149,53 +149,106 @@ public class productDaoImpl implements productDao {
 	public List<productBean> getPopularFive() {
 		Session session = factory.getCurrentSession();
 		List<productBean> list = null;
-		String hql = "FROM productBean";
+		String hql = "FROM productBean pb ORDER BY pb.pAvgRating desc";
 		list = session.createQuery(hql).setMaxResults(5).list();
 		return list;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<productBean> getProductByPriceDesc() {
+	public List<productBean> getProductByPriceDesc(String QueryString) {
 		List<productBean> list = new ArrayList<productBean>();
 		Session session = factory.getCurrentSession();
-		String sql = "FROM productBean pb ORDER BY pb.pPrice desc";
-		int startPage = (pageNo - 1) * GlobalService.dataPerPage;
-		list = session.createQuery(sql).setFirstResult(startPage).setMaxResults(GlobalService.dataPerPage).list();
+		String sql = "";
+		if (QueryString == null) {
+			sql = "FROM productBean pb ORDER BY pb.pPrice desc";
+			int startPage = (pageNo - 1) * GlobalService.dataPerPage;
+			list = session.createQuery(sql).setFirstResult(startPage).setMaxResults(GlobalService.dataPerPage).list();
+		} else {
+			sql = "FROM productBean pb WHERE pb.pContent LIKE :query ORDER BY pb.pPrice desc";
+			int startPage = (pageNo - 1) * GlobalService.dataPerPage;
+			list = session.createQuery(sql).setParameter("query", "%" + QueryString + "%").setFirstResult(startPage)
+					.setMaxResults(GlobalService.dataPerPage).list();
+		}
 		return list;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<productBean> getProductByPriceAsc() {
+	public List<productBean> getProductByPriceAsc(String QueryString) {
 		List<productBean> list = new ArrayList<productBean>();
 		Session session = factory.getCurrentSession();
-		String sql = "FROM productBean pb ORDER BY pb.pPrice";
-		int startPage = (pageNo - 1) * GlobalService.dataPerPage;
-		list = session.createQuery(sql).setFirstResult(startPage).setMaxResults(GlobalService.dataPerPage).list();
+		String sql = "";
+		if (QueryString == null) {
+			sql = "FROM productBean pb ORDER BY pb.pPrice";
+			int startPage = (pageNo - 1) * GlobalService.dataPerPage;
+			list = session.createQuery(sql).setFirstResult(startPage).setMaxResults(GlobalService.dataPerPage).list();
+		} else {
+			sql = "FROM productBean pb WHERE pb.pContent LIKE :query ORDER BY pb.pPrice";
+			int startPage = (pageNo - 1) * GlobalService.dataPerPage;
+			list = session.createQuery(sql).setParameter("query", "%" + QueryString + "%").setFirstResult(startPage)
+					.setMaxResults(GlobalService.dataPerPage).list();
+		}
 		return list;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<productBean> getProductByReviewDesc() {
+	public List<productBean> getProductByReviewDesc(String QueryString) {
 		List<productBean> list = new ArrayList<productBean>();
 		Session session = factory.getCurrentSession();
-		String sql = "FROM productBean pb ORDER BY pb.pAvgRating";
-		int startPage = (pageNo - 1) * GlobalService.dataPerPage;
-		list = session.createQuery(sql).setFirstResult(startPage).setMaxResults(GlobalService.dataPerPage).list();
+		String sql = "";
+		if (QueryString == null) {
+			sql = "FROM productBean pb ORDER BY pb.pAvgRating desc";
+			int startPage = (pageNo - 1) * GlobalService.dataPerPage;
+			list = session.createQuery(sql).setFirstResult(startPage).setMaxResults(GlobalService.dataPerPage).list();
+		} else {
+			sql = "FROM productBean pb WHERE pb.pContent LIKE :query ORDER BY pb.pAvgRating desc";
+			int startPage = (pageNo - 1) * GlobalService.dataPerPage;
+			list = session.createQuery(sql).setParameter("query", "%" + QueryString + "%").setFirstResult(startPage)
+					.setMaxResults(GlobalService.dataPerPage).list();
+		}
 		return list;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<productBean> getProductByReviewAsc() {
+	public List<productBean> getProductByReviewAsc(String QueryString) {
 		List<productBean> list = new ArrayList<productBean>();
 		Session session = factory.getCurrentSession();
-		String sql = "FROM productBean pb ORDER BY pb.pAvgRating desc";
-		int startPage = (pageNo - 1) * GlobalService.dataPerPage;
-		list = session.createQuery(sql).setFirstResult(startPage).setMaxResults(GlobalService.dataPerPage).list();
+		String sql = "";
+		if (QueryString == null) {
+			sql = "FROM productBean pb ORDER BY pb.pAvgRating";
+			int startPage = (pageNo - 1) * GlobalService.dataPerPage;
+			list = session.createQuery(sql).setFirstResult(startPage).setMaxResults(GlobalService.dataPerPage).list();
+		} else {
+			sql = "FROM productBean pb WHERE pb.pContent LIKE :query ORDER BY pb.pAvgRating";
+			int startPage = (pageNo - 1) * GlobalService.dataPerPage;
+			list = session.createQuery(sql).setParameter("query", "%" + QueryString + "%").setFirstResult(startPage)
+					.setMaxResults(GlobalService.dataPerPage).list();
+		}
 		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<productBean> QueryProduct(String QueryString) {
+		List<productBean> list = new ArrayList<productBean>();
+		Session session = factory.getCurrentSession();
+		String sql = "FROM productBean pb WHERE pb.pContent LIKE :query";
+		int startPage = (pageNo - 1) * GlobalService.dataPerPage;
+		list = session.createQuery(sql).setParameter("query", "%" + QueryString + "%").setFirstResult(startPage)
+				.setMaxResults(GlobalService.dataPerPage).list();
+		return list;
+	}
+
+	@Override
+	public Long getQueryCount(String QueryString) {
+		Long n = null;
+		Session session = factory.getCurrentSession();
+		String sql = "SELECT COUNT(*) FROM productBean pb WHERE pb.pContent LIKE :query";
+		n = (Long) session.createQuery(sql).setParameter("query", "%"+QueryString+"%").uniqueResult();
+		return n;
 	}
 
 }
