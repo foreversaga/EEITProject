@@ -42,9 +42,7 @@ public class productServiceImpl implements productService {
 
 	@Override
 	public List<productBean> getAllProduct() {
-		List<productBean> list = null;
-		list = pdao.getAllProduct();
-		return list;
+		return pdao.getAllProduct();
 	}
 
 	@Override
@@ -57,9 +55,7 @@ public class productServiceImpl implements productService {
 
 	@Override
 	public productBean getProduct(int pId) {
-		productBean pb = null;
-		pb = pdao.getProduct(pId);
-		return pb;
+		return pdao.getProduct(pId);
 	}
 
 	@Override
@@ -89,6 +85,7 @@ public class productServiceImpl implements productService {
 	public int updateStock(int pId, int newStock) {
 		return pdao.updateStock(pId, newStock);
 	}
+
 	@Override
 	public void addProductDB() {
 		pdao.addProductDB();
@@ -97,5 +94,27 @@ public class productServiceImpl implements productService {
 	@Override
 	public List<productBean> getPopularFive() {
 		return pdao.getPopularFive();
+	}
+
+
+
+	@Override
+	public List<productBean> getProductByPriceDesc() {
+		return pdao.getProductByPriceDesc();
+	}
+
+	@Override
+	public List<productBean> getProductByPriceAsc() {
+		return pdao.getProductByPriceAsc();
+	}
+
+	@Override
+	public List<productBean> getProductByReviewDesc() {
+		return pdao.getProductByReviewDesc();
+	}
+
+	@Override
+	public List<productBean> getProductByReviewAsc() {
+		return pdao.getProductByReviewAsc();
 	}
 }

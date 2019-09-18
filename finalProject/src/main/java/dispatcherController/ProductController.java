@@ -79,6 +79,78 @@ public class ProductController {
 		session.setAttribute("pageNo", pageNo);
 		return mav;
 	}
+	//商品依照價格遞減排序
+	@RequestMapping(value = "/ProductsPriceDesc/{pageNo}", method = RequestMethod.GET)
+	public ModelAndView ProductsOrderByPriceDesc(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
+		if (pageNo == null) {
+			pageNo = 1;
+		}
+		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
+		pService.setPageNo(pageNo);
+		List<productBean> list = pService.getProductByPriceDesc();
+		int totalPages = pService.getTotalPages();
+		orderItem oi = new orderItem();
+		mav.addObject("totalPages", totalPages);
+		mav.addObject("productList", list);
+		mav.addObject("orderItem", oi);
+		session.setAttribute("pageNo", pageNo);
+		return mav;
+	}
+	
+	//商品依照價格遞增排序
+	@RequestMapping(value = "/ProductsPriceAsc/{pageNo}", method = RequestMethod.GET)
+	public ModelAndView ProductsOrderByPriceAsc(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
+		if (pageNo == null) {
+			pageNo = 1;
+		}
+		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
+		pService.setPageNo(pageNo);
+		List<productBean> list = pService.getProductByPriceAsc();
+		int totalPages = pService.getTotalPages();
+		orderItem oi = new orderItem();
+		mav.addObject("totalPages", totalPages);
+		mav.addObject("productList", list);
+		mav.addObject("orderItem", oi);
+		session.setAttribute("pageNo", pageNo);
+		return mav;
+	}
+	
+	//商品依照價格遞增排序
+	@RequestMapping(value = "/ProductsReviewAsc/{pageNo}", method = RequestMethod.GET)
+	public ModelAndView ProductsOrderByReviewAsc(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
+		if (pageNo == null) {
+			pageNo = 1;
+		}
+		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
+		pService.setPageNo(pageNo);
+		List<productBean> list = pService.getProductByReviewAsc();
+		int totalPages = pService.getTotalPages();
+		orderItem oi = new orderItem();
+		mav.addObject("totalPages", totalPages);
+		mav.addObject("productList", list);
+		mav.addObject("orderItem", oi);
+		session.setAttribute("pageNo", pageNo);
+		return mav;
+	}
+	
+	//商品依照價格遞減排序
+	@RequestMapping(value = "/ProductsReviewDesc/{pageNo}", method = RequestMethod.GET)
+	public ModelAndView ProductsOrderByReviewDesc(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
+		if (pageNo == null) {
+			pageNo = 1;
+		}
+		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
+		pService.setPageNo(pageNo);
+		List<productBean> list = pService.getProductByReviewDesc();
+		int totalPages = pService.getTotalPages();
+		orderItem oi = new orderItem();
+		mav.addObject("totalPages", totalPages);
+		mav.addObject("productList", list);
+		mav.addObject("orderItem", oi);
+		session.setAttribute("pageNo", pageNo);
+		return mav;
+	}
+	
 //轉換圖檔
 	private byte[] toByte(String filePath) {
 		byte[] b = null;

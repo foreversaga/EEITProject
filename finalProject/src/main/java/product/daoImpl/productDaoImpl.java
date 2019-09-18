@@ -154,4 +154,48 @@ public class productDaoImpl implements productDao {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<productBean> getProductByPriceDesc() {
+		List<productBean> list = new ArrayList<productBean>();
+		Session session = factory.getCurrentSession();
+		String sql = "FROM productBean pb ORDER BY pb.pPrice desc";
+		int startPage = (pageNo - 1) * GlobalService.dataPerPage;
+		list = session.createQuery(sql).setFirstResult(startPage).setMaxResults(GlobalService.dataPerPage).list();
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<productBean> getProductByPriceAsc() {
+		List<productBean> list = new ArrayList<productBean>();
+		Session session = factory.getCurrentSession();
+		String sql = "FROM productBean pb ORDER BY pb.pPrice";
+		int startPage = (pageNo - 1) * GlobalService.dataPerPage;
+		list = session.createQuery(sql).setFirstResult(startPage).setMaxResults(GlobalService.dataPerPage).list();
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<productBean> getProductByReviewDesc() {
+		List<productBean> list = new ArrayList<productBean>();
+		Session session = factory.getCurrentSession();
+		String sql = "FROM productBean pb ORDER BY pb.pAvgRating";
+		int startPage = (pageNo - 1) * GlobalService.dataPerPage;
+		list = session.createQuery(sql).setFirstResult(startPage).setMaxResults(GlobalService.dataPerPage).list();
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<productBean> getProductByReviewAsc() {
+		List<productBean> list = new ArrayList<productBean>();
+		Session session = factory.getCurrentSession();
+		String sql = "FROM productBean pb ORDER BY pb.pAvgRating desc";
+		int startPage = (pageNo - 1) * GlobalService.dataPerPage;
+		list = session.createQuery(sql).setFirstResult(startPage).setMaxResults(GlobalService.dataPerPage).list();
+		return list;
+	}
+
 }

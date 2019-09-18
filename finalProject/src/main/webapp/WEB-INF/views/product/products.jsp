@@ -256,6 +256,19 @@ div#shoppingCartMenu {
 
 				<div class="col-lg-9">
 					<div class="row">
+						<div style="width: 100%; margin: 0 5% 5% 2%; border: 1px solid black;">
+							<table>
+								<tr>
+									<td style="width: 20%">排序方式:</td>
+									<td style="width: 22%"><a href="<c:url value='/ProductsPriceDesc/1'/>">價格高→低</a></td>
+									<td style="width: 22%"><a href="<c:url value='/ProductsPriceAsc/1'/>">價格低→高</a></td>
+									<td style="width: 22%"><a href="<c:url value='/ProductsReviewDesc/1'/>">評價高→低</a></td>
+									<td style="width: 22%"><a href="<c:url value='/ProductsReviewAsc/1'/>">評價低→高</a></td>
+								</tr>
+
+							</table>
+
+						</div>
 						<c:forEach varStatus="stVar" var="productBean" items="${productList}">
 							<c:if test="${stVar.index%3==0}">
 								<br>
@@ -273,8 +286,45 @@ div#shoppingCartMenu {
 													<a href="">${productBean.pName}</a>
 												</h3>
 												<p class="rate">
-													<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
-														class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
+													<c:choose>
+														<c:when test="${produceBean.pAvgRating>=1&&produceBean.pAvgRating<2 }">
+															<i class="icon-star"></i>
+															<i class="icon-star-o"></i>
+															<i class="icon-star-o"></i>
+															<i class="icon-star-o"></i>
+															<i class="icon-star-o"></i>
+														</c:when>
+														<c:when test="${produceBean.pAvgRating>=2&&produceBean.pAvgRating<3 }">
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star-o"></i>
+															<i class="icon-star-o"></i>
+															<i class="icon-star-o"></i>
+														</c:when>
+														<c:when test="${produceBean.pAvgRating>=3&&produceBean.pAvgRating<4 }">
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star-o"></i>
+															<i class="icon-star-o"></i>
+														</c:when>
+														<c:when test="${produceBean.pAvgRating>=4&&produceBean.pAvgRating<5 }">
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star-o"></i>
+														</c:when>
+														<c:otherwise>
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+															<i class="icon-star"></i>
+														</c:otherwise>
+
+													</c:choose>
+													<span>${produceBean.pAvgRating} Rating</span>
 												</p>
 											</div>
 											<div class="two">

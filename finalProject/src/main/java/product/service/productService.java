@@ -6,6 +6,14 @@ import product.model.productBean;
 
 public interface productService {
 	List<productBean> getAllProduct();
+	
+	List<productBean> getProductByPriceDesc();
+	
+	List<productBean> getProductByPriceAsc();
+	
+	List<productBean> getProductByReviewDesc();
+	
+	List<productBean> getProductByReviewAsc();
 
 	int getTotalPages();
 

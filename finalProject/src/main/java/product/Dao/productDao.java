@@ -8,6 +8,14 @@ public interface productDao {
 
 	public List<productBean> getAllProduct();
 
+	public List<productBean> getProductByPriceDesc();
+	
+	public List<productBean> getProductByPriceAsc();
+	
+	public List<productBean> getProductByReviewDesc();
+	
+	public List<productBean> getProductByReviewAsc();
+	
 	public Long getDataCount();
 
 	public int insertNewProduct(productBean pb);
