@@ -132,7 +132,7 @@ div.dropdown-menu {
 	<!-- 	</section> -->
 	<div class="limiter">
 		<div class="container-table100">
-			<div class="wrap-table100" style="width:800px;">
+			<div class="wrap-table100" >
 				<div class="table100 ver1 m-b-110">
 					<div class="table100-head">
 						<table>
@@ -140,6 +140,7 @@ div.dropdown-menu {
 								<tr class="row100 head" style="text-align: center;">
 									<th class="cell100 column1">商品圖示</th>
 									<th class="cell100 column2">明細內容</th>
+									<th class="cell100 column3">我的評價</th>
 
 								</tr>
 							</thead>
@@ -151,10 +152,17 @@ div.dropdown-menu {
 							<tbody>
 								<c:forEach varStatus="vs" var="orderItem" items="${orderItemList}">
 									<tr class="row100 body" style="font-size: 30px;">
-										<td class="cell100 column1" style="text-align: center;  padding-left: 0px;">
-										<img width="30%;" src="<c:url value='/showPic/${orderItem.pId}'/>"/>
-										</td>
+										<td class="cell100 column1" style="text-align: center; padding-left: 0px;"><img
+											width="30%;" src="<c:url value='/showPic/${orderItem.pId}'/>" /></td>
 										<td class="cell100 column2">${orderItem.iDes}</td>
+										<td class="cell100 column3" style="text-align: center;"><c:choose>
+												<c:when test="${!empty review[orderItem.pId]}">
+													<a href="<c:url value=''/>">查看我的評價</a>
+												</c:when>
+												<c:otherwise>
+													<a href="<c:url value='/AddReview/${orderItem.pId}'/>">填寫評價</a>
+												</c:otherwise>
+											</c:choose></td>
 									</tr>
 								</c:forEach>
 							</tbody>

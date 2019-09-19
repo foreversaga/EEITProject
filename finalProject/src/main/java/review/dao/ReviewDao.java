@@ -7,4 +7,9 @@ import review.model.reviewBean;
 public interface ReviewDao {
 	List<reviewBean> getAllReviews();
 
+	void InsertNewReview(reviewBean rb);
+
+	reviewBean getOrderItemReview(Integer pId, String mAccount);
+
+	List<reviewBean> getProductReview(Integer pId);
 }

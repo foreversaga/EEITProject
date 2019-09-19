@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
@@ -51,17 +51,20 @@ import ecpay.payment.integration.domain.AioCheckOutOneTime;
 import product.model.productBean;
 import product.service.productService;
 import register.model.MemberBean;
+import review.model.reviewBean;
+import review.service.ReviewService;
 
 @Controller
 public class ProductController {
 	@Autowired
 	productService pService;
 	@Autowired
+	ReviewService rService;
+	@Autowired
 	ServletContext context;
 	@Autowired
 	orderService oService;
-	@Autowired
-	SessionFactory factory;
+
 //顯示商品頁面
 	@RequestMapping(value = "/products/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView productsPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
@@ -78,6 +81,19 @@ public class ProductController {
 		mav.addObject("orderItem", oi);
 		session.setAttribute("pageNo", pageNo);
 		session.setAttribute("MappingPath", "products");
+		return mav;
+	}
+
+	// 顯示單一商品頁面
+	@RequestMapping(value = "/ProductSingle/{pId}", method = RequestMethod.GET)
+	public ModelAndView ProductSinglePage(HttpSession session, @PathVariable Integer pId, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("product/ProductSingle");
+		productBean pb = pService.getProduct(pId);
+		List<reviewBean> list = rService.getProductReview(pId);
+		orderItem oi = new orderItem();
+		mav.addObject("orderItem", oi);
+		mav.addObject("productBean", pb);
+		mav.addObject("reviewList", list);
 		return mav;
 	}
 
@@ -259,7 +275,6 @@ public class ProductController {
 	@RequestMapping(value = "/Buy", method = RequestMethod.POST)
 	public ModelAndView AddToCart(HttpSession session, ModelAndView mav, @ModelAttribute("orderItem") orderItem oi,
 			BindingResult result) throws ServletException {
-		int pageNo = (int) session.getAttribute("pageNo");
 		mav.setViewName("checkout/checkCart");
 		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
 		if (cart == null) {
@@ -452,6 +467,13 @@ public class ProductController {
 	public ModelAndView GetOrderItem(@PathVariable Integer oId, HttpSession session, ModelAndView mav,
 			HttpServletRequest request) {
 		List<orderItemBean> list = oService.getOrderItem(oId);
+		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
+		Map<Integer, reviewBean> map = new HashMap<Integer, reviewBean>();
+		for (orderItemBean ob : list) {
+			reviewBean rb = rService.getOrderItemReview(ob.getpId(), mb.getmAccount());
+			map.put(ob.getpId(), rb);
+		}
+		mav.addObject("review", map);
 		mav.addObject("orderItemList", list);
 		mav.setViewName("checkout/orderItem");
 		return mav;
