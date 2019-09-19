@@ -62,7 +62,6 @@ public class ProductController {
 	orderService oService;
 	@Autowired
 	SessionFactory factory;
-
 //顯示商品頁面
 	@RequestMapping(value = "/products/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView productsPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
@@ -78,133 +77,8 @@ public class ProductController {
 		mav.addObject("productList", list);
 		mav.addObject("orderItem", oi);
 		session.setAttribute("pageNo", pageNo);
-		session.setAttribute("MappingPath", "products");
 		return mav;
 	}
-
-	// 商品依照價格遞減排序
-	@RequestMapping(value = "/ProductsPriceDesc/{pageNo}", method = RequestMethod.GET)
-	public ModelAndView ProductsOrderByPriceDesc(HttpSession session, @PathVariable Integer pageNo,
-			HttpServletRequest request) {
-		if (pageNo == null) {
-			pageNo = 1;
-		}
-		// 查詢後顯示第一頁
-		String QueryString = request.getParameter("QueryString");
-		// 顯示查詢頁面後的換頁
-		if (QueryString == null) {
-			QueryString = (String) session.getAttribute("QueryString");
-
-		}
-		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
-		pService.setPageNo(pageNo);
-		List<productBean> list = pService.getProductByPriceDesc(QueryString);
-		int totalPages = pService.getQueryPages(QueryString);
-		orderItem oi = new orderItem();
-		mav.addObject("totalPages", totalPages);
-		mav.addObject("productList", list);
-		mav.addObject("orderItem", oi);
-		session.setAttribute("pageNo", pageNo);
-		session.setAttribute("MappingPath", "ProductsPriceDesc");
-		return mav;
-	}
-
-	// 商品依照價格遞增排序
-	@RequestMapping(value = "/ProductsPriceAsc/{pageNo}", method = RequestMethod.GET)
-	public ModelAndView ProductsOrderByPriceAsc(HttpSession session, @PathVariable Integer pageNo,
-			HttpServletRequest request) {
-		if (pageNo == null) {
-			pageNo = 1;
-		}
-		String QueryString = request.getParameter("QueryString");
-		if (QueryString == null) {
-			QueryString = (String) session.getAttribute("QueryString");
-		}
-		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
-		pService.setPageNo(pageNo);
-		List<productBean> list = pService.getProductByPriceAsc(QueryString);
-		int totalPages = pService.getQueryPages(QueryString);
-		orderItem oi = new orderItem();
-		mav.addObject("totalPages", totalPages);
-		mav.addObject("productList", list);
-		mav.addObject("orderItem", oi);
-		session.setAttribute("pageNo", pageNo);
-		session.setAttribute("MappingPath", "ProductsPriceAsc");
-		return mav;
-	}
-
-	// 商品依照評價遞增排序
-	@RequestMapping(value = "/ProductsReviewAsc/{pageNo}", method = RequestMethod.GET)
-	public ModelAndView ProductsOrderByReviewAsc(HttpSession session, @PathVariable Integer pageNo,
-			HttpServletRequest request) {
-		if (pageNo == null) {
-			pageNo = 1;
-		}
-		String QueryString = request.getParameter("QueryString");
-		if (QueryString == null) {
-			QueryString = (String) session.getAttribute("QueryString");
-		}
-		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
-		pService.setPageNo(pageNo);
-		List<productBean> list = pService.getProductByReviewAsc(QueryString);
-		int totalPages = pService.getQueryPages(QueryString);
-		orderItem oi = new orderItem();
-		mav.addObject("totalPages", totalPages);
-		mav.addObject("productList", list);
-		mav.addObject("orderItem", oi);
-		session.setAttribute("pageNo", pageNo);
-		session.setAttribute("MappingPath", "ProductsReviewAsc");
-		return mav;
-	}
-
-	// 商品依照評價遞減排序
-	@RequestMapping(value = "/ProductsReviewDesc/{pageNo}", method = RequestMethod.GET)
-	public ModelAndView ProductsOrderByReviewDesc(HttpSession session, @PathVariable Integer pageNo,
-			HttpServletRequest request) {
-		if (pageNo == null) {
-			pageNo = 1;
-		}
-		String QueryString = request.getParameter("QueryString");
-		if (QueryString == null) {
-			QueryString = (String) session.getAttribute("QueryString");
-		}
-		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
-		pService.setPageNo(pageNo);
-		List<productBean> list = pService.getProductByReviewDesc(QueryString);
-		int totalPages = pService.getQueryPages(QueryString);
-		orderItem oi = new orderItem();
-		mav.addObject("totalPages", totalPages);
-		mav.addObject("productList", list);
-		mav.addObject("orderItem", oi);
-		session.setAttribute("pageNo", pageNo);
-		session.setAttribute("MappingPath", "ProductsReviewDesc");
-		return mav;
-	}
-
-	// 商品查詢
-	@RequestMapping(value = "/QueryProduct/{pageNo}", method = RequestMethod.GET)
-	public ModelAndView QueryProduct(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
-		if (pageNo == null) {
-			pageNo = 1;
-		}
-		String QueryString = request.getParameter("QueryString");
-		if (QueryString == null) {
-			QueryString = (String) session.getAttribute("QueryString");
-		}
-		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
-		pService.setPageNo(pageNo);
-		List<productBean> list = pService.QueryProduct(QueryString);
-		int totalPages = pService.getQueryPages(QueryString);
-		orderItem oi = new orderItem();
-		mav.addObject("totalPages", totalPages);
-		mav.addObject("productList", list);
-		mav.addObject("orderItem", oi);
-		session.setAttribute("pageNo", pageNo);
-		session.setAttribute("MappingPath", "QueryProduct");
-		session.setAttribute("QueryString", QueryString);
-		return mav;
-	}
-
 //轉換圖檔
 	private byte[] toByte(String filePath) {
 		byte[] b = null;
@@ -222,7 +96,6 @@ public class ProductController {
 		}
 		return b;
 	}
-
 //顯示商品圖片
 	@RequestMapping(value = "/showPic/{pId}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> showPic(HttpServletResponse resp, @PathVariable Integer pId) {
@@ -257,7 +130,6 @@ public class ProductController {
 		ResponseEntity<byte[]> resEntity = new ResponseEntity<>(mediaByte, headers, HttpStatus.OK);
 		return resEntity;
 	}
-
 //新增商品至購物車
 	@RequestMapping(value = "/Buy", method = RequestMethod.POST)
 	public ModelAndView AddToCart(HttpSession session, ModelAndView mav, @ModelAttribute("orderItem") orderItem oi,
@@ -272,7 +144,6 @@ public class ProductController {
 		session.setAttribute("shoppingCart", cart);
 		return mav;
 	}
-
 //確認訂單頁面顯示
 	@RequestMapping(value = "/CheckOut")
 	public ModelAndView ToCheckOut(HttpSession session, ModelAndView mav) {
@@ -292,7 +163,7 @@ public class ProductController {
 			ob.setoTotalAmount(total);
 			ob.setmName(mb.getmName());
 			mav.addObject("orderInfo", ob);
-			mav.setViewName("checkout/CheckOut");
+			mav.setViewName("checkout/checkout");
 			return mav;
 		} else {
 			session.setAttribute("requestURI", "/CheckOut");
@@ -300,7 +171,6 @@ public class ProductController {
 			return mav;
 		}
 	}
-
 //送出訂單
 	@RequestMapping(value = "/ConfirmOrder")
 	public String ConfirmOrder(@ModelAttribute("orderInfo") orderBean ob, HttpSession session) {
@@ -355,7 +225,6 @@ public class ProductController {
 			return "redirect:/login";
 		}
 	}
-
 //綠界結帳完成頁面顯示
 	@RequestMapping("/PaySuccess")
 	public String TestEC(HttpSession session, HttpServletRequest request) {
@@ -409,17 +278,15 @@ public class ProductController {
 		}
 		return "checkout/paidPage";
 	}
-
 //新增商品表格
 	@RequestMapping(value = "/AddProduct", method = RequestMethod.GET)
 	public String AddForm(Model model) {
 		productBean bb = new productBean();
 		model.addAttribute("productBean", bb);
-		return "maintain/maintain";
+		return "Dashboard/AddProduct";
 	}
-
 //新增商品
-	@RequestMapping(value = "/ProcessAdd", method = RequestMethod.POST)
+	@RequestMapping(value = "/AddProduct", method = RequestMethod.POST)
 	public String AddProduct(@ModelAttribute("productBean") productBean bb, BindingResult result) {
 		MultipartFile productImage = bb.getProductImage();
 		String originFilename = productImage.getOriginalFilename();
@@ -437,7 +304,6 @@ public class ProductController {
 		pService.insertNewProduct(bb);
 		return "redirect:/products/1";
 	}
-
 //刪除購物車商品
 	@RequestMapping(value = "/DeleteCartProduct", method = RequestMethod.GET)
 	public ModelAndView deleteProduct(HttpSession session, ModelAndView mav, HttpServletRequest request) {
@@ -447,7 +313,6 @@ public class ProductController {
 		cart.deleteProduct(pId);
 		return mav;
 	}
-
 //顯示訂單
 	@RequestMapping("/OrderDetails")
 	public ModelAndView GetOrderlist(HttpSession session, ModelAndView mav) {
@@ -457,7 +322,6 @@ public class ProductController {
 		mav.setViewName("checkout/orderDetails");
 		return mav;
 	}
-
 //顯示訂單明細
 	@RequestMapping("/showOrderItem/{oId}")
 	public ModelAndView GetOrderItem(@PathVariable Integer oId, HttpSession session, ModelAndView mav,
@@ -467,7 +331,6 @@ public class ProductController {
 		mav.setViewName("checkout/orderItem");
 		return mav;
 	}
-
 //建立商品資料庫
 	@RequestMapping("/AddProductDB")
 	public String AddProductDB() {

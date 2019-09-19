@@ -31,7 +31,16 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 <script src="<c:url value='/css/RWDcss/js/jquery.min.js'/>"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+
+$(function() {
+	$("#datepicker").datepicker({
+		dateFormat : 'yy-mm-dd',
+		changeMonth : true,
+		changeYear : true
+	});
+});
 	$(document).ready(function() {
 
 		$('[data-toggle=offcanvas]').click(function() {
@@ -105,7 +114,7 @@ body {
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<a class="navbar-brand" href="<c:url value='/UserDashboard'/>"
-				title="User Dashboard">會員中心</a>
+				title="User Dashboard">後臺系統</a>
 		</div>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsingNavbar">
@@ -188,15 +197,16 @@ body {
 					<div
 						class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 						aria-labelledby="userDropdown">
-						<a class="dropdown-item" href="<c:url value='/UpdateMemberForm'/>">
+						<a class="dropdown-item" href="<c:url value='/Dashboard'/>">
 							<i class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
-							帳戶設定
-						</a> <a class="dropdown-item" href="<c:url value='/UserOrderDetail'/>">
-							<i class="  mr-2 text-gray-400 fa fa-shopping-bag"
-							style="color: #99E64D;"></i> 我的訂單
-						</a> <a class="dropdown-item" href="<c:url value='/UserDashboardRating'/>"> <i
+							後台系統
+						</a>  <a class="dropdown-item" href="<c:url value='AddProduct'/>"> <i
 							class="  mr-2 text-gray-400 fa fa-gratipay" style="color: pink;"></i>
-							我的評價
+							新增商品
+						</a>
+						<a class="dropdown-item" href="<c:url value='/MemberList'/>"> <i
+							class="  mr-2 text-gray-400 fa fa-gratipay" style="color: pink;"></i>
+							會員列表
 						</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="<c:url value='/logout'/>"
@@ -221,17 +231,16 @@ body {
             </div> -->
 			<div
 				class="container sidebar-heading col-md-3  sidebar-offcanvas bg-light "
-				id="sidebar" role="navigation" style="text-align: center">
+				id="sidebar" role="navigation" style="text-align: center;">
 				<div
 					class="list-group list-group-flush flex-column sticky-top  p-0 pt-5 "
 					style="font-family: 'Noto Serif TC', serif">
-					<a href="<c:url value='/UserDashboard'/>"
-						class="list-group-item list-group-item-action bg-light ">個人中心</a>
-					<a href="<c:url value='/UserOrderDetail'/>"
-						class="list-group-item list-group-item-action bg-light">我的訂單</a> <a
-						href="<c:url value='/UserDashboardRating'/>" class="list-group-item list-group-item-action bg-light">我的評價</a>
-					<a href="<c:url value='/UpdateMemberForm'/>"
-						class="list-group-item list-group-item-action bg-light">帳戶設定</a> 
+					<a href="<c:url value='/Dashboard'/>"
+						class="list-group-item list-group-item-action bg-light ">後臺系統</a>
+					<a href="<c:url value='/AddProduct'/>"
+						class="list-group-item list-group-item-action bg-light">新增商品</a> 
+					<a href="<c:url value='/MemberList'/>"
+						class="list-group-item list-group-item-action bg-light">會員列表</a> 
 				</div>
 			</div>
 			<!--/col-->
@@ -240,51 +249,43 @@ body {
 
 					<div class="  pt-5">
 						<div class="card ">
-							<form:form method="POST" modelAttribute="MemberBean">
+							<form:form method="POST" enctype="multipart/form-data"  modelAttribute="productBean">
 								<div class="card-header card-header-primary">
-									<h4 class="card-title ">個人資訊管理</h4>
-									<p class="card-category">以下資訊僅用於幫助你在支付時自動填寫你的個人資料，你的資料將會安全地被保存且不會公開</p>
+									<h4 class="card-title ">新增商品</h4>
+									<p class="card-category"></p>
 								</div>
 								<div class="card-body">
 
 									<div class="row">
 										<div class="col-md-4">
 											<div class="form-group">
-												<label class="bmd-label-floating">用戶名(須與旅遊證件一致)</label>
-												<form:input id="mName" path="mName" value="${LoginOK.mName}"
-													type="text" class="form-control " disabled="true" />
+												<label class="bmd-label-floating">產品名稱</label>
+												<form:input id="pName" path="pName" 
+													type="text" class="form-control " />
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
-												<label class="bmd-label-floating">生日(須與旅遊證件一致)</label>
-												<form:input id="mDate" path="mDate" value="${LoginOK.mDate}"
-													type="text" class="form-control " disabled="true" />
+												<label class="bmd-label-floating">產品價格</label>
+												<form:input id="pPrice" path="pPrice"
+													type="text" class="form-control "  />
 											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="form-group">
-												<label class="bmd-label-floating">性別</label>
-												<form:input id="mGender" path="mGender"
-													value="${LoginOK.mGender}" type="email"
-													class="form-control " disabled="true" />
-											</div>
-										</div>
+										</div>									
 									</div>
 									<div class="row">
 										<div class="col-md-4">
 											<div class="form-group">
-												<label class="bmd-label-floating">帳號</label>
-												<form:input id="mAccount" path="mAccount"
-													value="${LoginOK.mAccount}" type="text"
+												<label class="bmd-label-floating">庫存</label>
+												<form:input id="pInstock" path="pInstock"
+													 type="text"
 													class="form-control" />
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
-												<label class="bmd-label-floating">密碼</label>
-												<form:input id="mPassword" path="mPassword"
-													value="${LoginOK.mPassword}" type="password"
+												<label class="bmd-label-floating">產品有效日期</label>
+												<form:input id="datepicker" path="pDateRange"
+													 type="text"
 													class="form-control" />
 											</div>
 										</div>
@@ -292,40 +293,26 @@ body {
 									<div class="row">
 										<div class="col-md-5">
 											<div class="form-group">
-												<label class="bmd-label-floating">Email</label>
-												<form:input id="mEmail" path="mEmail"
-													value="${LoginOK.mEmail}" type="text" class="form-control" />
+												<label class="bmd-label-floating">產品說明</label>
+												<form:input id="pContent" path="pContent"
+													 type="text" class="form-control" />
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-8">
 											<div class="form-group">
-												<label class="bmd-label-floating">地址</label>
-												<form:input id="mAddress" path="mAddress"
-													value="${LoginOK.mAddress}" type="text"
-													class="form-control" />
+												<label class="bmd-label-floating">產品圖片上傳</label>
+												<form:input id="productImage" path="productImage" type="file" class="form-control btn btn-outline-dark btn-block"  />
 											</div>
 										</div>
 									</div>
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">手機號碼</label>
-												<form:input id="mPhone" path="mPhone"
-													value="${LoginOK.mPhone}" type="text" class="form-control" />
-											</div>
-										</div>
-									</div>
-
 								</div>
 								<div class="row"></div>
 								<button type="submit"
-									class="btn btn-primary pull-right col-md-4 align-self-end m-1">Update
-									Profile</button>
+									class="btn btn-primary pull-right col-md-4 align-self-end m-1">送出</button>
 								<div class="clearfix"></div>
 							</form:form>
-							<img  width='300' height='300' class=" " src="<c:url value='/showmPic/${LoginOK.mId}'/>" style="height:500px" href="">
 						</div>
 					</div>
 				</div>

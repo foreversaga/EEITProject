@@ -53,19 +53,7 @@
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/flaticon.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/icomoon.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/style.css'/>">
-<style type="text/css">
-div.dropdown-menu {
-	/* 	width: 300px; */
-	/* 	height: 423px; */
-	background-color: #f0f0f0;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	overflow-y: auto;
-}
 
-div#shoppingCartMenu {
-	width: 280px;
-}
-</style>
 </head>
 <body>
 
@@ -90,8 +78,11 @@ div#shoppingCartMenu {
 					<li class="nav-item"><a href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li>
 					<c:if test="${!empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
+						<li class="nav-item"><a href="<c:url value='/Dashboard'/>" class="nav-link">後臺系統</a></li>
 						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 						<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">訂單查詢</a></li>
+						<li class="nav-item"><a href="<c:url value='/MemberList'/>" class="nav-link">會員列表</a></li>
+<%-- 						<li class="nav-item"><a href="<c:url value='/AddProduct'/>" class="nav-link">新增商品2</a></li> --%>
 						<li class="nav-item"><a href="<c:url value='/review'/>" class="nav-link">評價查詢</a></li>
 					</c:if>
 				</ul>
@@ -105,18 +96,12 @@ div#shoppingCartMenu {
 							</c:if>
 							<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
 								<hr>
-								<table>
-									<tr>
-										<td rowspan="2"><img style="width: 80px; height: 80px;"
-											src="<c:url value='/showPic/${cart.value.pId}'/>"></td>
-										<td style="padding: 0 10px;">${cart.value.pName}</td>
-									</tr>
-									<tr>
-										<td style="padding: 0 5px;">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</td>
-										<td><input style="margin-left: 10px;" id="${cart.value.pId}" type="button"
-												onclick="DeleteItem(this.id)" value="刪除" /></td>
-									</tr>
-								</table>
+								<img style="width: 50px; height: 50px; float: left;"
+									src="<c:url value='/showPic/${cart.value.pId}'/>">
+								<p style="line-height: 10px">${cart.value.pName}</p>
+								<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
+								<span><input id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)"
+										value="刪除" /> </span>
 								<c:if test="${vs.last}">
 									<hr>
 								</c:if>
@@ -144,10 +129,10 @@ div#shoppingCartMenu {
 					<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find great places to
 						stay, eat, shop, or visit from local experts</p>
 					<div class="block-17 my-4" style="width: 80%;">
-						<form action="<c:url value='/QueryProduct/1'/>" method="get" class="d-block d-flex">
+						<form action="" method="post" class="d-block d-flex">
 							<div class="fields d-block d-flex">
 								<div class="textfield-search one-third">
-									<input name="QueryString" type="text" class="form-control" placeholder="Ex: food, service, hotel">
+									<input type="text" class="form-control" placeholder="Ex: food, service, hotel">
 								</div>
 							</div>
 							<input type="submit" class="search-submit btn btn-primary" value="Search">
@@ -351,48 +336,12 @@ div#shoppingCartMenu {
 											<a href="#">${Top5.pName}</a>
 										</h3>
 										<p class="rate">
-											<c:choose>
-												<c:when test="${Top5.pAvgRating>=1&&Top5.pAvgRating<2 }">
-													<i class="icon-star"></i>
-													<i class="icon-star-o"></i>
-													<i class="icon-star-o"></i>
-													<i class="icon-star-o"></i>
-													<i class="icon-star-o"></i>
-												</c:when>
-												<c:when test="${Top5.pAvgRating>=2&&Top5.pAvgRating<3 }">
-													<i class="icon-star"></i>
-													<i class="icon-star"></i>
-													<i class="icon-star-o"></i>
-													<i class="icon-star-o"></i>
-													<i class="icon-star-o"></i>
-												</c:when>
-												<c:when test="${Top5.pAvgRating>=3&&Top5.pAvgRating<4 }">
-													<i class="icon-star"></i>
-													<i class="icon-star"></i>
-													<i class="icon-star"></i>
-													<i class="icon-star-o"></i>
-													<i class="icon-star-o"></i>
-												</c:when>
-												<c:when test="${Top5.pAvgRating>=4&&Top5.pAvgRating<5 }">
-													<i class="icon-star"></i>
-													<i class="icon-star"></i>
-													<i class="icon-star"></i>
-													<i class="icon-star"></i>
-													<i class="icon-star-o"></i>
-												</c:when>
-												<c:otherwise>
-													<i class="icon-star"></i>
-													<i class="icon-star"></i>
-													<i class="icon-star"></i>
-													<i class="icon-star"></i>
-													<i class="icon-star"></i>
-												</c:otherwise>
-											</c:choose>
-											<span>${Top5.pAvgRating}</span>
+											<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
+												class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
 										</p>
 									</div>
 									<div class="two">
-										<span class="price per-price">$${Top5.pPrice}<br> <small>/night</small></span>
+										<span class="price per-price">${Top5.pPrice}<br> <small>/night</small></span>
 									</div>
 								</div>
 								<p>${Top5.pContent}</p>
@@ -695,7 +644,7 @@ div#shoppingCartMenu {
 	</div>
 
 
-
+	
 	<script src="<c:url value='/css/RWDcss/js/jquery-migrate-3.0.1.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/popper.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/bootstrap.min.js'/>"></script>

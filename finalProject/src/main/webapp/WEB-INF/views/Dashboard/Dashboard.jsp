@@ -31,7 +31,7 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 <script src="<c:url value='/css/RWDcss/js/jquery.min.js'/>"></script>
-<script>
+<script type="text/javascript">
 	$(document).ready(function() {
 
 		$('[data-toggle=offcanvas]').click(function() {
@@ -39,8 +39,7 @@
 		});
 
 	});
-
-	// 	購物車
+// 	購物車
 	function DeleteItem(clicked_id) {
 		var url = "<c:url value='/DeleteCartProduct?pId=" + clicked_id + "'/>";
 		$.ajax({
@@ -51,7 +50,7 @@
 			}
 		});
 	};
-
+	
 	// 天氣預報javaScript:https://weatherwidget.io/
 	!function(d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0];
@@ -141,13 +140,12 @@ body {
 						aria-label="Search">
 				</form:form>
 			</ul>
-			<ul class="navbar-nav ml-auto">
+			<ul class="navbar-nav ml-auto ">
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle fa fa-shopping-cart  fa-pull-right "
 					style="color: white;" id="navbarDropdown" role="button"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">購物車</a>
-					<div class="dropdown-menu dropdown-menu-right"
-						id="shoppingCartMenu"
+					<div class="dropdown-menu dropdown-menu-right" id="shoppingCartMenu" 
 						style="width: 300px; height: 340px; background-color: #f0f0f0; font-family: 'Noto Serif TC', serif; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); overflow-y: auto;"
 						aria-labelledby="navbarDropdown">
 						<c:if test="${empty shoppingCart.content }">
@@ -188,15 +186,16 @@ body {
 					<div
 						class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 						aria-labelledby="userDropdown">
-						<a class="dropdown-item" href="<c:url value='/UpdateMemberForm'/>">
+						<a class="dropdown-item" href="<c:url value='/Dashboard'/>">
 							<i class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
-							帳戶設定
-						</a> <a class="dropdown-item" href="<c:url value='/UserOrderDetail'/>">
-							<i class="  mr-2 text-gray-400 fa fa-shopping-bag"
-							style="color: #99E64D;"></i> 我的訂單
-						</a> <a class="dropdown-item" href="<c:url value='/UserDashboardRating'/>"> <i
+							後台系統
+						</a>  <a class="dropdown-item" href="<c:url value='AddProduct'/>"> <i
 							class="  mr-2 text-gray-400 fa fa-gratipay" style="color: pink;"></i>
-							我的評價
+							新增商品
+						</a>
+						<a class="dropdown-item" href="<c:url value='/MemberList'/>"> <i
+							class="  mr-2 text-gray-400 fa fa-gratipay" style="color: pink;"></i>
+							會員列表
 						</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="<c:url value='/logout'/>"
@@ -209,7 +208,7 @@ body {
 		</div>
 	</nav>
 	<div class="container " id="main">
-		<div class="container row row-offcanvas row-offcanvas-left ">
+		<div class="container row row-offcanvas row-offcanvas-left " >
 			<!-- <div class="  col-md-3  sidebar-offcanvas bg-light " id="sidebar" role="navigation"
                 style="text-align: center">
                 <ul class=" nav  list-group list-group-item-flush  flex-column sticky-top  p-0 pt-5 "style="font-family: 'Noto Serif TC', serif">
@@ -221,169 +220,166 @@ body {
             </div> -->
 			<div
 				class="container sidebar-heading col-md-3  sidebar-offcanvas bg-light "
-				id="sidebar" role="navigation" style="text-align: center">
+				id="sidebar" role="navigation" style="text-align: center;">
 				<div
 					class="list-group list-group-flush flex-column sticky-top  p-0 pt-5 "
 					style="font-family: 'Noto Serif TC', serif">
-					<a href="<c:url value='/UserDashboard'/>"
-						class="list-group-item list-group-item-action bg-light ">個人中心</a>
-					<a href="<c:url value='/UserOrderDetail'/>"
-						class="list-group-item list-group-item-action bg-light">我的訂單</a> <a
-						href="<c:url value='/UserDashboardRating'/>" class="list-group-item list-group-item-action bg-light">我的評價</a>
-					<a href="<c:url value='/UpdateMemberForm'/>"
-						class="list-group-item list-group-item-action bg-light">帳戶設定</a> 
+					<a href="<c:url value='/Dashboard'/>"
+						class="list-group-item list-group-item-action bg-light ">後臺系統</a>
+					<a href="<c:url value='/AddProduct'/>"
+						class="list-group-item list-group-item-action bg-light">新增商品</a> 
+					<a href="<c:url value='/MemberList'/>"
+						class="list-group-item list-group-item-action bg-light">會員列表</a> 
 				</div>
 			</div>
 			<!--/col-->
-			<div class="container col-md-9 p-0 "style="margin-top:20px">
-				<div class="container flex-column">
 
-					<div class="  pt-5">
-						<div class="card ">
-							<form:form method="POST" modelAttribute="MemberBean">
-								<div class="card-header card-header-primary">
-									<h4 class="card-title ">個人資訊管理</h4>
-									<p class="card-category">以下資訊僅用於幫助你在支付時自動填寫你的個人資料，你的資料將會安全地被保存且不會公開</p>
-								</div>
-								<div class="card-body">
+			<div class="col main pt-5 ml-2 bg-white" >
+				<div class="d-flex justify-content-center flex-row  ">
+					<img src="<c:url value='/img/TravelIcon.png'/>" class="img-fluid" />
+				</div>
+				<span class="lead d-none d-sm-block"
+					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">下一個旅程去邊好？選擇你的目的地並計劃行程吧！</span>
+				<center>
+					<button type="button" class="btn btn-warning btn-lg "
+						onclick="location.href=<c:url value='/'/>">返回首頁</button>
+				</center>
 
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">用戶名(須與旅遊證件一致)</label>
-												<form:input id="mName" path="mName" value="${LoginOK.mName}"
-													type="text" class="form-control " disabled="true" />
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">生日(須與旅遊證件一致)</label>
-												<form:input id="mDate" path="mDate" value="${LoginOK.mDate}"
-													type="text" class="form-control " disabled="true" />
-											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="form-group">
-												<label class="bmd-label-floating">性別</label>
-												<form:input id="mGender" path="mGender"
-													value="${LoginOK.mGender}" type="email"
-													class="form-control " disabled="true" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">帳號</label>
-												<form:input id="mAccount" path="mAccount"
-													value="${LoginOK.mAccount}" type="text"
-													class="form-control" />
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">密碼</label>
-												<form:input id="mPassword" path="mPassword"
-													value="${LoginOK.mPassword}" type="password"
-													class="form-control" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-5">
-											<div class="form-group">
-												<label class="bmd-label-floating">Email</label>
-												<form:input id="mEmail" path="mEmail"
-													value="${LoginOK.mEmail}" type="text" class="form-control" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-8">
-											<div class="form-group">
-												<label class="bmd-label-floating">地址</label>
-												<form:input id="mAddress" path="mAddress"
-													value="${LoginOK.mAddress}" type="text"
-													class="form-control" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">手機號碼</label>
-												<form:input id="mPhone" path="mPhone"
-													value="${LoginOK.mPhone}" type="text" class="form-control" />
-											</div>
-										</div>
-									</div>
+				<hr>
+				<!-- 天氣預報欄位 -->
+				<div>
+					<a class="weatherwidget-io"
+						href="https://forecast7.com/zh-tw/25d03121d57/taipei-city/"
+						data-label_1="台北市" data-label_2="WEATHER" data-font="Noto Sans TC"
+						data-theme="marine">台北市 WEATHER</a>
+				</div>
+				<!--/row-->
 
-								</div>
-								<div class="row"></div>
-								<button type="submit"
-									class="btn btn-primary pull-right col-md-4 align-self-end m-1">Update
-									Profile</button>
-								<div class="clearfix"></div>
-							</form:form>
-							<img  width='300' height='300' class=" " src="<c:url value='/showmPic/${LoginOK.mId}'/>" style="height:500px" href="">
+				<hr>
+				<div id="carouselExampleIndicators" class="carousel slide "
+					data-ride="carousel">
+					<ol class="carousel-indicators">
+						<li data-target="#carouselExampleIndicators" data-slide-to="0"
+							class="active"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+					</ol>
+					<div class="carousel-inner ">
+						<div class=" carousel-item active ">
+							<img class=" d-block w-100"
+								src="<c:url value='/img/Discover.JPG'/>" alt="First slide">
+							<span
+								style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">樂活體驗，探索無限可能</span>
+						</div>
+						<div class="carousel-item">
+							<img class="d-block w-100" src="<c:url value='/img/food.JPG'/>"
+								alt="Second slide"> <span
+								style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">吃飯皇帝大，優惠票券替您省下荷包</span>
+						</div>
+						<div class="carousel-item">
+							<img class="d-block w-100" src="<c:url value='/img/rail.jpg'/>"
+								alt="Third slide"> <span
+								style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">各式交通票券讓您暢通無阻</span>
 						</div>
 					</div>
+					<a class="carousel-control-prev" href="#carouselExampleIndicators"
+						role="button" data-slide="prev"> <span
+						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+						class="sr-only">Previous</span>
+					</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+						role="button" data-slide="next"> <span
+						class="carousel-control-next-icon" aria-hidden="true"></span> <span
+						class="sr-only">Next</span>
+					</a>
 				</div>
+
+
+				<a id="layouts"></a>
+				<hr>
+				<h2 class="sub-header mt-5 mb-5"
+					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">熱門地區</h2>
+				<div class="container row mb-3 ml-1 d-flex justify-content-center"
+					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">
+					<div class="card-deck">
+						<div class="card">
+							<img class="card-img-top" src="<c:url value='/img/Tokyo.JPG'/>"
+								href="">
+							<div class="card-body">
+								<h5 class="card-title "></h5>
+								<p class="card-text">全世界最著名的現代大都會，每年有超過一千萬旅客到訪，其新舊並存的風情吸引更多人朝聖。只要一天的時間，就足夠你從最古老的寺院穿越到最摩登的大廈。</p>
+								<!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+							</div>
+						</div>
+						<div class="card">
+							<img class="card-img-top " src="<c:url value='/img/Osaka.JPG'/>"
+								href="">
+							<div class="card-body">
+								<h5 class="card-title"></h5>
+								<p class="card-text">作為日本第二大都市，大阪向世界各地的旅客保證，處處都是美食、美景和驚喜！歷史重地大阪城、世界最大水族館──大阪海遊館、高聳入雲的梅田藍天大廈都是必去景點。</p>
+							</div>
+						</div>
+						<div class="card">
+							<img class="card-img-top" src="<c:url value='/img/Kyoto.JPG'/>"
+								href="">
+							<div class="card-body">
+								<h5 class="card-title"></h5>
+								<p class="card-text">雖然曾歷戰火，京都之美仍然遺世獨立。只要親自走訪，你就會發現京都把日本的「侘寂」美學詮釋得有多淋漓盡致。</p>
+							</div>
+						</div>
+					</div>
+					<!--/col-->
+				</div>
+<!-- 				熱門地區商品超連結要在img外面包一層<a href=""></a>,原本在img內的超連結不要用 -->
+				<!--/row-->
+
 			</div>
-			<hr>
+			<!--/main col-->
 		</div>
 
-
-		<!--/main col-->
-	</div>
-
-
-
-
-	<footer class="container  navbar-fixed-bottom flex-column ">
-		<div
-			class=" container align-items-end row featurette bg-dark  p-5  mt-1 "
-			style="color: white">
-			<div class="  justify-content-end col-md-5 order-md-7">
-				<h3 class="title2">聯絡我們</h3>
-				<div class="form-group">
-					<label for="txtName">寄件人姓名</label> <input type="text"
-						class="form-control" name="txtName" id="txtName" required>
+		<footer class="container  navbar-fixed-bottom ">
+			<div
+				class=" container align-items-end row featurette bg-dark col-md-12 p-5 pt-0 mt-2"
+				style="color: white">
+				<div class="  justify-content-end col-md-5 order-md-7">
+					<h3 class="title2">聯絡我們</h3>
+					<div class="form-group">
+						<label for="txtName">寄件人姓名</label> <input type="text"
+							class="form-control" name="txtName" id="txtName" required>
+					</div>
+					<div class="form-group">
+						<label for="txtEmail">信箱</label> <input type="email"
+							class="form-control" name="txtEmail" id="txtEmail" required>
+					</div>
+					<div class="form-group">
+						<label for="msg">訊息</label>
+						<textarea class="form-control" required></textarea>
+					</div>
+					<button type="submit" class="btn btn-primary" style="width: 100%;">傳送</button>
 				</div>
-				<div class="form-group">
-					<label for="txtEmail">信箱</label> <input type="email"
-						class="form-control" name="txtEmail" id="txtEmail" required>
+				<div class=" align-self-center col-md-7" style="color: white">
+					<ul>
+						<li style="margin-top: 3px;">©2019 Travel Fun Technology</li>
+						<li style="margin-top: 3px;">Limited. All Rights Reserved.</li>
+						<li style="margin-top: 3px;">電話：02-23766198</li>
+						<li style="margin-top: 3px;">信箱：EEIT108@outlook.com</li>
+						<li style="margin-top: 3px;">地址：106台北市大安區復興南路一段390號 2,3號</li>
+						<li style="margin-top: 3px;">粉專：https://www.travelFun.com/EEIT108/</li>
+					</ul>
+					<ul>
+						<li style="margin-top: 3px;">支付方式</li>
+						<img class=" mt-2" src="<c:url value='/img/visa.png'/>"
+							height="40px" href="">
+						<img class=" mt-2" src="<c:url value='/img/master.png'/>"
+							height="40px" href="">
+						<img class=" mt-2" src="<c:url value='/img/jcb.png'/>"
+							height="40px" href="">
+						<img class=" mt-2" src="<c:url value='/img/american.png'/>"
+							height="40px" href="">
+						<img class=" mt-2" src="<c:url value='/img/paypal.png'/>"
+							height="40px" href="">
+					</ul>
 				</div>
-				<div class="form-group">
-					<label for="msg">訊息</label>
-					<textarea class="form-control" required></textarea>
-				</div>
-				<button type="submit" class="btn btn-primary" style="width: 100%;">傳送</button>
 			</div>
-			<div class=" align-self-center col-md-7" style="color: white">
-				<ul>
-					<li style="margin-top: 3px;">©2019 Travel Fun Technology</li>
-					<li style="margin-top: 3px;">Limited. All Rights Reserved.</li>
-					<li style="margin-top: 3px;">電話：02-23766198</li>
-					<li style="margin-top: 3px;">信箱：EEIT108@outlook.com</li>
-					<li style="margin-top: 3px;">地址：106台北市大安區復興南路一段390號 2,3號</li>
-					<li style="margin-top: 3px;">粉專：https://www.travelFun.com/EEIT108/</li>
-				</ul>
-				<ul>
-					<li style="margin-top: 3px;">支付方式</li>
-					<img class=" mt-2" src="<c:url value='/img/visa.png'/>"
-						height="40px" href="">
-					<img class=" mt-2" src="<c:url value='/img/master.png'/>"
-						height="40px" href="">
-					<img class=" mt-2" src="<c:url value='/img/jcb.png'/>"
-						height="40px" href="">
-					<img class=" mt-2" src="<c:url value='/img/american.png'/>"
-						height="40px" href="">
-					<img class=" mt-2" src="<c:url value='/img/paypal.png'/>"
-						height="40px" href="">
-				</ul>
-			</div>
-		</div>
-	</footer>
+		</footer>
 </body>
 </html>

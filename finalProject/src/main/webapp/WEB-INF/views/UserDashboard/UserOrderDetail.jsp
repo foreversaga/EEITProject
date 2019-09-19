@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<jsp:useBean id="orderInfo" class="cart.model.orderBean" scope="session" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +19,13 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/TableCss/vendor/perfect-scrollbar/perfect-scrollbar.css'/>">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/TableCss/css/util.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/TableCss/css/main.css'/>">
+<!-- 上述三行顯示訂單內容必要連結 -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	crossorigin="anonymous"></script>
@@ -32,6 +38,9 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 <script src="<c:url value='/css/RWDcss/js/jquery.min.js'/>"></script>
+<!-- ==================================================================== -->
+<script src="http://malsup.github.io/jquery.form.js"></script>
+	<script src="<c:url value='/css/TableCss/vendor/perfect-scrollbar/perfect-scrollbar.min.js'/>"></script>
 <script>
 	$(document).ready(function() {
 
@@ -53,6 +62,14 @@
 		});
 	};
 
+	//顯示訂單內容滾條
+	$('.js-pscroll').each(function() {
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function() {
+				ps.update();
+			})
+		});
 	// 天氣預報javaScript:https://weatherwidget.io/
 	!function(d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0];
@@ -194,7 +211,7 @@ body {
 						</a> <a class="dropdown-item" href="<c:url value='/UserOrderDetail'/>">
 							<i class="  mr-2 text-gray-400 fa fa-shopping-bag"
 							style="color: #99E64D;"></i> 我的訂單
-						</a> <a class="dropdown-item" href="#"> <i
+						</a> <a class="dropdown-item" href="<c:url value='/UserDashboardRating'/>"> <i
 							class="  mr-2 text-gray-400 fa fa-gratipay" style="color: pink;"></i>
 							我的評價
 						</a>
@@ -221,7 +238,7 @@ body {
             </div> -->
 			<div
 				class="container sidebar-heading col-md-3  sidebar-offcanvas bg-light "
-				id="sidebar" role="navigation" style="text-align: center">
+				id="sidebar" role="navigation" style="text-align: center;">
 				<div
 					class="list-group list-group-flush flex-column sticky-top  p-0 pt-5 "
 					style="font-family: 'Noto Serif TC', serif">
@@ -229,47 +246,58 @@ body {
 						class="list-group-item list-group-item-action bg-light ">個人中心</a>
 					<a href="<c:url value='/UserOrderDetail'/>"
 						class="list-group-item list-group-item-action bg-light">我的訂單</a> <a
-						href="#" class="list-group-item list-group-item-action bg-light">我的評價</a>
+						href="<c:url value='/UserDashboardRating'/>" class="list-group-item list-group-item-action bg-light">我的評價</a>
 					<a href="<c:url value='/UpdateMemberForm'/>"
-						class="list-group-item list-group-item-action bg-light">帳戶設定</a> <a
-						href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
-					<a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+						class="list-group-item list-group-item-action bg-light">帳戶設定</a> 
 				</div>
 			</div>
 			<!--/col-->
-			<div class="container col-md-9 p-0 ">
+			<div class="container col-md-9 p-0 margin-top:10px"style="margin-top:20px">
 
 				<div class="container flex-column">
 
 					<div class="  pt-5">
 						<div class="card ">
-							<form:form method="POST"
-								action="${pageContext.request.contextPath }/ConfirmOrder"
-								modelAttribute="orderInfo">
-								<div class="card-header card-header-primary">
-									<h4 class="card-title ">訂單管理</h4>
-									<p class="card-category">以下資訊僅用於顯示您目前的訂單資訊</p>
-								</div>
-								<div style="height: 450px;">
-									<table>
-										<c:forEach varStatus="vs" var="cart"
-											items="${shoppingCart.content}">
-											<tr>
-												<td>${cart.value.pName}</td>
-												<td>數量:${cart.value.iQty}</td>
-												<td>單價:${cart.value.pPrice}</td>
-												<td>小計:${cart.value.iQty * cart.value.pPrice}</td>
-											</tr>
-										</c:forEach>
-										<tr>
-											<td>金額總計:</td>
-											<td><jsp:getProperty property="oTotalAmount"
-													name="orderInfo" /></td>
-										</tr>
-									</table>
-									<!--end of 購物明細 -->
-								</div>
-							</form:form>
+								<div class="mt-2">
+		<div class="container-fruid" style="height:600px;">
+			<div class="">
+				<div class="table100 ver1 mb-5">
+					<div class="table100-head ">
+						<table>
+							<thead>
+								<tr class="  row100 head ">
+									<th class="cell100 column1">訂單編號</th>
+									<th class="cell100 column2">訂購日期</th>
+									<th class="cell100 column3">訂購金額</th>
+									<th class="cell100 column4">付款狀態</th>
+									<th class="cell100 column5">收貨人</th>
+									<th class="cell100 column6">運送地址</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="container-fruid js-pscroll">
+						<table>
+							<tbody>
+								<c:forEach varStatus="vs" var="orderBean" items="${orderList}">
+									<tr class="row100 body ">
+										<td class=" justify-content-center cell100 column1 " style="text-align: center;height:95px"><a
+											href="<c:url value='/showOrderItem/${orderBean.oId}'/>">${orderBean.oId}</a></td>
+										<td class="container-fruid cell100 column2 mb-5">${orderBean.oTimestamp}</td>
+										<td class="cell100 column3">${orderBean.oTotalAmount}</td>
+										<td class="cell100 column4">${orderBean.oPaymentStatus}</td>
+										<td class="cell100 column5">${orderBean.oReceiveName}</td>
+										<td class="cell100 column6">${orderBean.oAddress}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 													<hr>
 				<h2 class="sub-header mt-5 mb-5"
 					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">熱銷活動</h2>

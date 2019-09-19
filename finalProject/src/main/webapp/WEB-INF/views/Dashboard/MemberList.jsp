@@ -19,6 +19,13 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/TableCss/vendor/perfect-scrollbar/perfect-scrollbar.css'/>">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/TableCss/css/util.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/TableCss/css/main.css'/>">
+<!-- 上述三行顯示訂單內容必要連結 -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	crossorigin="anonymous"></script>
@@ -31,6 +38,9 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 <script src="<c:url value='/css/RWDcss/js/jquery.min.js'/>"></script>
+<!-- ==================================================================== -->
+<script src="http://malsup.github.io/jquery.form.js"></script>
+	<script src="<c:url value='/css/TableCss/vendor/perfect-scrollbar/perfect-scrollbar.min.js'/>"></script>
 <script>
 	$(document).ready(function() {
 
@@ -52,6 +62,14 @@
 		});
 	};
 
+	//顯示訂單內容滾條
+	$('.js-pscroll').each(function() {
+			var ps = new PerfectScrollbar(this);
+
+			$(window).on('resize', function() {
+				ps.update();
+			})
+		});
 	// 天氣預報javaScript:https://weatherwidget.io/
 	!function(d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0];
@@ -105,7 +123,7 @@ body {
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<a class="navbar-brand" href="<c:url value='/UserDashboard'/>"
-				title="User Dashboard">會員中心</a>
+				title="User Dashboard">後臺系統</a>
 		</div>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsingNavbar">
@@ -146,10 +164,9 @@ body {
 					class="nav-link dropdown-toggle fa fa-shopping-cart  fa-pull-right "
 					style="color: white;" id="navbarDropdown" role="button"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">購物車</a>
-					<div class="dropdown-menu dropdown-menu-right"
-						id="shoppingCartMenu"
+					<div class="dropdown-menu dropdown-menu-right" id="shoppingCartMenu" 
 						style="width: 300px; height: 340px; background-color: #f0f0f0; font-family: 'Noto Serif TC', serif; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); overflow-y: auto;"
-						aria-labelledby="navbarDropdown">
+						aria-labelledby="navbarDropdown2">
 						<c:if test="${empty shoppingCart.content }">
 							<p style="text-align: center; margin-top: 10%">購物車暫無商品</p>
 						</c:if>
@@ -188,15 +205,16 @@ body {
 					<div
 						class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 						aria-labelledby="userDropdown">
-						<a class="dropdown-item" href="<c:url value='/UpdateMemberForm'/>">
+						<a class="dropdown-item" href="<c:url value='/Dashboard'/>">
 							<i class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
-							帳戶設定
-						</a> <a class="dropdown-item" href="<c:url value='/UserOrderDetail'/>">
-							<i class="  mr-2 text-gray-400 fa fa-shopping-bag"
-							style="color: #99E64D;"></i> 我的訂單
-						</a> <a class="dropdown-item" href="<c:url value='/UserDashboardRating'/>"> <i
+							後台系統
+						</a>  <a class="dropdown-item" href="<c:url value='AddProduct'/>"> <i
 							class="  mr-2 text-gray-400 fa fa-gratipay" style="color: pink;"></i>
-							我的評價
+							新增商品
+						</a>
+						<a class="dropdown-item" href="<c:url value='/MemberList'/>"> <i
+							class="  mr-2 text-gray-400 fa fa-gratipay" style="color: pink;"></i>
+							會員列表
 						</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="<c:url value='/logout'/>"
@@ -221,118 +239,105 @@ body {
             </div> -->
 			<div
 				class="container sidebar-heading col-md-3  sidebar-offcanvas bg-light "
-				id="sidebar" role="navigation" style="text-align: center">
+				id="sidebar" role="navigation" style="text-align: center;">
 				<div
 					class="list-group list-group-flush flex-column sticky-top  p-0 pt-5 "
 					style="font-family: 'Noto Serif TC', serif">
-					<a href="<c:url value='/UserDashboard'/>"
-						class="list-group-item list-group-item-action bg-light ">個人中心</a>
-					<a href="<c:url value='/UserOrderDetail'/>"
-						class="list-group-item list-group-item-action bg-light">我的訂單</a> <a
-						href="<c:url value='/UserDashboardRating'/>" class="list-group-item list-group-item-action bg-light">我的評價</a>
-					<a href="<c:url value='/UpdateMemberForm'/>"
-						class="list-group-item list-group-item-action bg-light">帳戶設定</a> 
+					<a href="<c:url value='/Dashboard'/>"
+						class="list-group-item list-group-item-action bg-light ">後臺系統</a>
+					<a href="<c:url value='/AddProduct'/>"
+						class="list-group-item list-group-item-action bg-light">新增商品</a> 
+					<a href="<c:url value='/MemberList'/>"
+						class="list-group-item list-group-item-action bg-light">會員列表</a> 
 				</div>
 			</div>
 			<!--/col-->
-			<div class="container col-md-9 p-0 "style="margin-top:20px">
+			<div class="container col-md-9 p-0 margin-top:10px"style="margin-top:20px">
+
 				<div class="container flex-column">
 
 					<div class="  pt-5">
 						<div class="card ">
-							<form:form method="POST" modelAttribute="MemberBean">
-								<div class="card-header card-header-primary">
-									<h4 class="card-title ">個人資訊管理</h4>
-									<p class="card-category">以下資訊僅用於幫助你在支付時自動填寫你的個人資料，你的資料將會安全地被保存且不會公開</p>
-								</div>
-								<div class="card-body">
+								<div class="mt-2">
+		<div class="container-fruid" style="height:600px;">
+			<div class="">
+				<div class="table100 ver1 mb-5">
+					<div class="table100-head ">
+						<table>
+							<thead>
+								<tr class=" row100 head "style="text-align: center;">
+									<th class="cell100 column1">帳號</th>
+									<th class="cell100 column2">姓名</th>	
+									<th class="cell100 column3">性別</th>
+									<th class="cell100 column4">出生日期</th>
+									<th class="cell100 column5">地址</th>
+									<th class="cell100 column6">電話</th>									
+								</tr>
+							</thead>
+						</table>
+					</div>
 
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">用戶名(須與旅遊證件一致)</label>
-												<form:input id="mName" path="mName" value="${LoginOK.mName}"
-													type="text" class="form-control " disabled="true" />
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">生日(須與旅遊證件一致)</label>
-												<form:input id="mDate" path="mDate" value="${LoginOK.mDate}"
-													type="text" class="form-control " disabled="true" />
-											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="form-group">
-												<label class="bmd-label-floating">性別</label>
-												<form:input id="mGender" path="mGender"
-													value="${LoginOK.mGender}" type="email"
-													class="form-control " disabled="true" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">帳號</label>
-												<form:input id="mAccount" path="mAccount"
-													value="${LoginOK.mAccount}" type="text"
-													class="form-control" />
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">密碼</label>
-												<form:input id="mPassword" path="mPassword"
-													value="${LoginOK.mPassword}" type="password"
-													class="form-control" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-5">
-											<div class="form-group">
-												<label class="bmd-label-floating">Email</label>
-												<form:input id="mEmail" path="mEmail"
-													value="${LoginOK.mEmail}" type="text" class="form-control" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-8">
-											<div class="form-group">
-												<label class="bmd-label-floating">地址</label>
-												<form:input id="mAddress" path="mAddress"
-													value="${LoginOK.mAddress}" type="text"
-													class="form-control" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">手機號碼</label>
-												<form:input id="mPhone" path="mPhone"
-													value="${LoginOK.mPhone}" type="text" class="form-control" />
-											</div>
-										</div>
-									</div>
-
-								</div>
-								<div class="row"></div>
-								<button type="submit"
-									class="btn btn-primary pull-right col-md-4 align-self-end m-1">Update
-									Profile</button>
-								<div class="clearfix"></div>
-							</form:form>
-							<img  width='300' height='300' class=" " src="<c:url value='/showmPic/${LoginOK.mId}'/>" style="height:500px" href="">
-						</div>
+					<div class="container-fruid js-pscroll"style="text-align: center;height:550px">
+						<table>
+							<tbody>
+								<c:forEach  var="MemberBean" items="${Members}">
+									<tr class="row100 body "style="text-align: center;">
+										<td class=" justify-content-center cell100 column1 " ><a
+											href="<c:url value='/UserDashboardUpdateMember'/>">${MemberBean.mAccount}</a></td>
+										<td class="container-fruid cell100 column2 mb-5">${MemberBean.mName}</td>
+										<td class="cell100 column3">${MemberBean.mGender}</td>
+										<td class="cell100 column4">${MemberBean.mDate}</td>
+										<td class="cell100 column5">${MemberBean.mAddress}</td>
+										<td class="cell100 column6">${MemberBean.mPhone}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
-			<hr>
 		</div>
-
+	</div>
+													<hr>
+				<h2 class="sub-header mt-5 mb-5"
+					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">熱銷活動</h2>
+				<div class="container row mb-3 ml-1 d-flex justify-content-center"
+					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">
+					<div class="card-deck">
+						<div class="card">
+							<img class="card-img-top" src="<c:url value='/img/Tokyo.JPG'/>"
+								href="">
+							<div class="card-body">
+								<h5 class="card-title "></h5>
+								<p class="card-text">全世界最著名的現代大都會，每年有超過一千萬旅客到訪，其新舊並存的風情吸引更多人朝聖。只要一天的時間，就足夠你從最古老的寺院穿越到最摩登的大廈。</p>
+								<!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+							</div>
+						</div>
+						<div class="card">
+							<img class="card-img-top " src="<c:url value='/img/Osaka.JPG'/>"
+								href="">
+							<div class="card-body">
+								<h5 class="card-title"></h5>
+								<p class="card-text">作為日本第二大都市，大阪向世界各地的旅客保證，處處都是美食、美景和驚喜！歷史重地大阪城、世界最大水族館──大阪海遊館、高聳入雲的梅田藍天大廈都是必去景點。</p>
+							</div>
+						</div>
+						<div class="card">
+							<img class="card-img-top" src="<c:url value='/img/Kyoto.JPG'/>"
+								href="">
+							<div class="card-body">
+								<h5 class="card-title"></h5>
+								<p class="card-text">雖然曾歷戰火，京都之美仍然遺世獨立。只要親自走訪，你就會發現京都把日本的「侘寂」美學詮釋得有多淋漓盡致。</p>
+							</div>
+						</div>
+					</div>
+					<!--/col-->
+				</div>
+						</div>
+					</div>
+				</div>
+	
+			</div>
+		</div>
 
 		<!--/main col-->
 	</div>

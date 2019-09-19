@@ -3,7 +3,6 @@ package register.dao;
 import java.sql.Connection;
 import java.util.List;
 
-import product.model.productBean;
 import register.model.MemberBean;
 
 public interface MemberDao {
@@ -19,5 +18,7 @@ public interface MemberDao {
 
 	public void updateMember(MemberBean mb);
 	
+	public MemberBean getMember(int mId);
 	
+	public List<MemberBean> getAllMember();
 }
