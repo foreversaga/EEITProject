@@ -153,7 +153,7 @@ div#shoppingCartMenu {
 					<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find great places to
 						stay, eat, shop, or visit from local experts</p>
 					<div class="block-17 my-4" style="width: 80%;">
-						<form action="" method="post" class="d-block d-flex">
+						<form action="<c:url value='/QueryProduct/1'/>" method="get" class="d-block d-flex">
 							<div class="fields d-block d-flex">
 								<div class="textfield-search one-third">
 									<input type="text" class="form-control" placeholder="Ex: food, service, hotel">
