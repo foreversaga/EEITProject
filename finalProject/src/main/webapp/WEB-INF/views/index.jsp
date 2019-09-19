@@ -53,7 +53,19 @@
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/flaticon.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/icomoon.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/style.css'/>">
+<style type="text/css">
+div.dropdown-menu {
+	/* 	width: 300px; */
+	/* 	height: 423px; */
+	background-color: #f0f0f0;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	overflow-y: auto;
+}
 
+div#shoppingCartMenu {
+	width: 280px;
+}
+</style>
 </head>
 <body>
 
