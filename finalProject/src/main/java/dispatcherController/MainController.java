@@ -22,7 +22,7 @@ public class MainController {
 	orderService oService;
 	
 	@RequestMapping("/")
-	public String home() {
+	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("index");
 		List<productBean> list = pService.getPopularFive();
 		orderItem oi = new orderItem();
