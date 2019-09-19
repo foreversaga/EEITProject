@@ -403,7 +403,7 @@ div#shoppingCartMenu {
 										</p>
 									</div>
 									<div class="two">
-										<span class="price per-price">${Top5.pPrice}<br> <small>/night</small></span>
+										<span class="price per-price">$${Top5.pPrice}<br> <small>/night</small></span>
 									</div>
 								</div>
 								<p>${Top5.pContent}</p>
