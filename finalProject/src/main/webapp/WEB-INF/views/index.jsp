@@ -360,6 +360,44 @@ div#shoppingCartMenu {
 											<a href="#">${Top5.pName}</a>
 										</h3>
 										<p class="rate">
+																					<c:choose>
+												<c:when test="${Top5.pAvgRating>=1&&Top5.pAvgRating<2 }">
+													<i class="icon-star"></i>
+													<i class="icon-star-o"></i>
+													<i class="icon-star-o"></i>
+													<i class="icon-star-o"></i>
+													<i class="icon-star-o"></i>
+												</c:when>
+												<c:when test="${Top5.pAvgRating>=2&&Top5.pAvgRating<3 }">
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star-o"></i>
+													<i class="icon-star-o"></i>
+													<i class="icon-star-o"></i>
+												</c:when>
+												<c:when test="${Top5.pAvgRating>=3&&Top5.pAvgRating<4 }">
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star-o"></i>
+													<i class="icon-star-o"></i>
+												</c:when>
+												<c:when test="${Top5.pAvgRating>=4&&Top5.pAvgRating<5 }">
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star-o"></i>
+												</c:when>
+												<c:otherwise>
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+													<i class="icon-star"></i>
+												</c:otherwise>
+											</c:choose>
+											<span>${Top5.pAvgRating}</span>
 											<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
 												class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
 										</p>
