@@ -288,7 +288,7 @@ public class ProductController {
 			ob.setoTotalAmount(total);
 			ob.setmName(mb.getmName());
 			mav.addObject("orderInfo", ob);
-			mav.setViewName("checkout/checkout");
+			mav.setViewName("checkout/CheckOut");
 			return mav;
 		} else {
 			session.setAttribute("requestURI", "/CheckOut");
