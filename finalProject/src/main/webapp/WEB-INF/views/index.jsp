@@ -156,7 +156,7 @@ div#shoppingCartMenu {
 						<form action="<c:url value='/QueryProduct/1'/>" method="get" class="d-block d-flex">
 							<div class="fields d-block d-flex">
 								<div class="textfield-search one-third">
-									<input type="text" class="form-control" placeholder="Ex: food, service, hotel">
+									<input name="QueryString" type="text" class="form-control" placeholder="Ex: food, service, hotel">
 								</div>
 							</div>
 							<input type="submit" class="search-submit btn btn-primary" value="Search">
