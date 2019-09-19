@@ -411,7 +411,7 @@ public class ProductController {
 		return "Dashboard/AddProduct";
 	}
 //新增商品
-	@RequestMapping(value = "/AddProduct", method = RequestMethod.POST)
+	@RequestMapping(value = "/ProcessAdd", method = RequestMethod.POST)
 	public String AddProduct(@ModelAttribute("productBean") productBean bb, BindingResult result) {
 		MultipartFile productImage = bb.getProductImage();
 		String originFilename = productImage.getOriginalFilename();
