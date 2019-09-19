@@ -132,6 +132,78 @@ public class ProductController {
 		return mav;
 		
 	}
+		// 商品依照評價遞增排序
+	@RequestMapping(value = "/ProductsReviewAsc/{pageNo}", method = RequestMethod.GET)
+	public ModelAndView ProductsOrderByReviewAsc(HttpSession session, @PathVariable Integer pageNo,
+			HttpServletRequest request) {
+		if (pageNo == null) {
+			pageNo = 1;
+		}
+		String QueryString = request.getParameter("QueryString");
+		if (QueryString == null) {
+			QueryString = (String) session.getAttribute("QueryString");
+		}
+		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
+		pService.setPageNo(pageNo);
+		List<productBean> list = pService.getProductByReviewAsc(QueryString);
+		int totalPages = pService.getQueryPages(QueryString);
+		orderItem oi = new orderItem();
+		mav.addObject("totalPages", totalPages);
+		mav.addObject("productList", list);
+		mav.addObject("orderItem", oi);
+		session.setAttribute("pageNo", pageNo);
+		session.setAttribute("MappingPath", "ProductsReviewAsc");
+		return mav;
+	}
+
+	// 商品依照評價遞減排序
+	@RequestMapping(value = "/ProductsReviewDesc/{pageNo}", method = RequestMethod.GET)
+	public ModelAndView ProductsOrderByReviewDesc(HttpSession session, @PathVariable Integer pageNo,
+			HttpServletRequest request) {
+		if (pageNo == null) {
+			pageNo = 1;
+		}
+		String QueryString = request.getParameter("QueryString");
+		if (QueryString == null) {
+			QueryString = (String) session.getAttribute("QueryString");
+		}
+		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
+		pService.setPageNo(pageNo);
+		List<productBean> list = pService.getProductByReviewDesc(QueryString);
+		int totalPages = pService.getQueryPages(QueryString);
+		orderItem oi = new orderItem();
+		mav.addObject("totalPages", totalPages);
+		mav.addObject("productList", list);
+		mav.addObject("orderItem", oi);
+		session.setAttribute("pageNo", pageNo);
+		session.setAttribute("MappingPath", "ProductsReviewDesc");
+		return mav;
+	}
+
+	// 商品查詢
+	@RequestMapping(value = "/QueryProduct/{pageNo}", method = RequestMethod.GET)
+	public ModelAndView QueryProduct(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
+		if (pageNo == null) {
+			pageNo = 1;
+		}
+		String QueryString = request.getParameter("QueryString");
+		if (QueryString == null) {
+			QueryString = (String) session.getAttribute("QueryString");
+		}
+		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
+		pService.setPageNo(pageNo);
+		List<productBean> list = pService.QueryProduct(QueryString);
+		int totalPages = pService.getQueryPages(QueryString);
+		orderItem oi = new orderItem();
+		mav.addObject("totalPages", totalPages);
+		mav.addObject("productList", list);
+		mav.addObject("orderItem", oi);
+		session.setAttribute("pageNo", pageNo);
+		session.setAttribute("MappingPath", "QueryProduct");
+		session.setAttribute("QueryString", QueryString);
+		return mav;
+	}
+
 //轉換圖檔
 	private byte[] toByte(String filePath) {
 		byte[] b = null;
