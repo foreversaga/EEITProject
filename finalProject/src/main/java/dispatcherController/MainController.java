@@ -23,7 +23,12 @@ public class MainController {
 	
 	@RequestMapping("/")
 	public String home() {
-		return "index";
+		ModelAndView mav = new ModelAndView("index");
+		List<productBean> list = pService.getPopularFive();
+		orderItem oi = new orderItem();
+		mav.addObject("TopFiveList", list);
+		mav.addObject("orderItem", oi);
+		return mav;
 	}
 
 	@RequestMapping("/login")
