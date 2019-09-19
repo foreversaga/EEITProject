@@ -1,8 +1,7 @@
 package dispatcherController;
 
-import java.text.SimpleDateFormat;
 
-import javax.servlet.ServletContext;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import checkout.service.orderService;
-import product.service.productService;
 import register.model.MemberBean;
 import review.model.reviewBean;
 import review.service.ReviewService;
@@ -25,13 +22,7 @@ import review.service.ReviewService;
 @Controller
 public class ReviewController {
 	@Autowired
-	productService pService;
-	@Autowired
 	ReviewService rService;
-	@Autowired
-	ServletContext context;
-	@Autowired
-	orderService oService;
 	@Autowired
 	SessionFactory factory;
 

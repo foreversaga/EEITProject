@@ -27,4 +27,14 @@ public class ReviewServiceImpl implements ReviewService {
 		dao.InsertNewReview(rb);
 	}
 
+	@Override
+	public reviewBean getOrderItemReview(Integer pId, String mAccount) {
+		return dao.getOrderItemReview(pId, mAccount);
+	}
+
+	@Override
+	public List<reviewBean> getProductReview(Integer pId) {
+		return dao.getProductReview(pId);
+	}
+
 }

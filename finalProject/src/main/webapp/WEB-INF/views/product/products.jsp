@@ -19,21 +19,21 @@
 			}
 		});
 	};
-	$(document).ready(function() {
-		$("input:button").click(function(e) {
-			e.preventDefault();
-			var form = $(this.form);
-			var url = form.attr('action');
-			$.ajax({
-				type : "POST",
-				url : url,
-				data : form.serialize(),
-				success : function(data) {
-					$("div#shoppingCartMenu").html(data);
-				}
-			});
-		});
-	});
+	// 	$(document).ready(function() {
+	// 		$("input:button").click(function(e) {
+	// 			e.preventDefault();
+	// 			var form = $(this.form);
+	// 			var url = form.attr('action');
+	// 			$.ajax({
+	// 				type : "POST",
+	// 				url : url,
+	// 				data : form.serialize(),
+	// 				success : function(data) {
+	// 					$("div#shoppingCartMenu").html(data);
+	// 				}
+	// 			});
+	// 		});
+	// 	});
 </script>
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/open-iconic-bootstrap.min.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/animate.css'/>">
@@ -331,25 +331,7 @@ div#shoppingCartMenu {
 										<p>這邊要放商品簡介文字</p>
 										<hr>
 										<p class="bottom-area d-flex">
-											<form:form method="POST" action="${pageContext.request.contextPath}/Buy"
-												modelAttribute="orderItem" id="idform">
-												<c:if test="${productBean.pInstock==0 }">
-													<p>已售完</p>
-												</c:if>
-												<c:if test="${productBean.pInstock!=0 }">
-													<form:select path="iQty" style="margin-top:10px;">
-														<c:forEach var="stock" begin="1" end="${productBean.pInstock}">
-															<option value="${stock}">${stock}</option>
-														</c:forEach>
-													</form:select>
-												</c:if>
-												<form:input type="hidden" path="pId" value="${productBean.pId }" />
-												<form:input type="hidden" path="pName" value="${productBean.pName }" />
-												<form:input type="hidden" path="pPrice" value="${productBean.pPrice }" />
-												<c:if test="${productBean.pInstock!=0 }">
-													<input class="btn btn-outline-info" style="float: right;" type="button" value="加到購物車">
-												</c:if>
-											</form:form>
+											<a class="btn btn-outline-info" href="<c:url value='/ProductSingle/${productBean.pId}'/>">詳細資訊</a>
 										</p>
 									</div>
 								</div>

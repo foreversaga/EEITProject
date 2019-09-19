@@ -132,7 +132,7 @@ div.dropdown-menu {
 	<!-- 	</section> -->
 	<div class="limiter">
 		<div class="container-table100">
-			<div class="wrap-table100" style="width: 800px;">
+			<div class="wrap-table100" >
 				<div class="table100 ver1 m-b-110">
 					<div class="table100-head">
 						<table>
@@ -156,7 +156,7 @@ div.dropdown-menu {
 											width="30%;" src="<c:url value='/showPic/${orderItem.pId}'/>" /></td>
 										<td class="cell100 column2">${orderItem.iDes}</td>
 										<td class="cell100 column3" style="text-align: center;"><c:choose>
-												<c:when test="">
+												<c:when test="${!empty review[orderItem.pId]}">
 													<a href="<c:url value=''/>">查看我的評價</a>
 												</c:when>
 												<c:otherwise>
