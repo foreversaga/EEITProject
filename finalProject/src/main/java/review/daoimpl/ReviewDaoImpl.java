@@ -16,17 +16,20 @@ public class ReviewDaoImpl implements ReviewDao {
 	@Autowired
 	SessionFactory factory;
 
-	
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<reviewBean> getAllReviews() {
 		String hql = "From reviewBean";
-		Session session = null;
+		Session session = factory.getCurrentSession();
 		List<reviewBean> list = new ArrayList<>();
-		session = factory.getCurrentSession();
 		list = session.createQuery(hql).getResultList();
 		return list;
 	}
 
+	@Override
+	public void InsertNewReview(reviewBean rb) {
+		Session session = factory.getCurrentSession();
+		session.save(rb);
+	}
 
 }

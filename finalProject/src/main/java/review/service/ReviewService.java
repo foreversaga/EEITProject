@@ -7,4 +7,5 @@ import review.model.reviewBean;
 public interface ReviewService {
 	List<reviewBean> getAllReviews();
 
+	void InsertNewReview(reviewBean rb);
 }

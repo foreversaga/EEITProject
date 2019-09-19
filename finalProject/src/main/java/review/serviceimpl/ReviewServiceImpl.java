@@ -10,16 +10,21 @@ import review.dao.ReviewDao;
 import review.model.reviewBean;
 import review.service.ReviewService;
 
+@Transactional
 @Service
 public class ReviewServiceImpl implements ReviewService {
-	
+
 	@Autowired
 	ReviewDao dao;
 
-	@Transactional
 	@Override
 	public List<reviewBean> getAllReviews() {
 		return dao.getAllReviews();
+	}
+
+	@Override
+	public void InsertNewReview(reviewBean rb) {
+		dao.InsertNewReview(rb);
 	}
 
 }
