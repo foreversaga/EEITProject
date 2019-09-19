@@ -19,7 +19,8 @@ import register.model.MemberBean;
 public class MainController {
 	
 	@Autowired
-	orderService oService;
+	productService pService;
+
 	
 	@RequestMapping("/")
 	public ModelAndView home() {
