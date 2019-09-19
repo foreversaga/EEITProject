@@ -1,6 +1,8 @@
 package register.daoImpl;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
@@ -10,6 +12,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import config.GlobalService;
 import product.model.productBean;
 import register.dao.MemberDao;
 import register.model.MemberBean;
@@ -87,6 +90,14 @@ public class MemberDaoImpl implements MemberDao {
 		return mb;
 	}
 
+	@Override
+	public MemberBean getMember(int mId) {
+		MemberBean mb = null;
+		Session session = factory.getCurrentSession();
+		String sql = "FROM MemberBean mb WHERE mb.mId=:mid";
+		mb = (MemberBean) session.createQuery(sql).setParameter("mid", mId).uniqueResult();
+		return mb;
+	}
 	
 	@Override
 	public void updateMember(MemberBean mb) {
@@ -98,5 +109,14 @@ public class MemberDaoImpl implements MemberDao {
 		session.update(mb);
 		
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MemberBean> getAllMember() {
+		List<MemberBean> list = new ArrayList<MemberBean>();
+		Session session = factory.getCurrentSession();
+		String sql = "FROM MemberBean";
+		list = session.createQuery(sql).getResultList();
+		return list;
+	}
 }

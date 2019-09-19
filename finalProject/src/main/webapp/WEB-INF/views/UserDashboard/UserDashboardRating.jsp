@@ -1,9 +1,16 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 <html>
 <head>
 <link rel="stylesheet"
@@ -19,6 +26,13 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	rel="stylesheet">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/TableCss/vendor/perfect-scrollbar/perfect-scrollbar.css'/>">
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/TableCss/css/util.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/TableCss/css/main.css'/>">
+<!-- 上述三行顯示訂單內容必要連結 -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 	crossorigin="anonymous"></script>
@@ -31,6 +45,9 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 <script src="<c:url value='/css/RWDcss/js/jquery.min.js'/>"></script>
+<!-- ==================================================================== -->
+<script src="http://malsup.github.io/jquery.form.js"></script>
+	<script src="<c:url value='/css/TableCss/vendor/perfect-scrollbar/perfect-scrollbar.min.js'/>"></script>
 <script>
 	$(document).ready(function() {
 
@@ -194,7 +211,8 @@ body {
 						</a> <a class="dropdown-item" href="<c:url value='/UserOrderDetail'/>">
 							<i class="  mr-2 text-gray-400 fa fa-shopping-bag"
 							style="color: #99E64D;"></i> 我的訂單
-						</a> <a class="dropdown-item" href="<c:url value='/UserDashboardRating'/>"> <i
+						</a> <a class="dropdown-item"
+							href="<c:url value='/UserDashboardRating'/>"> <i
 							class="  mr-2 text-gray-400 fa fa-gratipay" style="color: pink;"></i>
 							我的評價
 						</a>
@@ -229,103 +247,64 @@ body {
 						class="list-group-item list-group-item-action bg-light ">個人中心</a>
 					<a href="<c:url value='/UserOrderDetail'/>"
 						class="list-group-item list-group-item-action bg-light">我的訂單</a> <a
-						href="<c:url value='/UserDashboardRating'/>" class="list-group-item list-group-item-action bg-light">我的評價</a>
-					<a href="<c:url value='/UpdateMemberForm'/>"
-						class="list-group-item list-group-item-action bg-light">帳戶設定</a> 
+						href="<c:url value='/UserDashboardRating'/>"
+						class="list-group-item list-group-item-action bg-light">我的評價</a> <a
+						href="<c:url value='/UpdateMemberForm'/>"
+						class="list-group-item list-group-item-action bg-light">帳戶設定</a>
 				</div>
 			</div>
 			<!--/col-->
-			<div class="container col-md-9 p-0 "style="margin-top:20px">
+			<div class="container col-md-9 p-0 " style="margin-top: 20px">
 				<div class="container flex-column">
 
 					<div class="  pt-5">
 						<div class="card ">
-							<form:form method="POST" modelAttribute="MemberBean">
-								<div class="card-header card-header-primary">
-									<h4 class="card-title ">個人資訊管理</h4>
-									<p class="card-category">以下資訊僅用於幫助你在支付時自動填寫你的個人資料，你的資料將會安全地被保存且不會公開</p>
-								</div>
-								<div class="card-body">
 
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">用戶名(須與旅遊證件一致)</label>
-												<form:input id="mName" path="mName" value="${LoginOK.mName}"
-													type="text" class="form-control " disabled="true" />
+							<div class="card-header card-header-primary">
+								<h4 class="card-title ">個人評價管理</h4>
+								<p class="card-category">以下資訊僅用於填寫你對於商品的評價，你的資料將會安全地被保存且不會公開</p>
+							</div>
+							<div class="mt-2">
+								<div class="container-fruid" style="height: 600px;">
+									<div class="">
+										<div class="table100 ver1 mb-5">
+											<div class="table100-head "style="text-align: center">
+												<table>
+													<thead>
+														<tr class="  row100 head ">
+															<th class="cell100 column1">帳號</th>
+															<th class="cell100 column2">評級</th>
+															<th class="cell100 column3">標題</th>
+															<th class="cell100 column4">意見</th>
+															<th class="cell100 column5">發表時間</th>
+														</tr>
+													</thead>
+												</table>
 											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">生日(須與旅遊證件一致)</label>
-												<form:input id="mDate" path="mDate" value="${LoginOK.mDate}"
-													type="text" class="form-control " disabled="true" />
-											</div>
-										</div>
-										<div class="col-md-3">
-											<div class="form-group">
-												<label class="bmd-label-floating">性別</label>
-												<form:input id="mGender" path="mGender"
-													value="${LoginOK.mGender}" type="email"
-													class="form-control " disabled="true" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">帳號</label>
-												<form:input id="mAccount" path="mAccount"
-													value="${LoginOK.mAccount}" type="text"
-													class="form-control" />
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">密碼</label>
-												<form:input id="mPassword" path="mPassword"
-													value="${LoginOK.mPassword}" type="password"
-													class="form-control" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-5">
-											<div class="form-group">
-												<label class="bmd-label-floating">Email</label>
-												<form:input id="mEmail" path="mEmail"
-													value="${LoginOK.mEmail}" type="text" class="form-control" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-8">
-											<div class="form-group">
-												<label class="bmd-label-floating">地址</label>
-												<form:input id="mAddress" path="mAddress"
-													value="${LoginOK.mAddress}" type="text"
-													class="form-control" />
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group">
-												<label class="bmd-label-floating">手機號碼</label>
-												<form:input id="mPhone" path="mPhone"
-													value="${LoginOK.mPhone}" type="text" class="form-control" />
-											</div>
-										</div>
-									</div>
 
+											<div class="container-fruid js-pscroll">
+												<table>
+													<tbody>
+														<c:forEach varStatus="vs" var="orderBean"
+															items="${orderList}">
+															<tr class="row100 body ">
+																<td class=" justify-content-center cell100 column1 "
+																	style="text-align: center; height: 95px"><a
+																	href="<c:url value='/showOrderItem/${orderBean.oId}'/>">${orderBean.oId}</a></td>
+																<td class="container-fruid cell100 column2 mb-5">${orderBean.oTimestamp}</td>
+																<td class="cell100 column3">${orderBean.oTotalAmount}</td>
+																<td class="cell100 column4">${orderBean.oPaymentStatus}</td>
+																<td class="cell100 column5">${orderBean.oPaymentStatus}</td>
+															</tr>
+														</c:forEach>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
 								</div>
-								<div class="row"></div>
-								<button type="submit"
-									class="btn btn-primary pull-right col-md-4 align-self-end m-1">Update
-									Profile</button>
-								<div class="clearfix"></div>
-							</form:form>
-							<img  width='300' height='300' class=" " src="<c:url value='/showmPic/${LoginOK.mId}'/>" style="height:500px" href="">
+							</div>
+
 						</div>
 					</div>
 				</div>
@@ -385,5 +364,7 @@ body {
 			</div>
 		</div>
 	</footer>
+</body>
+</html>
 </body>
 </html>

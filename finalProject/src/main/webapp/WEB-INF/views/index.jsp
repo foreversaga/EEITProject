@@ -90,8 +90,11 @@ div#shoppingCartMenu {
 					<li class="nav-item"><a href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li>
 					<c:if test="${!empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
+						<li class="nav-item"><a href="<c:url value='/Dashboard'/>" class="nav-link">後臺系統</a></li>
 						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 						<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">訂單查詢</a></li>
+						<li class="nav-item"><a href="<c:url value='/MemberList'/>" class="nav-link">會員列表</a></li>
+<%-- 						<li class="nav-item"><a href="<c:url value='/AddProduct'/>" class="nav-link">新增商品2</a></li> --%>
 						<li class="nav-item"><a href="<c:url value='/review'/>" class="nav-link">評價查詢</a></li>
 					</c:if>
 				</ul>
@@ -105,7 +108,7 @@ div#shoppingCartMenu {
 							</c:if>
 							<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
 								<hr>
-								<table>
+																<table>
 									<tr>
 										<td rowspan="2"><img style="width: 80px; height: 80px;"
 											src="<c:url value='/showPic/${cart.value.pId}'/>"></td>
@@ -117,6 +120,12 @@ div#shoppingCartMenu {
 												onclick="DeleteItem(this.id)" value="刪除" /></td>
 									</tr>
 								</table>
+								<img style="width: 50px; height: 50px; float: left;"
+									src="<c:url value='/showPic/${cart.value.pId}'/>">
+								<p style="line-height: 10px">${cart.value.pName}</p>
+								<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
+								<span><input id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)"
+										value="刪除" /> </span>
 								<c:if test="${vs.last}">
 									<hr>
 								</c:if>
@@ -351,7 +360,7 @@ div#shoppingCartMenu {
 											<a href="#">${Top5.pName}</a>
 										</h3>
 										<p class="rate">
-											<c:choose>
+																					<c:choose>
 												<c:when test="${Top5.pAvgRating>=1&&Top5.pAvgRating<2 }">
 													<i class="icon-star"></i>
 													<i class="icon-star-o"></i>
@@ -389,6 +398,8 @@ div#shoppingCartMenu {
 												</c:otherwise>
 											</c:choose>
 											<span>${Top5.pAvgRating}</span>
+											<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
+												class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
 										</p>
 									</div>
 									<div class="two">
@@ -695,7 +706,7 @@ div#shoppingCartMenu {
 	</div>
 
 
-
+	
 	<script src="<c:url value='/css/RWDcss/js/jquery-migrate-3.0.1.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/popper.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/bootstrap.min.js'/>"></script>

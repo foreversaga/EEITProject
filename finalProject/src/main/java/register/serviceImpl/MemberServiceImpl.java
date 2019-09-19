@@ -1,10 +1,13 @@
 package register.serviceImpl;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import product.model.productBean;
 import register.dao.MemberDao;
 import register.model.MemberBean;
 import register.service.MemberService;
@@ -78,6 +81,17 @@ public class MemberServiceImpl implements MemberService {
 			dao.updateMember(mb);
 		}
 	}
-
-
+	@Transactional
+	@Override
+	public MemberBean getMember(int mId) {
+		MemberBean mb = null;
+		mb = dao.getMember(mId);
+		return mb;
+	}
+	@Transactional
+	@Override
+	public List<MemberBean> getAllMember() {
+		return dao.getAllMember();
+		
+	}
 }

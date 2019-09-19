@@ -1,17 +1,27 @@
 package dispatcherController;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,10 +29,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import product.model.productBean;
 import register.model.MemberBean;
 import register.service.MemberService;
 
@@ -91,6 +99,58 @@ public class MemberController {
 		return "register/register";
 	}
 
+	//轉換圖檔
+		private byte[] toByte(String filePath) {
+			byte[] b = null;
+			String realpath = context.getRealPath(filePath);
+			try {
+				File file = new File(realpath);
+				long size = file.length();
+				b = new byte[(int) size];
+				InputStream fis = context.getResourceAsStream(filePath);
+				fis.read(b);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return b;
+		}
+	
+	//顯示商品圖片
+		@RequestMapping(value = "/showmPic/{mId}", method = RequestMethod.GET)
+		public ResponseEntity<byte[]> showmPic(HttpSession session, HttpServletResponse resp, @PathVariable Integer mId) {
+			MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
+			String filePath = "/WEB-INF/resource/img/NoImage.jpg";
+			String filename = "";
+			int len = 0;
+			HttpHeaders headers = new HttpHeaders();
+			byte[] mediaByte = null;
+			if (mb != null) {
+				Blob blob = mb.getmPicture();
+				filename = mb.getmFileName();
+				try {
+					if (blob != null) {
+						len = (int) blob.length();
+						mediaByte = blob.getBytes(1, len);
+						String mimeType = context.getMimeType(filename);
+						MediaType mediaType = MediaType.valueOf(mimeType);
+						headers.setContentType(mediaType);
+					} else {
+						filename = filePath;
+						mediaByte = toByte(filePath);
+					}
+				} catch (SQLException e) {
+					throw new RuntimeException("MemberController的getPic發生例外:" + e.getMessage());
+				}
+			} else {
+				filename = filePath;
+				mediaByte = toByte(filePath);
+			}
+			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+			ResponseEntity<byte[]> resEntity = new ResponseEntity<>(mediaByte, headers, HttpStatus.OK);
+			return resEntity;
+		}
 	@RequestMapping(value = "/register/add", method = RequestMethod.POST)
 	public String porcessAddNewRegistertoForm(@ModelAttribute("MemberBean") MemberBean mb, BindingResult result) {
 		MultipartFile memberImage = mb.getMemberImage();
@@ -129,5 +189,12 @@ public class MemberController {
 		memberservice.updateMember(LoginOK);
 		return "redirect:/UserDashboard";
 //		return "index";
+	}
+	
+	@RequestMapping(value = "/MemberList")
+	public String getMemberListController(Model model) {
+		List<MemberBean>list=memberservice.getAllMember();
+		model.addAttribute("Members", list);
+		return "Dashboard/MemberList";
 	}
 }

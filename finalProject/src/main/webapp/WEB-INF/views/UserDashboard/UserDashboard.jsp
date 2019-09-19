@@ -192,7 +192,7 @@ body {
 						</a> <a class="dropdown-item" href="<c:url value='/UserOrderDetail'/>"> <i
 							class="  mr-2 text-gray-400 fa fa-shopping-bag"
 							style="color: #99E64D;"></i> 我的訂單
-						</a> <a class="dropdown-item" href="#"> <i
+						</a> <a class="dropdown-item" href="<c:url value='/UserDashboardRating'/>"> <i
 							class="  mr-2 text-gray-400 fa fa-gratipay" style="color: pink;"></i>
 							我的評價
 						</a>
@@ -206,7 +206,7 @@ body {
 		</div>
 	</nav>
 	<div class="container " id="main">
-		<div class="container row row-offcanvas row-offcanvas-left ">
+		<div class="container row row-offcanvas row-offcanvas-left " >
 			<!-- <div class="  col-md-3  sidebar-offcanvas bg-light " id="sidebar" role="navigation"
                 style="text-align: center">
                 <ul class=" nav  list-group list-group-item-flush  flex-column sticky-top  p-0 pt-5 "style="font-family: 'Noto Serif TC', serif">
@@ -224,16 +224,14 @@ body {
 					<a href="<c:url value='/UserDashboard'/>"
 						class="list-group-item list-group-item-action bg-light ">個人中心</a>
 					<a href="<c:url value='/UserOrderDetail'/>" class="list-group-item list-group-item-action bg-light">我的訂單</a>
-					<a href="#" class="list-group-item list-group-item-action bg-light">我的評價</a>
+					<a href="<c:url value='/UserDashboardRating'/>" class="list-group-item list-group-item-action bg-light">我的評價</a>
 					<a href="<c:url value='/UpdateMemberForm'/>"
-						class="list-group-item list-group-item-action bg-light">帳戶設定</a> <a
-						href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
-					<a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+						class="list-group-item list-group-item-action bg-light">帳戶設定</a> 
 				</div>
 			</div>
 			<!--/col-->
 
-			<div class="col main pt-5 ml-2 bg-white">
+			<div class="col main pt-5 ml-2 bg-white" >
 				<div class="d-flex justify-content-center flex-row  ">
 					<img src="<c:url value='/img/TravelIcon.png'/>" class="img-fluid" />
 				</div>

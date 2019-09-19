@@ -1,5 +1,8 @@
 package register.service;
 
+import java.util.List;
+
+import product.model.productBean;
 import register.model.MemberBean;
 
 public interface MemberService {
@@ -14,4 +17,7 @@ public interface MemberService {
 	
 	void updateMember(MemberBean mb );
 	
+	MemberBean getMember(int mId);
+	
+	List<MemberBean> getAllMember();
 }
