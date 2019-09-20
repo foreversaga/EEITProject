@@ -6,6 +6,9 @@
 <head>
 <title>我的訂單</title>
 <meta charset="utf-8">
+<meta http-equiv="pragma" content="no-cache">  
+<meta http-equiv="cache-control" content="no-cache">  
+<meta http-equiv="expires" content="0">   
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script src="<c:url value='/css/RWDcss/js/jquery.min.js'/>"></script>
 <script type="text/javascript">
@@ -130,9 +133,9 @@ div.dropdown-menu {
 	<!-- 			<div class="row"></div> -->
 	<!-- 		</div> -->
 	<!-- 	</section> -->
-	<div class="limiter">
+	<div id="orderitem" class="limiter">
 		<div class="container-table100">
-			<div class="wrap-table100" >
+			<div class="wrap-table100">
 				<div class="table100 ver1 m-b-110">
 					<div class="table100-head">
 						<table>
@@ -157,10 +160,84 @@ div.dropdown-menu {
 										<td class="cell100 column2">${orderItem.iDes}</td>
 										<td class="cell100 column3" style="text-align: center;"><c:choose>
 												<c:when test="${!empty review[orderItem.pId]}">
-													<a href="<c:url value=''/>">查看我的評價</a>
+													<button class="btn btn-primary" type="button" data-toggle="collapse"
+														data-target="#collapseReview" aria-expanded="false" aria-controls="collapseReview">
+														查看我的評價</button>
+													<div class="collapse" id="collapseReview">
+														<div style="text-align: left; margin-top: 2%;" class="card card-body">
+															<span class="rate"> <c:choose>
+																	<c:when
+																		test="${review[orderItem.pId].rRating>=1&&review[orderItem.pId].rRating<2 }">
+																		<i class="icon-star"></i>
+																		<i class="icon-star-o"></i>
+																		<i class="icon-star-o"></i>
+																		<i class="icon-star-o"></i>
+																		<i class="icon-star-o"></i>
+																	</c:when>
+																	<c:when
+																		test="${review[orderItem.pId].rRating>=2&&review[orderItem.pId].rRating<3 }">
+																		<i class="icon-star"></i>
+																		<i class="icon-star"></i>
+																		<i class="icon-star-o"></i>
+																		<i class="icon-star-o"></i>
+																		<i class="icon-star-o"></i>
+																	</c:when>
+																	<c:when
+																		test="${review[orderItem.pId].rRating>=3&&review[orderItem.pId].rRating<4 }">
+																		<i class="icon-star"></i>
+																		<i class="icon-star"></i>
+																		<i class="icon-star"></i>
+																		<i class="icon-star-o"></i>
+																		<i class="icon-star-o"></i>
+																	</c:when>
+																	<c:when
+																		test="${review[orderItem.pId].rRating>=4&&review[orderItem.pId].rRating<5 }">
+																		<i class="icon-star"></i>
+																		<i class="icon-star"></i>
+																		<i class="icon-star"></i>
+																		<i class="icon-star"></i>
+																		<i class="icon-star-o"></i>
+																	</c:when>
+																	<c:otherwise>
+																		<i class="icon-star"></i>
+																		<i class="icon-star"></i>
+																		<i class="icon-star"></i>
+																		<i class="icon-star"></i>
+																		<i class="icon-star"></i>
+																	</c:otherwise>
+																</c:choose></span>
+															<h5>${review[orderItem.pId].rTitle}</h5>
+															<p>${review[orderItem.pId].rReview}</p>
+														</div>
+													</div>
 												</c:when>
 												<c:otherwise>
-													<a href="<c:url value='/AddReview/${orderItem.pId}'/>">填寫評價</a>
+													<button class="btn btn-primary" type="button" data-toggle="collapse"
+														data-target="#collapseAddReview" aria-expanded="false"
+														aria-controls="collapseAddReview">填寫評價</button>
+													<div class="collapse" id="collapseAddReview">
+														<div class="card card-body" style="text-align: left; margin-top: 2%;">
+															<form:form action="${pageContext.request.contextPath}/ProcessNewReview"
+																modelAttribute="newrb" method="POST">
+																<form:input type="hidden" path="mName" value="${LoginOK.mName}"></form:input>
+																<form:input type="hidden" path="oId" value="${orderItem.orderBean.oId}"></form:input>
+																<h5>評分:</h5>
+																<p>
+																	<form:radiobutton path="rRating" value="1" label="1" />
+																	<form:radiobutton path="rRating" value="2" label="2" />
+																	<form:radiobutton path="rRating" value="3" label="3" />
+																	<form:radiobutton path="rRating" value="4" label="4" />
+																	<form:radiobutton path="rRating" value="5" label="5" />
+																</p>
+																<form:input type="text" size="20" path="rTitle" placeholder="請輸入標題"></form:input>
+																<br>
+																<form:textarea path="rReview" rows="8" cols="40" placeholder="請輸入評價內容"></form:textarea>
+																<form:input type="hidden" path="pId" value="${orderItem.pId}"></form:input>
+																<br>
+																<input class="btn btn-outline-success btn-sm" type="submit" value="送出">
+															</form:form>
+														</div>
+													</div>
 												</c:otherwise>
 											</c:choose></td>
 									</tr>

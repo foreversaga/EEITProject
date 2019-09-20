@@ -63,14 +63,12 @@ div#ftco-nav li.nav-item {
 span#star-span {
 	color: #ffff37;
 }
-
-
 </style>
 
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 		<div class="container">
 			<a class="navbar-brand" href="<c:url value='/'/>">旅遊趣</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
@@ -104,12 +102,12 @@ span#star-span {
 							</c:if>
 							<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
 								<hr>
-								<img style="width: 50px; height: 50px; float: left;"
+								<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;"
 									src="<c:url value='/showPic/${cart.value.pId}'/>">
 								<p style="line-height: 10px">${cart.value.pName}</p>
 								<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
-								<span><input id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)"
-										value="刪除" /> </span>
+								<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button"
+										onclick="DeleteItem(this.id)" value="刪除" /> </span>
 								<c:if test="${vs.last}">
 									<hr>
 								</c:if>
@@ -124,7 +122,7 @@ span#star-span {
 	</nav>
 	<!-- END nav -->
 	<div style="width: 50%; margin: 0 auto;">
-<img width="100%" src="<c:url value='/showPic/${productBean.pId}'/>"/>
+		<img width="100%" src="<c:url value='/showPic/${productBean.pId}'/>" />
 		<div id="Product-Title">
 			<h1 class="display-2">${productBean.pName}</h1>
 		</div>
@@ -214,63 +212,66 @@ span#star-span {
 			<li class="nav-item"><a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"
 				role="tab" aria-controls="contact" aria-selected="false">Contact</a></li>
 		</ul>
-		<div class="tab-content" id="myTabContent">
+		<div class="tab-content" id="myTabContent" style="height: 300px">
 			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">${productBean.pContent}</div>
 			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-				<c:forEach varStatus="vs" var="reviewBean" items="${reviewList}">
-					<div class="card border-light mb-3">
-						<h5 class="card-header">
-							<span style="margin-right: 10%">用戶:${reviewBean.mName}</span> <span class="rate" style="margin-right: 10%">
-								<c:choose>
-									<c:when test="${reviewBean.rRating>=1&&reviewBean.rRating<2 }">
-										<i class="icon-star"></i>
-										<i class="icon-star-o"></i>
-										<i class="icon-star-o"></i>
-										<i class="icon-star-o"></i>
-										<i class="icon-star-o"></i>
-									</c:when>
-									<c:when test="${reviewBean.rRating>=2&&reviewBean.rRating<3 }">
-										<i class="icon-star"></i>
-										<i class="icon-star"></i>
-										<i class="icon-star-o"></i>
-										<i class="icon-star-o"></i>
-										<i class="icon-star-o"></i>
-									</c:when>
-									<c:when test="${reviewBean.rRating>=3&&reviewBean.rRating<4 }">
-										<i class="icon-star"></i>
-										<i class="icon-star"></i>
-										<i class="icon-star"></i>
-										<i class="icon-star-o"></i>
-										<i class="icon-star-o"></i>
-									</c:when>
-									<c:when test="${reviewBean.rRating>=4&&reviewBean.rRating<5 }">
-										<i class="icon-star"></i>
-										<i class="icon-star"></i>
-										<i class="icon-star"></i>
-										<i class="icon-star"></i>
-										<i class="icon-star-o"></i>
-									</c:when>
-									<c:otherwise>
-										<i class="icon-star"></i>
-										<i class="icon-star"></i>
-										<i class="icon-star"></i>
-										<i class="icon-star"></i>
-										<i class="icon-star"></i>
-									</c:otherwise>
-								</c:choose>
-							</span>
-						</h5>
-						<div class="card-body">
-							<h5 class="card-title">${reviewBean.rTitle}</h5>
-							<p class="card-text">${reviewBean.rReview}</p>
-						</div>
-					</div>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${empty reviewList}">此商品尚無評價。</c:when>
+					<c:otherwise>
+						<c:forEach varStatus="vs" var="reviewBean" items="${reviewList}">
+							<div class="card border-light mb-3">
+								<h5 class="card-header">
+									<span style="margin-right: 10%">用戶:${reviewBean.mName}</span> <span class="rate"
+										style="margin-right: 10%"> <c:choose>
+											<c:when test="${reviewBean.rRating>=1&&reviewBean.rRating<2 }">
+												<i class="icon-star"></i>
+												<i class="icon-star-o"></i>
+												<i class="icon-star-o"></i>
+												<i class="icon-star-o"></i>
+												<i class="icon-star-o"></i>
+											</c:when>
+											<c:when test="${reviewBean.rRating>=2&&reviewBean.rRating<3 }">
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star-o"></i>
+												<i class="icon-star-o"></i>
+												<i class="icon-star-o"></i>
+											</c:when>
+											<c:when test="${reviewBean.rRating>=3&&reviewBean.rRating<4 }">
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star-o"></i>
+												<i class="icon-star-o"></i>
+											</c:when>
+											<c:when test="${reviewBean.rRating>=4&&reviewBean.rRating<5 }">
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star-o"></i>
+											</c:when>
+											<c:otherwise>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+												<i class="icon-star"></i>
+											</c:otherwise>
+										</c:choose>
+									</span>
+								</h5>
+								<div class="card-body">
+									<h5 class="card-title">${reviewBean.rTitle}</h5>
+									<p class="card-text">${reviewBean.rReview}</p>
+								</div>
+							</div>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">測試用文字3</div>
 		</div>
-
 	</div>
-
 </body>
 </html>

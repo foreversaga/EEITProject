@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Review")
@@ -30,9 +31,19 @@ public class reviewBean implements Serializable {
 	private Integer pId;
 	private java.sql.Timestamp rTimestamp;
 	private Integer rRating;
+	@Transient
+	private Integer oId;
 
 	public reviewBean() {
 
+	}
+
+	public Integer getoId() {
+		return oId;
+	}
+
+	public void setoId(Integer oId) {
+		this.oId = oId;
 	}
 
 	public Integer getrId() {

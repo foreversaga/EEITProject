@@ -337,7 +337,7 @@ div#shoppingCartMenu {
 		<div class="container">
 			<div class="row justify-content-start mb-5 pb-3">
 				<div class="col-md-7 heading-section ftco-animate">
-					<span class="subheading">好評不斷</span>
+					<span id="testspan" class="subheading">好評不斷</span>
 					<h2 class="mb-4">
 						<strong>最熱門</strong> 隨時更新TOP5
 					</h2>

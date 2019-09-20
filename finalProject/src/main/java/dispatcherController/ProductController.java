@@ -146,9 +146,10 @@ public class ProductController {
 		session.setAttribute("pageNo", pageNo);
 		session.setAttribute("MappingPath", "ProductsPriceAsc");
 		return mav;
-		
+
 	}
-		// 商品依照評價遞增排序
+
+	// 商品依照評價遞增排序
 	@RequestMapping(value = "/ProductsReviewAsc/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView ProductsOrderByReviewAsc(HttpSession session, @PathVariable Integer pageNo,
 			HttpServletRequest request) {
@@ -237,6 +238,7 @@ public class ProductController {
 		}
 		return b;
 	}
+
 //顯示商品圖片
 	@RequestMapping(value = "/showPic/{pId}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> showPic(HttpServletResponse resp, @PathVariable Integer pId) {
@@ -271,6 +273,7 @@ public class ProductController {
 		ResponseEntity<byte[]> resEntity = new ResponseEntity<>(mediaByte, headers, HttpStatus.OK);
 		return resEntity;
 	}
+
 //新增商品至購物車
 	@RequestMapping(value = "/Buy", method = RequestMethod.POST)
 	public ModelAndView AddToCart(HttpSession session, ModelAndView mav, @ModelAttribute("orderItem") orderItem oi,
@@ -284,6 +287,7 @@ public class ProductController {
 		session.setAttribute("shoppingCart", cart);
 		return mav;
 	}
+
 //確認訂單頁面顯示
 	@RequestMapping(value = "/CheckOut")
 	public ModelAndView ToCheckOut(HttpSession session, ModelAndView mav) {
@@ -311,6 +315,7 @@ public class ProductController {
 			return mav;
 		}
 	}
+
 //送出訂單
 	@RequestMapping(value = "/ConfirmOrder")
 	public String ConfirmOrder(@ModelAttribute("orderInfo") orderBean ob, HttpSession session) {
@@ -359,12 +364,14 @@ public class ProductController {
 			AllInOne all = new AllInOne("");
 			String form = all.aioCheckOut(obj, null);
 			session.setAttribute("form", form);
-			return "checkout/ECpage";
+//			return "checkout/ECpage";
+			return "redirect:/";
 		} else {
 			session.setAttribute("requestURI", "/ConfirmOrder");
 			return "redirect:/login";
 		}
 	}
+
 //綠界結帳完成頁面顯示
 	@RequestMapping("/PaySuccess")
 	public String TestEC(HttpSession session, HttpServletRequest request) {
@@ -418,6 +425,7 @@ public class ProductController {
 		}
 		return "checkout/paidPage";
 	}
+
 //新增商品表格
 	@RequestMapping(value = "/AddProduct", method = RequestMethod.GET)
 	public String AddForm(Model model) {
@@ -425,6 +433,7 @@ public class ProductController {
 		model.addAttribute("productBean", bb);
 		return "Dashboard/AddProduct";
 	}
+
 //新增商品
 	@RequestMapping(value = "/ProcessAdd", method = RequestMethod.POST)
 	public String AddProduct(@ModelAttribute("productBean") productBean bb, BindingResult result) {
@@ -444,6 +453,7 @@ public class ProductController {
 		pService.insertNewProduct(bb);
 		return "redirect:/products/1";
 	}
+
 //刪除購物車商品
 	@RequestMapping(value = "/DeleteCartProduct", method = RequestMethod.GET)
 	public ModelAndView deleteProduct(HttpSession session, ModelAndView mav, HttpServletRequest request) {
@@ -453,6 +463,7 @@ public class ProductController {
 		cart.deleteProduct(pId);
 		return mav;
 	}
+
 //顯示訂單
 	@RequestMapping("/OrderDetails")
 	public ModelAndView GetOrderlist(HttpSession session, ModelAndView mav) {
@@ -462,22 +473,31 @@ public class ProductController {
 		mav.setViewName("checkout/orderDetails");
 		return mav;
 	}
+
 //顯示訂單明細
 	@RequestMapping("/showOrderItem/{oId}")
 	public ModelAndView GetOrderItem(@PathVariable Integer oId, HttpSession session, ModelAndView mav,
 			HttpServletRequest request) {
 		List<orderItemBean> list = oService.getOrderItem(oId);
 		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
-		Map<Integer, reviewBean> map = new HashMap<Integer, reviewBean>();
-		for (orderItemBean ob : list) {
-			reviewBean rb = rService.getOrderItemReview(ob.getpId(), mb.getmAccount());
-			map.put(ob.getpId(), rb);
+		if (mb == null) {
+			session.setAttribute("requestURI", "/showOrderItem/" + oId);
+			mav.setViewName("redirect:/login");
+		} else {
+			Map<Integer, reviewBean> map = new HashMap<Integer, reviewBean>();
+			for (orderItemBean ob : list) {
+				reviewBean rb = rService.getOrderItemReview(ob.getpId(), mb.getmAccount());
+				map.put(ob.getpId(), rb);
+			}
+			reviewBean newrb = new reviewBean();
+			mav.addObject("newrb", newrb);
+			mav.addObject("review", map);
+			mav.addObject("orderItemList", list);
+			mav.setViewName("checkout/orderItem");
 		}
-		mav.addObject("review", map);
-		mav.addObject("orderItemList", list);
-		mav.setViewName("checkout/orderItem");
 		return mav;
 	}
+
 //建立商品資料庫
 	@RequestMapping("/AddProductDB")
 	public String AddProductDB() {
