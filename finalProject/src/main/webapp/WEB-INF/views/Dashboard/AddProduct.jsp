@@ -113,8 +113,8 @@ body {
 				data-toggle="offcanvas" title="Toggle responsive left sidebar">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<a class="navbar-brand" href="<c:url value='/UserDashboard'/>"
-				title="User Dashboard">後臺系統</a>
+<%-- 			<a class="navbar-brand" href="<c:url value='/UserDashboard'/>" --%>
+<!-- 				title="User Dashboard">後臺系統</a> -->
 		</div>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsingNavbar">
@@ -128,31 +128,31 @@ body {
                     <a class="nav-link" href="//www.codeply.com">Link</a>
                 </li> -->
 			</ul>
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle fa fa-align-justify fa-pull-left ml-2"
-					style="color: white;" href="#" id="navbarDropdown" role="button"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						分類 </a>
-					<div
-						class="dropdown-menu dropdown-menu dropdown-menu-left shadow animated--grow-in"
-						aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">景點門票-表演</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">美食</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">特色活動體驗</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">交通票券</a>
-					</div></li>
-				<form:form class="form-inline col-md-offset-2 ml-5">
-					<input class="form-control" type="text" placeholder="Search"
-						aria-label="Search">
-				</form:form>
-			</ul>
+<!-- 			<ul class="navbar-nav mr-auto"> -->
+<!-- 				<li class="nav-item dropdown"><a -->
+<!-- 					class="nav-link dropdown-toggle fa fa-align-justify fa-pull-left ml-2" -->
+<!-- 					style="color: white;" href="#" id="navbarDropdown" role="button" -->
+<!-- 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+<!-- 						分類 </a> -->
+<!-- 					<div -->
+<!-- 						class="dropdown-menu dropdown-menu dropdown-menu-left shadow animated--grow-in" -->
+<!-- 						aria-labelledby="navbarDropdown"> -->
+<!-- 						<a class="dropdown-item" href="#">景點門票-表演</a> -->
+<!-- 						<div class="dropdown-divider"></div> -->
+<!-- 						<a class="dropdown-item" href="#">美食</a> -->
+<!-- 						<div class="dropdown-divider"></div> -->
+<!-- 						<a class="dropdown-item" href="#">特色活動體驗</a> -->
+<!-- 						<div class="dropdown-divider"></div> -->
+<!-- 						<a class="dropdown-item" href="#">交通票券</a> -->
+<!-- 					</div></li> -->
+<%-- 				<form:form class="form-inline col-md-offset-2 ml-5"> --%>
+<!-- 					<input class="form-control" type="text" placeholder="Search" -->
+<!-- 						aria-label="Search"> -->
+<%-- 				</form:form> --%>
+<!-- 			</ul> -->
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle fa fa-shopping-cart  fa-pull-right "
+					class="nav-link dropdown-toggle  "
 					style="color: white;" id="navbarDropdown" role="button"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">購物車</a>
 					<div class="dropdown-menu dropdown-menu-right"
@@ -190,12 +190,12 @@ body {
 				<li class="nav-item "><a class="nav-link dropdown-toggle"
 					href="#" id="userDropdown" role="button" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false"> <span
-						class=" d-none d-lg-inline fa fa-user-circle-o fa-pull-left "
-						style="color: white;">用戶</span> <img
-						class="img-profile rounded-circle" src="">
+						class=" d-none d-lg-inline  "
+						style="color: white;"></span>
+						<img src="<c:url value='/showmPic/${LoginOK.mId}'/>" class="img-circle " title="${LoginOK.mAccount}" style=" width:30px; height:30px; border-radius:50%; "/>
 				</a> <!-- Dropdown - User Information -->
 					<div
-						class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+						class="dropdown-menu dropdown-menu-right shadow animated--grow-in mt-2"
 						aria-labelledby="userDropdown">
 						<a class="dropdown-item" href="<c:url value='/Dashboard'/>">
 							<i class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
@@ -230,7 +230,7 @@ body {
 			<!-- </ul>
             </div> -->
 			<div
-				class="container sidebar-heading col-md-3  sidebar-offcanvas bg-light "
+				class="container sidebar-heading col-md-3  sidebar-offcanvas bg-light mt-2"
 				id="sidebar" role="navigation" style="text-align: center;">
 				<div
 					class="list-group list-group-flush flex-column sticky-top  p-0 pt-5 "
@@ -264,7 +264,7 @@ body {
 													type="text" class="form-control " />
 											</div>
 										</div>
-										<div class="col-md-4">
+										<div class="col-md-4 ml-5">
 											<div class="form-group">
 												<label class="bmd-label-floating">產品價格</label>
 												<form:input id="pPrice" path="pPrice"
@@ -281,12 +281,12 @@ body {
 													class="form-control" />
 											</div>
 										</div>
-										<div class="col-md-4">
+										<div class="col-md-4 ml-5">
 											<div class="form-group">
 												<label class="bmd-label-floating">產品有效日期</label>
 												<form:input id="datepicker" path="pDateRange"
 													 type="text"
-													class="form-control" />
+													class="form-control " style="text-align: center;"/>
 											</div>
 										</div>
 									</div>
@@ -294,13 +294,13 @@ body {
 										<div class="col-md-5">
 											<div class="form-group">
 												<label class="bmd-label-floating">產品說明</label>
-												<form:input id="pContent" path="pContent"
-													 type="text" class="form-control" />
+												<form:textarea id="pContent" path="pContent"
+													 type="text" class="form-control" style="height:150px"/>
 											</div>
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-md-8">
+										<div class="col-md-4">
 											<div class="form-group">
 												<label class="bmd-label-floating">產品圖片上傳</label>
 												<form:input id="productImage" path="productImage" type="file" class="form-control btn btn-outline-dark btn-block"  />
