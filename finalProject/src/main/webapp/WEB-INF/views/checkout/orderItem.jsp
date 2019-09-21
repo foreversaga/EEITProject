@@ -208,6 +208,7 @@ div.dropdown-menu {
 																</c:choose></span>
 															<h5>${review[orderItem.pId].rTitle}</h5>
 															<p>${review[orderItem.pId].rReview}</p>
+															<button onclick="" class="btn btn-primary" style="width:40%">修改評價</button>
 														</div>
 													</div>
 												</c:when>

@@ -39,7 +39,7 @@ public class ReviewController {
 		rb.setrTimestamp(date);
 		rService.InsertNewReview(rb);
 		StringBuilder sb = new StringBuilder();
-		sb.append("redirect:").append("/showOrderItem/").append(rb.getoId());
+		sb.append("redirect:").append("/showOrderItem/").append(rb.getoId()).append("#orderitem");
 		return sb.toString();
 	}
 }
