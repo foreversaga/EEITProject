@@ -37,4 +37,9 @@ public class ReviewServiceImpl implements ReviewService {
 		return dao.getProductReview(pId);
 	}
 
+	@Override
+	public void UpdateReview(reviewBean rb) {
+		dao.UpdateReview(rb);
+	}
+
 }

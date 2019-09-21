@@ -51,4 +51,10 @@ public class ReviewDaoImpl implements ReviewDao {
 		return rb;
 	}
 
+	@Override
+	public void UpdateReview(reviewBean rb) {
+		Session session = factory.getCurrentSession();
+		session.update(rb);
+	}
+
 }

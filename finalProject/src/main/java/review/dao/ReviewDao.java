@@ -8,6 +8,8 @@ public interface ReviewDao {
 	List<reviewBean> getAllReviews();
 
 	void InsertNewReview(reviewBean rb);
+	
+	void UpdateReview(reviewBean rb);
 
 	reviewBean getOrderItemReview(Integer pId, String mAccount);
 

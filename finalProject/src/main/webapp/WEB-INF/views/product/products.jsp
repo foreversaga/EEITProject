@@ -111,12 +111,11 @@ div#shoppingCartMenu {
 						<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
 						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
 					</c:if>
-					<li class="nav-item"><a href="<c:url value='/AddProduct'/>" class="nav-link">新增商品</a></li>
 					<c:if test="${!empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
-						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 						<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">訂單查詢</a></li>
-						<li class="nav-item"><a href="<c:url value='/review'/>" class="nav-link">評價查詢</a></li>
+						<li class="nav-item"><a href="<c:url value='/Dashboard'/>" class="nav-link">後臺系統</a></li>
+						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 					</c:if>
 				</ul>
 				<ul class="navbar-nav mr-right">
@@ -175,7 +174,7 @@ div#shoppingCartMenu {
 			<div class="row">
 				<div class="col-lg-3 sidebar">
 					<div class="sidebar-wrap bg-light ftco-animate">
-						<h3 class="heading mb-4">Find City</h3>
+						<h3 class="heading mb-4">尋找商品</h3>
 						<form action="<c:url value='/QueryProduct/1'/>" method="get">
 							<div class="fields">
 								<div class="form-group">
