@@ -122,8 +122,8 @@ body {
 				data-toggle="offcanvas" title="Toggle responsive left sidebar">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<a class="navbar-brand" href="<c:url value='/UserDashboard'/>"
-				title="User Dashboard">會員中心</a>
+<%-- 			<a class="navbar-brand" href="<c:url value='/UserDashboard'/>" --%>
+<!-- 				title="User Dashboard">會員中心</a> -->
 		</div>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsingNavbar">
@@ -137,31 +137,31 @@ body {
                     <a class="nav-link" href="//www.codeply.com">Link</a>
                 </li> -->
 			</ul>
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle fa fa-align-justify fa-pull-left ml-2"
-					style="color: white;" href="#" id="navbarDropdown" role="button"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						分類 </a>
-					<div
-						class="dropdown-menu dropdown-menu dropdown-menu-left shadow animated--grow-in"
-						aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">景點門票-表演</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">美食</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">特色活動體驗</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">交通票券</a>
-					</div></li>
-				<form:form class="form-inline col-md-offset-2 ml-5">
-					<input class="form-control" type="text" placeholder="Search"
-						aria-label="Search">
-				</form:form>
-			</ul>
+<!-- 			<ul class="navbar-nav mr-auto"> -->
+<!-- 				<li class="nav-item dropdown"><a -->
+<!-- 					class="nav-link dropdown-toggle fa fa-align-justify fa-pull-left ml-2" -->
+<!-- 					style="color: white;" href="#" id="navbarDropdown" role="button" -->
+<!-- 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+<!-- 						分類 </a> -->
+<!-- 					<div -->
+<!-- 						class="dropdown-menu dropdown-menu dropdown-menu-left shadow animated--grow-in" -->
+<!-- 						aria-labelledby="navbarDropdown"> -->
+<!-- 						<a class="dropdown-item" href="#">景點門票-表演</a> -->
+<!-- 						<div class="dropdown-divider"></div> -->
+<!-- 						<a class="dropdown-item" href="#">美食</a> -->
+<!-- 						<div class="dropdown-divider"></div> -->
+<!-- 						<a class="dropdown-item" href="#">特色活動體驗</a> -->
+<!-- 						<div class="dropdown-divider"></div> -->
+<!-- 						<a class="dropdown-item" href="#">交通票券</a> -->
+<!-- 					</div></li> -->
+<%-- 				<form:form class="form-inline col-md-offset-2 ml-5"> --%>
+<!-- 					<input class="form-control" type="text" placeholder="Search" -->
+<!-- 						aria-label="Search"> -->
+<%-- 				</form:form> --%>
+<!-- <!-- 			</ul> 先移掉購物車iCon fa fa-shopping-cart  fa-pull-right 會影響置中 -->
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle fa fa-shopping-cart  fa-pull-right "
+					class="nav-link dropdown-toggle  mr-3"
 					style="color: white;" id="navbarDropdown" role="button"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">購物車</a>
 					<div class="dropdown-menu dropdown-menu-right" id="shoppingCartMenu" 
@@ -198,9 +198,9 @@ body {
 				<li class="nav-item "><a class="nav-link dropdown-toggle"
 					href="#" id="userDropdown" role="button" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false"> <span
-						class=" d-none d-lg-inline fa fa-user-circle-o fa-pull-left "
-						style="color: white;">用戶</span> <img
-						class="img-profile rounded-circle" src="">
+						class=" d-none d-lg-inline  "
+						style="color: white;"></span>
+						<img src="<c:url value='/showmPic/${LoginOK.mId}'/>" class="img-circle " title="${LoginOK.mAccount}" style=" width:30px; height:30px; border-radius:50%; "/>
 				</a> <!-- Dropdown - User Information -->
 					<div
 						class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -238,7 +238,7 @@ body {
             </div> -->
 			<div
 				class="container sidebar-heading col-md-3  sidebar-offcanvas bg-light "
-				id="sidebar" role="navigation" style="text-align: center;">
+				id="sidebar" role="navigation" style="text-align: center;margin-top:30px">
 				<div
 					class="list-group list-group-flush flex-column sticky-top  p-0 pt-5 "
 					style="font-family: 'Noto Serif TC', serif">
@@ -261,7 +261,7 @@ body {
 								<div class="mt-2">
 		<div class="container-fruid" style="height:600px;">
 			<div class="">
-				<div class="table100 ver1 mb-5">
+				<div class="table100 ver1 mb-5"style="text-align: center;">
 					<div class="table100-head ">
 						<table>
 							<thead>

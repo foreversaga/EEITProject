@@ -427,11 +427,11 @@ public class ProductController {
 	}
 
 //新增商品表格
-	@RequestMapping(value = "/AddProduct", method = RequestMethod.GET)
+	@RequestMapping(value = "/Dashboard", method = RequestMethod.GET)
 	public String AddForm(Model model) {
 		productBean bb = new productBean();
 		model.addAttribute("productBean", bb);
-		return "Dashboard/AddProduct";
+		return "Dashboard/Dashboard";
 	}
 
 //新增商品

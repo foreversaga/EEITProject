@@ -191,10 +191,5 @@ public class MemberController {
 //		return "index";
 	}
 	
-	@RequestMapping(value = "/MemberList")
-	public String getMemberListController(Model model) {
-		List<MemberBean>list=memberservice.getAllMember();
-		model.addAttribute("Members", list);
-		return "Dashboard/MemberList";
-	}
+
 }

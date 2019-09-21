@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,10 +16,12 @@ import checkout.service.orderService;
 import product.model.productBean;
 import product.service.productService;
 import register.model.MemberBean;
+import register.service.MemberService;
 
 @Controller
 public class MainController {
-
+	@Autowired
+	MemberService memberservice;
 	@Autowired
 	productService pService;
 	@Autowired
@@ -54,8 +57,10 @@ public class MainController {
 		return "/register/register";
 	}
 
-	@RequestMapping("/Dashboard")
-	public String Dashboard() {
+	@RequestMapping(value = "/Dashboard")
+	public String getMemberListController(Model model) {
+		List<MemberBean>list=memberservice.getAllMember();
+		model.addAttribute("Members", list);
 		return "/Dashboard/Dashboard";
 	}
 
@@ -69,11 +74,6 @@ public class MainController {
 		return "/UserDashboard/UserDashboardRating";
 	}
 
-	@RequestMapping("/AddProduct")
-	public String DashboardAddProduct() {
-		return "/Dashboard/AddProduct";
-	}
-
 	@RequestMapping("/UserOrderDetail")
 	public ModelAndView UserOrderDetail(HttpSession session, ModelAndView mav) {
 		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
@@ -82,7 +82,7 @@ public class MainController {
 		mav.setViewName("UserDashboard/UserOrderDetail");
 		return mav;
 	}
-
+	
 	@RequestMapping("/rwd")
 	public String indexRWD() {
 		return "indexRWD";
