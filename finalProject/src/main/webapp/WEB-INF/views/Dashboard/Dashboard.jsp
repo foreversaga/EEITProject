@@ -67,22 +67,12 @@
 
 	//顯示訂單內容滾條
 	$('.js-pscroll').each(function() {
-			var ps = new PerfectScrollbar(this);
+		var ps = new PerfectScrollbar(this);
 
-			$(window).on('resize', function() {
-				ps.update();
-			})
-		});
-	// 天氣預報javaScript:https://weatherwidget.io/
-	!function(d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (!d.getElementById(id)) {
-			js = d.createElement(s);
-			js.id = id;
-			js.src = 'https://weatherwidget.io/js/widget.min.js';
-			fjs.parentNode.insertBefore(js, fjs);
-		}
-	}(document, 'script', 'weatherwidget-io-js');
+		$(window).on('resize', function() {
+			ps.update();
+		})
+	});
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -136,32 +126,8 @@ body {
 			<ul class="navbar-nav">
 				<li class="nav-item active"><a class="nav-link"
 					href="<c:url value='/'/>">旅遊趣<span class="sr-only"></span></a></li>
-				<!-- <li class="nav-item">
-                    <a class="nav-link" href="//www.codeply.com">Link</a>
-                </li> -->
 			</ul>
-			<!-- 			<ul class="navbar-nav mr-auto"> -->
-			<!-- 				<li class="nav-item dropdown"><a -->
-			<!-- 					class="nav-link dropdown-toggle fa fa-align-justify fa-pull-left ml-2" -->
-			<!-- 					style="color: white;" href="#" id="navbarDropdown" role="button" -->
-			<!-- 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-			<!-- 						分類 </a> -->
-			<!-- 					<div -->
-			<!-- 						class="dropdown-menu dropdown-menu dropdown-menu-left shadow animated--grow-in" -->
-			<!-- 						aria-labelledby="navbarDropdown"> -->
-			<!-- 						<a class="dropdown-item" href="#">景點門票-表演</a> -->
-			<!-- 						<div class="dropdown-divider"></div> -->
-			<!-- 						<a class="dropdown-item" href="#">美食</a> -->
-			<!-- 						<div class="dropdown-divider"></div> -->
-			<!-- 						<a class="dropdown-item" href="#">特色活動體驗</a> -->
-			<!-- 						<div class="dropdown-divider"></div> -->
-			<!-- 						<a class="dropdown-item" href="#">交通票券</a> -->
-			<!-- 					</div></li> -->
-			<%-- 				<form:form class="form-inline col-md-offset-2 ml-5"> --%>
-			<!-- 					<input class="form-control" type="text" placeholder="Search" -->
-			<!-- 						aria-label="Search"> -->
-			<%-- 				</form:form> --%>
-			<!-- 			</ul> -->
+
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle  " style="color: white;"
@@ -213,6 +179,17 @@ body {
 						<a class="dropdown-item" href="<c:url value='/Dashboard'/>"> <i
 							class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
 							後台系統
+						</a> <a class="dropdown-item" href="<c:url value='/AddProduct'/>">
+							<i class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
+							新增訂單
+						</a> <a class="dropdown-item"
+							href="<c:url value='/MemberListDashboard'/>"> <i
+							class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
+							會員列表
+						</a> <a class="dropdown-item"
+							href="<c:url value='/ReviewListDashboard'/>"> <i
+							class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
+							評價列表
 						</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="<c:url value='/logout'/>"
@@ -224,154 +201,225 @@ body {
 			</ul>
 		</div>
 	</nav>
-	<div class="container " id="main">
+	<div class=" container align-items-center" id="main">
 		<div class="container  ">
-			<div class="  justify-content-around    mt-2" 
-				 style="text-align: center;">
-				<div class=" sticky-top  p-0 pt-5 "
-					style="font-family: 'Noto Serif TC', serif">					
-						<button type="button" class="btn btn-warning btn btn-lg mt-5"
-							data-toggle="collapse" data-target="#AddProduct"
-							aria-expanded="false" aria-controls="AddProduct">新增商品</button>
-						<div class="container col-md-12 p-0 " style="margin-top: 20px;">
-							<div class="container flex-column collapse" id="AddProduct">
-								<div class="  pt-5">
-									<div class="card ">
-										<form:form
-											action="${pageContext.request.contextPath}/ProcessAdd"
-											method="POST" enctype="multipart/form-data"
-											modelAttribute="productBean">
-											<div class="card-header card-header-primary">
-												<h4 class="card-title ">新增商品</h4>
-												<p class="card-category"></p>
-											</div>
-											<div class="card-body"style="text-align:left">
-
-												<div class="row">
-													<div class="col-md-5">
-														<div class="form-group">
-															<label class="bmd-label-floating">產品名稱</label>
-															<form:input id="pName" path="pName" type="text"
-																class="form-control " />
-														</div>
-													</div>
-													<div class="col-md-3 ml-5">
-														<div class="form-group">
-															<label class="bmd-label-floating">產品價格</label>
-															<form:input id="pPrice" path="pPrice" type="text"
-																class="form-control " />
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-5">
-														<div class="form-group">
-															<label class="bmd-label-floating">庫存</label>
-															<form:input id="pInstock" path="pInstock" type="text"
-																class="form-control" />
-														</div>
-													</div>
-													<div class="col-md-3 ml-5">
-														<div class="form-group">
-															<label class="bmd-label-floating">產品有效日期</label>
-															<form:input id="datepicker" path="pDateRange" type="text"
-																class="form-control " style="text-align: center;" />
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-5">
-														<div class="form-group">
-															<label class="bmd-label-floating">產品說明</label>
-															<form:textarea id="pContent" path="pContent" type="text"
-																class="form-control" style="height:150px" />
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-5">
-														<div class="form-group">
-															<label class="bmd-label-floating">產品圖片上傳</label>
-															<form:input id="productImage" path="productImage"
-																type="file"
-																class="form-control btn btn-outline-dark btn-block" />
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="row"></div>
-											<button type="submit"
-												class="btn btn-primary pull-right col-md-4 align-self-end m-1">送出</button>
-											<div class="clearfix"></div>
-										</form:form>
-									</div>
-								</div>
-							</div>
-						</div>
-					
-					<!-- 			====================會員列表========================== -->
-					<button  type="button" class="btn btn-warning btn btn-lg mt-2"
+			<div class="  justify-content-around  " style="text-align: center;">
+				<div class="justify-content-center " style="margin-top: 100px">
+					<a href="<c:url value='/AddProduct'/>"> <input type="button"
+						class="btn btn-warning btn btn-lg mt-5 " data-toggle="collapse"
+						data-target="#AddProduct" aria-expanded="false"
+						aria-expanded="false" aria-controls="AddProduct" value="新增商品" /></a> <a
+						href="<c:url value='/MemberListDashboard'/>"> <input
+						type="button" class="btn btn-warning btn btn-lg mt-5"
 						data-toggle="collapse" data-target="#MemberList"
-						aria-expanded="false" aria-controls="MemberList">會員列表</button>
-					<div class="container col-md-12 p-0 margin-top:10px "
-						style="margin-top: 20px">
-						<div class="container flex-column collapse" id="MemberList">
-
-							<div class="  pt-5">
-								<div class="card ">
-									<div class="mt-2">
-										<div class="container-fruid justify-content-around"
-											style="height: 600px;">
-											<div class="" style="text-align: center;">
-												<div class="table100 ver1 mb-5 ">
-													<div class="table100-head " style="text-align: center">
-														<table>
-															<thead>
-																<tr class=" row100 head justify-content-center"
-																	style="text-align: center;">
-																	<th class="cell100 column1">帳號</th>
-																	<th class="cell100 column2">姓名</th>
-																	<th class="cell100 column3">性別</th>
-																	<th class="cell100 column4">出生日期</th>
-																	<th class="cell100 column5">地址</th>
-																	<th class="cell100 column6">電話</th>
-																</tr>
-															</thead>
-														</table>
-													</div>
-
-													<div class="container-fruid js-pscroll "
-														style="text-align: center; height: 550px">
-														<table>
-															<tbody>
-																<c:forEach var="MemberBean" items="${Members}">
-																	<tr class="row100 body " style="text-align: center;">
-																		<td class=" justify-content-center cell100 column1 "><a
-																			href="">${MemberBean.mAccount}</a></td>
-																		<td class="container-fruid cell100 column2 mb-5">${MemberBean.mName}</td>
-																		<td class="cell100 column3">${MemberBean.mGender}</td>
-																		<td class="cell100 column4">${MemberBean.mDate}</td>
-																		<td class="cell100 column5">${MemberBean.mAddress}</td>
-																		<td class="cell100 column6">${MemberBean.mPhone}</td>
-																	</tr>
-																</c:forEach>
-															</tbody>
-														</table>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+						aria-expanded="false" aria-controls="MemberList" value="會員列表" /></a> <a
+						href="<c:url value='/ReviewListDashboard'/>"> <input
+						type="button" class="btn btn-warning btn btn-lg mt-5"
+						data-toggle="collapse" data-target="#RatingList"
+						aria-expanded="false" aria-controls="RatingList" value="評價列表"></a>
 				</div>
+				<!-- 						=====================新增商品區域=================== -->
+				<!-- 				<div class=" sticky-top  p-0 pt-5 " -->
+				<!-- 					style="font-family: 'Noto Serif TC', serif"> -->
+				<!-- 					<div class="container  p-0 " style="margin-top: 20px;"> -->
+				<!-- 						<div class="container flex-column collapse" id="AddProduct"> -->
+				<!-- 							<div class="  pt-5"> -->
+				<!-- 								<div class="card "> -->
+				<%-- 									<form:form --%>
+				<%-- 										action="${pageContext.request.contextPath}/ProcessAdd" --%>
+				<%-- 										method="POST" enctype="multipart/form-data" --%>
+				<%-- 										modelAttribute="productBean"> --%>
+				<!-- 										<div class="card-header card-header-primary"> -->
+				<!-- 											<h4 class="card-title ">新增商品</h4> -->
+				<!-- 											<p class="card-category"></p> -->
+				<!-- 										</div> -->
+				<!-- 										<div class="card-body" style="text-align: left"> -->
 
+				<!-- 											<div class="row"> -->
+				<!-- 												<div class="col-md-5"> -->
+				<!-- 													<div class="form-group"> -->
+				<!-- 														<label class="bmd-label-floating">產品名稱</label> -->
+				<%-- 														<form:input id="pName" path="pName" type="text" --%>
+				<%-- 															class="form-control " /> --%>
+				<!-- 													</div> -->
+				<!-- 												</div> -->
+				<!-- 												<div class="col-md-3 ml-5"> -->
+				<!-- 													<div class="form-group"> -->
+				<!-- 														<label class="bmd-label-floating">產品價格</label> -->
+				<%-- 														<form:input id="pPrice" path="pPrice" type="text" --%>
+				<%-- 															class="form-control " /> --%>
+				<!-- 													</div> -->
+				<!-- 												</div> -->
+				<!-- 											</div> -->
+				<!-- 											<div class="row"> -->
+				<!-- 												<div class="col-md-5"> -->
+				<!-- 													<div class="form-group"> -->
+				<!-- 														<label class="bmd-label-floating">庫存</label> -->
+				<%-- 														<form:input id="pInstock" path="pInstock" type="text" --%>
+				<%-- 															class="form-control" /> --%>
+				<!-- 													</div> -->
+				<!-- 												</div> -->
+				<!-- 												<div class="col-md-3 ml-5"> -->
+				<!-- 													<div class="form-group"> -->
+				<!-- 														<label class="bmd-label-floating">產品有效日期</label> -->
+				<%-- 														<form:input id="datepicker" path="pDateRange" type="text" --%>
+				<%-- 															class="form-control " style="text-align: center;" /> --%>
+				<!-- 													</div> -->
+				<!-- 												</div> -->
+				<!-- 											</div> -->
+				<!-- 											<div class="row"> -->
+				<!-- 												<div class="col-md-5"> -->
+				<!-- 													<div class="form-group"> -->
+				<!-- 														<label class="bmd-label-floating">產品說明</label> -->
+				<%-- 														<form:textarea id="pContent" path="pContent" type="text" --%>
+				<%-- 															class="form-control" style="height:150px" /> --%>
+				<!-- 													</div> -->
+				<!-- 												</div> -->
+				<!-- 											</div> -->
+				<!-- 											<div class="row"> -->
+				<!-- 												<div class="col-md-5"> -->
+				<!-- 													<div class="form-group"> -->
+				<!-- 														<label class="bmd-label-floating">產品圖片上傳</label> -->
+				<%-- 														<form:input id="productImage" path="productImage" --%>
+				<%-- 															type="file" --%>
+				<%-- 															class="form-control btn btn-outline-dark btn-block" /> --%>
+				<!-- 													</div> -->
+				<!-- 												</div> -->
+				<!-- 											</div> -->
+				<!-- 										</div> -->
+				<!-- 										<div class="row"></div> -->
+				<!-- 										<button type="submit" -->
+				<!-- 											class="btn btn-primary pull-right col-md-4 align-self-end m-1">送出</button> -->
+				<!-- 										<div class="clearfix"></div> -->
+				<%-- 									</form:form> --%>
+				<!-- 								</div> -->
+				<!-- 							</div> -->
+				<!-- 						</div> -->
+				<!-- 					</div> -->
+				<!-- 				</div> -->
+				<!-- 							====================會員列表========================== -->
+				<!-- 				<div class=" sticky-top   " -->
+				<!-- 					style="font-family: 'Noto Serif TC', serif"> -->
+				<!-- 					<div class="container  p-0 "> -->
+				<!-- 						<div class="container flex-column collapse" id="MemberList"> -->
+				<!-- 							<div class="  pt-5"> -->
+				<!-- 								<div class="card "> -->
+				<!-- 									<div class="card-header card-header-primary"> -->
+				<!-- 										<h4 class="card-title ">會員列表</h4> -->
+				<!-- 									</div> -->
+				<!-- 									<div class=""> -->
+				<!-- 									<div class="container-fruid" style="height: 600px;"> -->
+				<!-- 										<div class=""> -->
+				<!-- 											<div class="table100 ver1 mb-5"> -->
+				<!-- 												<div class="table100-head " style="text-align: center"> -->
+				<!-- 													<div class="table100-head " style="text-align: center"> -->
+				<!-- 														<table> -->
+				<!-- 															<thead> -->
+				<!-- 																<tr class=" row100 head justify-content-around" -->
+				<!-- 																	style="text-align: center;"> -->
+				<!-- 																	<th class="cell100 column1">帳號</th> -->
+				<!-- 																	<th class="cell100 column2">姓名</th> -->
+				<!-- 																	<th class="cell100 column3">性別</th> -->
+				<!-- 																	<th class="cell100 column4">出生日期</th> -->
+				<!-- 																	<th class="cell100 column5">地址</th> -->
+				<!-- 																	<th class="cell100 column6">電話</th> -->
+				<!-- 																</tr> -->
+				<!-- 															</thead> -->
+				<!-- 														</table> -->
+				<!-- 													</div> -->
+
+				<!-- 													<div class="container-fruid js-pscroll " -->
+				<!-- 														style="text-align: center; height: 550px"> -->
+				<!-- 														<table> -->
+				<!-- 															<tbody> -->
+				<%-- 																<c:forEach var="MemberBean" items="${Members}"> --%>
+				<!-- 																	<tr class="row100 body " style="text-align: center;"> -->
+				<!-- 																		<td class=" justify-content-center cell100 column1 "><a -->
+				<%-- 																			href="">${MemberBean.mAccount}</a></td> --%>
+				<%-- 																		<td class="container-fruid cell100 column2 mb-5">${MemberBean.mName}</td> --%>
+				<%-- 																		<td class="cell100 column3">${MemberBean.mGender}</td> --%>
+				<%-- 																		<td class="cell100 column4">${MemberBean.mDate}</td> --%>
+				<%-- 																		<td class="cell100 column5">${MemberBean.mAddress}</td> --%>
+				<%-- 																		<td class="cell100 column6">${MemberBean.mPhone}</td> --%>
+				<!-- 																	</tr> -->
+				<%-- 																</c:forEach> --%>
+				<!-- 															</tbody> -->
+				<!-- 														</table> -->
+				<!-- 													</div> -->
+				<!-- 												</div> -->
+				<!-- 											</div> -->
+				<!-- 										</div> -->
+				<!-- 									</div> -->
+				<!-- 								</div> -->
+				<!-- 							</div> -->
+				<!-- 						</div> -->
+				<!-- 					</div> -->
+				<!-- 				</div> -->
+				<!-- 			</div> -->
+				<!-- 			<!-- 				=============查看所有評價與修改評價============= -->
+				<!-- 			<div class=" sticky-top   " -->
+				<!-- 				style="font-family: 'Noto Serif TC', serif"> -->
+				<!-- 				<div class="container  p-0 "> -->
+				<!-- 					<div class="container flex-column collapse" id="RatingList"> -->
+
+				<!-- 						<div class="  pt-5"> -->
+				<!-- 							<div class="card "> -->
+
+				<!-- 								<div class="card-header card-header-primary"> -->
+				<!-- 									<h4 class="card-title "style="text-align: center">評價管理</h4> -->
+
+				<!-- 								</div> -->
+				<!-- 								<div class=""> -->
+				<!-- 									<div class="container-fruid" style="height: 500px;"> -->
+				<!-- 										<div class=""> -->
+				<!-- 											<div class="table100 ver1 mb-5"> -->
+				<!-- 												<div class="table100-head " style="text-align: center"> -->
+				<!-- 													<table> -->
+				<!-- 														<thead> -->
+				<!-- 															<tr class="  row100 head "> -->
+				<!-- 																<th class="cell100 column1">帳號</th> -->
+				<!-- 																<th class="cell100 column2">產品編號</th> -->
+				<!-- 																<th class="cell100 column3">標題</th> -->
+				<!-- 																<th class="cell100 column4">評級</th> -->
+				<!-- 																<th class="cell100 column5">意見</th> -->
+				<!-- 																<th class="cell100 column6">發表時間</th> -->
+				<!-- 															</tr> -->
+				<!-- 														</thead> -->
+				<!-- 													</table> -->
+				<!-- 												</div> -->
+
+				<!-- 												<div class="container-fruid js-pscroll"> -->
+				<!-- 													<table> -->
+				<!-- 														<tbody> -->
+				<%-- 															<c:forEach varStatus="vs" var="reviewBean" --%>
+				<%-- 																items="${Reviews}"> --%>
+				<!-- 																<tr class="row100 body "> -->
+				<!-- 																	<td class=" justify-content-center cell100 column1 " -->
+				<!-- 																		style="text-align: center; height: 95px"><a -->
+				<%-- 																		href="'/>">${reviewBean.mAccount}</a></td> --%>
+				<%-- 																	<td class="container-fruid cell100 column2 mb-5">${reviewBean.pId}</td> --%>
+				<%-- 																	<td class="cell100 column3">${reviewBean.rTitle}</td> --%>
+				<%-- 																	<td class="cell100 column4">${reviewBean.rRating}</td> --%>
+				<%-- 																	<td class="cell100 column5">${reviewBean.rReview}</td> --%>
+				<%-- 																	<td class="cell100 column6">${reviewBean.rTimestamp}</td> --%>
+				<!-- 																</tr> -->
+				<%-- 															</c:forEach> --%>
+				<!-- 														</tbody> -->
+				<!-- 													</table> -->
+				<!-- 												</div> -->
+				<!-- 											</div> -->
+				<!-- 										</div> -->
+				<!-- 									</div> -->
+				<!-- 								</div> -->
+
+				<!-- 							</div> -->
+				<!-- 						</div> -->
+				<!-- 					</div> -->
+				<!-- 				</div> -->
+				<!-- 			</div> -->
+				<!-- 			<!-- 		============下方三個div為前三個div============= -->
 			</div>
 		</div>
-		<!--/col-->
-<!-- 		<hr> -->
 	</div>
 
 
@@ -381,20 +429,20 @@ body {
 
 
 
-<!-- 	<footer class="container  justify-content-center navbar-fixed-bottom "> -->
-<!-- 		<div -->
-<!-- 			class=" container align-items-end row featurette bg-dark col-md-12 p-5 pt-0 mt-2" -->
-<!-- 			style="color: white"> -->
+	<!-- 	<footer class="container  justify-content-center navbar-fixed-bottom "> -->
+	<!-- 		<div -->
+	<!-- 			class=" container align-items-end row featurette bg-dark col-md-12 p-5 pt-0 mt-2" -->
+	<!-- 			style="color: white"> -->
 
-<!-- 			<div class=" align-self-center col-md-12 align-self-center" -->
-<!-- 				style="color: white; text-align: center;"> -->
+	<!-- 			<div class=" align-self-center col-md-12 align-self-center" -->
+	<!-- 				style="color: white; text-align: center;"> -->
 
-<!-- 				<a style="margin-top: 3px; text-align: center;">©2019 Travel Fun -->
-<!-- 					Technology</a> <a style="margin-top: 3px; text-align: center;">Limited. -->
-<!-- 					All Rights Reserved.</a> -->
+	<!-- 				<a style="margin-top: 3px; text-align: center;">©2019 Travel Fun -->
+	<!-- 					Technology</a> <a style="margin-top: 3px; text-align: center;">Limited. -->
+	<!-- 					All Rights Reserved.</a> -->
 
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</footer> -->
+	<!-- 			</div> -->
+	<!-- 		</div> -->
+	<!-- 	</footer> -->
 </body>
 </html>
