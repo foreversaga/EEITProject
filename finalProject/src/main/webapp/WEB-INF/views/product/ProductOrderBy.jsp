@@ -275,15 +275,15 @@ div#shoppingCartMenu {
 							</c:if>
 							<div class="col-md-4 ftco-animate">
 								<div class="destination">
-									<a href="" class="img img-2 d-flex justify-content-center align-items-center"
+									<a href="<c:url value='/ProductSingle/${productBean.pId}'/>" class="img img-2 d-flex justify-content-center align-items-center"
 										style="background-image: url(<c:url value='/showPic/${productBean.pId}'/>);"> <!-- 											<div class="icon d-flex justify-content-center align-items-center"> -->
 										<!-- 												<span class="icon-search2"></span> --> <!-- 											</div> -->
 									</a>
 									<div class="text p-3">
-										<div class="d-flex">
+										<div class="d-flex" style="height:100px;">
 											<div class="one">
 												<h3>
-													<a href="">${productBean.pName}</a>
+													<a href="<c:url value='/ProductSingle/${productBean.pId}'/>">${productBean.pName}</a>
 												</h3>
 												<p class="rate">
 													<c:choose>
@@ -327,10 +327,10 @@ div#shoppingCartMenu {
 												</p>
 											</div>
 											<div class="two">
-												<span class="price per-price">$${productBean.pPrice}<br> <small>這邊放字</small></span>
+												<span class="price per-price">$${productBean.pPrice}<br></span>
 											</div>
 										</div>
-										<p>這邊要放商品簡介文字</p>
+<!-- 										<p>這邊要放商品簡介文字</p> -->
 										<hr>
 										<p class="bottom-area d-flex">
 											<form:form method="POST" action="${pageContext.request.contextPath}/Buy"

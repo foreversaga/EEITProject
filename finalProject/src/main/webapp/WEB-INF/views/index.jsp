@@ -85,6 +85,9 @@ div#shoppingCartMenu {
 					<c:if test="${empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
 						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
+						<li class="nav-item"><a href="<c:url value='/AddMemberDB'/>" class="nav-link">新增會員DB</a></li>
+						<li class="nav-item"><a href="<c:url value='/AddReviewDB'/>" class="nav-link">新增評價DB</a></li>
+						<li class="nav-item"><a href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li>
 					</c:if>
 					<c:if test="${!empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
@@ -444,64 +447,35 @@ div#shoppingCartMenu {
 						Semantics, a large language ocean.</p>
 					<p>Even the all-powerful Pointing has no control about the blind texts it is an almost
 						unorthographic life.</p>
-					<p>
-						<a href="#" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3">Read more</a>
-					</p>
+<!-- 					<p> -->
+<!-- 						<a href="#" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3">Read more</a> -->
+<!-- 					</p> -->
 				</div>
 				<div class="col-md-1"></div>
 				<div class="col-md-6 heading-section ftco-animate">
-					<span class="subheading">Testimony</span>
+					<span class="subheading">用戶回饋</span>
 					<h2 class="mb-4 pb-3">
-						<strong>Our</strong> Guests Says
+						<strong>最新</strong> 旅客評價
 					</h2>
 					<div class="row ftco-animate">
 						<div class="col-md-12">
 							<div class="carousel-testimony owl-carousel">
+								<c:forEach varStatus="vs" var="reviewBean" items="reviewList">
 								<div class="item">
 									<div class="testimony-wrap d-flex">
-										<div class="user-img mb-5" style="background-image: url(images/person_1.jpg)">
-											<span class="quote d-flex align-items-center justify-content-center"> <i
-												class="icon-quote-left"></i>
-											</span>
-										</div>
+<!-- 										<div class="user-img mb-5" style="background-image: url(images/person_1.jpg)"> -->
+<!-- 											<span class="quote d-flex align-items-center justify-content-center"> <i -->
+<!-- 												class="icon-quote-left"></i> -->
+<!-- 											</span> -->
+<!-- 										</div> -->
 										<div class="text ml-md-4">
-											<p class="mb-5">Far far away, behind the word mountains, far from the countries
-												Vokalia and Consonantia, there live the blind texts.</p>
-											<p class="name">Dennis Green</p>
-											<span class="position">Guest from italy</span>
+<%-- 											<p class="name">${reviewBean.rTitle }</p> --%>
+<%-- 											<p class="mb-5">${reviewBean.rReview }</p> --%>
+<%-- 											<span class="position">${reviewBean.mName }</span> --%>
 										</div>
 									</div>
 								</div>
-								<div class="item">
-									<div class="testimony-wrap d-flex">
-										<div class="user-img mb-5" style="background-image: url(images/person_2.jpg)">
-											<span class="quote d-flex align-items-center justify-content-center"> <i
-												class="icon-quote-left"></i>
-											</span>
-										</div>
-										<div class="text ml-md-4">
-											<p class="mb-5">Far far away, behind the word mountains, far from the countries
-												Vokalia and Consonantia, there live the blind texts.</p>
-											<p class="name">Dennis Green</p>
-											<span class="position">Guest from London</span>
-										</div>
-									</div>
-								</div>
-								<div class="item">
-									<div class="testimony-wrap d-flex">
-										<div class="user-img mb-5" style="background-image: url(images/person_3.jpg)">
-											<span class="quote d-flex align-items-center justify-content-center"> <i
-												class="icon-quote-left"></i>
-											</span>
-										</div>
-										<div class="text ml-md-4">
-											<p class="mb-5">Far far away, behind the word mountains, far from the countries
-												Vokalia and Consonantia, there live the blind texts.</p>
-											<p class="name">Dennis Green</p>
-											<span class="position">Guest from Philippines</span>
-										</div>
-									</div>
-								</div>
+								</c:forEach>
 							</div>
 						</div>
 					</div>

@@ -14,4 +14,6 @@ public interface ReviewDao {
 	reviewBean getOrderItemReview(Integer pId, String mAccount);
 
 	List<reviewBean> getProductReview(Integer pId);
+	
+	List<reviewBean> getIndexReview(Integer num);
 }

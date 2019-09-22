@@ -98,11 +98,6 @@ public class productServiceImpl implements productService {
 	}
 
 	@Override
-	public void addProductDB() {
-		pdao.addProductDB();
-	}
-
-	@Override
 	public List<productBean> getPopularFive() {
 		return pdao.getPopularFive();
 	}

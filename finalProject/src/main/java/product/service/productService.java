@@ -35,7 +35,5 @@ public interface productService {
 
 	int updateStock(int pId, int newStock);
 
-	void addProductDB();
-
 	List<productBean> getPopularFive();
 }

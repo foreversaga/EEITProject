@@ -31,8 +31,6 @@ public interface productDao {
 	public void setPageNo(int pageNo);
 
 	public int updateStock(int pId, int newStock);
-
-	public void addProductDB();
 	
 	public List<productBean> getPopularFive();
 }

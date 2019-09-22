@@ -123,7 +123,7 @@ span#star-span {
 	<div style="width: 50%; margin: 0 auto;">
 		<img width="100%" src="<c:url value='/showPic/${productBean.pId}'/>" />
 		<div id="Product-Title">
-			<h1 class="display-2">${productBean.pName}</h1>
+			<h3 class="display-2">${productBean.pName}</h3>
 		</div>
 		<div id="Product-Rating">
 			<p class="rate">

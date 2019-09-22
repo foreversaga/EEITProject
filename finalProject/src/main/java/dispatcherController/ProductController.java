@@ -498,11 +498,4 @@ public class ProductController {
 		return mav;
 	}
 
-//建立商品資料庫
-	@RequestMapping("/AddProductDB")
-	public String AddProductDB() {
-		pService.addProductDB();
-		return "index";
-	}
-
 }
