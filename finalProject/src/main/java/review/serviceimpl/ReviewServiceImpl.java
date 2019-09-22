@@ -44,8 +44,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public List<reviewBean> getIndexReview(Integer num) {
-		dao.getIndexReview(num);
-		return null;
+		return	dao.getIndexReview(num);
 	}
 
 }

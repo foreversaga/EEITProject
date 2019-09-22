@@ -105,7 +105,7 @@ div#shoppingCartMenu {
 							</c:if>
 							<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
 								<hr>
-																<table>
+								<table>
 									<tr>
 										<td rowspan="2"><img style="width: 80px; height: 80px;"
 											src="<c:url value='/showPic/${cart.value.pId}'/>"></td>
@@ -114,7 +114,7 @@ div#shoppingCartMenu {
 									<tr>
 										<td style="padding: 0 5px;">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</td>
 										<td><input style="margin-left: 10px;" id="${cart.value.pId}" type="button"
-												onclick="DeleteItem(this.id)" value="刪除" /></td>
+											onclick="DeleteItem(this.id)" value="刪除" /></td>
 									</tr>
 								</table>
 								<img style="width: 50px; height: 50px; float: left;"
@@ -122,7 +122,7 @@ div#shoppingCartMenu {
 								<p style="line-height: 10px">${cart.value.pName}</p>
 								<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
 								<span><input id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)"
-										value="刪除" /> </span>
+									value="刪除" /> </span>
 								<c:if test="${vs.last}">
 									<hr>
 								</c:if>
@@ -153,7 +153,8 @@ div#shoppingCartMenu {
 						<form action="<c:url value='/QueryProduct/1'/>" method="get" class="d-block d-flex">
 							<div class="fields d-block d-flex">
 								<div class="textfield-search one-third">
-									<input name="QueryString" type="text" class="form-control" placeholder="Ex: food, service, hotel">
+									<input name="QueryString" type="text" class="form-control"
+										placeholder="Ex: food, service, hotel">
 								</div>
 							</div>
 							<input type="submit" class="search-submit btn btn-primary" value="Search">
@@ -346,18 +347,19 @@ div#shoppingCartMenu {
 				<c:forEach varStatus="vs" var="Top5" items="${TopFiveList}">
 					<div class="col-sm col-md-6 col-lg ftco-animate">
 						<div class="destination">
-							<a href="#" class="img img-2 d-flex justify-content-center align-items-center"
+							<a href="<c:url value='/ProductSingle/${productBean.pId}'/>"
+								class="img img-2 d-flex justify-content-center align-items-center"
 								style="background-image: url(<c:url value='/showPic/${Top5.pId}'/>);"> <!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
 								<!-- 								<span class="icon-search2"></span> --> <!-- 							</div> -->
 							</a>
 							<div class="text p-3">
 								<div class="d-flex">
 									<div class="one">
-										<h3>
-											<a href="#">${Top5.pName}</a>
+										<h3 style="height: 50px;">
+											<a href="<c:url value='/ProductSingle/${productBean.pId}'/>">${Top5.pName}</a>
 										</h3>
 										<p class="rate">
-																					<c:choose>
+											<c:choose>
 												<c:when test="${Top5.pAvgRating>=1&&Top5.pAvgRating<2 }">
 													<i class="icon-star"></i>
 													<i class="icon-star-o"></i>
@@ -395,36 +397,16 @@ div#shoppingCartMenu {
 												</c:otherwise>
 											</c:choose>
 											<span>${Top5.pAvgRating}</span>
-											<i class="icon-star"></i> <i class="icon-star"></i> <i class="icon-star"></i> <i
-												class="icon-star"></i> <i class="icon-star-o"></i> <span>8 Rating</span>
 										</p>
 									</div>
 									<div class="two">
-										<span class="price per-price">$${Top5.pPrice}<br> <small>/night</small></span>
+										<span class="price per-price">$${Top5.pPrice}<br></span>
 									</div>
 								</div>
-								<p>${Top5.pContent}</p>
+								<p style="height: 170px;">${Top5.pContent}</p>
 								<hr>
 								<p class="bottom-area d-flex">
-									<form:form method="POST" action="${pageContext.request.contextPath}/Buy"
-										modelAttribute="orderItem" id="idform">
-										<c:if test="${Top5.pInstock==0 }">
-											<p>已售完</p>
-										</c:if>
-										<c:if test="${Top5.pInstock!=0 }">
-											<form:select path="iQty" style="margin-top:10px;">
-												<c:forEach var="stock" begin="1" end="${Top5.pInstock}">
-													<option value="${stock}">${stock}</option>
-												</c:forEach>
-											</form:select>
-										</c:if>
-										<form:input type="hidden" path="pId" value="${Top5.pId }" />
-										<form:input type="hidden" path="pName" value="${Top5.pName }" />
-										<form:input type="hidden" path="pPrice" value="${Top5.pPrice }" />
-										<c:if test="${Top5.pInstock!=0 }">
-											<input class="btn btn-outline-info" style="float: right;" type="button" value="加到購物車">
-										</c:if>
-									</form:form>
+									<a class="btn btn-outline-info" href="<c:url value='/ProductSingle/${productBean.pId}'/>">詳細資訊</a>
 								</p>
 							</div>
 						</div>
@@ -447,9 +429,9 @@ div#shoppingCartMenu {
 						Semantics, a large language ocean.</p>
 					<p>Even the all-powerful Pointing has no control about the blind texts it is an almost
 						unorthographic life.</p>
-<!-- 					<p> -->
-<!-- 						<a href="#" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3">Read more</a> -->
-<!-- 					</p> -->
+					<!-- 					<p> -->
+					<!-- 						<a href="#" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3">Read more</a> -->
+					<!-- 					</p> -->
 				</div>
 				<div class="col-md-1"></div>
 				<div class="col-md-6 heading-section ftco-animate">
@@ -460,21 +442,21 @@ div#shoppingCartMenu {
 					<div class="row ftco-animate">
 						<div class="col-md-12">
 							<div class="carousel-testimony owl-carousel">
-								<c:forEach varStatus="vs" var="reviewBean" items="reviewList">
-								<div class="item">
-									<div class="testimony-wrap d-flex">
-<!-- 										<div class="user-img mb-5" style="background-image: url(images/person_1.jpg)"> -->
-<!-- 											<span class="quote d-flex align-items-center justify-content-center"> <i -->
-<!-- 												class="icon-quote-left"></i> -->
-<!-- 											</span> -->
-<!-- 										</div> -->
-										<div class="text ml-md-4">
-<%-- 											<p class="name">${reviewBean.rTitle }</p> --%>
-<%-- 											<p class="mb-5">${reviewBean.rReview }</p> --%>
-<%-- 											<span class="position">${reviewBean.mName }</span> --%>
+								<c:forEach varStatus="vs" var="reviewBean" items="${reviewList}">
+									<div class="item">
+										<div class="testimony-wrap d-flex">
+											<!-- 										<div class="user-img mb-5" style="background-image: url(images/person_1.jpg)"> -->
+											<!-- 											<span class="quote d-flex align-items-center justify-content-center"> <i -->
+											<!-- 												class="icon-quote-left"></i> -->
+											<!-- 											</span> -->
+											<!-- 										</div> -->
+											<div class="text ml-md-4">
+												<p class="name">${reviewBean.rTitle}</p>
+												<p class="mb-5">${reviewBean.rReview}</p>
+												<span class="position">${reviewBean.mName}</span>
+											</div>
 										</div>
 									</div>
-								</div>
 								</c:forEach>
 							</div>
 						</div>
@@ -674,7 +656,7 @@ div#shoppingCartMenu {
 	</div>
 
 
-	
+
 	<script src="<c:url value='/css/RWDcss/js/jquery-migrate-3.0.1.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/popper.min.js'/>"></script>
 	<script src="<c:url value='/css/RWDcss/js/bootstrap.min.js'/>"></script>
