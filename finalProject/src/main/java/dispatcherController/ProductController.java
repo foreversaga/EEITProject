@@ -426,33 +426,6 @@ public class ProductController {
 		return "checkout/paidPage";
 	}
 
-//新增商品表格
-	@RequestMapping(value = "/Dashboard", method = RequestMethod.GET)
-	public String AddForm(Model model) {
-		productBean bb = new productBean();
-		model.addAttribute("productBean", bb);
-		return "Dashboard/Dashboard";
-	}
-
-//新增商品
-	@RequestMapping(value = "/ProcessAdd", method = RequestMethod.POST)
-	public String AddProduct(@ModelAttribute("productBean") productBean bb, BindingResult result) {
-		MultipartFile productImage = bb.getProductImage();
-		String originFilename = productImage.getOriginalFilename();
-		bb.setpFileName(originFilename);
-		if (productImage != null && !productImage.isEmpty()) {
-			try {
-				byte[] b = productImage.getBytes();
-				Blob blob = new SerialBlob(b);
-				bb.setpPicture(blob);
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new RuntimeException("檔案上傳發生異常:" + e.getMessage());
-			}
-		}
-		pService.insertNewProduct(bb);
-		return "redirect:/products/1";
-	}
 
 //刪除購物車商品
 	@RequestMapping(value = "/DeleteCartProduct", method = RequestMethod.GET)
@@ -497,5 +470,6 @@ public class ProductController {
 		}
 		return mav;
 	}
+
 
 }

@@ -272,7 +272,7 @@ body {
 												<table>
 													<thead>
 														<tr class="  row100 head ">
-															<th class="cell100 column1">帳號</th>
+															<th class="cell100 column1">商品名</th>
 															<th class="cell100 column2">評級</th>
 															<th class="cell100 column3">標題</th>
 															<th class="cell100 column4">意見</th>

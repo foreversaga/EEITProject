@@ -57,12 +57,6 @@ public class MainController {
 		return "/register/register";
 	}
 
-	@RequestMapping(value = "/Dashboard")
-	public String getMemberListController(Model model) {
-		List<MemberBean>list=memberservice.getAllMember();
-		model.addAttribute("Members", list);
-		return "/Dashboard/Dashboard";
-	}
 
 	@RequestMapping("/UserDashboard")
 	public String UserDashboard() {
@@ -73,7 +67,12 @@ public class MainController {
 	public String UserDashboardRating() {
 		return "/UserDashboard/UserDashboardRating";
 	}
-
+	
+	@RequestMapping("/Dashboard")
+	public String Dashboard() {
+		return "/Dashboard/Dashboard";
+	}
+	
 	@RequestMapping("/UserOrderDetail")
 	public ModelAndView UserOrderDetail(HttpSession session, ModelAndView mav) {
 		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
