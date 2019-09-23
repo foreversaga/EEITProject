@@ -6,6 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +28,7 @@ public class orderBean implements Serializable {
 	private Integer oTotalAmount;
 	private java.sql.Timestamp oTimestamp;
 	private java.sql.Timestamp oPaymentDate;
+	@Column(columnDefinition = "String default 未付款")
 	private String oPaymentStatus;
 	private String oAddress;
 	private String mAccount;
@@ -44,9 +46,8 @@ public class orderBean implements Serializable {
 	public void setItemSet(Set<orderItemBean> itemSet) {
 		this.itemSet = itemSet;
 	}
-	
-	public orderBean(Integer oId, Integer oTotalAmount, Timestamp oTimestamp, String oAddress,
-			String mAccount) {
+
+	public orderBean(Integer oId, Integer oTotalAmount, Timestamp oTimestamp, String oAddress, String mAccount) {
 		super();
 		this.oId = oId;
 		this.oTotalAmount = oTotalAmount;

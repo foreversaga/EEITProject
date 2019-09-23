@@ -11,21 +11,27 @@ import database.service.DatabaseService;
 @Transactional
 public class DatabaseServiceImpl implements DatabaseService {
 	@Autowired
-	DatabaseDao dDao;
+	DatabaseDao dao;
 
 	@Override
 	public void addProductDB() {
-		dDao.addProductDB();
+		dao.addProductDB();
 	}
 
 	@Override
 	public void addReviewDB() {
-		dDao.addReviewDB();
+		dao.addReviewDB();
 	}
 
 	@Override
 	public void addMemberDB() {
-		dDao.addMemberDB();
+		dao.addMemberDB();
 	}
+
+	@Override
+	public void addOrderDB() {
+		dao.addOrderDB();
+	}
+
 
 }

@@ -80,7 +80,7 @@ public class MemberController {
 		if (requestURI != null) {
 			return "redirect:" + requestURI;
 		} else {
-			return "index";
+			return "redirect:/";
 		}
 	}
 
@@ -88,7 +88,7 @@ public class MemberController {
 	public String Logout(Model model, HttpSession session) {
 //		request.getSession().invalidate();
 		session.invalidate();
-		return "index";
+		return "redirect:/";
 
 	}
 

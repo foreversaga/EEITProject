@@ -34,7 +34,7 @@ public class MainController {
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("index");
 		List<productBean> list1 = pService.getPopularFive();
-		List<reviewBean> list2=rService.getIndexReview(3);
+		List<reviewBean> list2 = rService.getIndexReview(5);
 		mav.addObject("TopFiveList", list1);
 		mav.addObject("reviewList", list2);
 		return mav;
@@ -60,7 +60,6 @@ public class MainController {
 		return "/register/register";
 	}
 
-
 	@RequestMapping("/UserDashboard")
 	public String UserDashboard() {
 		return "/UserDashboard/UserDashboard";
@@ -70,12 +69,12 @@ public class MainController {
 	public String UserDashboardRating() {
 		return "/UserDashboard/UserDashboardRating";
 	}
-	
+
 	@RequestMapping("/Dashboard")
 	public String Dashboard() {
 		return "/Dashboard/Dashboard";
 	}
-	
+
 	@RequestMapping("/UserOrderDetail")
 	public ModelAndView UserOrderDetail(HttpSession session, ModelAndView mav) {
 		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
@@ -84,7 +83,7 @@ public class MainController {
 		mav.setViewName("UserDashboard/UserOrderDetail");
 		return mav;
 	}
-	
+
 	@RequestMapping("/rwd")
 	public String indexRWD() {
 		return "indexRWD";

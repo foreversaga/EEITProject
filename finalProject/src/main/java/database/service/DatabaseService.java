@@ -7,4 +7,7 @@ public interface DatabaseService {
 	public void addReviewDB();
 
 	public void addMemberDB();
+
+	public void addOrderDB();
+
 }

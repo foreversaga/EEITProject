@@ -88,6 +88,7 @@ div#shoppingCartMenu {
 						<li class="nav-item"><a href="<c:url value='/AddMemberDB'/>" class="nav-link">新增會員DB</a></li>
 						<li class="nav-item"><a href="<c:url value='/AddReviewDB'/>" class="nav-link">新增評價DB</a></li>
 						<li class="nav-item"><a href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li>
+						<li class="nav-item"><a href="<c:url value='/AddOrderDB'/>" class="nav-link">新增訂單DB</a></li>
 					</c:if>
 					<c:if test="${!empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
@@ -154,10 +155,10 @@ div#shoppingCartMenu {
 							<div class="fields d-block d-flex">
 								<div class="textfield-search one-third">
 									<input name="QueryString" type="text" class="form-control"
-										placeholder="Ex: food, service, hotel">
+										placeholder="請輸入關鍵字">
 								</div>
 							</div>
-							<input type="submit" class="search-submit btn btn-primary" value="Search">
+							<input type="submit" class="search-submit btn btn-primary" value="搜尋">
 						</form>
 					</div>
 				</div>
