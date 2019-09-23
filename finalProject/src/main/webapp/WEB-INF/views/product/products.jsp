@@ -279,7 +279,7 @@ div#shoppingCartMenu {
 									<div class="text p-3">
 										<div class="d-flex" style="height:100px;">
 											<div class="one">
-												<h3>
+												<h3 style="height: 70px;">
 													<a href="<c:url value='/ProductSingle/${productBean.pId}'/>">${productBean.pName}</a>
 												</h3>
 												<p class="rate">

@@ -96,43 +96,43 @@ div#shoppingCartMenu {
 						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 					</c:if>
 				</ul>
-				<ul class="navbar-nav mr-right">
-					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">購物車</a>
-						<div id="shoppingCartMenu" class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<c:if test="${empty shoppingCart.content }">
-								<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
-							</c:if>
-							<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
-								<hr>
-								<table>
-									<tr>
-										<td rowspan="2"><img style="width: 80px; height: 80px;"
-											src="<c:url value='/showPic/${cart.value.pId}'/>"></td>
-										<td style="padding: 0 10px;">${cart.value.pName}</td>
-									</tr>
-									<tr>
-										<td style="padding: 0 5px;">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</td>
-										<td><input style="margin-left: 10px;" id="${cart.value.pId}" type="button"
-											onclick="DeleteItem(this.id)" value="刪除" /></td>
-									</tr>
-								</table>
-								<img style="width: 50px; height: 50px; float: left;"
-									src="<c:url value='/showPic/${cart.value.pId}'/>">
-								<p style="line-height: 10px">${cart.value.pName}</p>
-								<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
-								<span><input id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)"
-									value="刪除" /> </span>
-								<c:if test="${vs.last}">
-									<hr>
-								</c:if>
-							</c:forEach>
-							<c:if test="${!empty shoppingCart.content }">
-								<a href="<c:url value='/CheckOut'/>">結帳</a>
-							</c:if>
-						</div></li>
-				</ul>
+<!-- 				<ul class="navbar-nav mr-right"> -->
+<!-- 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" -->
+<!-- 						id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" -->
+<!-- 						aria-expanded="false">購物車</a> -->
+<!-- 						<div id="shoppingCartMenu" class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
+<%-- 							<c:if test="${empty shoppingCart.content }"> --%>
+<!-- 								<p style="text-align: center; margin-top: 10%">購物車內已無商品</p> -->
+<%-- 							</c:if> --%>
+<%-- 							<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }"> --%>
+<!-- 								<hr> -->
+<!-- 								<table> -->
+<!-- 									<tr> -->
+<!-- 										<td rowspan="2"><img style="width: 80px; height: 80px;" -->
+<%-- 											src="<c:url value='/showPic/${cart.value.pId}'/>"></td> --%>
+<%-- 										<td style="padding: 0 10px;">${cart.value.pName}</td> --%>
+<!-- 									</tr> -->
+<!-- 									<tr> -->
+<%-- 										<td style="padding: 0 5px;">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</td> --%>
+<%-- 										<td><input style="margin-left: 10px;" id="${cart.value.pId}" type="button" --%>
+<!-- 												onclick="DeleteItem(this.id)" value="刪除" /></td> -->
+<!-- 									</tr> -->
+<!-- 								</table> -->
+<!-- 								<img style="width: 50px; height: 50px; float: left;" -->
+<%-- 									src="<c:url value='/showPic/${cart.value.pId}'/>"> --%>
+<%-- 								<p style="line-height: 10px">${cart.value.pName}</p> --%>
+<%-- 								<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span> --%>
+<%-- 								<span><input id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)" --%>
+<!-- 										value="刪除" /> </span> -->
+<%-- 								<c:if test="${vs.last}"> --%>
+<!-- 									<hr> -->
+<%-- 								</c:if> --%>
+<%-- 							</c:forEach> --%>
+<%-- 							<c:if test="${!empty shoppingCart.content }"> --%>
+<%-- 								<a href="<c:url value='/CheckOut'/>">結帳</a> --%>
+<%-- 							</c:if> --%>
+<!-- 						</div></li> -->
+<!-- 				</ul> -->
 			</div>
 		</div>
 	</nav>
@@ -154,8 +154,7 @@ div#shoppingCartMenu {
 						<form action="<c:url value='/QueryProduct/1'/>" method="get" class="d-block d-flex">
 							<div class="fields d-block d-flex">
 								<div class="textfield-search one-third">
-									<input name="QueryString" type="text" class="form-control"
-										placeholder="請輸入關鍵字">
+									<input name="QueryString" type="text" class="form-control" placeholder="請輸入關鍵字">
 								</div>
 							</div>
 							<input type="submit" class="search-submit btn btn-primary" value="搜尋">
@@ -407,7 +406,7 @@ div#shoppingCartMenu {
 								<p style="height: 170px;">${Top5.pContent}</p>
 								<hr>
 								<p class="bottom-area d-flex">
-									<a class="btn btn-outline-info" href="<c:url value='/ProductSingle/${productBean.pId}'/>">詳細資訊</a>
+									<a class="btn btn-outline-info" href="<c:url value='/ProductSingle/${Top5.pId}'/>">詳細資訊</a>
 								</p>
 							</div>
 						</div>
@@ -446,15 +445,15 @@ div#shoppingCartMenu {
 								<c:forEach varStatus="vs" var="reviewBean" items="${reviewList}">
 									<div class="item">
 										<div class="testimony-wrap d-flex">
-											<!-- 										<div class="user-img mb-5" style="background-image: url(images/person_1.jpg)"> -->
-											<!-- 											<span class="quote d-flex align-items-center justify-content-center"> <i -->
-											<!-- 												class="icon-quote-left"></i> -->
-											<!-- 											</span> -->
-											<!-- 										</div> -->
+											<div class="user-img mb-5">
+												<span class="quote d-flex align-items-center justify-content-center"> <i
+													class="icon-quote-left"></i>
+												</span>
+											</div>
 											<div class="text ml-md-4">
 												<p class="name">${reviewBean.rTitle}</p>
 												<p class="mb-5">${reviewBean.rReview}</p>
-												<span class="position">${reviewBean.mName}</span>
+												<span class="position">用戶:${reviewBean.mName}</span>
 											</div>
 										</div>
 									</div>

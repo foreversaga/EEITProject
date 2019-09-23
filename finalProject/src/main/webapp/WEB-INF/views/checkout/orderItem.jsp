@@ -23,9 +23,10 @@
 		});
 	};
 
-	function ToggleReview() {
+	function ToggleReview(id) {
+		var amend = '#AmendReview' + id;
 		$("#ShowReview").hide();
-		$("#AmendReview").fadeIn();
+		$(amend).fadeIn();
 		$("#ToggleReview").hide();
 	};
 
@@ -175,9 +176,9 @@ div.dropdown-menu {
 										<td class="cell100 column3" style="text-align: center;width:15%;"><c:choose>
 												<c:when test="${!empty review[orderItem.pId]}">
 													<button class="btn btn-primary" type="button" data-toggle="collapse"
-														data-target="#collapseReview" aria-expanded="false" aria-controls="collapseReview">
+														data-target="#collapseReview${review[orderItem.pId].rId}" aria-expanded="false" aria-controls="collapseReview${review[orderItem.pId].rId}">
 														查看我的評價</button>
-													<div class="collapse" id="collapseReview">
+													<div class="collapse" id="collapseReview${review[orderItem.pId].rId}">
 														<div style="text-align: left; margin-top: 2%;" class="card card-body">
 															<div id="ShowReview">
 																<span class="rate"> <c:choose>
@@ -223,10 +224,10 @@ div.dropdown-menu {
 																	</c:choose></span>
 																<h5>${review[orderItem.pId].rTitle}</h5>
 																<p>${review[orderItem.pId].rReview}</p>
-																		<button id="ToggleReview" onclick="ToggleReview()" class="btn btn-primary"
+																		<button id="${review[orderItem.pId].rId}" onclick="ToggleReview(this.id)" class="btn btn-primary"
 																style="width: 25%">修改評價</button>
 															</div>
-															<div id="AmendReview" style="display: none">
+															<div id="AmendReview${review[orderItem.pId].rId}" style="display: none">
 <!-- 																<div class="card card-body" style="text-align: left; margin-top: 2%;"> -->
 																	<form:form action="${pageContext.request.contextPath}/ProcessAmendReview"
 																		modelAttribute="newrb" method="POST">
