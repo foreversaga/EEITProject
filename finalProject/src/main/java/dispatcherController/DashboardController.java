@@ -1,8 +1,12 @@
 package dispatcherController;
 
 import java.sql.Blob;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import cart.model.orderItemBean;
 import checkout.service.orderService;
 import product.model.productBean;
 import product.service.productService;
@@ -71,8 +79,25 @@ public class DashboardController {
 	//評價列表
 		@RequestMapping(value = "/ReviewListDashboard")
 		public String getReviewListController(Model model) {
+			reviewBean rb=new reviewBean();
+			model.addAttribute("updateallrb", rb);
 			List<reviewBean>list=rService.getAllReviews();
-			model.addAttribute("Reviews", list);
+			model.addAttribute("reviewList", list);
 			return "Dashboard/ReviewListDashboard";
 		}	
+		
+		@RequestMapping(value = "/ReviewListDashboard", method = RequestMethod.POST)
+		public String AmendReview(@ModelAttribute("updateallrb") reviewBean rb, @RequestParam("rReview") String rReview,
+				BindingResult result, HttpServletRequest request) {
+			java.sql.Timestamp date = new java.sql.Timestamp(System.currentTimeMillis());
+			rb.setrTimestamp(date);
+			rb.setrReview(rReview);
+			rService.UpdateReview(rb);
+//			StringBuilder sb = new StringBuilder();
+//			sb.append("redirect:/ReviewListDashboard/").append(rb.getoId()).append("#orderitem");
+//			return sb.toString();
+			return "redirect:/ReviewListDashboard/";
+		}
+		
+
 }

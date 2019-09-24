@@ -22,6 +22,7 @@
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/TableCss/vendor/perfect-scrollbar/perfect-scrollbar.css'/>">
+	<link rel="stylesheet" href="<c:url value='/css/RWDcss/css/icomoon.css'/>">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css"
 	href="<c:url value='/css/TableCss/css/util.css'/>">
@@ -74,17 +75,21 @@
 		})
 	});
 
-	function ToggleReview() {
+	function ToggleReview(clicked_id) {
+		var rId='"#'+clicked_id+'"';
+		var updaterId='#AmendReview'+clicked_id;
 		$("#ShowReview").hide();
-		$("#AmendReview").fadeIn();
-		$("#ToggleReview").hide();
+		$(updaterId).fadeIn();
+		$("#clicked_id").hide();
 	};
 
-	function CancelAmend() {
+	function CancelAmend(clicked_id) {
+		var rId='"#'+clicked_id+'"';
+		var updaterId='#AmendReview'+clicked_id;
 		event.preventDefault();
 		$("#ShowReview").fadeIn();
-		$("#AmendReview").hide();
-		$("#ToggleReview").fadeIn();
+		$(updaterId).hide();
+		$("#clicked_id").fadeIn();
 
 	};
 </script>
@@ -118,12 +123,19 @@
 body {
 	background: #eee !important;
 }
+
+.scrollerbar{margin-top:8px;overflow:scroll;height:450px;overflow-x:hidden;overflow-y:auto;}
+.scrollerbar{scrollbar-arrow-color:#f00;}
+
+.AutoNewlineforView{
+word-break: break-all;/*必須*/
+}
 </style>
 <body>
 	<div class="Background">
 		<img src="<c:url value='/img/dashboardbackground.jpg'/>">
 	</div>
-	<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3">
+	<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3" style="font-family: 'Noto Serif TC', serif;">
 		<div class="flex-row d-flex">
 			<button type="button" class="navbar-toggler mr-2 "
 				data-toggle="offcanvas" title="Toggle responsive left sidebar">
@@ -189,7 +201,7 @@ body {
 				</a> <!-- Dropdown - User Information -->
 					<div
 						class="dropdown-menu dropdown-menu-right shadow animated--grow-in mt-2"
-						aria-labelledby="userDropdown">
+						aria-labelledby="userDropdown" style="font-family: 'Noto Serif TC', serif;">
 						<a class="dropdown-item" href="<c:url value='/Dashboard'/>"> <i
 							class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
 							後台系統
@@ -216,7 +228,7 @@ body {
 		</div>
 	</nav>
 	<div class=" container align-items-center" id="main">
-		<div class="container  ">
+		<div class="container  "style="font-family: 'Noto Serif TC', serif;">
 			<div class="  justify-content-around  " style="text-align: center;">
 				<div class="justify-content-center "style="margin-top:100px">
 				<a href="<c:url value='/AddProduct'/>">
@@ -248,41 +260,118 @@ body {
 
 									</div>
 									<div class="">
-										<div class="container-fruid" style="height: 500px;">
+										<div class="container-fruid" style="height: 450px;">
 											<div class="">
 												<div class="table100 ver1 mb-5">
-													<div class="table100-head " style="text-align: center">
+													<div class="table100-head mt-1 " style="text-align: center">
 														<table>
 															<thead>
 																<tr class="  row100 head justify-content-around"
 																	style="text-align: center;">
 																	<th class="cell100 column1">帳號</th>
 																	<th class="cell100 column2">產品編號</th>
-																	<th class="cell100 column3">標題</th>
-																	<th class="cell100 column4">評級</th>
-																	<th class="cell100 column5">意見</th>
-																	<th class="cell100 column6">發表時間</th>
+																	<th class="cell100 column3 ">評價</th>
+																	<th class="cell100 column4">發表時間</th>
 																</tr>
 															</thead>
 														</table>
 													</div>
 
-													<div class="container-fruid js-pscroll"
-														style="text-align: center; height: 550px">
+													<div class="container-fruid js-pscroll  scrollerbar"
+														style="text-align: center; ">
 														<table>
 															<tbody>
-																<c:forEach varStatus="vs" var="reviewBean"
-																	items="${Reviews}">
-																	<tr class="row100 body ">
-																		<td class=" justify-content-center cell100 column1 "><a
-																			href="'/>">${reviewBean.mAccount}</a></td>
-																		<td class="container-fruid cell100 column2 mb-5">${reviewBean.pId}</td>
-																		<td class="cell100 column3">${reviewBean.rTitle}</td>
-																		<td class="cell100 column4">${reviewBean.rRating}</td>
-																		<td class="cell100 column5">${reviewBean.rReview}</td>
-																		<td class="cell100 column6">${reviewBean.rTimestamp}</td>
-																	</tr>
-																</c:forEach>
+															<c:forEach varStatus="vs" var="reviewBean" items="${reviewList}">
+									<tr class="row100 body" style="font-size: 30px;">
+										<td class="cell100 column1" style="text-align: center; padding-left: 0px;">${reviewBean.mAccount}<img
+											width="30%;" src="" /></td>
+										<td class="cell100 column2">${reviewBean.pId}</td>
+										<td class="cell100 column3" style="text-align: center;width:15%;">
+												
+													<button class="btn btn-secondary mt-2" type="button" data-toggle="collapse" 
+														data-target="#collapseReview${reviewBean.rId}" aria-expanded="false" aria-controls="collapseReview${reviewBean.rId}">
+														查看評價</button>
+													<div class="collapse" id="collapseReview${reviewBean.rId}">
+														<div style="text-align: left; margin-top: 2%;" class="card card-body">
+															<div id="ShowReview">
+																<span class="rate"> <c:choose>
+																		<c:when
+																			test="${reviewBean.rRating>=1&&reviewBean.rRating<2 }">
+																			<i class="icon-star"></i>
+																			<i class="icon-star-o"></i>
+																			<i class="icon-star-o"></i>
+																			<i class="icon-star-o"></i>
+																			<i class="icon-star-o"></i>
+																		</c:when>
+																		<c:when
+																			test="${reviewBean.rRating>=2&&reviewBean.rRating<3 }">
+																			<i class="icon-star"></i>
+																			<i class="icon-star"></i>
+																			<i class="icon-star-o"></i>
+																			<i class="icon-star-o"></i>
+																			<i class="icon-star-o"></i>
+																		</c:when>
+																		<c:when
+																			test="${reviewBean.rRating>=3&&reviewBean.rRating<4 }">
+																			<i class="icon-star"></i>
+																			<i class="icon-star"></i>
+																			<i class="icon-star"></i>
+																			<i class="icon-star-o"></i>
+																			<i class="icon-star-o"></i>
+																		</c:when>
+																		<c:when
+																			test="${reviewBean.rRating>=4&&reviewBean.rRating<5 }">
+																			<i class="icon-star"></i>
+																			<i class="icon-star"></i>
+																			<i class="icon-star"></i>
+																			<i class="icon-star"></i>
+																			<i class="icon-star-o"></i>
+																		</c:when>
+																		<c:otherwise>
+																			<i class="icon-star"></i>
+																			<i class="icon-star"></i>
+																			<i class="icon-star"></i>
+																			<i class="icon-star"></i>
+																			<i class="icon-star"></i>
+																		</c:otherwise>
+																	</c:choose></span>
+																<h5>${reviewBean.rTitle}</h5>
+																<p>${reviewBean.rReview}</p>
+																		<button id="${reviewBean.rId}" onclick="ToggleReview(this.id)" class="btn btn-secondary">修改評價</button>
+															</div>
+															<div id="AmendReview${reviewBean.rId}" style="display: none">
+<!-- 																<div class="card card-body" style="text-align: left; margin-top: 2%;"> -->
+																	<form:form action="${pageContext.request.contextPath}/ReviewListDashboard"
+																		   modelAttribute="updateallrb" method="POST">
+																		<form:input type="hidden" path="mName" value="${LoginOK.mName}"></form:input>
+																		<form:input type="hidden" path="rId" value="${reviewBean.rId}"></form:input>
+																		<form:input type="hidden" path="mAccount" value="${reviewBean.mAccount}"></form:input>
+<%-- 																		<form:input type="hidden" path="oId" value="${orderItem.orderBean.oId}"></form:input> --%>
+																		<h5>評分:</h5>
+																		<p>
+																			<form:radiobutton path="rRating" value="1" label="1" checked="${reviewBean.rRating>=1&&reviewBean.rRating<2 ? 'checked' : '' }"/>
+																			<form:radiobutton path="rRating" value="2" label="2" checked="${reviewBean.rRating>=2&&reviewBean.rRating<3 ? 'checked' : '' }"/>
+																			<form:radiobutton path="rRating" value="3" label="3" checked="${reviewBean.rRating>=3&&reviewBean.rRating<4 ? 'checked' : '' }"/>
+																			<form:radiobutton path="rRating" value="4" label="4" checked="${reviewBean.rRating>=4&&reviewBean.rRating<5 ? 'checked' : '' }"/>
+																			<form:radiobutton path="rRating" value="5" label="5" checked="${reviewBean.rRating==5 ? 'checked' : '' }"/>
+																		</p>
+																		<form:input class="mb-1" style="margin-right: -300px" type="text" size="20" path="rTitle" value="${reviewBean.rTitle}"></form:input>
+																		<br>
+																		<textarea style=" margin-right: -220px" name="rReview" rows="8" cols="28">${reviewBean.rReview}</textarea>
+																		<form:input type="hidden" path="pId" value="${reviewBean.pId}"></form:input>
+																		<br>
+																		<input class="btn btn-outline-success btn-sm" type="submit" value="送出">
+																		<button id="${reviewBean.rId}" onclick="CancelAmend(this.id)" class="btn btn-outline-dark btn-sm">取消</button>
+																	</form:form>
+																</div>
+															</div>
+												
+														</div>
+<!-- 													</div> -->
+											</td>
+											<td class="cell100 column4">${reviewBean.rTimestamp}</td>
+									</tr>
+								</c:forEach>
 															</tbody>
 														</table>
 													</div>

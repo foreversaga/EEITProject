@@ -97,7 +97,7 @@ body {
 	<div class="Background">
 		<img src="<c:url value='/img/dashboardbackground.jpg'/>">
 	</div>
-	<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3">
+	<nav class=" navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3 justify-content-center">
 		<div class="flex-row d-flex">
 			<button type="button" class="navbar-toggler mr-2 "
 				data-toggle="offcanvas" title="Toggle responsive left sidebar">
@@ -112,7 +112,7 @@ body {
 		</button>
 		<div class="navbar-collapse collapse" id="collapsingNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link"
+				<li class="nav-item active" ><a class="nav-link" style="margin-left:230px"
 					href="<c:url value='/'/>">旅遊趣<span class="sr-only"></span></a></li>
 				<!-- <li class="nav-item">
                     <a class="nav-link" href="//www.codeply.com">Link</a>
@@ -140,9 +140,9 @@ body {
 <!-- 						aria-label="Search"> -->
 <%-- 				</form:form> --%>
 <!-- <!-- 			</ul> 先移掉購物車iCon fa fa-shopping-cart  fa-pull-right 會影響置中 -->
-			<ul class="navbar-nav ml-auto ">
+			<ul class="navbar-nav ml-auto "style="color: white;margin-right:10%">
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle   mr-3 "
+					class="nav-link dropdown-toggle "
 					style="color: white;" id="navbarDropdown" role="button"
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">購物車</a>
 					<div class="dropdown-menu dropdown-menu-right" id="shoppingCartMenu" 
@@ -176,7 +176,7 @@ body {
                     <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
                 </li> -->
 				<!-- 用戶選單 -->
-				<li class="nav-item "><a class="nav-link dropdown-toggle"
+				<li class="nav-item "><a class="nav-link dropdown-toggle" 
 					href="#" id="userDropdown" role="button" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false"> <span
 						class=" d-none d-lg-inline  "
@@ -184,18 +184,15 @@ body {
 						<img src="<c:url value='/showmPic/${LoginOK.mId}'/>" class="img-circle " title="${LoginOK.mAccount}" style=" width:30px; height:30px; border-radius:50%; "/>
 				</a> <!-- Dropdown - User Information -->
 					<div
-						class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+						class="dropdown-menu dropdown-menu-right shadow animated--grow-in "style=" margin-right:193px"
 						aria-labelledby="userDropdown">
 						<a class="dropdown-item" href="<c:url value='/UpdateMemberForm'/>">
 							<i class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
 							帳戶設定
 						</a> <a class="dropdown-item" href="<c:url value='/UserOrderDetail'/>"> <i
 							class="  mr-2 text-gray-400 fa fa-shopping-bag"
-							style="color: #99E64D;"></i> 我的訂單
-						</a> <a class="dropdown-item" href="<c:url value='/UserDashboardRating'/>"> <i
-							class="  mr-2 text-gray-400 fa fa-gratipay" style="color: pink;"></i>
-							我的評價
-						</a>
+							style="color: #99E64D;"></i> 訂單/評價管理
+						</a> 
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="<c:url value='/logout'/>"> <i
 							class=" mr-2 text-gray-400 fa fa-sign-out" style="color: gray;"></i>
@@ -216,22 +213,23 @@ body {
                     <li class=" list-group-item list-group-item-action "><a class="nav-link" href="#">帳戶設定</a></li> -->
 			<!-- </ul>
             </div> -->
-			<div class="sidebar-heading col-md-3  sidebar-offcanvas bg-light "
-				id="sidebar" role="navigation" style="text-align: center;margin-top:30px">
+			<div class="container-fruid " style="margin-top:200px;width:250px;">
+			<div class=" sidebar-heading   sidebar-offcanvas bg-light "
+				id="sidebar" role="navigation" style="text-align: center;height:1700px">
 				<div
-					class="list-group list-group-flush flex-column sticky-top  p-0 pt-5 "
-					style="font-family: 'Noto Serif TC', serif">
+					class="list-group list-group-flush flex-column sticky-top  p-0  "
+					style="font-family: 'Noto Serif TC', serif;">
 					<a href="<c:url value='/UserDashboard'/>"
 						class="list-group-item list-group-item-action bg-light ">個人中心</a>
-					<a href="<c:url value='/UserOrderDetail'/>" class="list-group-item list-group-item-action bg-light">我的訂單</a>
-					<a href="<c:url value='/UserDashboardRating'/>" class="list-group-item list-group-item-action bg-light">我的評價</a>
+					<a href="<c:url value='/UserOrderDetail'/>" class="list-group-item list-group-item-action bg-light">訂單/評價管理</a>
 					<a href="<c:url value='/UpdateMemberForm'/>"
 						class="list-group-item list-group-item-action bg-light">帳戶設定</a> 
 				</div>
 			</div>
+			</div>
 			<!--/col-->
 
-			<div class="col main pt-5 ml-2 bg-white" >
+			<div class="col main pt-5 ml-2 bg-white"  style="display: inline-block;margin-top:200px;">
 				<div class="d-flex justify-content-center flex-row  mt-3">
 					<img src="<c:url value='/img/TravelIcon.png'/>" class="img-fluid" />
 				</div>
@@ -294,7 +292,7 @@ body {
 				<a id="layouts"></a>
 				<hr>
 				<h2 class="sub-header mt-5 mb-5"
-					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">熱門地區</h2>
+					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif;height:50px">熱門地區</h2>
 				<div class="container row mb-3 ml-1 d-flex justify-content-center"
 					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">
 					<div class="card-deck">
@@ -358,7 +356,7 @@ body {
 						<li style="margin-top: 3px;">©2019 Travel Fun Technology</li>
 						<li style="margin-top: 3px;">Limited. All Rights Reserved.</li>
 						<li style="margin-top: 3px;">電話：02-23766198</li>
-						<li style="margin-top: 3px;">信箱：EEIT108@outlook.com</li>
+						<li style="margin-top: 3px;">信箱：TravleFun@outlook.com</li>
 						<li style="margin-top: 3px;">地址：106台北市大安區復興南路一段390號 2,3號</li>
 						<li style="margin-top: 3px;">粉專：https://www.travelFun.com/EEIT108/</li>
 					</ul>

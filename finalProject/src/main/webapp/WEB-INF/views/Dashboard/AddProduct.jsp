@@ -43,7 +43,13 @@
 <!-- ==================================================================== -->
 <script src="http://malsup.github.io/jquery.form.js"></script>
 <script
-	src="<c:url value='/css/TableCss/vendor/perfect-scrollbar/perfect-scrollbar.min.js'/>"></script>
+	src="<c:url value='/css/TableCss/vendor/perfect-scrollbar/perfect-scrollbar.min.js'/>"></script>	
+<!-- 日期選擇器script.CSS	 -->
+<script src="/path/to//jquery.min.js"></script>
+<script src="/path/to/bootstrap.js"></script>
+<script src="/path/to/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="/path/to/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-TW.js"></script>
+<link rel="stylesheet" href="/path/to/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" />
 <script>
 	$(document).ready(function() {
 
@@ -87,6 +93,17 @@
 		$("#ToggleReview").fadeIn();
 
 	};
+	
+	//產品日期選擇
+$('[type="date"]').datepicker({
+    format: "yyyy-mm-dd",
+    autoclose: true,
+    startDate: "today",   
+    clearBtn: true,
+    calendarWeeks: true,
+    todayHighlight: true,
+    language: 'zh-TW'
+});
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -123,7 +140,7 @@ body {
 	<div class="Background">
 		<img src="<c:url value='/img/dashboardbackground.jpg'/>">
 	</div>
-	<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3">
+	<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3" style="font-family: 'Noto Serif TC', serif;">
 		<div class="flex-row d-flex">
 			<button type="button" class="navbar-toggler mr-2 "
 				data-toggle="offcanvas" title="Toggle responsive left sidebar">
@@ -189,7 +206,7 @@ body {
 				</a> <!-- Dropdown - User Information -->
 					<div
 						class="dropdown-menu dropdown-menu-right shadow animated--grow-in mt-2"
-						aria-labelledby="userDropdown">
+						aria-labelledby="userDropdown" style="font-family: 'Noto Serif TC', serif;">
 						<a class="dropdown-item" href="<c:url value='/Dashboard'/>"> <i
 							class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
 							後台系統
@@ -216,7 +233,7 @@ body {
 		</div>
 	</nav>
 	<div class=" container align-items-center" id="main">
-		<div class="container  ">
+		<div class="container  "style="font-family: 'Noto Serif TC', serif;">
 			<div class="  justify-content-around  " style="text-align: center;">
 				<div class="justify-content-center " style="margin-top: 100px">
 
@@ -280,8 +297,8 @@ body {
 												<div class="col-md-3 ml-5">
 													<div class="form-group">
 														<label class="bmd-label-floating">產品有效日期</label>
-														<form:input id="datepicker" path="pDateRange" type="text"
-															class="form-control " style="text-align: center;" />
+														<form:input id="datepicker" path="pDateRange" type="date"
+															class="form-control "  />
 													</div>
 												</div>
 											</div>
@@ -300,7 +317,7 @@ body {
 														<label class="bmd-label-floating">產品圖片上傳</label>
 														<form:input id="productImage" path="productImage"
 															type="file"
-															class="form-control btn btn-outline-dark btn-block" />
+															class="form-control btn btn-outline-dark btn-block " />
 													</div>
 												</div>
 											</div>

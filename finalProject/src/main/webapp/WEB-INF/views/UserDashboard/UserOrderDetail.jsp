@@ -111,6 +111,8 @@
 body {
 	background: #eee !important;
 }
+.scrollerbar{overflow:scroll;height:545px;overflow-x:hidden;overflow-y:auto;}
+.scrollerbar{scrollbar-arrow-color:#f00;}
 </style>
 <body>
 	<div class="Background">
@@ -131,7 +133,7 @@ body {
 		</button>
 		<div class="navbar-collapse collapse" id="collapsingNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link"
+				<li class="nav-item active"><a class="nav-link" style="margin-left:230px"
 					href="<c:url value='/'/>">旅遊趣<span class="sr-only"></span></a></li>
 				<!-- <li class="nav-item">
                     <a class="nav-link" href="//www.codeply.com">Link</a>
@@ -159,7 +161,7 @@ body {
 <!-- 						aria-label="Search"> -->
 <%-- 				</form:form> --%>
 <!-- <!-- 			</ul> 先移掉購物車iCon fa fa-shopping-cart  fa-pull-right 會影響置中 -->
-			<ul class="navbar-nav ml-auto">
+			<ul class="navbar-nav ml-auto"style="color: white;margin-right:10%">
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle  mr-3"
 					style="color: white;" id="navbarDropdown" role="button"
@@ -203,17 +205,14 @@ body {
 						<img src="<c:url value='/showmPic/${LoginOK.mId}'/>" class="img-circle " title="${LoginOK.mAccount}" style=" width:30px; height:30px; border-radius:50%; "/>
 				</a> <!-- Dropdown - User Information -->
 					<div
-						class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+						class="dropdown-menu dropdown-menu-right shadow animated--grow-in" style=" margin-right:193px"
 						aria-labelledby="userDropdown">
 						<a class="dropdown-item" href="<c:url value='/UpdateMemberForm'/>">
 							<i class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
 							帳戶設定
 						</a> <a class="dropdown-item" href="<c:url value='/UserOrderDetail'/>">
 							<i class="  mr-2 text-gray-400 fa fa-shopping-bag"
-							style="color: #99E64D;"></i> 我的訂單
-						</a> <a class="dropdown-item" href="<c:url value='/UserDashboardRating'/>"> <i
-							class="  mr-2 text-gray-400 fa fa-gratipay" style="color: pink;"></i>
-							我的評價
+							style="color: #99E64D;"></i>訂單/評價管理
 						</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="<c:url value='/logout'/>"
@@ -236,28 +235,33 @@ body {
                     <li class=" list-group-item list-group-item-action "><a class="nav-link" href="#">帳戶設定</a></li> -->
 			<!-- </ul>
             </div> -->
+			<div class="container-fruid " style="margin-top:200px;width:250px;">
 			<div
-				class="container sidebar-heading col-md-3  sidebar-offcanvas bg-light "
-				id="sidebar" role="navigation" style="text-align: center;margin-top:30px">
+				class=" sidebar-heading  sidebar-offcanvas bg-light "
+				id="sidebar" role="navigation" style="text-align: center;height:1334px">
 				<div
-					class="list-group list-group-flush flex-column sticky-top  p-0 pt-5 "
+					class="list-group list-group-flush flex-column sticky-top  p-0  "
 					style="font-family: 'Noto Serif TC', serif">
 					<a href="<c:url value='/UserDashboard'/>"
 						class="list-group-item list-group-item-action bg-light ">個人中心</a>
 					<a href="<c:url value='/UserOrderDetail'/>"
-						class="list-group-item list-group-item-action bg-light">我的訂單</a> <a
-						href="<c:url value='/UserDashboardRating'/>" class="list-group-item list-group-item-action bg-light">我的評價</a>
+						class="list-group-item list-group-item-action bg-light">訂單/評價管理</a>
 					<a href="<c:url value='/UpdateMemberForm'/>"
 						class="list-group-item list-group-item-action bg-light">帳戶設定</a> 
 				</div>
 			</div>
+			</div>
 			<!--/col-->
-			<div class="container col-md-9 p-0 margin-top:10px"style="margin-top:20px">
+			<div class="container-fruid col-md-9 p-0 "style="margin-top:150px">
 
 				<div class="container flex-column">
 
 					<div class="  pt-5">
 						<div class="card ">
+						<div class="card-header card-header-primary">
+									<h4 class="card-title ">訂單 / 評價資訊管理</h4>
+									<p class="card-category">以下資訊用於幫助您查詢訂單明細，並填寫/查詢/更新評價，您的資料將會安全地被保存且不會公開</p>
+								</div>
 								<div class="mt-2">
 		<div class="container-fruid" style="height:600px;">
 			<div class="">
@@ -269,25 +273,26 @@ body {
 									<th class="cell100 column1">訂單編號</th>
 									<th class="cell100 column2">訂購日期</th>
 									<th class="cell100 column3">訂購金額</th>
-									<th class="cell100 column4">付款狀態</th>
-									<th class="cell100 column5">收貨人</th>
+									<th class="cell100 column4"style="width:20%">付款狀態</th>
+									<th class="cell100 column5"style="width:20%">收貨人</th>
 									<th class="cell100 column6">運送地址</th>
 								</tr>
 							</thead>
 						</table>
 					</div>
 
-					<div class="container-fruid js-pscroll">
+					<div class="container-fruid js-pscroll mt-2 scrollerbar"style="height:545px;">
 						<table>
 							<tbody>
+							
 								<c:forEach varStatus="vs" var="orderBean" items="${orderList}">
 									<tr class="row100 body ">
-										<td class=" justify-content-center cell100 column1 " style="text-align: center;height:95px"><a
+										<td class=" justify-content-center cell100 column1 " style="text-align: center;height:100px"><a
 											href="<c:url value='/showOrderItem/${orderBean.oId}'/>">${orderBean.oId}</a></td>
 										<td class="container-fruid cell100 column2 mb-5">${orderBean.oTimestamp}</td>
 										<td class="cell100 column3">${orderBean.oTotalAmount}</td>
-										<td class="cell100 column4">${orderBean.oPaymentStatus}</td>
-										<td class="cell100 column5">${orderBean.oReceiveName}</td>
+										<td class="cell100 column4"style="width:20%">${orderBean.oPaymentStatus}</td>
+										<td class="cell100 column5"style="width:20%">${orderBean.oReceiveName}</td>
 										<td class="cell100 column6">${orderBean.oAddress}</td>
 									</tr>
 								</c:forEach>
@@ -300,7 +305,7 @@ body {
 	</div>
 													<hr>
 				<h2 class="sub-header mt-5 mb-5"
-					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">熱銷活動</h2>
+					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif;height:50px">熱銷活動</h2>
 				<div class="container row mb-3 ml-1 d-flex justify-content-center"
 					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">
 					<div class="card-deck">
@@ -347,8 +352,8 @@ body {
 
 	<footer class="container  navbar-fixed-bottom flex-column ">
 		<div
-			class=" container align-items-end row featurette bg-dark  p-5  mt-1 "
-			style="color: white">
+			class=" container align-items-end row featurette bg-dark  p-5  mt-1 ml-1"
+			style="color: white;width:1040px">
 			<div class="  justify-content-end col-md-5 order-md-7">
 				<h3 class="title2">聯絡我們</h3>
 				<div class="form-group">
@@ -370,7 +375,7 @@ body {
 					<li style="margin-top: 3px;">©2019 Travel Fun Technology</li>
 					<li style="margin-top: 3px;">Limited. All Rights Reserved.</li>
 					<li style="margin-top: 3px;">電話：02-23766198</li>
-					<li style="margin-top: 3px;">信箱：EEIT108@outlook.com</li>
+					<li style="margin-top: 3px;">信箱：TravleFun@outlook.com</li>
 					<li style="margin-top: 3px;">地址：106台北市大安區復興南路一段390號 2,3號</li>
 					<li style="margin-top: 3px;">粉專：https://www.travelFun.com/EEIT108/</li>
 				</ul>

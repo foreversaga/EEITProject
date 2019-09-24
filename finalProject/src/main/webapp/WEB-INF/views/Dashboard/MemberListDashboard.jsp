@@ -118,12 +118,14 @@
 body {
 	background: #eee !important;
 }
+.scrollerbar{overflow:scroll;height:500px;overflow-x:hidden;overflow-y:auto;}
+.scrollerbar{scrollbar-arrow-color:#f00;}
 </style>
 <body>
 	<div class="Background">
 		<img src="<c:url value='/img/dashboardbackground.jpg'/>">
 	</div>
-	<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3">
+	<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3" style="font-family: 'Noto Serif TC', serif;">
 		<div class="flex-row d-flex">
 			<button type="button" class="navbar-toggler mr-2 "
 				data-toggle="offcanvas" title="Toggle responsive left sidebar">
@@ -189,7 +191,7 @@ body {
 				</a> <!-- Dropdown - User Information -->
 					<div
 						class="dropdown-menu dropdown-menu-right shadow animated--grow-in mt-2"
-						aria-labelledby="userDropdown">
+						aria-labelledby="userDropdown" style="font-family: 'Noto Serif TC', serif;">
 						<a class="dropdown-item" href="<c:url value='/Dashboard'/>"> <i
 							class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
 							後台系統
@@ -216,7 +218,7 @@ body {
 		</div>
 	</nav>
 	<div class=" container align-items-center" id="main">
-		<div class="container  ">
+		<div class="container  "style="font-family: 'Noto Serif TC', serif;">
 			<div class="  justify-content-around  " style="text-align: center;">
 				<div class="justify-content-center "style="margin-top:100px">
 				<a href="<c:url value='/AddProduct'/>">
@@ -250,7 +252,7 @@ body {
 											<div class="">
 												<div class="table100 ver1 mb-5">
 
-													<div class="table100-head " style="text-align: center">
+													<div class="table100-head mt-1" style="text-align: center">
 														<table>
 															<thead>
 																<tr class=" row100 head justify-content-around"
@@ -259,14 +261,14 @@ body {
 																	<th class="cell100 column2">姓名</th>
 																	<th class="cell100 column3">性別</th>
 																	<th class="cell100 column4">出生日期</th>
-																	<th class="cell100 column5">地址</th>
+																	<th class="cell100 column5" style="width:26%">地址</th>
 																	<th class="cell100 column6">電話</th>
 																</tr>
 															</thead>
 														</table>
 													</div>
 
-													<div class="container-fruid js-pscroll "
+													<div class="container-fruid js-pscroll scrollerbar mt-2"
 														style="text-align: center; height: 550px">
 														<table>
 															<tbody>
@@ -277,10 +279,10 @@ body {
 																		<td class="container-fruid cell100 column2 mb-5">${MemberBean.mName}</td>
 																		<td class="cell100 column3">${MemberBean.mGender}</td>
 																		<td class="cell100 column4">${MemberBean.mDate}</td>
-																		<td class="cell100 column5">${MemberBean.mAddress}</td>
-																		<td class="cell100 column6">${MemberBean.mPhone}</td>
+																		<td class="cell100 column5"style="width:26%">${MemberBean.mAddress}</td>
+																		<td class="cell100 column6 ">${MemberBean.mPhone}</td>
 																	</tr>
-																</c:forEach>
+																</c:forEach>																
 															</tbody>
 														</table>
 													</div>
