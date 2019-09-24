@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%
+	response.setHeader("Pragma", "no-cache");
+	response.setHeader("Cache-Control", "no-cache");
+	response.setDateHeader("Expires", 0);
+%>
 <jsp:useBean id="orderInfo" class="cart.model.orderBean" scope="session" />
 <!DOCTYPE html>
 <html>
@@ -9,9 +14,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script src="<c:url value='/css/RWDcss/js/jquery.min.js'/>"></script>
-<script type="text/javascript">
-	
-</script>
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/open-iconic-bootstrap.min.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/animate.css'/>">
 
@@ -36,6 +38,42 @@
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/TableCss/css/util.css'/>">
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/TableCss/css/main.css'/>">
+<script type="text/javascript">
+	function DelCart(pId) {
+		var url = "<c:url value='/CheckOutDel?pId=" + pId + "'/>"
+		$.ajax({
+			type : "POST",
+			url : url,
+			success : function(data) {
+				$("div#UpdateDetail").html(data);
+			}
+		});
+	}
+
+	$(document).ready(
+			function() {
+				$("input[name='qty']").on(
+						"change paste keyup",
+						function() {
+							// 			var qty = this.value;
+							// 			var tdunit = "td#unit" + this.id;
+							// 			var unitprice = $(tdunit).html();
+							// 			var tdsub = "td#sub" + this.id;
+							// 			$(tdsub).html(qty * unitprice);
+							var qty = this.value;
+							var pId = this.id;
+							var url = "<c:url value='/UpdateCart?pId=" + pId
+									+ "&qty=" + qty + "'/>"
+							$.ajax({
+								type : "POST",
+								url : url,
+								success : function(data) {
+									$("div#UpdateDetail").html(data);
+								}
+							});
+						});
+			});
+</script>
 <style type="text/css">
 div.dropdown-menu {
 	width: 300px;
@@ -43,6 +81,10 @@ div.dropdown-menu {
 	background-color: #f0f0f0;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	overflow-y: auto;
+}
+
+div#ftco-nav li.nav-item {
+	margin: 0 20px;
 }
 </style>
 
@@ -67,35 +109,8 @@ div.dropdown-menu {
 					</c:if>
 					<c:if test="${!empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
-						<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">訂單查詢</a></li>
-						<li class="nav-item"><a href="<c:url value='/Dashboard'/>" class="nav-link">後臺系統</a></li>
 						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 					</c:if>
-				</ul>
-				<ul class="navbar-nav mr-right">
-					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">購物車</a>
-						<div id="shoppingCartMenu" class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<c:if test="${empty shoppingCart.content }">
-								<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
-							</c:if>
-							<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
-								<hr>
-								<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;"
-									src="<c:url value='/showPic/${cart.value.pId}'/>">
-								<p style="line-height: 10px">${cart.value.pName}</p>
-								<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
-								<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button"
-										onclick="DeleteItem(this.id)" value="刪除" /> </span>
-								<c:if test="${vs.last}">
-									<hr>
-								</c:if>
-							</c:forEach>
-							<c:if test="${!empty shoppingCart.content }">
-								<a href="<c:url value='/CheckOut'/>">結帳</a>
-							</c:if>
-						</div></li>
 				</ul>
 			</div>
 		</div>
@@ -105,11 +120,12 @@ div.dropdown-menu {
 	<div class="hero-wrap js-fullheight"
 		style="background-image: url(<c:url value='/css/RWDcss/images/bg_5.jpg'/>);">
 		<div style="margin: 0 20%;">
-			<form:form method="POST" action="${pageContext.request.contextPath }/ConfirmOrder"
-				modelAttribute="orderInfo">
-				<div style="margin: 20% 2%; display: inline-block; width: 45%;" class="card">
-					<div class="card-header">購買人資訊</div>
-					<div class="card-body">
+
+			<div style="margin: 20% 2%; display: inline-block; width: 35%;" class="card">
+				<div class="card-header">購買人資訊</div>
+				<div class="card-body">
+					<form:form method="POST" action="${pageContext.request.contextPath }/ConfirmOrder"
+						modelAttribute="orderInfo">
 						<table>
 							<tr>
 								<td><h5 class="card-title">購買人姓名:</h5></td>
@@ -135,33 +151,45 @@ div.dropdown-menu {
 								<td><input type="submit" class="btn btn-outline-primary" value="送出"></td>
 							</tr>
 						</table>
-
-					</div>
+						<form:input type="hidden" value="${orderInfo.mAccount}" path="mAccount" />
+						<form:input type="hidden" value="${orderInfo.oTimestamp}" path="oTimestamp" />
+						<form:input type="hidden" value="${orderInfo.oTotalAmount}" path="oTotalAmount" />
+					</form:form>
 				</div>
-				<div style="margin: 20% 2%; display: inline-block; width: 45%" class="card">
-					<div class="card-header">購物明細</div>
-					<div>
-						<table style="background-color: #99FF99; width: 100%;">
-							<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content}">
-								<tr>
-									<td>${cart.value.pName}</td>
-									<td>數量:${cart.value.iQty}</td>
-									<td>單價:${cart.value.pPrice}</td>
-									<td>小計:${cart.value.iQty * cart.value.pPrice}</td>
-								</tr>
-							</c:forEach>
+			</div>
+			<div id="UpdateDetail" style="margin: 20% 2%; display: inline-block; width: 55%" class="card">
+				<div class="card-header">購物明細</div>
+				<div>
+					<table style="background-color: #99FF99; width: 100%;">
+						<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content}">
 							<tr>
-								<td>金額總計:</td>
-								<td><jsp:getProperty property="oTotalAmount" name="orderInfo" /></td>
+								<td>${cart.value.pName}</td>
+								<td>數量:</td>
+								<td><input style="width: 40px;" id="${cart.value.pId}" name="qty" type="number"
+										value="${cart.value.iQty}" min="1" /></td>
+								<td>單價:</td>
+								<td id="unit${cart.value.pId}">${cart.value.pPrice}</td>
+								<td>小計:</td>
+								<td style="width: 80px;" id="sub${cart.value.pId}">$${cart.value.iQty *
+									cart.value.pPrice}</td>
+								<td><button onclick="DelCart(this.id)" id="${cart.value.pId}">刪除</button></td>
 							</tr>
-						</table>
-						<!--end of 購物明細 -->
-					</div>
+						</c:forEach>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>金額總計:</td>
+							<td>$${shoppingCart.total}</td>
+							<td></td>
+						</tr>
+					</table>
+					<!--end of 購物明細 -->
 				</div>
-				<form:input type="hidden" value="${orderInfo.mAccount}" path="mAccount" />
-				<form:input type="hidden" value="${orderInfo.oTimestamp}" path="oTimestamp" />
-				<form:input type="hidden" value="${orderInfo.oTotalAmount}" path="oTotalAmount" />
-			</form:form>
+			</div>
+
 		</div>
 	</div>
 

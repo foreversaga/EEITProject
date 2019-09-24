@@ -342,6 +342,7 @@ public class ProductController {
 				newStock = pb.getpInstock() - oi.getiQty();
 				n = pService.updateStock(pb.getpId(), newStock);
 			}
+			ob.setoTotalAmount(sc.getTotal());
 			ob.setItemSet(items);
 			ob.setmName(mb.getmName());
 			oService.saveOrder(ob);
@@ -426,7 +427,6 @@ public class ProductController {
 		return "checkout/paidPage";
 	}
 
-
 //刪除購物車商品
 	@RequestMapping(value = "/DeleteCartProduct", method = RequestMethod.GET)
 	public ModelAndView deleteProduct(HttpSession session, ModelAndView mav, HttpServletRequest request) {
@@ -471,5 +471,22 @@ public class ProductController {
 		return mav;
 	}
 
+	@RequestMapping("/UpdateCart")
+	public String UpdateCart(HttpSession session, HttpServletRequest request) {
+		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
+		int UpdatePid = Integer.parseInt(request.getParameter("pId"));
+		int UpdateQty = Integer.parseInt(request.getParameter("qty"));
+		cart.UpdateCartItem(UpdatePid, UpdateQty);
+		session.setAttribute("shoppingCart", cart);
+		return "checkout/CheckOutUpdate";
+	}
 
+	@RequestMapping("/CheckOutDel")
+	public String CheckOutDel(HttpSession session, HttpServletRequest request) {
+		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
+		int pId = Integer.parseInt(request.getParameter("pId"));
+		cart.deleteProduct(pId);
+		session.setAttribute("shoppingCart", cart);
+		return "checkout/CheckOutUpdate";
+	}
 }

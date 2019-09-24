@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>我的訂單</title>
+<title>${productBean.pName}</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet"
@@ -25,7 +25,7 @@
 	};
 
 	$(document).ready(function() {
-		$("input:button").click(function(e) {
+		$("input#addtocart").click(function(e) {
 			e.preventDefault();
 			var form = $(this.form);
 			var url = form.attr('action');
@@ -86,8 +86,6 @@ span#star-span {
 					</c:if>
 					<c:if test="${!empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
-						<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">訂單查詢</a></li>
-						<li class="nav-item"><a href="<c:url value='/Dashboard'/>" class="nav-link">後臺系統</a></li>
 						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 					</c:if>
 				</ul>
@@ -123,7 +121,7 @@ span#star-span {
 	<div style="width: 50%; margin: 0 auto;">
 		<img width="100%" src="<c:url value='/showPic/${productBean.pId}'/>" />
 		<div id="Product-Title">
-			<h3 class="display-2">${productBean.pName}</h3>
+			<h1 style="font-size: 50px;" class="display-2">${productBean.pName}</h1>
 		</div>
 		<div id="Product-Rating">
 			<p class="rate">
@@ -198,7 +196,7 @@ span#star-span {
 				<form:input type="hidden" path="pName" value="${productBean.pName }" />
 				<form:input type="hidden" path="pPrice" value="${productBean.pPrice }" />
 				<c:if test="${productBean.pInstock!=0 }">
-					<input class="btn btn-outline-info" type="button" value="加到購物車">
+					<input id="addtocart" class="btn btn-outline-info" type="button" value="加到購物車">
 				</c:if>
 			</form:form>
 		</p>
@@ -209,7 +207,7 @@ span#star-span {
 			<li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
 				role="tab" aria-controls="profile" aria-selected="false">用戶評價</a></li>
 			<li class="nav-item"><a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"
-				role="tab" aria-controls="contact" aria-selected="false">Contact</a></li>
+				role="tab" aria-controls="contact" aria-selected="false">Google地圖</a></li>
 		</ul>
 		<div class="tab-content" id="myTabContent" style="height: 300px">
 			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">${productBean.pContent}</div>
@@ -220,8 +218,8 @@ span#star-span {
 						<c:forEach varStatus="vs" var="reviewBean" items="${reviewList}">
 							<div class="card border-light mb-3">
 								<h5 class="card-header">
-									<span style="margin-right: 10%">用戶:${reviewBean.mName}</span> <span class="rate"
-										style="margin-right: 10%"> <c:choose>
+									<span style="width: 400px;">用戶:${reviewBean.mName}</span> <span
+										class="rate" style="margin-right: 10%"> <c:choose>
 											<c:when test="${reviewBean.rRating>=1&&reviewBean.rRating<2 }">
 												<i class="icon-star"></i>
 												<i class="icon-star-o"></i>
@@ -269,8 +267,32 @@ span#star-span {
 					</c:otherwise>
 				</c:choose>
 			</div>
-			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">測試用文字3</div>
+			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+				<div id="map"></div>
+			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		var map;
+
+		function initMap() {
+			var position = {
+				lat : ${productBean.pLat},
+				lng : ${productBean.pLng}
+			};
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom : 16,
+				center : position
+			});
+			var marker = new google.maps.Marker({
+				position : position,
+				map : map
+			});
+		}
+	</script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRbkV92eGVhHDqqN1xgXTGwHHH-XAX7HI&callback=initMap">
+		
+	</script>
 </body>
 </html>

@@ -111,12 +111,9 @@ div#shoppingCartMenu {
 						<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
 						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
 					</c:if>
-					<li class="nav-item"><a href="<c:url value='/AddProduct'/>" class="nav-link">新增商品</a></li>
 					<c:if test="${!empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
 						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
-						<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">訂單查詢</a></li>
-						<li class="nav-item"><a href="<c:url value='/review'/>" class="nav-link">評價查詢</a></li>
 					</c:if>
 				</ul>
 				<ul class="navbar-nav mr-right">
@@ -176,7 +173,7 @@ div#shoppingCartMenu {
 				<div class="col-lg-3 sidebar">
 					<div class="sidebar-wrap bg-light ftco-animate">
 						<h3 class="heading mb-4">Find City</h3>
-							<form action="<c:url value='/QueryProduct/1'/>" method="get">
+						<form action="<c:url value='/QueryProduct/1'/>" method="get">
 							<div class="fields">
 								<div class="form-group">
 									<input name="QueryString" type="text" class="form-control" placeholder="搜尋關鍵字">
@@ -195,21 +192,21 @@ div#shoppingCartMenu {
 										</select>
 									</div>
 								</div>
-<!-- 								<div class="form-group"> -->
-<!-- 									<input type="text" id="checkin_date" class="form-control" placeholder="Date from"> -->
-<!-- 								</div> -->
-<!-- 								<div class="form-group"> -->
-<!-- 									<input type="text" id="checkin_date" class="form-control" placeholder="Date to"> -->
-<!-- 								</div> -->
-<!-- 								<div class="form-group"> -->
-<!-- 									<div class="range-slider"> -->
-<!-- 										<span> <input type="number" value="25000" min="0" max="120000" /> - <input -->
-<!-- 												type="number" value="50000" min="0" max="120000" /> -->
-<!-- 										</span> -->
-<!-- 										<input value="1000" min="0" max="120000" step="500" type="range" /> -->
-<!-- 										<input value="50000" min="0" max="120000" step="500" type="range" /> -->
-<!-- 									</div> -->
-<!-- 								</div> -->
+								<!-- 								<div class="form-group"> -->
+								<!-- 									<input type="text" id="checkin_date" class="form-control" placeholder="Date from"> -->
+								<!-- 								</div> -->
+								<!-- 								<div class="form-group"> -->
+								<!-- 									<input type="text" id="checkin_date" class="form-control" placeholder="Date to"> -->
+								<!-- 								</div> -->
+								<!-- 								<div class="form-group"> -->
+								<!-- 									<div class="range-slider"> -->
+								<!-- 										<span> <input type="number" value="25000" min="0" max="120000" /> - <input -->
+								<!-- 												type="number" value="50000" min="0" max="120000" /> -->
+								<!-- 										</span> -->
+								<!-- 										<input value="1000" min="0" max="120000" step="500" type="range" /> -->
+								<!-- 										<input value="50000" min="0" max="120000" step="500" type="range" /> -->
+								<!-- 									</div> -->
+								<!-- 								</div> -->
 								<div class="form-group">
 									<input type="submit" value="Search" class="btn btn-primary py-3 px-5">
 								</div>
@@ -275,12 +272,13 @@ div#shoppingCartMenu {
 							</c:if>
 							<div class="col-md-4 ftco-animate">
 								<div class="destination">
-									<a href="<c:url value='/ProductSingle/${productBean.pId}'/>" class="img img-2 d-flex justify-content-center align-items-center"
+									<a href="<c:url value='/ProductSingle/${productBean.pId}'/>"
+										class="img img-2 d-flex justify-content-center align-items-center"
 										style="background-image: url(<c:url value='/showPic/${productBean.pId}'/>);"> <!-- 											<div class="icon d-flex justify-content-center align-items-center"> -->
 										<!-- 												<span class="icon-search2"></span> --> <!-- 											</div> -->
 									</a>
 									<div class="text p-3">
-										<div class="d-flex" style="height:100px;">
+										<div class="d-flex" style="height: 100px;">
 											<div class="one">
 												<h3 style="height: 70px;">
 													<a href="<c:url value='/ProductSingle/${productBean.pId}'/>">${productBean.pName}</a>
@@ -330,28 +328,10 @@ div#shoppingCartMenu {
 												<span class="price per-price">$${productBean.pPrice}<br></span>
 											</div>
 										</div>
-<!-- 										<p>這邊要放商品簡介文字</p> -->
+										<!-- 										<p>這邊要放商品簡介文字</p> -->
 										<hr>
 										<p class="bottom-area d-flex">
-											<form:form method="POST" action="${pageContext.request.contextPath}/Buy"
-												modelAttribute="orderItem" id="idform">
-												<c:if test="${productBean.pInstock==0 }">
-													<p>已售完</p>
-												</c:if>
-												<c:if test="${productBean.pInstock!=0 }">
-													<form:select path="iQty" style="margin-top:10px;">
-														<c:forEach var="stock" begin="1" end="${productBean.pInstock}">
-															<option value="${stock}">${stock}</option>
-														</c:forEach>
-													</form:select>
-												</c:if>
-												<form:input type="hidden" path="pId" value="${productBean.pId }" />
-												<form:input type="hidden" path="pName" value="${productBean.pName }" />
-												<form:input type="hidden" path="pPrice" value="${productBean.pPrice }" />
-												<c:if test="${productBean.pInstock!=0 }">
-													<input class="btn btn-outline-info" style="float: right;" type="button" value="加到購物車">
-												</c:if>
-											</form:form>
+											<a class="btn btn-outline-info" href="<c:url value='/ProductSingle/${productBean.pId}'/>">詳細資訊</a>
 										</p>
 									</div>
 								</div>

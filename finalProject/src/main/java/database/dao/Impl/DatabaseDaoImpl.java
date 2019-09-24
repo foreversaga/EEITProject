@@ -67,6 +67,8 @@ public class DatabaseDaoImpl implements DatabaseDao {
 				pb.setpPrice(Integer.parseInt(token[8]));
 				pb.setpRating(Integer.parseInt(token[9]));
 				pb.setpType(token[10]);
+				pb.setpLat(token[11]);
+				pb.setpLng(token[12]);
 				session.save(pb);
 				System.out.println("新增一筆商品");
 			}

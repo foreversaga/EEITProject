@@ -34,6 +34,8 @@ public class productBean implements Serializable {
 	private Double pAvgRating;
 	private Blob pPicture;
 	private String pFileName;
+	private String pLat;
+	private String pLng;
 	@Transient
 	@XmlTransient
 	private MultipartFile productImage;
@@ -171,6 +173,22 @@ public class productBean implements Serializable {
 
 	public void setpFileName(String pFileName) {
 		this.pFileName = pFileName;
+	}
+
+	public String getpLat() {
+		return pLat;
+	}
+
+	public void setpLat(String pLat) {
+		this.pLat = pLat;
+	}
+
+	public String getpLng() {
+		return pLng;
+	}
+
+	public void setpLng(String pLng) {
+		this.pLng = pLng;
 	}
 
 }

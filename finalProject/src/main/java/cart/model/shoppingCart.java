@@ -29,6 +29,11 @@ public class shoppingCart {
 		}
 	}
 
+	public void UpdateCartItem(int pId, int iQty) {
+		orderItem oib = cart.get(pId);
+		oib.setiQty(iQty);
+	}
+
 	public int getTotal() {
 		int totalAmount = 0;
 		Set<Integer> set = cart.keySet();
