@@ -65,10 +65,6 @@ public class MainController {
 		return "/UserDashboard/UserDashboard";
 	}
 
-	@RequestMapping("/UserDashboardRating")
-	public String UserDashboardRating() {
-		return "/UserDashboard/UserDashboardRating";
-	}
 
 	@RequestMapping("/Dashboard")
 	public String Dashboard() {

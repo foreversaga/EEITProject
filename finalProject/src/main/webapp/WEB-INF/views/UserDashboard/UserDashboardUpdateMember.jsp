@@ -113,7 +113,7 @@ body {
 		</button>
 		<div class="navbar-collapse collapse" id="collapsingNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link"
+				<li class="nav-item active"><a class="nav-link"style="margin-left:230px"
 					href="<c:url value='/'/>">旅遊趣<span class="sr-only"></span></a></li>
 				<!-- <li class="nav-item">
                     <a class="nav-link" href="//www.codeply.com">Link</a>
@@ -141,7 +141,7 @@ body {
 <!-- 						aria-label="Search"> -->
 <%-- 				</form:form> --%>
 <!-- <!-- 			</ul> 先移掉購物車iCon fa fa-shopping-cart  fa-pull-right 會影響置中 -->
-			<ul class="navbar-nav ml-auto">
+			<ul class="navbar-nav ml-auto"style="color: white;margin-right:10%">
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle  mr-3"
 					style="color: white;" id="navbarDropdown" role="button"
@@ -186,17 +186,14 @@ body {
 						<img src="<c:url value='/showmPic/${LoginOK.mId}'/>" class="img-circle " title="${LoginOK.mAccount}" style=" width:30px; height:30px; border-radius:50%; "/>
 				</a> <!-- Dropdown - User Information -->
 					<div
-						class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+						class="dropdown-menu dropdown-menu-right shadow animated--grow-in" style=" margin-right:193px"
 						aria-labelledby="userDropdown">
 						<a class="dropdown-item" href="<c:url value='/UpdateMemberForm'/>">
 							<i class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
 							帳戶設定
 						</a> <a class="dropdown-item" href="<c:url value='/UserOrderDetail'/>">
 							<i class="  mr-2 text-gray-400 fa fa-shopping-bag"
-							style="color: #99E64D;"></i> 我的訂單
-						</a> <a class="dropdown-item" href="<c:url value='/UserDashboardRating'/>"> <i
-							class="  mr-2 text-gray-400 fa fa-gratipay" style="color: pink;"></i>
-							我的評價
+							style="color: #99E64D;"></i>訂單/評價管理
 						</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="<c:url value='/logout'/>"
@@ -219,23 +216,24 @@ body {
                     <li class=" list-group-item list-group-item-action "><a class="nav-link" href="#">帳戶設定</a></li> -->
 			<!-- </ul>
             </div> -->
+			<div class="container-fruid " style="margin-top:200px;width:250px;">
 			<div
-				class="container sidebar-heading col-md-3  sidebar-offcanvas bg-light "
-				id="sidebar" role="navigation" style="text-align: center;margin-top:30px">
+				class=" sidebar-heading   sidebar-offcanvas bg-light "
+				id="sidebar" role="navigation" style="text-align: center;height:621px">
 				<div
-					class="list-group list-group-flush flex-column sticky-top  p-0 pt-5 "
+					class="list-group list-group-flush flex-column sticky-top  p-0  "
 					style="font-family: 'Noto Serif TC', serif">
 					<a href="<c:url value='/UserDashboard'/>"
 						class="list-group-item list-group-item-action bg-light ">個人中心</a>
 					<a href="<c:url value='/UserOrderDetail'/>"
-						class="list-group-item list-group-item-action bg-light">我的訂單</a> <a
-						href="<c:url value='/UserDashboardRating'/>" class="list-group-item list-group-item-action bg-light">我的評價</a>
+						class="list-group-item list-group-item-action bg-light">訂單/評價管理</a>
 					<a href="<c:url value='/UpdateMemberForm'/>"
 						class="list-group-item list-group-item-action bg-light">帳戶設定</a> 
 				</div>
 			</div>
+			</div>
 			<!--/col-->
-			<div class="container col-md-9 p-0 "style="margin-top:25px">
+			<div class="container col-md-9 p-0 "style="margin-top:150px">
 				<div class="container flex-column">
 
 					<div class="  pt-5">
@@ -341,8 +339,8 @@ body {
 
 	<footer class="container  navbar-fixed-bottom flex-column ">
 		<div
-			class=" container align-items-end row featurette bg-dark  p-5  mt-1 "
-			style="color: white">
+			class=" container align-items-end row featurette bg-dark  p-5  mt-1 ml-1"
+			style="color: white;width:1040px">
 			<div class="  justify-content-end col-md-5 order-md-7">
 				<h3 class="title2">聯絡我們</h3>
 				<div class="form-group">
@@ -364,7 +362,7 @@ body {
 					<li style="margin-top: 3px;">©2019 Travel Fun Technology</li>
 					<li style="margin-top: 3px;">Limited. All Rights Reserved.</li>
 					<li style="margin-top: 3px;">電話：02-23766198</li>
-					<li style="margin-top: 3px;">信箱：EEIT108@outlook.com</li>
+					<li style="margin-top: 3px;">信箱：TravleFun@outlook.com</li>
 					<li style="margin-top: 3px;">地址：106台北市大安區復興南路一段390號 2,3號</li>
 					<li style="margin-top: 3px;">粉專：https://www.travelFun.com/EEIT108/</li>
 				</ul>

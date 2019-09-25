@@ -8,6 +8,12 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- 日期選擇scriptCSS -->
+<script src="/path/to//jquery.min.js"></script>
+<script src="/path/to/bootstrap.js"></script>
+<script src="/path/to/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="/path/to/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-TW.js"></script>
+<link rel="stylesheet" href="/path/to/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" />
 <script>
 //密碼驗證
 document.addEventListener("DOMContentLoaded",function(){
@@ -53,6 +59,16 @@ function checkPwd(){
                 //window.alert("請重新檢查輸入格式");
                 document.getElementById("dateidentify").innerHTML="請重新檢查輸入格式";
         }
+ //日期選擇
+ $('[type="date"]').datepicker({
+    format: "yyyy-mm-dd",
+    autoclose: true,
+    startDate: "today",
+    clearBtn: true,
+    calendarWeeks: true,
+    todayHighlight: true,
+    language: 'zh-TW'
+});
 </script>
 <style>
 .registerBackground {			/*使圖片隨著瀏覽器尺寸自動縮放，不因大小出現縫隙*/
@@ -169,7 +185,7 @@ input[type="password"] {
 				<td><label> <form:radiobutton value="male" id="mGender" path="mGender"  name="txtUrl" required="required"/>男
 				</label> <label><form:radiobutton value="female" id="mGender" path="mGender"  name="txtUrl" required="required"/>女</label></td>
 			</tr>
-			<form:input path="mDate" id="datepicker" class="form-control" type="text" placeholder="出身年-月-日"  name="txtUrl" required="required"/>
+			<form:input path="mDate" id="datepicker" class="form-control" type="date" placeholder="出身年-月-日"  name="txtUrl" required="required"/>
 			<span id="dateidentify"style="color:red"></span>
 			<br>
 			<form:input id="mPhone" path="mPhone" class="form-control" type="text" placeholder="電話號碼"  name="txtUrl" required="required"/>

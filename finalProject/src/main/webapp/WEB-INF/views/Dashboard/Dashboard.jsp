@@ -104,12 +104,13 @@
 body {
 	background: #eee !important;
 }
+
 </style>
 <body>
 	<div class="Background">
 		<img src="<c:url value='/img/dashboardbackground.jpg'/>">
 	</div>
-	<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3">
+	<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3"style="font-family: 'Noto Serif TC', serif;">
 		<div class="flex-row d-flex">
 			<button type="button" class="navbar-toggler mr-2 "
 				data-toggle="offcanvas" title="Toggle responsive left sidebar">
@@ -175,7 +176,7 @@ body {
 				</a> <!-- Dropdown - User Information -->
 					<div
 						class="dropdown-menu dropdown-menu-right shadow animated--grow-in mt-2"
-						aria-labelledby="userDropdown">
+						aria-labelledby="userDropdown" style="font-family: 'Noto Serif TC', serif;">
 						<a class="dropdown-item" href="<c:url value='/Dashboard'/>"> <i
 							class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
 							後台系統
@@ -201,7 +202,7 @@ body {
 			</ul>
 		</div>
 	</nav>
-	<div class=" container align-items-center" id="main">
+	<div class=" container align-items-center" style="font-family: 'Noto Serif TC', serif;" id="main">
 		<div class="container  ">
 			<div class="  justify-content-around  " style="text-align: center;">
 				<div class="justify-content-center " style="margin-top: 100px">
