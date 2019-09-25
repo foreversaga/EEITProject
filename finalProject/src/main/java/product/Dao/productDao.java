@@ -41,4 +41,8 @@ public interface productDao {
 	public void updatePopular(int pId, int pPopular);
 	
 	public void updateAvgRating(int pId);
+	
+	void UpdateProduct(productBean pb);
+	
+	public List<productBean> getAllProductList();
 }

@@ -44,4 +44,8 @@ public interface productService {
 	void updatePopular(int pId, int pPopular);
 	
 	void updateAvgRating(int pId);
+	
+	void UpdateProduct(productBean pb);
+	
+	public List<productBean> getAllProductList();
 }

@@ -99,5 +99,33 @@ public class DashboardController {
 			return "redirect:/ReviewListDashboard/";
 		}
 		
-
+		//商品列表
+				@RequestMapping(value = "/ProductListDashboard")
+				public String getProductListController(Model model) {
+					productBean pb = new productBean();
+					model.addAttribute("updateallpb", pb);
+					List<productBean>list=pService.getAllProductList();
+					model.addAttribute("productList", list);
+					return "Dashboard/ProductListDashboard";
+				}
+		//修改商品		
+				@RequestMapping(value = "/ProductListDashboard", method = RequestMethod.POST)
+				public String UpdateAllProduct(@ModelAttribute("updateallpb") productBean pb, 
+						BindingResult result, HttpServletRequest request) {
+					MultipartFile productImage = pb.getProductImage();
+					String originFilename = productImage.getOriginalFilename();
+					pb.setpFileName(originFilename);
+					if (productImage != null && !productImage.isEmpty()) {
+						try {
+							byte[] b = productImage.getBytes();
+							Blob blob = new SerialBlob(b);
+							pb.setpPicture(blob);
+						} catch (Exception e) {
+							e.printStackTrace();
+							throw new RuntimeException("檔案上傳發生異常:" + e.getMessage());
+						}
+					}
+					pService.UpdateProduct(pb);
+					return "redirect:/ProductListDashboard/";
+				}
 }
