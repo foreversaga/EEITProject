@@ -5,6 +5,9 @@ import java.util.List;
 import review.model.reviewBean;
 
 public interface ReviewDao {
+	
+	reviewBean getReview(int rId);
+	
 	List<reviewBean> getAllReviews();
 
 	void InsertNewReview(reviewBean rb);

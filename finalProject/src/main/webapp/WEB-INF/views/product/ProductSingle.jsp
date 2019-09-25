@@ -268,7 +268,7 @@ span#star-span {
 				</c:choose>
 			</div>
 			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-				<div id="map"></div>
+				<div style="margin-bottom: 200px;" id="map"></div>
 			</div>
 		</div>
 	</div>

@@ -78,4 +78,12 @@ public class ReviewDaoImpl implements ReviewDao {
 		return list;
 	}
 
+	@Override
+	public reviewBean getReview(int rId) {
+		Session session = factory.getCurrentSession();
+		String hql = "FROM reviewBean rb WHERE rb.rId = :id";
+		reviewBean rb = (reviewBean) session.createQuery(hql).setParameter("id", rId).uniqueResult();
+		return rb;
+	}
+
 }

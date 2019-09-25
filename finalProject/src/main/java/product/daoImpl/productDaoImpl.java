@@ -1,13 +1,7 @@
 package product.daoImpl;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.sql.Blob;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -18,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import config.GlobalService;
-import config.SystemUtils;
 import product.Dao.productDao;
 import product.model.productBean;
 
@@ -202,8 +195,48 @@ public class productDaoImpl implements productDao {
 		Long n = null;
 		Session session = factory.getCurrentSession();
 		String sql = "SELECT COUNT(*) FROM productBean pb WHERE pb.pContent LIKE :query";
-		n = (Long) session.createQuery(sql).setParameter("query", "%"+QueryString+"%").uniqueResult();
+		n = (Long) session.createQuery(sql).setParameter("query", "%" + QueryString + "%").uniqueResult();
 		return n;
+	}
+
+	@Override
+	public void updateRating(int pId, int rRating) {
+		Session session = factory.getCurrentSession();
+		String sql = "FROM productBean pb WHERE pb.pId = :id";
+		productBean pb = (productBean) session.createQuery(sql).setParameter("id", pId).uniqueResult();
+		pb.setpRating(pb.getpRating() + rRating);
+		session.update(pb);
+	}
+
+	@Override
+	public void updatePopular(int pId, int pPopular) {
+		Session session = factory.getCurrentSession();
+		String sql = "FROM productBean pb WHERE pb.pId = :id";
+		productBean pb = (productBean) session.createQuery(sql).setParameter("id", pId).uniqueResult();
+		pb.setpPopular(pb.getpPopular() + pPopular);
+		session.update(pb);
+	}
+
+	@Override
+	public void updateAvgRating(int pId) {
+		Session session = factory.getCurrentSession();
+		String sql1 = "FROM productBean pb WHERE pb.pId = :id";
+		String sql2 = "SELECT COUNT(*) FROM reviewBean rb WHERE rb.pId= :id";
+		productBean pb = (productBean) session.createQuery(sql1).setParameter("id", pId).uniqueResult();
+		Long n = (long) session.createQuery(sql2).setParameter("id", pId).uniqueResult();
+		Double count=Double.parseDouble(n.toString());
+		Double NewRating =(double) Math.round(pb.getpRating() / count);
+		pb.setpAvgRating(NewRating);
+		session.update(pb);
+	}
+
+	@Override
+	public void updateAmendRating(int pId, int oldRating, int newRating) {
+		Session session = factory.getCurrentSession();
+		String sql = "FROM productBean pb WHERE pb.pId = :id";
+		productBean pb = (productBean) session.createQuery(sql).setParameter("id", pId).uniqueResult();
+		pb.setpRating(pb.getpRating() - oldRating + newRating);
+		session.update(pb);
 	}
 
 }

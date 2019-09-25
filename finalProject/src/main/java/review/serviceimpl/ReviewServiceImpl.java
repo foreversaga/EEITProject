@@ -44,7 +44,12 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public List<reviewBean> getIndexReview(Integer num) {
-		return	dao.getIndexReview(num);
+		return dao.getIndexReview(num);
+	}
+
+	@Override
+	public reviewBean getReview(int rId) {
+		return dao.getReview(rId);
 	}
 
 }

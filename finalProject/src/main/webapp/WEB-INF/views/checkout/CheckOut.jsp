@@ -72,6 +72,14 @@
 								}
 							});
 						});
+				$("button#AbortOrder").click(function(e) {
+					e.preventDefault();
+					if (confirm("您是否確定要放棄訂單?")==true) {
+						window.location.href = "<c:url value='/AbortOrder'/>";
+					} else {
+						//do nothing
+					}
+				});
 			});
 </script>
 <style type="text/css">
@@ -149,6 +157,8 @@ div#ftco-nav li.nav-item {
 							</tr>
 							<tr>
 								<td><input type="submit" class="btn btn-outline-primary" value="送出"></td>
+								<td><button id="AbortOrder" class="btn btn-outline-danger">取消</button></td>
+								<%-- 								<td><button id="AbortOrder" onclick="javascript:location.href='<c:url value="/AbortOrder"/>'" class="btn btn-outline-danger">取消</button></td> --%>
 							</tr>
 						</table>
 						<form:input type="hidden" value="${orderInfo.mAccount}" path="mAccount" />

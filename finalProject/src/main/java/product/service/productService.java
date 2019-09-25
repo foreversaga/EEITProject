@@ -17,6 +17,8 @@ public interface productService {
 
 	List<productBean> QueryProduct(String QueryString);
 
+	List<productBean> getPopularFive();
+
 	int getTotalPages();
 
 	int getQueryPages(String QueryString);
@@ -25,15 +27,21 @@ public interface productService {
 
 	Long getQueryCount(String QueryString);
 
-	int insertNewProduct(productBean pb);
-
 	productBean getProduct(int pId);
-
-	void setPageNo(int pageNo);
 
 	int getPageNo();
 
+	int insertNewProduct(productBean pb);
+
+	void setPageNo(int pageNo);
+
 	int updateStock(int pId, int newStock);
 
-	List<productBean> getPopularFive();
+	void updateRating(int pId, int rRating);
+	
+	void updateAmendRating(int pId, int oldRating, int newRating);
+
+	void updatePopular(int pId, int pPopular);
+	
+	void updateAvgRating(int pId);
 }

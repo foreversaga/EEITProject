@@ -9,28 +9,36 @@ public interface productDao {
 	public List<productBean> getAllProduct();
 
 	public List<productBean> getProductByPriceDesc(String QueryString);
-	
-	public List<productBean> getProductByPriceAsc(String QueryString);
-	
-	public List<productBean> getProductByReviewDesc(String QueryString);
-	
-	public List<productBean> getProductByReviewAsc(String QueryString);
-	
-	public List<productBean> QueryProduct(String QueryString);
-	
-	public Long getDataCount();
-	
-	public Long getQueryCount(String QueryString);
 
-	public int insertNewProduct(productBean pb);
+	public List<productBean> getProductByPriceAsc(String QueryString);
+
+	public List<productBean> getProductByReviewDesc(String QueryString);
+
+	public List<productBean> getProductByReviewAsc(String QueryString);
+
+	public List<productBean> QueryProduct(String QueryString);
+
+	public List<productBean> getPopularFive();
+
+	public Long getDataCount();
+
+	public Long getQueryCount(String QueryString);
 
 	public productBean getProduct(int pId);
 
 	public int getPageNo();
 
-	public void setPageNo(int pageNo);
+	public int insertNewProduct(productBean pb);
 
 	public int updateStock(int pId, int newStock);
+
+	public void setPageNo(int pageNo);
+
+	public void updateRating(int pId, int rRating);
+
+	public void updateAmendRating(int pId, int oldRating, int newRating);
 	
-	public List<productBean> getPopularFive();
+	public void updatePopular(int pId, int pPopular);
+	
+	public void updateAvgRating(int pId);
 }

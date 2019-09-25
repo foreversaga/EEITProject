@@ -129,5 +129,25 @@ public class productServiceImpl implements productService {
 		return pdao.QueryProduct(QueryString);
 	}
 
+	@Override
+	public void updateRating(int pId, int rRating) {
+		pdao.updateRating(pId, rRating);
+	}
+
+	@Override
+	public void updatePopular(int pId, int pPopular) {
+		pdao.updatePopular(pId, pPopular);
+	}
+
+	@Override
+	public void updateAvgRating(int pId) {
+		pdao.updateAvgRating(pId);
+	}
+
+	@Override
+	public void updateAmendRating(int pId, int oldRating, int newRating) {
+		pdao.updateAmendRating(pId, oldRating, newRating);
+	}
+
 
 }
