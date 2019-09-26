@@ -149,5 +149,14 @@ public class productServiceImpl implements productService {
 		pdao.updateAmendRating(pId, oldRating, newRating);
 	}
 
-
+	@Override
+	public void UpdateProduct(productBean pb) {
+		pdao.UpdateProduct(pb);
+	}
+	
+	@Override
+	public List<productBean> getAllProductList() {
+		return pdao.getAllProductList();
+	}
+	
 }

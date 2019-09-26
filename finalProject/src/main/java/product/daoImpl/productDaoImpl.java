@@ -239,4 +239,20 @@ public class productDaoImpl implements productDao {
 		session.update(pb);
 	}
 
+	@Override
+	public void UpdateProduct(productBean pb) {
+		Session session = factory.getCurrentSession();
+		session.update(pb);
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<productBean> getAllProductList() {
+		String hql = "From productBean";
+		Session session = factory.getCurrentSession();
+		List<productBean> list = new ArrayList<>();
+		list = session.createQuery(hql).getResultList();
+		return list;
+	}
+
 }

@@ -104,13 +104,13 @@
 body {
 	background: #eee !important;
 }
-
 </style>
 <body>
 	<div class="Background">
 		<img src="<c:url value='/img/dashboardbackground.jpg'/>">
 	</div>
-	<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3"style="font-family: 'Noto Serif TC', serif;">
+	<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3"
+		style="font-family: 'Noto Serif TC', serif;">
 		<div class="flex-row d-flex">
 			<button type="button" class="navbar-toggler mr-2 "
 				data-toggle="offcanvas" title="Toggle responsive left sidebar">
@@ -176,13 +176,18 @@ body {
 				</a> <!-- Dropdown - User Information -->
 					<div
 						class="dropdown-menu dropdown-menu-right shadow animated--grow-in mt-2"
-						aria-labelledby="userDropdown" style="font-family: 'Noto Serif TC', serif;">
+						aria-labelledby="userDropdown"
+						style="font-family: 'Noto Serif TC', serif;">
 						<a class="dropdown-item" href="<c:url value='/Dashboard'/>"> <i
 							class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
 							後台系統
 						</a> <a class="dropdown-item" href="<c:url value='/AddProduct'/>">
 							<i class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
-							新增訂單
+							新增商品
+						</a><a class="dropdown-item"
+							href="<c:url value='/ProductListDashboard'/>"> <i
+							class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
+							修改商品
 						</a> <a class="dropdown-item"
 							href="<c:url value='/MemberListDashboard'/>"> <i
 							class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
@@ -202,19 +207,24 @@ body {
 			</ul>
 		</div>
 	</nav>
-	<div class=" container align-items-center" style="font-family: 'Noto Serif TC', serif;" id="main">
+	<div class=" container align-items-center"
+		style="font-family: 'Noto Serif TC', serif;" id="main">
 		<div class="container  ">
 			<div class="  justify-content-around  " style="text-align: center;">
 				<div class="justify-content-center " style="margin-top: 100px">
 					<a href="<c:url value='/AddProduct'/>"> <input type="button"
 						class="btn btn-warning btn btn-lg mt-5 " data-toggle="collapse"
 						data-target="#AddProduct" aria-expanded="false"
-						aria-expanded="false" aria-controls="AddProduct" value="新增商品" /></a> <a
-						href="<c:url value='/MemberListDashboard'/>"> <input
+						aria-expanded="false" aria-controls="AddProduct" value="新增商品" /></a>
+					<a href="<c:url value='ProductListDashboard'/>"> <input
+						type="button" class="btn btn-warning btn btn-lg mt-5"
+						data-toggle="collapse" data-target="#ProductList"
+						aria-expanded="false" aria-controls="ProductList" value="修改商品" /></a>
+					<a href="<c:url value='/MemberListDashboard'/>"> <input
 						type="button" class="btn btn-warning btn btn-lg mt-5"
 						data-toggle="collapse" data-target="#MemberList"
-						aria-expanded="false" aria-controls="MemberList" value="會員列表" /></a> <a
-						href="<c:url value='/ReviewListDashboard'/>"> <input
+						aria-expanded="false" aria-controls="MemberList" value="會員列表" /></a>
+					<a href="<c:url value='/ReviewListDashboard'/>"> <input
 						type="button" class="btn btn-warning btn btn-lg mt-5"
 						data-toggle="collapse" data-target="#RatingList"
 						aria-expanded="false" aria-controls="RatingList" value="評價列表"></a>

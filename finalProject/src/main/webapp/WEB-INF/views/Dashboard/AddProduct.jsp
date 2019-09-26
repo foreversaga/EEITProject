@@ -206,13 +206,18 @@ body {
 				</a> <!-- Dropdown - User Information -->
 					<div
 						class="dropdown-menu dropdown-menu-right shadow animated--grow-in mt-2"
-						aria-labelledby="userDropdown" style="font-family: 'Noto Serif TC', serif;">
+						aria-labelledby="userDropdown"
+						style="font-family: 'Noto Serif TC', serif;">
 						<a class="dropdown-item" href="<c:url value='/Dashboard'/>"> <i
 							class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
 							後台系統
 						</a> <a class="dropdown-item" href="<c:url value='/AddProduct'/>">
 							<i class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
-							新增訂單
+							新增商品
+						</a><a class="dropdown-item"
+							href="<c:url value='/ProductListDashboard'/>"> <i
+							class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
+							修改商品
 						</a> <a class="dropdown-item"
 							href="<c:url value='/MemberListDashboard'/>"> <i
 							class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
@@ -241,7 +246,10 @@ body {
 						data-toggle="collapse" data-target="#AddProduct"
 						aria-expanded="false" aria-expanded="false"
 						aria-controls="AddProduct">新增商品</button>
-				 
+				 <a href="<c:url value='ProductListDashboard'/>"> <input
+						type="button" class="btn btn-warning btn btn-lg mt-5"
+						data-toggle="collapse" data-target="#ProductList"
+						aria-expanded="false" aria-controls="ProductList" value="修改商品" /></a>
 				 <a href="<c:url value='/MemberListDashboard'/>">
 				<input type="button" class="btn btn-warning btn btn-lg mt-5"
 						data-toggle="collapse" data-target="#MemberList"
@@ -273,30 +281,44 @@ body {
 											<div class="row">
 												<div class="col-md-5">
 													<div class="form-group">
-														<label class="bmd-label-floating">產品名稱</label>
+														<label class="bmd-label-floating">商品名稱</label>
 														<form:input id="pName" path="pName" type="text"
 															class="form-control " />
 													</div>
 												</div>
 												<div class="col-md-3 ml-5">
 													<div class="form-group">
-														<label class="bmd-label-floating">產品價格</label>
+														<label class="bmd-label-floating">商品價格</label>
 														<form:input id="pPrice" path="pPrice" type="text"
 															class="form-control " />
 													</div>
 												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-5">
+												<div class="col-md-3">
 													<div class="form-group">
 														<label class="bmd-label-floating">庫存</label>
 														<form:input id="pInstock" path="pInstock" type="text"
 															class="form-control" />
 													</div>
 												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-5">
+													<div class="form-group">
+														<label class="bmd-label-floating">地區</label>
+														<form:input id="pArea" path="pArea" type="text"
+															class="form-control" />
+													</div>
+												</div>
 												<div class="col-md-3 ml-5">
 													<div class="form-group">
-														<label class="bmd-label-floating">產品有效日期</label>
+														<label class="bmd-label-floating">分類</label>
+														<form:input id="pType" path="pType" type="text"
+															class="form-control" />
+													</div>
+												</div>
+												<div class="col-md-3 ">
+													<div class="form-group">
+														<label class="bmd-label-floating">商品有效日期</label>
 														<form:input id="datepicker" path="pDateRange" type="date"
 															class="form-control "  />
 													</div>
@@ -305,16 +327,30 @@ body {
 											<div class="row">
 												<div class="col-md-5">
 													<div class="form-group">
-														<label class="bmd-label-floating">產品說明</label>
+														<label class="bmd-label-floating">商品說明</label>
 														<form:textarea id="pContent" path="pContent" type="text"
 															class="form-control" style="height:150px" />
+													</div>
+												</div>
+												<div class="col-md-3 ml-5">
+													<div class="form-group">
+														<label class="bmd-label-floating">gooleMap經度</label>
+														<form:input id="pLat" path="pLat" type="text"
+															class="form-control" />
+													</div>
+												</div>
+												<div class="col-md-3 ">
+													<div class="form-group">
+														<label class="bmd-label-floating">gooleMap緯度</label>
+														<form:input id="pLng" path="pLng" type="text"
+															class="form-control "  />
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-md-5">
 													<div class="form-group">
-														<label class="bmd-label-floating">產品圖片上傳</label>
+														<label class="bmd-label-floating">商品圖片上傳</label>
 														<form:input id="productImage" path="productImage"
 															type="file"
 															class="form-control btn btn-outline-dark btn-block " />

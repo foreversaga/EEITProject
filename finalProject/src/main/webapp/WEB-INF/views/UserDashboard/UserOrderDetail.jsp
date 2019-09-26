@@ -305,33 +305,35 @@ body {
 	</div>
 													<hr>
 				<h2 class="sub-header mt-5 mb-5"
-					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif;height:50px">熱銷活動</h2>
+					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif;height:50px">熱銷商品</h2>
 				<div class="container row mb-3 ml-1 d-flex justify-content-center"
 					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">
 					<div class="card-deck">
 						<div class="card">
-							<img class="card-img-top" src="<c:url value='/img/Tokyo.JPG'/>"
-								href="">
+							<a href="<c:url value='/ProductSingle/30'/>"><img class="card-img-top" src="<c:url value='/img/Roppongi.JPG'/>"
+								href=""></a>
 							<div class="card-body">
 								<h5 class="card-title "></h5>
-								<p class="card-text">全世界最著名的現代大都會，每年有超過一千萬旅客到訪，其新舊並存的風情吸引更多人朝聖。只要一天的時間，就足夠你從最古老的寺院穿越到最摩登的大廈。</p>
+								<p class="card-text">位於六本木新城森大廈52樓的室內展望迴廊，挑高樓層、360度環繞式玻璃觀景窗、無遮蔽零死角，可遠眺東京鐵塔、東京晴空塔等著名城市地標！</p>
 								<!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
 							</div>
 						</div>
 						<div class="card">
-							<img class="card-img-top " src="<c:url value='/img/Osaka.JPG'/>"
-								href="">
+							<a href="<c:url value='/ProductSingle/24'/>">
+							<img class="card-img-top " src="<c:url value='/img/Tokyoticket.JPG'/>"
+								href=""></a>
 							<div class="card-body">
 								<h5 class="card-title"></h5>
-								<p class="card-text">作為日本第二大都市，大阪向世界各地的旅客保證，處處都是美食、美景和驚喜！歷史重地大阪城、世界最大水族館──大阪海遊館、高聳入雲的梅田藍天大廈都是必去景點。</p>
+								<p class="card-text">專為來訪旅客設計的東京地鐵乘車票券，有效期間內自由進出東京各大地鐵站，不只省下了大筆交通費用，也節省了在各站買票的時間。</p>
 							</div>
 						</div>
 						<div class="card">
-							<img class="card-img-top" src="<c:url value='/img/Kyoto.JPG'/>"
-								href="">
+							<a href="<c:url value='/ProductSingle/56'/>">
+							<img class="card-img-top" src="<c:url value='/img/ghiblimuseum.JPG'/>"
+								href=""></a>
 							<div class="card-body">
 								<h5 class="card-title"></h5>
-								<p class="card-text">雖然曾歷戰火，京都之美仍然遺世獨立。只要親自走訪，你就會發現京都把日本的「侘寂」美學詮釋得有多淋漓盡致。</p>
+								<p class="card-text">在這裡有許多宮崎駿電影中出現過的場景，不僅是小朋友，就算是大人和家長也能夠在這裡找尋童年的記憶，讓好奇心再次打開，重新進入一個夢想的城邦！</p>
 							</div>
 						</div>
 					</div>
