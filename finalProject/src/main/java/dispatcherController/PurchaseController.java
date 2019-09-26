@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -66,21 +67,30 @@ public class PurchaseController {
 	// 確認訂單頁面顯示
 	@RequestMapping(value = "/CheckOut")
 	public ModelAndView ToCheckOut(HttpSession session, ModelAndView mav) {
-		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
-		if (cart == null) {
+		shoppingCart sc = (shoppingCart) session.getAttribute("shoppingCart");
+		if (sc == null) {
 			mav.setViewName("redirect:/products/1");
 			return mav;
 		}
 		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
 		if (mb != null) {
 			String mAccount = mb.getmAccount();
-			Integer total = cart.getTotal();
+			Integer total = sc.getTotal();
 			java.sql.Timestamp orderTime = new Timestamp(new java.util.Date().getTime());
 			orderBean ob = new orderBean();
 			ob.setmAccount(mAccount);
 			ob.setoTimestamp(orderTime);
 			ob.setoTotalAmount(total);
 			ob.setmName(mb.getmName());
+			Map<Integer, orderItem> cart = sc.getContent();
+			Set<Integer> set = cart.keySet();
+			Map<Integer, Integer> stockMap = new HashMap<>();
+			for (Integer i : set) {
+				orderItem oi = cart.get(i);
+				productBean pb = pService.getProduct(oi.getpId());
+				stockMap.put(oi.getpId(), pb.getpInstock());
+			}
+			mav.addObject("stockMap", stockMap);
 			mav.addObject("orderInfo", ob);
 			mav.setViewName("checkout/CheckOut");
 			return mav;
@@ -100,48 +110,65 @@ public class PurchaseController {
 		}
 		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
 		if (mb != null) {
-			Set<orderItemBean> items = new HashSet<orderItemBean>();
-			Map<Integer, orderItem> cart = sc.getContent();
-			Set<Integer> set = cart.keySet();
-			Integer newStock = 0;
-			int n = 0;
-			productBean pb = null;
-			for (Integer k : set) {
-				orderItem oi = cart.get(k);
-				Integer subtotal = (oi.getiQty() * oi.getpPrice());
-				String iDes = oi.getpName() + " 共 " + oi.getiQty().toString() + "個，金額小計:" + subtotal.toString();
-				orderItemBean oib = new orderItemBean(null, oi.getpId(), iDes, oi.getiQty(), oi.getpPrice());
-				oib.setOrderBean(ob);
-				items.add(oib);
-				pb = pService.getProduct(oi.getpId());
-				newStock = pb.getpInstock() - oi.getiQty();
-				n = pService.updateStock(pb.getpId(), newStock);
+			Map<String, String> errormsg = new HashMap<>();
+			if (ob.getoReceiveName() == null || ob.getoReceiveName().trim().length() == 0) {
+				errormsg.put("receivename", "請輸入收件人名稱");
 			}
-			ob.setoTotalAmount(sc.getTotal());
-			ob.setItemSet(items);
-			ob.setmName(mb.getmName());
-			oService.saveOrder(ob);
-			session.removeAttribute("shoppingCart");
-			AioCheckOutOneTime obj = new AioCheckOutOneTime();
-			Date today = new Date();
-			String todayStr = new SimpleDateFormat("yyyyMMddHHmmss").format(today);
-			String TradeNo = todayStr + "No" + ob.getoId().toString();
-			obj.setMerchantTradeNo(TradeNo);
-			String tradedate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(ob.getoTimestamp());
-			obj.setMerchantTradeDate(tradedate);
-			obj.setTotalAmount(ob.getoTotalAmount().toString());
-			obj.setTradeDesc("test Description");
-			obj.setItemName("TestItem");
-			obj.setReturnURL("http://211.23.128.214:5000");
-			obj.setNeedExtraPaidInfo("N");
-			obj.setRedeem("Y");
-			obj.setOrderResultURL("http://localhost:8080/finalProject/PaySuccess");
-			obj.setCustomField1(ob.getmAccount());
-			AllInOne all = new AllInOne("");
-			String form = all.aioCheckOut(obj, null);
-			session.setAttribute("form", form);
+			if (ob.getoReceivePhone() == null || ob.getoReceivePhone().trim().length() == 0) {
+				errormsg.put("receivephone", "請輸入收件人電話");
+			}
+			if (ob.getoAddress() == null || ob.getoAddress().trim().length() == 0) {
+				errormsg.put("receiveadr", "請輸入收件人地址");
+			}
+			if (errormsg.size() != 0) {
+				session.setAttribute("orderBeanParam", ob);
+				session.setAttribute("errormsg", errormsg);
+				return "forward:/CheckOut";
+			} else {
+				Set<orderItemBean> items = new HashSet<orderItemBean>();
+				Map<Integer, orderItem> cart = sc.getContent();
+				Set<Integer> set = cart.keySet();
+				Integer newStock = 0;
+				int n = 0;
+				productBean pb = null;
+				for (Integer k : set) {
+					orderItem oi = cart.get(k);
+					Integer subtotal = (oi.getiQty() * oi.getpPrice());
+					String iDes = oi.getpName() + " 共 " + oi.getiQty().toString() + "個，金額小計:" + subtotal.toString();
+					orderItemBean oib = new orderItemBean(null, oi.getpId(), iDes, oi.getiQty(), oi.getpPrice());
+					oib.setOrderBean(ob);
+					items.add(oib);
+					pb = pService.getProduct(oi.getpId());
+					newStock = pb.getpInstock() - oi.getiQty();
+					n = pService.updateStock(pb.getpId(), newStock);
+				}
+				ob.setoTotalAmount(sc.getTotal());
+				ob.setItemSet(items);
+				ob.setmName(mb.getmName());
+				oService.saveOrder(ob);
+				session.removeAttribute("shoppingCart");
+				session.removeAttribute("orderBeanParam");
+				AioCheckOutOneTime obj = new AioCheckOutOneTime();
+				Date today = new Date();
+				String todayStr = new SimpleDateFormat("yyyyMMddHHmmss").format(today);
+				String TradeNo = todayStr + "No" + ob.getoId().toString();
+				obj.setMerchantTradeNo(TradeNo);
+				String tradedate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(ob.getoTimestamp());
+				obj.setMerchantTradeDate(tradedate);
+				obj.setTotalAmount(ob.getoTotalAmount().toString());
+				obj.setTradeDesc("test Description");
+				obj.setItemName("TestItem");
+				obj.setReturnURL("http://211.23.128.214:5000");
+				obj.setNeedExtraPaidInfo("N");
+				obj.setRedeem("Y");
+				obj.setOrderResultURL("http://localhost:8080/finalProject/PaySuccess");
+				obj.setCustomField1(ob.getmAccount());
+				AllInOne all = new AllInOne("");
+				String form = all.aioCheckOut(obj, null);
+				session.setAttribute("form", form);
 //				return "checkout/ECpage";
-			return "redirect:/";
+				return "redirect:/";
+			}
 		} else {
 			session.setAttribute("requestURI", "/ConfirmOrder");
 			return "redirect:/login";
@@ -258,10 +285,21 @@ public class PurchaseController {
 
 	@RequestMapping("/CheckOutDel")
 	public String CheckOutDel(HttpSession session, HttpServletRequest request) {
-		shoppingCart cart = (shoppingCart) session.getAttribute("shoppingCart");
+		shoppingCart sc = (shoppingCart) session.getAttribute("shoppingCart");
 		int pId = Integer.parseInt(request.getParameter("pId"));
-		cart.deleteProduct(pId);
-		session.setAttribute("shoppingCart", cart);
+		sc.deleteProduct(pId);
+		Map<Integer, orderItem> cart = sc.getContent();
+		Set<Integer> set = cart.keySet();
+		if (set.size() != 0 || set == null) {
+			Map<Integer, Integer> stockMap = new HashMap<>();
+			for (Integer i : set) {
+				orderItem oi = cart.get(i);
+				productBean pb = pService.getProduct(oi.getpId());
+				stockMap.put(oi.getpId(), pb.getpInstock());
+			}
+			session.setAttribute("stockMap", stockMap);
+		}
+		session.setAttribute("shoppingCart", sc);
 		return "checkout/CheckOutUpdate";
 	}
 

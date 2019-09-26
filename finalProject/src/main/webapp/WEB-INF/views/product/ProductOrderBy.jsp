@@ -167,7 +167,7 @@ div#shoppingCartMenu {
 	</div>
 
 
-	<section class="ftco-section ftco-degree-bg">
+	<section id="ChangePage" class="ftco-section ftco-degree-bg">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3 sidebar">
@@ -257,10 +257,10 @@ div#shoppingCartMenu {
 							<table>
 								<tr>
 									<td style="width: 20%">排序方式:</td>
-									<td style="width: 22%"><a href="<c:url value='/ProductsPriceDesc/1'/>">價格高→低</a></td>
-									<td style="width: 22%"><a href="<c:url value='/ProductsPriceAsc/1'/>">價格低→高</a></td>
-									<td style="width: 22%"><a href="<c:url value='/ProductsReviewDesc/1'/>">評價高→低</a></td>
-									<td style="width: 22%"><a href="<c:url value='/ProductsReviewAsc/1'/>">評價低→高</a></td>
+									<td style="width: 22%"><a href="<c:url value='/PriceDesc/1'/>">價格高→低</a></td>
+									<td style="width: 22%"><a href="<c:url value='/PriceAsc/1'/>">價格低→高</a></td>
+									<td style="width: 22%"><a href="<c:url value='/ReviewDesc/1'/>">評價高→低</a></td>
+									<td style="width: 22%"><a href="<c:url value='/ReviewAsc/1'/>">評價低→高</a></td>
 								</tr>
 
 							</table>

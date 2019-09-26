@@ -24,17 +24,22 @@
 	};
 
 	function ToggleReview(id) {
+		var show = '#ShowReview' + id;
 		var amend = '#AmendReview' + id;
-		$("#ShowReview").hide();
+		var toggle = '#ToggleReview' + id;
+		$(show).hide();
 		$(amend).fadeIn();
-		$("#ToggleReview").hide();
+		$(toggle).hide();
 	};
 
-	function CancelAmend() {
+	function CancelAmend(id) {
 		event.preventDefault();
-		$("#ShowReview").fadeIn();
-		$("#AmendReview").hide();
-		$("#ToggleReview").fadeIn();
+		var show = '#ShowReview' + id;
+		var amend = '#AmendReview' + id;
+		var toggle = '#ToggleReview' + id;
+		$(show).fadeIn();
+		$(amend).hide();
+		$(toggle).fadeIn();
 
 	};
 </script>
@@ -96,8 +101,6 @@ div.dropdown-menu {
 					<c:if test="${!empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
 						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
-						<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">訂單查詢</a></li>
-						<li class="nav-item"><a href="<c:url value='/review'/>" class="nav-link">評價查詢</a></li>
 					</c:if>
 				</ul>
 				<ul class="navbar-nav mr-right">
@@ -180,7 +183,7 @@ div.dropdown-menu {
 														查看我的評價</button>
 													<div class="collapse" id="collapseReview${review[orderItem.pId].rId}">
 														<div style="text-align: left; margin-top: 2%;" class="card card-body">
-															<div id="ShowReview">
+															<div id="ShowReview${review[orderItem.pId].rId}">
 																<span class="rate"> <c:choose>
 																		<c:when
 																			test="${review[orderItem.pId].rRating>=1&&review[orderItem.pId].rRating<2 }">
@@ -249,7 +252,7 @@ div.dropdown-menu {
 																		<form:input type="hidden" path="pId" value="${orderItem.pId}"></form:input>
 																		<br>
 																		<input class="btn btn-outline-success btn-sm" type="submit" value="送出">
-																		<button onclick="CancelAmend()" class="btn btn-outline-dark btn-sm">取消</button>
+																		<button id="${review[orderItem.pId].rId}" onclick="CancelAmend(this.id)" class="btn btn-outline-dark btn-sm">取消</button>
 																	</form:form>
 																</div>
 															</div>
@@ -270,17 +273,20 @@ div.dropdown-menu {
 																<form:input type="hidden" path="oId" value="${orderItem.orderBean.oId}"></form:input>
 																<h5>評分:</h5>
 																<p>
-																	<form:radiobutton path="rRating" value="1" label="1" />
-																	<form:radiobutton path="rRating" value="2" label="2" />
-																	<form:radiobutton path="rRating" value="3" label="3" />
-																	<form:radiobutton path="rRating" value="4" label="4" />
-																	<form:radiobutton path="rRating" value="5" label="5" />
+																	<form:radiobutton path="rRating" value="1" label="1" checked="${reviewBeanParam.rRating==1 ? 'checked' : '' }"/>
+																	<form:radiobutton path="rRating" value="2" label="2" checked="${reviewBeanParam.rRating==2 ? 'checked' : '' }"/>
+																	<form:radiobutton path="rRating" value="3" label="3" checked="${reviewBeanParam.rRating==3 ? 'checked' : '' }"/>
+																	<form:radiobutton path="rRating" value="4" label="4" checked="${reviewBeanParam.rRating==4 ? 'checked' : '' }"/>
+																	<form:radiobutton path="rRating" value="5" label="5" checked="${reviewBeanParam.rRating==5 ? 'checked' : '' }"/>
+																	<span style="color:red">${errormsg.rating}</span>
 																</p>
-																<form:input style="margin-right: -300px" type="text" size="20" path="rTitle" placeholder="請輸入標題"></form:input>
+																<form:input style="margin-right: -300px" type="text" size="20" path="rTitle" value="${reviewBeanParam.rTitle}" placeholder="請輸入標題"></form:input>
 																<br>
-																<form:textarea style="margin-right: -300px" path="rReview" rows="8" cols="40" placeholder="請輸入評價內容"></form:textarea>
+																<textarea style="margin-right: -300px" name="rReview" rows="8" cols="40" placeholder="請輸入評價內容">${reviewBeanParam.rReview}</textarea>
 																<form:input type="hidden" path="pId" value="${orderItem.pId}"></form:input>
 																<br>
+																<p style="color:red;">${errormsg.title}</p>
+																<p style="color:red">${errormsg.review}</p>
 																<input class="btn btn-outline-success btn-sm" type="submit" value="送出">
 															</form:form>
 														</div>

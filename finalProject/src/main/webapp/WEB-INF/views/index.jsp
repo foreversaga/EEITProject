@@ -81,10 +81,10 @@ div#shoppingCartMenu {
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a href="<c:url value='/'/>" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
+					<li class="nav-item"><a href="<c:url value='/shop/1'/>" class="nav-link">Products</a></li>
 					<c:if test="${empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
-						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
+						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>						
 						<li class="nav-item"><a href="<c:url value='/AddMemberDB'/>" class="nav-link">新增會員DB</a></li>
 						<li class="nav-item"><a href="<c:url value='/AddReviewDB'/>" class="nav-link">新增評價DB</a></li>
 						<li class="nav-item"><a href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li>
@@ -92,6 +92,7 @@ div#shoppingCartMenu {
 					</c:if>
 					<c:if test="${!empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
+						<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">查詢訂單</a></li>
 						<li class="nav-item"><a href="<c:url value='/Dashboard'/>" class="nav-link">後臺系統</a></li>
 						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 					</c:if>

@@ -65,6 +65,19 @@ public class ProductController {
 	@Autowired
 	orderService oService;
 
+	@RequestMapping(value = "/shop/{pageNo}")
+	public String productPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
+		StringBuilder sb = new StringBuilder();
+		if (pageNo == 1) {
+			pageNo = 1;
+			sb.append("redirect:/products/").append(pageNo);
+			return sb.toString();
+		} else {
+			sb.append("redirect:/products/").append(pageNo).append("#ChangePage");
+			return sb.toString();
+		}
+	}
+
 //顯示商品頁面
 	@RequestMapping(value = "/products/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView productsPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
@@ -80,7 +93,7 @@ public class ProductController {
 		mav.addObject("productList", list);
 		mav.addObject("orderItem", oi);
 		session.setAttribute("pageNo", pageNo);
-		session.setAttribute("MappingPath", "products");
+		session.setAttribute("MappingPath", "shop");
 		return mav;
 	}
 
@@ -96,7 +109,12 @@ public class ProductController {
 		mav.addObject("reviewList", list);
 		return mav;
 	}
-
+	@RequestMapping(value = "/PriceDesc/{pageNo}")
+	public String PriceDescPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
+		StringBuilder sb = new StringBuilder();
+			sb.append("redirect:/ProductsPriceDesc/").append(pageNo).append("#ChangePage");
+			return sb.toString();
+	}
 	// 商品依照價格遞減排序
 	@RequestMapping(value = "/ProductsPriceDesc/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView ProductsOrderByPriceDesc(HttpSession session, @PathVariable Integer pageNo,
@@ -111,7 +129,7 @@ public class ProductController {
 			QueryString = (String) session.getAttribute("QueryString");
 
 		}
-		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
+		ModelAndView mav = new ModelAndView("product/products");
 		pService.setPageNo(pageNo);
 		List<productBean> list = pService.getProductByPriceDesc(QueryString);
 		int totalPages = pService.getQueryPages(QueryString);
@@ -120,10 +138,15 @@ public class ProductController {
 		mav.addObject("productList", list);
 		mav.addObject("orderItem", oi);
 		session.setAttribute("pageNo", pageNo);
-		session.setAttribute("MappingPath", "ProductsPriceDesc");
+		session.setAttribute("MappingPath", "PriceDesc");
 		return mav;
 	}
-
+	@RequestMapping(value = "/PriceAsc/{pageNo}")
+	public String PriceAscPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
+		StringBuilder sb = new StringBuilder();
+			sb.append("redirect:/ProductsPriceAsc/").append(pageNo).append("#ChangePage");
+			return sb.toString();
+	}
 	// 商品依照價格遞增排序
 	@RequestMapping(value = "/ProductsPriceAsc/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView ProductsOrderByPriceAsc(HttpSession session, @PathVariable Integer pageNo,
@@ -135,7 +158,7 @@ public class ProductController {
 		if (QueryString == null) {
 			QueryString = (String) session.getAttribute("QueryString");
 		}
-		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
+		ModelAndView mav = new ModelAndView("product/products");
 		pService.setPageNo(pageNo);
 		List<productBean> list = pService.getProductByPriceAsc(QueryString);
 		int totalPages = pService.getQueryPages(QueryString);
@@ -144,11 +167,18 @@ public class ProductController {
 		mav.addObject("productList", list);
 		mav.addObject("orderItem", oi);
 		session.setAttribute("pageNo", pageNo);
-		session.setAttribute("MappingPath", "ProductsPriceAsc");
+		session.setAttribute("MappingPath", "PriceAsc");
 		return mav;
 
 	}
 
+	@RequestMapping(value = "/ReviewAsc/{pageNo}")
+	public String ReviewAscPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
+		StringBuilder sb = new StringBuilder();
+			sb.append("redirect:/ProductsReviewAsc/").append(pageNo).append("#ChangePage");
+			return sb.toString();
+	}
+	
 	// 商品依照評價遞增排序
 	@RequestMapping(value = "/ProductsReviewAsc/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView ProductsOrderByReviewAsc(HttpSession session, @PathVariable Integer pageNo,
@@ -160,7 +190,7 @@ public class ProductController {
 		if (QueryString == null) {
 			QueryString = (String) session.getAttribute("QueryString");
 		}
-		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
+		ModelAndView mav = new ModelAndView("product/products");
 		pService.setPageNo(pageNo);
 		List<productBean> list = pService.getProductByReviewAsc(QueryString);
 		int totalPages = pService.getQueryPages(QueryString);
@@ -169,10 +199,17 @@ public class ProductController {
 		mav.addObject("productList", list);
 		mav.addObject("orderItem", oi);
 		session.setAttribute("pageNo", pageNo);
-		session.setAttribute("MappingPath", "ProductsReviewAsc");
+		session.setAttribute("MappingPath", "ReviewAsc");
 		return mav;
 	}
 
+	@RequestMapping(value = "/ReviewDesc/{pageNo}")
+	public String ReviewDescPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
+		StringBuilder sb = new StringBuilder();
+			sb.append("redirect:/ProductsReviewDesc/").append(pageNo).append("#ChangePage");
+			return sb.toString();
+	}
+	
 	// 商品依照評價遞減排序
 	@RequestMapping(value = "/ProductsReviewDesc/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView ProductsOrderByReviewDesc(HttpSession session, @PathVariable Integer pageNo,
@@ -184,7 +221,7 @@ public class ProductController {
 		if (QueryString == null) {
 			QueryString = (String) session.getAttribute("QueryString");
 		}
-		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
+		ModelAndView mav = new ModelAndView("product/products");
 		pService.setPageNo(pageNo);
 		List<productBean> list = pService.getProductByReviewDesc(QueryString);
 		int totalPages = pService.getQueryPages(QueryString);
@@ -193,7 +230,7 @@ public class ProductController {
 		mav.addObject("productList", list);
 		mav.addObject("orderItem", oi);
 		session.setAttribute("pageNo", pageNo);
-		session.setAttribute("MappingPath", "ProductsReviewDesc");
+		session.setAttribute("MappingPath", "ReviewDesc");
 		return mav;
 	}
 
@@ -207,7 +244,7 @@ public class ProductController {
 		if (QueryString == null) {
 			QueryString = (String) session.getAttribute("QueryString");
 		}
-		ModelAndView mav = new ModelAndView("product/ProductOrderBy");
+		ModelAndView mav = new ModelAndView("product/products");
 		pService.setPageNo(pageNo);
 		List<productBean> list = pService.QueryProduct(QueryString);
 		int totalPages = pService.getQueryPages(QueryString);
@@ -273,6 +310,5 @@ public class ProductController {
 		ResponseEntity<byte[]> resEntity = new ResponseEntity<>(mediaByte, headers, HttpStatus.OK);
 		return resEntity;
 	}
-
 
 }

@@ -80,8 +80,4 @@ public class MainController {
 		return mav;
 	}
 
-	@RequestMapping("/rwd")
-	public String indexRWD() {
-		return "indexRWD";
-	}
 }

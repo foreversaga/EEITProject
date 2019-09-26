@@ -74,7 +74,7 @@
 						});
 				$("button#AbortOrder").click(function(e) {
 					e.preventDefault();
-					if (confirm("您是否確定要放棄訂單?")==true) {
+					if (confirm("您是否確定要放棄訂單?") == true) {
 						window.location.href = "<c:url value='/AbortOrder'/>";
 					} else {
 						//do nothing
@@ -140,20 +140,20 @@ div#ftco-nav li.nav-item {
 								<td><h5>${orderInfo.mName}</h5></td>
 							</tr>
 							<tr>
-								<td><h5>收件人姓名:</h5></td>
-								<td><form:input class="card-title" type="text" path="oReceiveName" /></td>
+								<td><h5 style="font-size: 20px">收件人姓名:</h5></td>
+								<td><form:input class="card-title" type="text" path="oReceiveName" value="${orderBeanParam.oReceiveName}" /><span style="color:red">${errormsg.receivename}</span></td>
 							</tr>
 							<tr>
-								<td><h5>收件人地址:</h5></td>
-								<td><form:input class="card-title" type="text" path="oAddress" /></td>
+								<td><h5 style="font-size: 20px">收件人地址:</h5></td>
+								<td><form:input class="card-title" type="text" path="oAddress" value="${orderBeanParam.oAddress }"/><span style="color:red">${errormsg.receiveadr}</span></td>
 							</tr>
 							<tr>
-								<td><h5>收件人電話:</h5></td>
-								<td><form:input class="card-title" type="text" path="oReceivePhone" /></td>
+								<td><h5 style="font-size: 20px">收件人電話:</h5></td>
+								<td><form:input class="card-title" type="text" path="oReceivePhone" value="${orderBeanParam.oReceivePhone}" /><span style="color:red">${errormsg.receivephone}</span></td>
 							</tr>
 							<tr>
-								<td><h5>備註:</h5></td>
-								<td><form:input class="card-title" type="text" path="oNote" /></td>
+								<td><h5 style="font-size: 20px">備註:</h5></td>
+								<td><form:input class="card-title" type="text" path="oNote" value="${orderBeanParam.oNote }" /></td>
 							</tr>
 							<tr>
 								<td><input type="submit" class="btn btn-outline-primary" value="送出"></td>
@@ -175,8 +175,15 @@ div#ftco-nav li.nav-item {
 							<tr>
 								<td>${cart.value.pName}</td>
 								<td>數量:</td>
-								<td><input style="width: 40px;" id="${cart.value.pId}" name="qty" type="number"
-										value="${cart.value.iQty}" min="1" /></td>
+								<td>
+									<%-- 								<input style="width: 40px;" id="${cart.value.pId}" name="qty" type="number" --%>
+									<%-- 										value="${cart.value.iQty}" min="1" /> --%> 
+									<select name="qty">
+										<c:forEach var="stock" begin="1" end="${stockMap[cart.value.pId]}">
+											<option value="${stock}">${stock}</option>
+										</c:forEach>
+									</select>
+								</td>
 								<td>單價:</td>
 								<td id="unit${cart.value.pId}">${cart.value.pPrice}</td>
 								<td>小計:</td>

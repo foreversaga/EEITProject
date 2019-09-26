@@ -53,8 +53,11 @@
 				<tr>
 					<td>${cart.value.pName}</td>
 					<td>數量:</td>
-					<td><input style="width: 40px;" id="${cart.value.pId}" name="qty" type="number"
-							value="${cart.value.iQty}" min="1" /></td>
+					<td><select name="qty">
+							<c:forEach var="stock" begin="1" end="${stockMap[cart.value.pId]}">
+								<option value="${stock}">${stock}</option>
+							</c:forEach>
+					</select></td>
 					<td>單價:</td>
 					<td>${cart.value.pPrice}</td>
 					<td>小計:</td>
