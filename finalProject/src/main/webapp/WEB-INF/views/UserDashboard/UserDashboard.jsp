@@ -112,7 +112,7 @@ body {
 		</button>
 		<div class="navbar-collapse collapse" id="collapsingNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item active" ><a class="nav-link" style="margin-left:230px"
+				<li class="nav-item active text-align-center" ><a class="nav-link" style="margin-left:440px"
 					href="<c:url value='/'/>">旅遊趣<span class="sr-only"></span></a></li>
 				<!-- <li class="nav-item">
                     <a class="nav-link" href="//www.codeply.com">Link</a>
@@ -140,7 +140,7 @@ body {
 <!-- 						aria-label="Search"> -->
 <%-- 				</form:form> --%>
 <!-- <!-- 			</ul> 先移掉購物車iCon fa fa-shopping-cart  fa-pull-right 會影響置中 -->
-			<ul class="navbar-nav ml-auto "style="color: white;margin-right:10%">
+			<ul class="navbar-nav ml-auto "style="color: white;margin-right:23%">
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle "
 					style="color: white;" id="navbarDropdown" role="button"

@@ -150,11 +150,11 @@ word-break: break-all;/*必須*/
 		</button>
 		<div class="navbar-collapse collapse" id="collapsingNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link"
+				<li class="nav-item active"><a class="nav-link" style="margin-left:470px"
 					href="<c:url value='/'/>">旅遊趣<span class="sr-only"></span></a></li>
 			</ul>
 
-			<ul class="navbar-nav ml-auto">
+			<ul class="navbar-nav ml-auto" style="margin-right:23%">
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle  " style="color: white;"
 					id="navbarDropdown" role="button" data-toggle="dropdown"
