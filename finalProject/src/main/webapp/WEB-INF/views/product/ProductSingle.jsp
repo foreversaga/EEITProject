@@ -104,7 +104,7 @@ span#star-span {
 								<p style="line-height: 10px">${cart.value.pName}</p>
 								<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
 								<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button"
-										onclick="DeleteItem(this.id)" value="刪除" /> </span>
+									onclick="DeleteItem(this.id)" value="刪除" /> </span>
 								<c:if test="${vs.last}">
 									<hr>
 								</c:if>
@@ -274,7 +274,6 @@ span#star-span {
 	</div>
 	<script type="text/javascript">
 var map;
-var infowindow;
 var positions = ${mapList};
 var local = {	
 	    lat: ${productBean.pLat},
@@ -283,51 +282,31 @@ var local = {
 var markers = [];
 
 function initMap() {
-
+var infowindow = new google.maps.InfoWindow();
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 19,
+    zoom: 12,
     center: local
   });
 
   for (var i = 0; i < positions.length; i++) {
-    addMarker(i);
-
+    addMarker(positions[i]);
   }
-
-	  markers[1].addListener('click',function(){
- 	  infowindow.open(map, markers[1]);
-	});
-	  markers[2].addListener('click',function(){
-	 	  infowindow.open(map, markers[2]);
-	});
-	  markers[3].addListener('click',function(){
-	 	  infowindow.open(map, markers[3]);
-	});
-	  markers[0].addListener('click',function(){
-	 	  infowindow.open(map, markers[0]);
-	});
-
+  function addMarker(e) {
+	  	var loc = new google.maps.LatLng(e.lat,e.lng);
+	  	var link = '<a href="<c:url value="/ProductSingle/'+e.pId+'"/>">'+e.label+'</a>';
+		var marker = new google.maps.Marker({
+			position : loc,
+			map : map
+	  });
+		 google.maps.event.addListener(marker, 'click', function(){
+		        infowindow.close(); // Close previously opened infowindow
+		        infowindow.setContent(link);
+		        infowindow.open(map, marker);
+		 });
+	}
 }
 
-function addMarker(e) {
-  markers[e] = new google.maps.Marker({
-    position: {
-      lat: parseFloat(positions[e].lat),
-      lng: parseFloat(positions[e].lng)
-    },
-    map: map,
-//     label: positions[e].label
-  });
-  infowindow = new google.maps.InfoWindow({
-  	  content: positions[e].label,
-  	  position: {
-  	      lat: parseFloat(positions[e].lat),
-  	      lng: parseFloat(positions[e].lng)
-  	    },
-  	  maxWidth:200
-  	});
-  
-}
+
 
 </script>
 	<script

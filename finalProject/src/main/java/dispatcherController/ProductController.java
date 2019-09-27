@@ -92,6 +92,7 @@ public class ProductController {
 			ProductMap.addProperty("label", mapPb.getpName());
 			ProductMap.addProperty("lat", mapPb.getpLat());
 			ProductMap.addProperty("lng", mapPb.getpLng());
+			ProductMap.addProperty("pId", mapPb.getpId());
 			array.add(ProductMap);
 			ProductMap = new JsonObject();
 		}
