@@ -274,7 +274,7 @@ span#star-span {
 	</div>
 	<script type="text/javascript">
 var map;
-var content = '<h5>測試用內容</h5>';
+var infowindow;
 var positions = ${mapList};
 var local = {	
 	    lat: ${productBean.pLat},
@@ -291,14 +291,7 @@ function initMap() {
 
   for (var i = 0; i < positions.length; i++) {
     addMarker(i);
-    var infowindow = new google.maps.InfoWindow({
-  	  content: posutuibs[i].label,
-  	  position: {
-  	      lat: parseFloat(positions[i].lat),
-  	      lng: parseFloat(positions[i].lng)
-  	    },
-  	  maxWidth:200
-  	});
+
   }
 
 	  markers[1].addListener('click',function(){
@@ -325,7 +318,14 @@ function addMarker(e) {
     map: map,
 //     label: positions[e].label
   });
-
+  infowindow = new google.maps.InfoWindow({
+  	  content: positions[e].label,
+  	  position: {
+  	      lat: parseFloat(positions[e].lat),
+  	      lng: parseFloat(positions[e].lng)
+  	    },
+  	  maxWidth:200
+  	});
   
 }
 
