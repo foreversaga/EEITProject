@@ -4,26 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
@@ -32,25 +20,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import cart.model.orderBean;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import cart.model.orderItem;
-import cart.model.orderItemBean;
-import cart.model.shoppingCart;
 import checkout.service.orderService;
-import ecpay.payment.integration.AllInOne;
-import ecpay.payment.integration.domain.AioCheckOutOneTime;
 import product.model.productBean;
 import product.service.productService;
-import register.model.MemberBean;
 import review.model.reviewBean;
 import review.service.ReviewService;
 
@@ -102,19 +83,33 @@ public class ProductController {
 	public ModelAndView ProductSinglePage(HttpSession session, @PathVariable Integer pId, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("product/ProductSingle");
 		productBean pb = pService.getProduct(pId);
-		List<reviewBean> list = rService.getProductReview(pId);
+		List<reviewBean> reviewList = rService.getProductReview(pId);
+		List<productBean> mapList=pService.getProductMap(pId);
 		orderItem oi = new orderItem();
+		JsonObject ProductMap = new JsonObject();
+		JsonArray array = new JsonArray();
+		for (productBean mapPb:mapList) {
+			ProductMap.addProperty("label", mapPb.getpName());
+			ProductMap.addProperty("lat", mapPb.getpLat());
+			ProductMap.addProperty("lng", mapPb.getpLng());
+			array.add(ProductMap);
+			ProductMap = new JsonObject();
+		}
+		System.out.println(array);
+		mav.addObject("mapList",array);
 		mav.addObject("orderItem", oi);
 		mav.addObject("productBean", pb);
-		mav.addObject("reviewList", list);
+		mav.addObject("reviewList", reviewList);
 		return mav;
 	}
+
 	@RequestMapping(value = "/PriceDesc/{pageNo}")
 	public String PriceDescPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
 		StringBuilder sb = new StringBuilder();
-			sb.append("redirect:/ProductsPriceDesc/").append(pageNo).append("#ChangePage");
-			return sb.toString();
+		sb.append("redirect:/ProductsPriceDesc/").append(pageNo).append("#ChangePage");
+		return sb.toString();
 	}
+
 	// 商品依照價格遞減排序
 	@RequestMapping(value = "/ProductsPriceDesc/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView ProductsOrderByPriceDesc(HttpSession session, @PathVariable Integer pageNo,
@@ -141,12 +136,14 @@ public class ProductController {
 		session.setAttribute("MappingPath", "PriceDesc");
 		return mav;
 	}
+
 	@RequestMapping(value = "/PriceAsc/{pageNo}")
 	public String PriceAscPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
 		StringBuilder sb = new StringBuilder();
-			sb.append("redirect:/ProductsPriceAsc/").append(pageNo).append("#ChangePage");
-			return sb.toString();
+		sb.append("redirect:/ProductsPriceAsc/").append(pageNo).append("#ChangePage");
+		return sb.toString();
 	}
+
 	// 商品依照價格遞增排序
 	@RequestMapping(value = "/ProductsPriceAsc/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView ProductsOrderByPriceAsc(HttpSession session, @PathVariable Integer pageNo,
@@ -175,10 +172,10 @@ public class ProductController {
 	@RequestMapping(value = "/ReviewAsc/{pageNo}")
 	public String ReviewAscPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
 		StringBuilder sb = new StringBuilder();
-			sb.append("redirect:/ProductsReviewAsc/").append(pageNo).append("#ChangePage");
-			return sb.toString();
+		sb.append("redirect:/ProductsReviewAsc/").append(pageNo).append("#ChangePage");
+		return sb.toString();
 	}
-	
+
 	// 商品依照評價遞增排序
 	@RequestMapping(value = "/ProductsReviewAsc/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView ProductsOrderByReviewAsc(HttpSession session, @PathVariable Integer pageNo,
@@ -206,10 +203,10 @@ public class ProductController {
 	@RequestMapping(value = "/ReviewDesc/{pageNo}")
 	public String ReviewDescPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
 		StringBuilder sb = new StringBuilder();
-			sb.append("redirect:/ProductsReviewDesc/").append(pageNo).append("#ChangePage");
-			return sb.toString();
+		sb.append("redirect:/ProductsReviewDesc/").append(pageNo).append("#ChangePage");
+		return sb.toString();
 	}
-	
+
 	// 商品依照評價遞減排序
 	@RequestMapping(value = "/ProductsReviewDesc/{pageNo}", method = RequestMethod.GET)
 	public ModelAndView ProductsOrderByReviewDesc(HttpSession session, @PathVariable Integer pageNo,

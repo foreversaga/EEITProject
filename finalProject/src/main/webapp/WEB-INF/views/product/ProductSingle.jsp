@@ -218,8 +218,8 @@ span#star-span {
 						<c:forEach varStatus="vs" var="reviewBean" items="${reviewList}">
 							<div class="card border-light mb-3">
 								<h5 class="card-header">
-									<span style="width: 400px;">用戶:${reviewBean.mName}</span> <span
-										class="rate" style="margin-right: 10%"> <c:choose>
+									<span style="width: 400px;">用戶:${reviewBean.mName}</span> <span class="rate"
+										style="margin-right: 10%"> <c:choose>
 											<c:when test="${reviewBean.rRating>=1&&reviewBean.rRating<2 }">
 												<i class="icon-star"></i>
 												<i class="icon-star-o"></i>
@@ -273,23 +273,63 @@ span#star-span {
 		</div>
 	</div>
 	<script type="text/javascript">
-		var map;
+var map;
+var content = '<h5>測試用內容</h5>';
+var positions = ${mapList};
+var local = {	
+	    lat: ${productBean.pLat},
+	    lng: ${productBean.pLng}
+	};
+var markers = [];
 
-		function initMap() {
-			var position = {
-				lat : ${productBean.pLat},
-				lng : ${productBean.pLng}
-			};
-			var map = new google.maps.Map(document.getElementById('map'), {
-				zoom : 16,
-				center : position
-			});
-			var marker = new google.maps.Marker({
-				position : position,
-				map : map
-			});
-		}
-	</script>
+function initMap() {
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 19,
+    center: local
+  });
+
+  for (var i = 0; i < positions.length; i++) {
+    addMarker(i);
+    var infowindow = new google.maps.InfoWindow({
+  	  content: posutuibs[i].label,
+  	  position: {
+  	      lat: parseFloat(positions[i].lat),
+  	      lng: parseFloat(positions[i].lng)
+  	    },
+  	  maxWidth:200
+  	});
+  }
+
+	  markers[1].addListener('click',function(){
+ 	  infowindow.open(map, markers[1]);
+	});
+	  markers[2].addListener('click',function(){
+	 	  infowindow.open(map, markers[2]);
+	});
+	  markers[3].addListener('click',function(){
+	 	  infowindow.open(map, markers[3]);
+	});
+	  markers[0].addListener('click',function(){
+	 	  infowindow.open(map, markers[0]);
+	});
+
+}
+
+function addMarker(e) {
+  markers[e] = new google.maps.Marker({
+    position: {
+      lat: parseFloat(positions[e].lat),
+      lng: parseFloat(positions[e].lng)
+    },
+    map: map,
+//     label: positions[e].label
+  });
+
+  
+}
+
+</script>
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRbkV92eGVhHDqqN1xgXTGwHHH-XAX7HI&callback=initMap">
 		

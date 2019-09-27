@@ -1,6 +1,5 @@
 package product.daoImpl;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -224,8 +223,8 @@ public class productDaoImpl implements productDao {
 		String sql2 = "SELECT COUNT(*) FROM reviewBean rb WHERE rb.pId= :id";
 		productBean pb = (productBean) session.createQuery(sql1).setParameter("id", pId).uniqueResult();
 		Long n = (long) session.createQuery(sql2).setParameter("id", pId).uniqueResult();
-		Double count=Double.parseDouble(n.toString());
-		Double NewRating =(double) Math.round(pb.getpRating() / count);
+		Double count = Double.parseDouble(n.toString());
+		Double NewRating = (double) Math.round(pb.getpRating() / count);
 		pb.setpAvgRating(NewRating);
 		session.update(pb);
 	}
@@ -244,7 +243,7 @@ public class productDaoImpl implements productDao {
 		Session session = factory.getCurrentSession();
 		session.update(pb);
 	}
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<productBean> getAllProductList() {
@@ -253,6 +252,27 @@ public class productDaoImpl implements productDao {
 		List<productBean> list = new ArrayList<>();
 		list = session.createQuery(hql).getResultList();
 		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<productBean> getProductMap(int pId) {
+		Session session = factory.getCurrentSession();
+		String hql1 = "FROM productBean pb WHERE pb.pId = :id";
+		String hql2 = "FROM productBean";
+		productBean pb = (productBean) session.createQuery(hql1).setParameter("id", pId).uniqueResult();
+		Double centerLat=Double.parseDouble(pb.getpLat());
+		Double centerLng=Double.parseDouble(pb.getpLng());
+		List<productBean> mapList = new ArrayList<>();
+		List<productBean> allList = session.createQuery(hql2).list();
+		for (productBean allListPb : allList) {
+			Double pbLat = Double.parseDouble(allListPb.getpLat());
+			Double pbLng = Double.parseDouble(allListPb.getpLng());
+			if (Math.abs(pbLat - centerLat) < 0.5&&Math.abs(pbLng - centerLng) < 0.5) {
+				mapList.add(allListPb);
+			}
+		}
+		return mapList;
 	}
 
 }

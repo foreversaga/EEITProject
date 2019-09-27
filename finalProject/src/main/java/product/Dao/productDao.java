@@ -19,6 +19,8 @@ public interface productDao {
 	public List<productBean> QueryProduct(String QueryString);
 
 	public List<productBean> getPopularFive();
+	
+	public List<productBean> getProductMap(int pId);
 
 	public Long getDataCount();
 

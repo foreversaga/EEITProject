@@ -158,5 +158,10 @@ public class productServiceImpl implements productService {
 	public List<productBean> getAllProductList() {
 		return pdao.getAllProductList();
 	}
+
+	@Override
+	public List<productBean> getProductMap(int pId) {
+		return pdao.getProductMap(pId);
+	}
 	
 }

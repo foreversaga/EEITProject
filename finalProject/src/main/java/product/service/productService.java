@@ -18,6 +18,8 @@ public interface productService {
 	List<productBean> QueryProduct(String QueryString);
 
 	List<productBean> getPopularFive();
+	
+	List<productBean> getProductMap(int pId);
 
 	int getTotalPages();
 
