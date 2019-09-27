@@ -155,11 +155,11 @@ body {
 		</button>
 		<div class="navbar-collapse collapse" id="collapsingNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link"
+				<li class="nav-item active"><a class="nav-link" style="margin-left:470px"
 					href="<c:url value='/'/>">旅遊趣<span class="sr-only"></span></a></li>
 			</ul>
 
-			<ul class="navbar-nav ml-auto">
+			<ul class="navbar-nav ml-auto" style="margin-right:23%">
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle  " style="color: white;"
 					id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -262,9 +262,9 @@ body {
 					</a>
 	</div>
 				<!-- 		=====================新增商品區域=================== -->
-				<div class=" sticky-top  p-0 pt-5 "
+				<div class=" sticky-top   "
 					style="font-family: 'Noto Serif TC', serif">
-					<div class="container  p-0 " style="margin-top: 20px;">
+					<div class="container  p-0 " >
 						<div class="container flex-column collapse" id="AddProduct">
 							<div class="  pt-5">
 								<div class="card ">
