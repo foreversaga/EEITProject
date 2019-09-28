@@ -19,9 +19,18 @@
 			url : url,
 			type : "get",
 			success : function(data) {
-				$("div#shoppingCartMenu").html(data);
+				$("div.modal-body").html(data);
 			}
 		});
+	};
+	
+	function CheckOutButton(){
+		if(${empty shoppingCart.content}){
+			alert("購物車內無商品");
+			return;
+		}else{
+			location.href = "<c:url value='/CheckOut'/>";
+		}
 	};
 
 	$(document).ready(function() {
@@ -34,7 +43,8 @@
 				url : url,
 				data : form.serialize(),
 				success : function(data) {
-					$("div#shoppingCartMenu").html(data);
+					$("div.modal-body").html(data);
+					alert("商品已加入購物車");
 				}
 			});
 		});
@@ -48,14 +58,11 @@
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/style.css'/>">
 
 <style type="text/css">
-div.dropdown-menu {
-	width: 300px;
-	height: 423px;
-	background-color: #f0f0f0;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	overflow-y: auto;
+p{
+font-size: 25px;
 }
-
+span{font-size: 20px;
+}
 div#ftco-nav li.nav-item {
 	margin: 0 20px;
 }
@@ -91,28 +98,10 @@ span#star-span {
 				</ul>
 				<ul class="navbar-nav mr-right">
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false">購物車</a>
-						<div id="shoppingCartMenu" class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<c:if test="${empty shoppingCart.content }">
-								<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
-							</c:if>
-							<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
-								<hr>
-								<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;"
-									src="<c:url value='/showPic/${cart.value.pId}'/>">
-								<p style="line-height: 10px">${cart.value.pName}</p>
-								<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
-								<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button"
-									onclick="DeleteItem(this.id)" value="刪除" /> </span>
-								<c:if test="${vs.last}">
-									<hr>
-								</c:if>
-							</c:forEach>
-							<c:if test="${!empty shoppingCart.content }">
-								<a href="<c:url value='/CheckOut'/>">結帳</a>
-							</c:if>
-						</div></li>
+						id="navbarDropdown" role="button" data-toggle="modal" aria-haspopup="true"
+						aria-expanded="false" data-target="#shoppingCartMenu">購物車</a> 
+<!-- 						<div id="shoppingCartMenu" class="dropdown-menu" aria-labelledby="navbarDropdown"></div> -->
+						</li>
 				</ul>
 			</div>
 		</div>
@@ -201,6 +190,53 @@ span#star-span {
 			</form:form>
 		</p>
 
+		<!-- Modal -->
+		<div class="modal fade" id="shoppingCartMenu" tabindex="-1" role="dialog"
+			aria-labelledby="shoppingCartMenuTitle" aria-hidden="true" data-backdrop="false">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="shoppingCartMenuTitle">
+							<c:choose>
+								<c:when test="${!empty LoginOK}">
+						${LoginOK.mName}的購物車
+						</c:when>
+								<c:otherwise>
+						你的購物車
+						</c:otherwise>
+							</c:choose>
+						</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<c:if test="${empty shoppingCart.content }">
+							<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
+						</c:if>
+						<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
+							<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;"
+								src="<c:url value='/showPic/${cart.value.pId}'/>">
+							<p style="line-height: 10px">${cart.value.pName}</p>
+							<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
+							<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button"
+								onclick="DeleteItem(this.id)" value="刪除" /> </span>
+							<c:choose>
+								<c:when test="${vs.last}">
+								</c:when>
+								<c:otherwise>
+									<hr>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-dark" data-dismiss="modal">繼續購物</button>
+						<button type="button" onclick="CheckOutButton()" class="btn btn-success">結帳</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
 			<li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
 				role="tab" aria-controls="home" aria-selected="true">商品說明</a></li>
@@ -210,10 +246,10 @@ span#star-span {
 				role="tab" aria-controls="contact" aria-selected="false">Google地圖</a></li>
 		</ul>
 		<div class="tab-content" id="myTabContent" style="height: 300px">
-			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">${productBean.pContent}</div>
+			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><p>${productBean.pContent}</p></div>
 			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 				<c:choose>
-					<c:when test="${empty reviewList}">此商品尚無評價。</c:when>
+					<c:when test="${empty reviewList}"><p>此商品尚無評價。</p></c:when>
 					<c:otherwise>
 						<c:forEach varStatus="vs" var="reviewBean" items="${reviewList}">
 							<div class="card border-light mb-3">

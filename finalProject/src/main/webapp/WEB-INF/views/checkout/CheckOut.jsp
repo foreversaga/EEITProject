@@ -45,10 +45,19 @@
 			type : "POST",
 			url : url,
 			success : function(data) {
-				$("div#UpdateDetail").html(data);
+				var count=0;
+				<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content}">
+				count = count + 1;
+				</c:forEach>
+				if(count==1){			
+					alert("購物車內已無商品。");		
+					location.href = "<c:url value='/products/1'/>";
+					}else{
+					$("div#UpdateDetail").html(data);
+					}
 			}
 		});
-	}
+	};
 
 	$(document).ready(
 			function() {
@@ -80,6 +89,16 @@
 						//do nothing
 					}
 				});
+				
+				$("input#SubmitOrder").submit(function(){
+					e.preventDefault();
+					if(${shoppingCart==null}){
+						alert("購物車內無商品");
+						return;
+					}else{
+// 						$("#OrderForm").submit();
+					}
+				});
 			});
 </script>
 <style type="text/css">
@@ -93,6 +112,14 @@ div.dropdown-menu {
 
 div#ftco-nav li.nav-item {
 	margin: 0 20px;
+}
+
+p {
+	font-size: 25px;
+}
+
+span {
+	font-size: 20px;
 }
 </style>
 
@@ -127,13 +154,13 @@ div#ftco-nav li.nav-item {
 
 	<div class="hero-wrap js-fullheight"
 		style="background-image: url(<c:url value='/css/RWDcss/images/bg_5.jpg'/>);">
-		<div style="margin: 0 20%;">
+		<div style="margin: 0 10%;">
 
-			<div style="margin: 20% 2%; display: inline-block; width: 35%;" class="card">
+			<div style="margin: 10% 2%; display: inline-block; width: 36%;" class="card">
 				<div class="card-header">購買人資訊</div>
 				<div class="card-body">
-					<form:form method="POST" action="${pageContext.request.contextPath }/ConfirmOrder"
-						modelAttribute="orderInfo">
+					<form:form id="OrderForm" method="POST"
+						action="${pageContext.request.contextPath }/ConfirmOrder" modelAttribute="orderInfo">
 						<table>
 							<tr>
 								<td><h5 class="card-title">購買人姓名:</h5></td>
@@ -141,22 +168,26 @@ div#ftco-nav li.nav-item {
 							</tr>
 							<tr>
 								<td><h5 style="font-size: 20px">收件人姓名:</h5></td>
-								<td><form:input class="card-title" type="text" path="oReceiveName" value="${orderBeanParam.oReceiveName}" /><span style="color:red">${errormsg.receivename}</span></td>
+								<td><form:input class="card-title" type="text" path="oReceiveName"
+										value="${orderBeanParam.oReceiveName}" /><span style="color: red">${errormsg.receivename}</span></td>
 							</tr>
 							<tr>
 								<td><h5 style="font-size: 20px">收件人地址:</h5></td>
-								<td><form:input class="card-title" type="text" path="oAddress" value="${orderBeanParam.oAddress }"/><span style="color:red">${errormsg.receiveadr}</span></td>
+								<td><form:input class="card-title" type="text" path="oAddress"
+										value="${orderBeanParam.oAddress }" /><span style="color: red">${errormsg.receiveadr}</span></td>
 							</tr>
 							<tr>
 								<td><h5 style="font-size: 20px">收件人電話:</h5></td>
-								<td><form:input class="card-title" type="text" path="oReceivePhone" value="${orderBeanParam.oReceivePhone}" /><span style="color:red">${errormsg.receivephone}</span></td>
+								<td><form:input class="card-title" type="text" path="oReceivePhone"
+										value="${orderBeanParam.oReceivePhone}" /><span style="color: red">${errormsg.receivephone}</span></td>
 							</tr>
 							<tr>
 								<td><h5 style="font-size: 20px">備註:</h5></td>
-								<td><form:input class="card-title" type="text" path="oNote" value="${orderBeanParam.oNote }" /></td>
+								<td><form:input class="card-title" type="text" path="oNote"
+										value="${orderBeanParam.oNote }" /></td>
 							</tr>
 							<tr>
-								<td><input type="submit" class="btn btn-outline-primary" value="送出"></td>
+								<td><input id="SubmitOrder" type="submit" class="btn btn-outline-primary" value="送出"></td>
 								<td><button id="AbortOrder" class="btn btn-outline-danger">取消</button></td>
 								<%-- 								<td><button id="AbortOrder" onclick="javascript:location.href='<c:url value="/AbortOrder"/>'" class="btn btn-outline-danger">取消</button></td> --%>
 							</tr>
@@ -167,29 +198,29 @@ div#ftco-nav li.nav-item {
 					</form:form>
 				</div>
 			</div>
-			<div id="UpdateDetail" style="margin: 20% 2%; display: inline-block; width: 55%" class="card">
+			<div id="UpdateDetail" style="margin: 20% 2%; display: inline-block; width: 50%" class="card">
 				<div class="card-header">購物明細</div>
 				<div>
 					<table style="background-color: #99FF99; width: 100%;">
 						<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content}">
 							<tr>
-								<td>${cart.value.pName}</td>
-								<td>數量:</td>
+								<td style="width: 40%;"><p>${cart.value.pName}</p></td>
+								<td><span>數量:</span></td>
 								<td>
 									<%-- 								<input style="width: 40px;" id="${cart.value.pId}" name="qty" type="number" --%>
-									<%-- 										value="${cart.value.iQty}" min="1" /> --%> 
-									<select name="qty">
+									<%-- 										value="${cart.value.iQty}" min="1" /> --%> <select name="qty">
 										<c:forEach var="stock" begin="1" end="${stockMap[cart.value.pId]}">
 											<option value="${stock}">${stock}</option>
 										</c:forEach>
-									</select>
+								</select>
 								</td>
-								<td>單價:</td>
-								<td id="unit${cart.value.pId}">${cart.value.pPrice}</td>
-								<td>小計:</td>
-								<td style="width: 80px;" id="sub${cart.value.pId}">$${cart.value.iQty *
-									cart.value.pPrice}</td>
-								<td><button onclick="DelCart(this.id)" id="${cart.value.pId}">刪除</button></td>
+								<td><span>單價:</span></td>
+								<td id="unit${cart.value.pId}"><span>${cart.value.pPrice}</span></td>
+								<td><span>小計:</span></td>
+								<td style="width: 80px;" id="sub${cart.value.pId}"><span>$${cart.value.iQty *
+										cart.value.pPrice}</span></td>
+								<td><button class="btn btn-outline-danger" onclick="DelCart(this.id)"
+										id="${cart.value.pId}">刪除</button></td>
 							</tr>
 						</c:forEach>
 						<tr>
@@ -198,8 +229,8 @@ div#ftco-nav li.nav-item {
 							<td></td>
 							<td></td>
 							<td></td>
-							<td>金額總計:</td>
-							<td>$${shoppingCart.total}</td>
+							<td><span>金額總計:</span></td>
+							<td><span>$${shoppingCart.total}</span></td>
 							<td></td>
 						</tr>
 					</table>

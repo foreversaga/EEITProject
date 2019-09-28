@@ -298,8 +298,11 @@ public class PurchaseController {
 				stockMap.put(oi.getpId(), pb.getpInstock());
 			}
 			session.setAttribute("stockMap", stockMap);
+			session.setAttribute("shoppingCart", sc);
+		}else {
+			session.removeAttribute("shoppingCart");
+			return "redirect:/products/1";
 		}
-		session.setAttribute("shoppingCart", sc);
 		return "checkout/CheckOutUpdate";
 	}
 

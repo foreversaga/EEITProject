@@ -84,7 +84,7 @@ div#shoppingCartMenu {
 					<li class="nav-item"><a href="<c:url value='/shop/1'/>" class="nav-link">Products</a></li>
 					<c:if test="${empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
-						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>						
+						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
 						<li class="nav-item"><a href="<c:url value='/AddMemberDB'/>" class="nav-link">新增會員DB</a></li>
 						<li class="nav-item"><a href="<c:url value='/AddReviewDB'/>" class="nav-link">新增評價DB</a></li>
 						<li class="nav-item"><a href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li>
@@ -97,43 +97,43 @@ div#shoppingCartMenu {
 						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 					</c:if>
 				</ul>
-<!-- 				<ul class="navbar-nav mr-right"> -->
-<!-- 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" -->
-<!-- 						id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" -->
-<!-- 						aria-expanded="false">購物車</a> -->
-<!-- 						<div id="shoppingCartMenu" class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
-<%-- 							<c:if test="${empty shoppingCart.content }"> --%>
-<!-- 								<p style="text-align: center; margin-top: 10%">購物車內已無商品</p> -->
-<%-- 							</c:if> --%>
-<%-- 							<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }"> --%>
-<!-- 								<hr> -->
-<!-- 								<table> -->
-<!-- 									<tr> -->
-<!-- 										<td rowspan="2"><img style="width: 80px; height: 80px;" -->
-<%-- 											src="<c:url value='/showPic/${cart.value.pId}'/>"></td> --%>
-<%-- 										<td style="padding: 0 10px;">${cart.value.pName}</td> --%>
-<!-- 									</tr> -->
-<!-- 									<tr> -->
-<%-- 										<td style="padding: 0 5px;">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</td> --%>
-<%-- 										<td><input style="margin-left: 10px;" id="${cart.value.pId}" type="button" --%>
-<!-- 												onclick="DeleteItem(this.id)" value="刪除" /></td> -->
-<!-- 									</tr> -->
-<!-- 								</table> -->
-<!-- 								<img style="width: 50px; height: 50px; float: left;" -->
-<%-- 									src="<c:url value='/showPic/${cart.value.pId}'/>"> --%>
-<%-- 								<p style="line-height: 10px">${cart.value.pName}</p> --%>
-<%-- 								<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span> --%>
-<%-- 								<span><input id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)" --%>
-<!-- 										value="刪除" /> </span> -->
-<%-- 								<c:if test="${vs.last}"> --%>
-<!-- 									<hr> -->
-<%-- 								</c:if> --%>
-<%-- 							</c:forEach> --%>
-<%-- 							<c:if test="${!empty shoppingCart.content }"> --%>
-<%-- 								<a href="<c:url value='/CheckOut'/>">結帳</a> --%>
-<%-- 							</c:if> --%>
-<!-- 						</div></li> -->
-<!-- 				</ul> -->
+				<!-- 				<ul class="navbar-nav mr-right"> -->
+				<!-- 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" -->
+				<!-- 						id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" -->
+				<!-- 						aria-expanded="false">購物車</a> -->
+				<!-- 						<div id="shoppingCartMenu" class="dropdown-menu" aria-labelledby="navbarDropdown"> -->
+				<%-- 							<c:if test="${empty shoppingCart.content }"> --%>
+				<!-- 								<p style="text-align: center; margin-top: 10%">購物車內已無商品</p> -->
+				<%-- 							</c:if> --%>
+				<%-- 							<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }"> --%>
+				<!-- 								<hr> -->
+				<!-- 								<table> -->
+				<!-- 									<tr> -->
+				<!-- 										<td rowspan="2"><img style="width: 80px; height: 80px;" -->
+				<%-- 											src="<c:url value='/showPic/${cart.value.pId}'/>"></td> --%>
+				<%-- 										<td style="padding: 0 10px;">${cart.value.pName}</td> --%>
+				<!-- 									</tr> -->
+				<!-- 									<tr> -->
+				<%-- 										<td style="padding: 0 5px;">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</td> --%>
+				<%-- 										<td><input style="margin-left: 10px;" id="${cart.value.pId}" type="button" --%>
+				<!-- 												onclick="DeleteItem(this.id)" value="刪除" /></td> -->
+				<!-- 									</tr> -->
+				<!-- 								</table> -->
+				<!-- 								<img style="width: 50px; height: 50px; float: left;" -->
+				<%-- 									src="<c:url value='/showPic/${cart.value.pId}'/>"> --%>
+				<%-- 								<p style="line-height: 10px">${cart.value.pName}</p> --%>
+				<%-- 								<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span> --%>
+				<%-- 								<span><input id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)" --%>
+				<!-- 										value="刪除" /> </span> -->
+				<%-- 								<c:if test="${vs.last}"> --%>
+				<!-- 									<hr> -->
+				<%-- 								</c:if> --%>
+				<%-- 							</c:forEach> --%>
+				<%-- 							<c:if test="${!empty shoppingCart.content }"> --%>
+				<%-- 								<a href="<c:url value='/CheckOut'/>">結帳</a> --%>
+				<%-- 							</c:if> --%>
+				<!-- 						</div></li> -->
+				<!-- 				</ul> -->
 			</div>
 		</div>
 	</nav>
@@ -348,7 +348,7 @@ div#shoppingCartMenu {
 				<c:forEach varStatus="vs" var="Top5" items="${TopFiveList}">
 					<div class="col-sm col-md-6 col-lg ftco-animate">
 						<div class="destination">
-							<a href="<c:url value='/ProductSingle/${productBean.pId}'/>"
+							<a href="<c:url value='/ProductSingle/${Top5.pId}'/>"
 								class="img img-2 d-flex justify-content-center align-items-center"
 								style="background-image: url(<c:url value='/showPic/${Top5.pId}'/>);"> <!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
 								<!-- 								<span class="icon-search2"></span> --> <!-- 							</div> -->
@@ -423,13 +423,12 @@ div#shoppingCartMenu {
 				<div class="col-md-5 heading-section ftco-animate">
 					<span class="subheading">Best Directory Website</span>
 					<h2 class="mb-4 pb-3">
-						<strong>Why</strong> Choose Us?
+						<strong>為什麼</strong> 選擇我們?
 					</h2>
-					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-						there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the
-						Semantics, a large language ocean.</p>
-					<p>Even the all-powerful Pointing has no control about the blind texts it is an almost
-						unorthographic life.</p>
+					<h5>每一天，我們都在幫助旅客發掘全球最棒的景點、行程與最難忘的旅遊體驗！</h5>
+					<h5>你可以從所有熱門的目的地中開始探索，並用最優惠的價格預訂任何行程與服務：
+					從容不迫地搭上香港機場快綫、走進東京迪士尼滿足你的童趣之心，或在峇里島探索靜謐的海底世界⋯，專屬於你的旅程就此展開！</h5>
+
 					<!-- 					<p> -->
 					<!-- 						<a href="#" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3">Read more</a> -->
 					<!-- 					</p> -->
@@ -578,28 +577,23 @@ div#shoppingCartMenu {
 			<div class="row mb-5">
 				<div class="col-md">
 					<div class="ftco-footer-widget mb-4">
-						<ul style="color:white">
-						<li style="margin-top: 3px;">©2019 Travel Fun Technology</li>
-						<li style="margin-top: 3px;">Limited. All Rights Reserved.</li>
-						<li style="margin-top: 3px;">粉專：https://www.TravelFun.com/EEIT108/</li>
-					</ul>
+						<ul style="color: white">
+							<li style="margin-top: 3px;">©2019 Travel Fun Technology</li>
+							<li style="margin-top: 3px;">Limited. All Rights Reserved.</li>
+							<li style="margin-top: 3px;">粉專：https://www.TravelFun.com/EEIT108/</li>
+						</ul>
 						<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
 							<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
 							<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
 							<li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
 							<br>
-							<li style="margin-top: 3px;color:white">支付方式</li>
-						<br>
-						<img class=" mt-2" src="<c:url value='/img/visa.png'/>"
-							height="40px" href="">
-						<img class=" mt-2" src="<c:url value='/img/master.png'/>"
-							height="40px" href="">
-						<img class=" mt-2" src="<c:url value='/img/jcb.png'/>"
-							height="40px" href="">
-						<img class=" mt-2" src="<c:url value='/img/american.png'/>"
-							height="40px" href="">
-						<img class=" mt-2" src="<c:url value='/img/paypal.png'/>"
-							height="40px" href="">
+							<li style="margin-top: 3px; color: white">支付方式</li>
+							<br>
+							<img class=" mt-2" src="<c:url value='/img/visa.png'/>" height="40px" href="">
+							<img class=" mt-2" src="<c:url value='/img/master.png'/>" height="40px" href="">
+							<img class=" mt-2" src="<c:url value='/img/jcb.png'/>" height="40px" href="">
+							<img class=" mt-2" src="<c:url value='/img/american.png'/>" height="40px" href="">
+							<img class=" mt-2" src="<c:url value='/img/paypal.png'/>" height="40px" href="">
 						</ul>
 					</div>
 				</div>
@@ -630,7 +624,8 @@ div#shoppingCartMenu {
 						<h2 class="ftco-heading-2">Have a Questions?</h2>
 						<div class="block-23 mb-3">
 							<ul>
-								<li><span class="icon icon-map-marker"></span><span class="text">106台北市大安區復興南路一段390號 2,3號</span></li>
+								<li><span class="icon icon-map-marker"></span><span class="text">106台北市大安區復興南路一段390號
+										2,3號</span></li>
 								<li><a href="#"><span class="icon icon-phone"></span><span class="text">02-23766198</span></a></li>
 								<li><a href="#"><span class="icon icon-envelope"></span><span class="text">TravleFun@outlook.com</span></a></li>
 							</ul>
@@ -638,21 +633,21 @@ div#shoppingCartMenu {
 					</div>
 				</div>
 			</div>
-<!-- 			<div class="row"> -->
-<!-- 				<div class="col-md-12 text-center"> -->
+			<!-- 			<div class="row"> -->
+			<!-- 				<div class="col-md-12 text-center"> -->
 
-<!-- 					<p> -->
-<!-- 						Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-<!-- 						Copyright &copy; -->
-<!-- 						<script> -->
-<!--  							document.write(new Date().getFullYear()); -->
-<!-- 						</script> -->
-<!-- 						All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> -->
-<!-- 						by <a href="https://colorlib.com" target="_blank">Colorlib</a> -->
-<!-- 						Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-<!-- 					</p> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+			<!-- 					<p> -->
+			<!-- 						Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+			<!-- 						Copyright &copy; -->
+			<!-- 						<script> -->
+			<!--  							document.write(new Date().getFullYear()); -->
+			<!-- 						</script> -->
+			<!-- 						All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> -->
+			<!-- 						by <a href="https://colorlib.com" target="_blank">Colorlib</a> -->
+			<!-- 						Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+			<!-- 					</p> -->
+			<!-- 				</div> -->
+			<!-- 			</div> -->
 		</div>
 	</footer>
 

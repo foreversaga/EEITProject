@@ -8,7 +8,13 @@
 <title>我的訂單</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+<style type="text/css">
+p{
+font-size: 25px;
+}
+span{font-size: 20px;
+}
+</style>
 <script type="text/javascript">
 	function DelCart(pId) {
 		var url = "<c:url value='/CheckOutDel?pId=" + pId + "'/>"
@@ -16,7 +22,16 @@
 			type : "POST",
 			url : url,
 			success : function(data) {
-				$("div#UpdateDetail").html(data);
+				var count=0;
+				<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content}">
+				count = count + 1;
+				</c:forEach>
+				if(count==1){			
+					alert("購物車內已無商品。");	
+					location.href = "<c:url value='/products/1'/>";
+					}else{
+					$("div#UpdateDetail").html(data);
+					}
 			}
 		});
 	}
@@ -50,20 +65,23 @@
 	<div>
 		<table style="background-color: #99FF99; width: 100%;">
 			<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content}">
-				<tr>
-					<td>${cart.value.pName}</td>
-					<td>數量:</td>
-					<td><select name="qty">
-							<c:forEach var="stock" begin="1" end="${stockMap[cart.value.pId]}">
-								<option value="${stock}">${stock}</option>
-							</c:forEach>
-					</select></td>
-					<td>單價:</td>
-					<td>${cart.value.pPrice}</td>
-					<td>小計:</td>
-					<td style="width: 80px;">$${cart.value.iQty * cart.value.pPrice}</td>
-					<td><button onclick="DelCart(this.id)" id="${cart.value.pId}">刪除</button></td>
-				</tr>
+			<tr>
+								<td><span>${cart.value.pName}</span></td>
+								<td><span>數量:</span></td>
+								<td> 
+									<select name="qty">
+										<c:forEach var="stock" begin="1" end="${stockMap[cart.value.pId]}">
+											<option value="${stock}">${stock}</option>
+										</c:forEach>
+									</select>
+								</td>
+								<td><span>單價:</span></td>
+								<td id="unit${cart.value.pId}"><span>${cart.value.pPrice}</span></td>
+								<td><span>小計:</span></td>
+								<td style="width: 80px;" id="sub${cart.value.pId}"><span>$${cart.value.iQty *
+									cart.value.pPrice}</span></td>
+								<td><button class="btn btn-danger" onclick="DelCart(this.id)" id="${cart.value.pId}">刪除</button></td>
+							</tr>
 			</c:forEach>
 			<tr>
 				<td></td>
@@ -71,8 +89,8 @@
 				<td></td>
 				<td></td>
 				<td></td>
-				<td>金額總計:</td>
-				<td>$${shoppingCart.total}</td>
+				<td><p>金額總計:</td>
+				<td><p>$${shoppingCart.total}</td>
 				<td></td>
 			</tr>
 		</table>
