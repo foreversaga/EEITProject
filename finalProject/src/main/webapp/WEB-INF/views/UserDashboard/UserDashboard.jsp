@@ -40,17 +40,36 @@
 
 	});
 // 	購物車
+// 	function DeleteItem(clicked_id) {
+// 		var url = "<c:url value='/DeleteCartProduct?pId=" + clicked_id + "'/>";
+// 		$.ajax({
+// 			url : url,
+// 			type : "get",
+// 			success : function(data) {
+// 				$("div#shoppingCartMenu").html(data);
+// 			}
+// 		});
+// 	};
+// 	購物車新版本
 	function DeleteItem(clicked_id) {
-		var url = "<c:url value='/DeleteCartProduct?pId=" + clicked_id + "'/>";
-		$.ajax({
-			url : url,
-			type : "get",
-			success : function(data) {
-				$("div#shoppingCartMenu").html(data);
-			}
-		});
-	};
-	
+	var url = "<c:url value='/DeleteCartProduct?pId=" + clicked_id + "'/>";
+	$.ajax({
+		url : url,
+		type : "get",
+		success : function(data) {
+			$("div.modal-body").html(data);
+		}
+	});
+};
+
+function CheckOutButton(){
+	if(${empty shoppingCart.content}){
+		alert("購物車內無商品");
+		return;
+	}else{
+		location.href = "<c:url value='/CheckOut'/>";
+	}
+};
 	// 天氣預報javaScript:https://weatherwidget.io/
 	!function(d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0];
@@ -97,7 +116,7 @@ body {
 	<div class="Background">
 		<img src="<c:url value='/img/dashboardbackground.jpg'/>">
 	</div>
-	<nav class=" navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3 justify-content-center">
+	<nav class=" navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-3 justify-content-center"style="display:block;">
 		<div class="flex-row d-flex">
 			<button type="button" class="navbar-toggler mr-2 "
 				data-toggle="offcanvas" title="Toggle responsive left sidebar">
@@ -140,42 +159,62 @@ body {
 <!-- 						aria-label="Search"> -->
 <%-- 				</form:form> --%>
 <!-- <!-- 			</ul> 先移掉購物車iCon fa fa-shopping-cart  fa-pull-right 會影響置中 -->
-			<ul class="navbar-nav ml-auto "style="color: white;margin-right:23%">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle "
-					style="color: white;" id="navbarDropdown" role="button"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">購物車</a>
-					<div class="dropdown-menu dropdown-menu-right" id="shoppingCartMenu" 
-						style="width: 300px; height: 340px; background-color: #f0f0f0; font-family: 'Noto Serif TC', serif; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); overflow-y: auto;"
-						aria-labelledby="navbarDropdown">
+			<ul class="navbar-nav ml-auto "style="color: white;">
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#ChangePage" style="color: white;margin-left:850px"
+						id="navbarDropdown" role="button" data-toggle="modal" aria-haspopup="true"
+						aria-expanded="false"  data-target="#shoppingCartMenu">購物車</a></li></ul>
+					<div class="modal fade" id="shoppingCartMenu" tabindex="-1" role="dialog"
+			aria-labelledby="shoppingCartMenuTitle" aria-hidden="true" data-backdrop="false">
+			<div class="modal-dialog modal-dialog-centered" role="document" style="font-family: 'Noto Serif TC', serif;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="shoppingCartMenuTitle">
+							<c:choose>
+								<c:when test="${!empty LoginOK}">
+						${LoginOK.mName}的購物車
+						</c:when>
+								<c:otherwise>
+						你的購物車
+						</c:otherwise>
+							</c:choose>
+						</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
 						<c:if test="${empty shoppingCart.content }">
-							<p style="text-align: center; margin-top: 10%">購物車暫無商品</p>
+							<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
 						</c:if>
-						<c:forEach varStatus="vs" var="cart"
-							items="${shoppingCart.content }">
-							<hr>
-							<img style="width: 50px; height: 50px; float: left;"
+						<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
+							<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;"
 								src="<c:url value='/showPic/${cart.value.pId}'/>">
-							<p style="line-height: 30px">${cart.value.pName}</p>
-							<span style="line-height: 5px">數量:${cart.value.iQty}
-								價格:${cart.value.pPrice}</span>
-							<span><input id="${cart.value.pId}" type="button"
+							<p style="line-height: 10px">${cart.value.pName}</p>
+							<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
+							<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button"
 								onclick="DeleteItem(this.id)" value="刪除" /> </span>
-							<c:if test="${vs.last}">
-								<hr>
-							</c:if>
+							<c:choose>
+								<c:when test="${vs.last}">
+								</c:when>
+								<c:otherwise>
+									<hr>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
-						<c:if test="${!empty shoppingCart.content }">
-							<a href="<c:url value='/CheckOut'/>"><input type="button"
-								class="btn btn-primary btn-lg mr-1" style="float: right;"
-								value="前往結帳" /></a>
-						</c:if>
-					</div> <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-				</li>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-dark" data-dismiss="modal">繼續購物</button>
+						<button type="button" onclick="CheckOutButton()" class="btn btn-success">結帳</button>
+					</div>
+				</div>
+			</div>
+		</div>
+				
 				<!-- <li class="nav-item">
                     <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
                 </li> -->
 				<!-- 用戶選單 -->
+				<ul class="navbar-nav ml-auto"style="color: white;margin-right:23%">
 				<li class="nav-item "><a class="nav-link dropdown-toggle" 
 					href="#" id="userDropdown" role="button" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false"> <span
@@ -184,7 +223,7 @@ body {
 						<img src="<c:url value='/showmPic/${LoginOK.mId}'/>" class="img-circle " title="${LoginOK.mAccount}" style=" width:30px; height:30px; border-radius:50%; "/>
 				</a> <!-- Dropdown - User Information -->
 					<div
-						class="dropdown-menu dropdown-menu-right shadow animated--grow-in "style=" margin-right:193px"
+						class="dropdown-menu dropdown-menu-right shadow animated--grow-in "style=" margin-right:510px"
 						aria-labelledby="userDropdown">
 						<a class="dropdown-item" href="<c:url value='/UpdateMemberForm'/>">
 							<i class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
@@ -202,7 +241,7 @@ body {
 			</ul>
 		</div>
 	</nav>
-	<div class="container " id="main">
+	<div class="container " id="main" >
 		<div class="container row row-offcanvas row-offcanvas-left " >
 			<!-- <div class="  col-md-3  sidebar-offcanvas bg-light " id="sidebar" role="navigation"
                 style="text-align: center">
@@ -215,9 +254,9 @@ body {
             </div> -->
 			<div class="container-fruid " style="margin-top:200px;width:250px;">
 			<div class=" sidebar-heading   sidebar-offcanvas bg-light "
-				id="sidebar" role="navigation" style="text-align: center;height:1700px">
+				id="sidebar" role="navigation" style="text-align: center;height:1700px;display:block;">
 				<div
-					class="list-group list-group-flush flex-column sticky-top  p-0  "
+					class="list-group list-group-flush flex-column sticky-top   "
 					style="font-family: 'Noto Serif TC', serif;">
 					<a href="<c:url value='/UserDashboard'/>"
 						class="list-group-item list-group-item-action bg-light ">個人中心</a>
