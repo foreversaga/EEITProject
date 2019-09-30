@@ -66,21 +66,23 @@ span{font-size: 20px;
 		<table style="background-color: #99FF99; width: 100%;">
 			<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content}">
 			<tr>
-								<td><span>${cart.value.pName}</span></td>
+						<td style="width: 38%;"><p>${cart.value.pName}</p></td>
 								<td><span>數量:</span></td>
-								<td> 
-									<select name="qty">
+								<td>
+									<%-- 								<input style="width: 40px;" id="${cart.value.pId}" name="qty" type="number" --%>
+									<%-- 										value="${cart.value.iQty}" min="1" /> --%> <select name="qty">
 										<c:forEach var="stock" begin="1" end="${stockMap[cart.value.pId]}">
 											<option value="${stock}">${stock}</option>
 										</c:forEach>
-									</select>
+								</select>
 								</td>
 								<td><span>單價:</span></td>
 								<td id="unit${cart.value.pId}"><span>${cart.value.pPrice}</span></td>
 								<td><span>小計:</span></td>
 								<td style="width: 80px;" id="sub${cart.value.pId}"><span>$${cart.value.iQty *
-									cart.value.pPrice}</span></td>
-								<td><button class="btn btn-danger" onclick="DelCart(this.id)" id="${cart.value.pId}">刪除</button></td>
+										cart.value.pPrice}</span></td>
+								<td><button class="btn btn-outline-danger" onclick="DelCart(this.id)"
+										id="${cart.value.pId}">刪除</button></td>
 							</tr>
 			</c:forEach>
 			<tr>

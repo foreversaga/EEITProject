@@ -159,7 +159,7 @@ div.dropdown-menu {
 						<table>
 							<thead>
 								<tr class="row100 head" style="text-align: center;">
-									<th class="cell100 column1">商品圖示</th>
+									<th class="cell100 column1" style="width:10%">商品圖示</th>
 									<th class="cell100 column2">明細內容</th>
 									<th class="cell100 column3" style="width:15%">我的評價</th>
 
@@ -173,7 +173,7 @@ div.dropdown-menu {
 							<tbody>
 								<c:forEach varStatus="vs" var="orderItem" items="${orderItemList}">
 									<tr class="row100 body" style="font-size: 30px;">
-										<td class="cell100 column1" style="text-align: center; padding-left: 0px;"><img
+										<td class="cell100 column1" style="width:10%;text-align: center; padding-left: 0px;"><img
 											width="30%;" src="<c:url value='/showPic/${orderItem.pId}'/>" /></td>
 										<td class="cell100 column2">${orderItem.iDes}</td>
 										<td class="cell100 column3" style="text-align: center;width:15%;"><c:choose>
@@ -262,9 +262,9 @@ div.dropdown-menu {
 												</c:when>
 												<c:otherwise>
 													<button class="btn btn-primary" type="button" data-toggle="collapse"
-														data-target="#collapseAddReview" aria-expanded="false"
+														data-target="#collapseAddReview${orderItem.pId}" aria-expanded="false"
 														aria-controls="collapseAddReview">填寫評價</button>
-													<div class="collapse" id="collapseAddReview">
+													<div class="collapse" id="collapseAddReview${orderItem.pId}">
 														<div class="card card-body" style="text-align: left; margin-top: 2%; ">
 															<form:form action="${pageContext.request.contextPath}/ProcessNewReview"
 																modelAttribute="newrb" method="POST">

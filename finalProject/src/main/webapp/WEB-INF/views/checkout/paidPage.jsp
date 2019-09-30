@@ -12,7 +12,13 @@
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
+<style type="text/css">
+body {
+background-image: url(<c:url value='/img/paidBG.jpg'/>);
+background-repeat: no-repeat;
+background-size: cover;
+}
+</style>
 </head>
 <body>
 	<div style="width: 600px; margin: 10px auto;">
@@ -49,7 +55,7 @@
 					</tr>
 					<tr>
 						<td colspan="2"><a class="btn btn-outline-success" href="<c:url value='/products/1'/>">繼續購物</a>
-							<a class="btn btn-outline-warning" href="<c:url value='/'/>">回到首頁</a></td>
+							<a class="btn btn-outline-dark" href="<c:url value='/'/>">回到首頁</a></td>
 					</tr>
 				</table>
 			</div>
