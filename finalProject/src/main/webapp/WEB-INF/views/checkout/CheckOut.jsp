@@ -204,7 +204,7 @@ span {
 					<table style="background-color: #99FF99; width: 100%;">
 						<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content}">
 							<tr>
-								<td style="width: 40%;"><p>${cart.value.pName}</p></td>
+								<td style="width: 38%;"><p>${cart.value.pName}</p></td>
 								<td><span>數量:</span></td>
 								<td>
 									<%-- 								<input style="width: 40px;" id="${cart.value.pId}" name="qty" type="number" --%>

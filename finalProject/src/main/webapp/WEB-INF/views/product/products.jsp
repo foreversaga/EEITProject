@@ -103,8 +103,6 @@ $(document).ready(function() {
 	border-color: #494949 !important;
 	transition: all 0.3s ease 0s;
 }
-
-
 </style>
 
 </head>
@@ -135,59 +133,59 @@ $(document).ready(function() {
 				<ul class="navbar-nav mr-right">
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#ChangePage"
 						id="navbarDropdown" role="button" data-toggle="modal" aria-haspopup="true"
-						aria-expanded="false"  data-target="#shoppingCartMenu">購物車</a></li>
+						aria-expanded="false" data-target="#shoppingCartMenu">購物車</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<!-- END nav -->
-		<!-- Modal -->
-		<div class="modal fade" id="shoppingCartMenu" tabindex="-1" role="dialog"
-			aria-labelledby="shoppingCartMenuTitle" aria-hidden="true" data-backdrop="false">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="shoppingCartMenuTitle">
-							<c:choose>
-								<c:when test="${!empty LoginOK}">
+	<!-- Modal -->
+	<div class="modal fade" id="shoppingCartMenu" tabindex="-1" role="dialog"
+		aria-labelledby="shoppingCartMenuTitle" aria-hidden="true" data-backdrop="false">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="shoppingCartMenuTitle">
+						<c:choose>
+							<c:when test="${!empty LoginOK}">
 						${LoginOK.mName}的購物車
 						</c:when>
-								<c:otherwise>
+							<c:otherwise>
 						你的購物車
 						</c:otherwise>
-							</c:choose>
-						</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<c:if test="${empty shoppingCart.content }">
-							<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
-						</c:if>
-						<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
-							<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;"
-								src="<c:url value='/showPic/${cart.value.pId}'/>">
-							<p style="line-height: 10px">${cart.value.pName}</p>
-							<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
-							<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button"
-								onclick="DeleteItem(this.id)" value="刪除" /> </span>
-							<c:choose>
-								<c:when test="${vs.last}">
-								</c:when>
-								<c:otherwise>
-									<hr>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-dark" data-dismiss="modal">繼續購物</button>
-						<button type="button" onclick="CheckOutButton()" class="btn btn-success">結帳</button>
-					</div>
+						</c:choose>
+					</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<c:if test="${empty shoppingCart.content }">
+						<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
+					</c:if>
+					<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
+						<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;"
+							src="<c:url value='/showPic/${cart.value.pId}'/>">
+						<p style="line-height: 10px">${cart.value.pName}</p>
+						<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
+						<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button"
+							onclick="DeleteItem(this.id)" value="刪除" /> </span>
+						<c:choose>
+							<c:when test="${vs.last}">
+							</c:when>
+							<c:otherwise>
+								<hr>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-dark" data-dismiss="modal">繼續購物</button>
+					<button type="button" onclick="CheckOutButton()" class="btn btn-success">結帳</button>
 				</div>
 			</div>
 		</div>
+	</div>
 	<div class="hero-wrap js-fullheight"
 		style="background-image: url(<c:url value='/css/RWDcss/images/bg_5.jpg'/>);">
 		<div class="overlay"></div>
@@ -215,36 +213,7 @@ $(document).ready(function() {
 									<input name="QueryString" type="text" class="form-control" placeholder="搜尋關鍵字">
 								</div>
 								<div class="form-group">
-									<div class="select-wrap one-third">
-										<div class="icon">
-											<span class="ion-ios-arrow-down"></span>
-										</div>
-										<select name="" id="" class="form-control">
-											<option value="">Select Location</option>
-											<option value="">San Francisco USA</option>
-											<option value="">Berlin Germany</option>
-											<option value="">Lodon United Kingdom</option>
-											<option value="">Paris Italy</option>
-										</select>
-									</div>
-								</div>
-								<!-- 								<div class="form-group"> -->
-								<!-- 									<input type="text" id="checkin_date" class="form-control" placeholder="Date from"> -->
-								<!-- 								</div> -->
-								<!-- 								<div class="form-group"> -->
-								<!-- 									<input type="text" id="checkin_date" class="form-control" placeholder="Date to"> -->
-								<!-- 								</div> -->
-								<!-- 								<div class="form-group"> -->
-								<!-- 									<div class="range-slider"> -->
-								<!-- 										<span> <input type="number" value="25000" min="0" max="120000" /> - <input -->
-								<!-- 												type="number" value="50000" min="0" max="120000" /> -->
-								<!-- 										</span> -->
-								<!-- 										<input value="1000" min="0" max="120000" step="500" type="range" /> -->
-								<!-- 										<input value="50000" min="0" max="120000" step="500" type="range" /> -->
-								<!-- 									</div> -->
-								<!-- 								</div> -->
-								<div class="form-group">
-									<input type="submit" value="Search" class="btn btn-primary py-3 px-5">
+									<input type="submit" value="搜尋" class="btn btn-primary py-3 px-5">
 								</div>
 							</div>
 						</form>
@@ -298,9 +267,22 @@ $(document).ready(function() {
 									<td style="width: 22%"><a href="<c:url value='/ReviewDesc/1'/>">評價高→低</a></td>
 									<td style="width: 22%"><a href="<c:url value='/ReviewAsc/1'/>">評價低→高</a></td>
 								</tr>
-
 							</table>
-
+						</div>
+						<div style="width: 100%; margin: 0 5% 0% 2%;">
+							<c:choose>
+								<c:when test="${!empty QueryString&&!empty productList }">
+									<p style="font-size: 30px;">
+										商品內容包含<span style="color: green;">${QueryString}</span>的商品：
+									</p>
+								</c:when>
+								<c:when test="${!empty QueryString&&empty productList }">
+									<p style="font-size: 30px;">
+										查無商品內容包含<span style="color: green; font-size: 30px;">${QueryString}</span>的商品。
+									</p>
+								</c:when>
+								<c:otherwise></c:otherwise>
+							</c:choose>
 						</div>
 						<c:forEach varStatus="stVar" var="productBean" items="${productList}">
 							<c:if test="${stVar.index%3==0}">
@@ -362,7 +344,6 @@ $(document).ready(function() {
 												<span class="price per-price">$${productBean.pPrice}<br></span>
 											</div>
 										</div>
-										<!-- 										<p>這邊要放商品簡介文字</p> -->
 										<hr>
 										<p class="bottom-area d-flex">
 											<a class="btn btn-outline-info" href="<c:url value='/ProductSingle/${productBean.pId}'/>">詳細資訊</a>
@@ -380,7 +361,7 @@ $(document).ready(function() {
 						<c:if test="${pageNo>1}">
 							<a class="PageButton" href="<c:url value='/${MappingPath}/${pageNo-1}'/>"> 上一頁</a>
 						</c:if>
-						<c:if test="${pageNo!=totalPages}">
+						<c:if test="${pageNo!=totalPages&&!empty productList}">
 							<a class="PageButton" href="<c:url value='/${MappingPath}/${pageNo+1}'/>"> 下一頁</a>
 						</c:if>
 					</div>
@@ -452,21 +433,6 @@ $(document).ready(function() {
 					</div>
 				</div>
 			</div>
-			<!-- 			<div class="row"> -->
-			<!-- 				<div class="col-md-12 text-center"> -->
-
-			<!-- 					<p> -->
-			<!-- 						Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-			<!-- 						Copyright &copy; -->
-			<!-- 						<script> -->
-			<!--  							document.write(new Date().getFullYear()); -->
-			<!-- 						</script> -->
-			<!-- 						All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> -->
-			<!-- 						by <a href="https://colorlib.com" target="_blank">Colorlib</a> -->
-			<!-- 						Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-			<!-- 					</p> -->
-			<!-- 				</div> -->
-			<!-- 			</div> -->
 		</div>
 	</footer>
 

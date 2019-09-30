@@ -160,7 +160,7 @@ body {
 		</button>
 		<div class="navbar-collapse collapse" id="collapsingNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link" style="margin-left:470px"
+				<li class="nav-item active"><a class="nav-link" style="margin-left:520px"
 					href="<c:url value='/'/>">旅遊趣<span class="sr-only"></span></a></li>
 			</ul>
 

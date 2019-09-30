@@ -75,6 +75,7 @@ public class ProductController {
 		mav.addObject("orderItem", oi);
 		session.setAttribute("pageNo", pageNo);
 		session.setAttribute("MappingPath", "shop");
+		session.removeAttribute("QueryString");
 		return mav;
 	}
 
