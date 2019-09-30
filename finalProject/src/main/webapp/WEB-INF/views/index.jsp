@@ -85,10 +85,11 @@ div#shoppingCartMenu {
 					<c:if test="${empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
 						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
-						<li class="nav-item"><a href="<c:url value='/AddMemberDB'/>" class="nav-link">新增會員DB</a></li>
-						<li class="nav-item"><a href="<c:url value='/AddReviewDB'/>" class="nav-link">新增評價DB</a></li>
-						<li class="nav-item"><a href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li>
-						<li class="nav-item"><a href="<c:url value='/AddOrderDB'/>" class="nav-link">新增訂單DB</a></li>
+							<li class="nav-item"><a href="<c:url value='/ForumIndex'/>" class="nav-link">討論區</a></li>
+<%-- 						<li class="nav-item"><a href="<c:url value='/AddMemberDB'/>" class="nav-link">新增會員DB</a></li> --%>
+<%-- 						<li class="nav-item"><a href="<c:url value='/AddReviewDB'/>" class="nav-link">新增評價DB</a></li> --%>
+<%-- 						<li class="nav-item"><a href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li> --%>
+<%-- 						<li class="nav-item"><a href="<c:url value='/AddOrderDB'/>" class="nav-link">新增訂單DB</a></li> --%>
 					</c:if>
 					<c:if test="${!empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>

@@ -82,7 +82,7 @@
 	}(document, 'script', 'weatherwidget-io-js');
 </script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>會員中心</title>
 </head>
 <style>
 .Background {
@@ -133,7 +133,7 @@ body {
 		</button>
 		<div class="navbar-collapse collapse" id="collapsingNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link" style="margin-left:440px"
+				<li class="nav-item active"><a class="nav-link" style="margin-left:480px"
 					href="<c:url value='/'/>">旅遊趣<span class="sr-only"></span></a></li>
 				<!-- <li class="nav-item">
                     <a class="nav-link" href="//www.codeply.com">Link</a>
@@ -205,7 +205,7 @@ body {
 						<img src="<c:url value='/showmPic/${LoginOK.mId}'/>" class="img-circle " title="${LoginOK.mAccount}" style=" width:30px; height:30px; border-radius:50%; "/>
 				</a> <!-- Dropdown - User Information -->
 					<div
-						class="dropdown-menu dropdown-menu-right shadow animated--grow-in" style=" margin-right:193px"
+						class="dropdown-menu dropdown-menu-right shadow animated--grow-in" style=" margin-right:510px"
 						aria-labelledby="userDropdown">
 						<a class="dropdown-item" href="<c:url value='/UpdateMemberForm'/>">
 							<i class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>
@@ -310,7 +310,7 @@ body {
 					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">
 					<div class="card-deck">
 						<div class="card">
-							<a href="<c:url value='/ProductSingle/30'/>"><img class="card-img-top" src="<c:url value='/img/Roppongi.JPG'/>"
+							<a href="<c:url value='/ProductSingle/18'/>"><img class="card-img-top" src="<c:url value='/img/Roppongi.JPG'/>"
 								href=""></a>
 							<div class="card-body">
 								<h5 class="card-title "></h5>
@@ -319,7 +319,7 @@ body {
 							</div>
 						</div>
 						<div class="card">
-							<a href="<c:url value='/ProductSingle/24'/>">
+							<a href="<c:url value='/ProductSingle/12'/>">
 							<img class="card-img-top " src="<c:url value='/img/Tokyoticket.JPG'/>"
 								href=""></a>
 							<div class="card-body">
@@ -328,7 +328,7 @@ body {
 							</div>
 						</div>
 						<div class="card">
-							<a href="<c:url value='/ProductSingle/56'/>">
+							<a href="<c:url value='/ProductSingle/22'/>">
 							<img class="card-img-top" src="<c:url value='/img/ghiblimuseum.JPG'/>"
 								href=""></a>
 							<div class="card-body">
