@@ -21,13 +21,15 @@ public class ArticleBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer aId;
 	private String aTitle;
-	private String aContent;
-	private String mId;
+	private Integer mId;
 	private String mName;
+	private Integer aDisplay;
+	private String aPreContent;
+	private String aContent;
 	private java.sql.Timestamp aAddTime;
 	private java.sql.Timestamp aEditTime;
 	@OneToMany(mappedBy = "ArticleBean", cascade = CascadeType.ALL)
-	Set<ArticleReplyBean> itemSet = new LinkedHashSet<>();
+	Set<ArticleReplyBean> ReplySet = new LinkedHashSet<>();
 	
 	
 	public Integer getaId() {
@@ -49,23 +51,12 @@ public class ArticleBean implements Serializable {
 		this.aTitle = aTitle;
 	}
 
-
-	public String getaContent() {
-		return aContent;
-	}
-
-
-	public void setaContent(String aContent) {
-		this.aContent = aContent;
-	}
-
-
-	public String getmId() {
+	public Integer getmId() {
 		return mId;
 	}
 
 
-	public void setmId(String mId) {
+	public void setmId(Integer mId) {
 		this.mId = mId;
 	}
 
@@ -100,17 +91,47 @@ public class ArticleBean implements Serializable {
 	}
 
 
-	public Set<ArticleReplyBean> getItemSet() {
-		return itemSet;
+	public Set<ArticleReplyBean> getReplySet() {
+		return ReplySet;
 	}
 
 
-	public void setItemSet(Set<ArticleReplyBean> itemSet) {
-		this.itemSet = itemSet;
+	public void setReplySet(Set<ArticleReplyBean> ReplySet) {
+		this.ReplySet = ReplySet;
 	}
 
 
 	public ArticleBean() {
+	}
+
+
+	public Integer getaDisplay() {
+		return aDisplay;
+	}
+
+
+	public void setaDisplay(Integer aDisplay) {
+		this.aDisplay = aDisplay;
+	}
+
+
+	public String getaPreContent() {
+		return aPreContent;
+	}
+
+
+	public void setaPreContent(String aPreContent) {
+		this.aPreContent = aPreContent;
+	}
+
+
+	public String getaContent() {
+		return aContent;
+	}
+
+
+	public void setaContent(String aContent) {
+		this.aContent = aContent;
 	}
 
 

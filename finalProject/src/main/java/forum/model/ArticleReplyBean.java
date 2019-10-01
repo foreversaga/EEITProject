@@ -18,10 +18,10 @@ public class ArticleReplyBean implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer arId;
-	private String arTitle;
 	private String arContent;
-	private String mId;
+	private Integer mId;
 	private String mName;
+	private Integer arDisplay;
 	private java.sql.Timestamp arAddTime;
 	private java.sql.Timestamp arEditTime;
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -38,17 +38,6 @@ public class ArticleReplyBean implements Serializable{
 		this.arId = arId;
 	}
 
-
-	public String getArTitle() {
-		return arTitle;
-	}
-
-
-	public void setArTitle(String arTitle) {
-		this.arTitle = arTitle;
-	}
-
-
 	public String getArContent() {
 		return arContent;
 	}
@@ -59,12 +48,12 @@ public class ArticleReplyBean implements Serializable{
 	}
 
 
-	public String getmId() {
+	public Integer getmId() {
 		return mId;
 	}
 
 
-	public void setmId(String mId) {
+	public void setmId(Integer mId) {
 		this.mId = mId;
 	}
 
@@ -110,6 +99,16 @@ public class ArticleReplyBean implements Serializable{
 
 
 	public ArticleReplyBean() {
+	}
+
+
+	public Integer getArDisplay() {
+		return arDisplay;
+	}
+
+
+	public void setArDisplay(Integer arDisplay) {
+		this.arDisplay = arDisplay;
 	}
 	
 }

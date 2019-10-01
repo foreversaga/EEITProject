@@ -22,15 +22,6 @@ public class productDaoImpl implements productDao {
 	@Autowired
 	ServletContext context;
 
-	public SessionFactory getFactory() {
-		return factory;
-	}
-
-	@Autowired
-	public void setFactory(SessionFactory factory) {
-		this.factory = factory;
-	}
-
 	public productDaoImpl() {
 	}
 

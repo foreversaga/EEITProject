@@ -120,7 +120,7 @@ public class MemberController {
 	//顯示商品圖片
 		@RequestMapping(value = "/showmPic/{mId}", method = RequestMethod.GET)
 		public ResponseEntity<byte[]> showmPic(HttpSession session, HttpServletResponse resp, @PathVariable Integer mId) {
-			MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
+			MemberBean mb = memberservice.getMember(mId);
 			String filePath = "/WEB-INF/resource/img/NoImage.jpg";
 			String filename = "";
 			int len = 0;
