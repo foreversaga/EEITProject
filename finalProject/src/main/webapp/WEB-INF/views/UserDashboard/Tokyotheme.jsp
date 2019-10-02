@@ -122,6 +122,8 @@ div#shoppingCartMenu {
 							class="nav-link">討論區</a></li>
 					</c:if>
 					<c:if test="${!empty LoginOK}">
+						<li class="nav-item"><a  href="<c:url value='/ForumIndex/1'/>"
+							class="nav-link">討論區</a></li>
 						<li class="nav-item"><a
 							href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
 						<li class="nav-item"><a href="<c:url value='/OrderDetails'/>"
