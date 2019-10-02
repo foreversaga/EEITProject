@@ -80,4 +80,27 @@ public class MainController {
 		return mav;
 	}
 
+	@RequestMapping("/Tokyotheme")
+	public ModelAndView Tokyotheme() {
+		ModelAndView mav = new ModelAndView("UserDashboard/Tokyotheme");
+		List<productBean>list=pService.getAllProductList();
+		mav.addObject("productList", list);
+		return mav;
+	}
+	
+	@RequestMapping("/Kyototheme")
+	public ModelAndView Kyototheme() {
+		ModelAndView mav = new ModelAndView("UserDashboard/Kyototheme");
+		List<productBean>list=pService.getAllProductList();
+		mav.addObject("productList", list);
+		return mav;
+	}
+	
+	@RequestMapping("/Osakatheme")
+	public ModelAndView Osakatheme() {
+		ModelAndView mav = new ModelAndView("UserDashboard/Osakatheme");
+		List<productBean>list=pService.getAllProductList();
+		mav.addObject("productList", list);
+		return mav;
+	}
 }

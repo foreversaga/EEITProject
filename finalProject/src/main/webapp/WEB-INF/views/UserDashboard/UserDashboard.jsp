@@ -80,9 +80,23 @@ function CheckOutButton(){
 			fjs.parentNode.insertBefore(js, fjs);
 		}
 	}(document, 'script', 'weatherwidget-io-js');
+
+	//返回最上層script	
+	$(function(){
+		$('#BackTop').click(function(){ 
+			$('html,body').animate({scrollTop:0}, 333);
+		});
+		$(window).scroll(function() {
+			if ( $(this).scrollTop() > 200 ){
+				$('#BackTop').fadeIn(222);
+			} else {
+				$('#BackTop').stop().fadeOut(222);
+			}
+		}).scroll();
+	});
 </script>
 <meta charset="UTF-8">
-<title>會員中心</title>
+<title>Insert title here</title>
 </head>
 <style>
 .Background {
@@ -111,8 +125,44 @@ function CheckOutButton(){
 body {
 	background: #eee !important;
 }
+
+/*totop返回最上層CSS 40px */
+.toTop-arrow {
+	width: 2.5rem;
+	height: 2.5rem;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	border-radius: 33%;
+	opacity: 0.6;
+	background: #000;
+	cursor: pointer;
+	position:fixed;
+	right: 1rem;
+	bottom: 1rem;
+	display: none;
+}
+.toTop-arrow::before, .toTop-arrow::after {
+	width: 18px;
+	height: 5px;
+	border-radius: 10px;
+	background: #f90;
+	position: absolute;
+	content: "";
+}
+.toTop-arrow::before {
+	transform: rotate(-45deg) translate(0, -50%);
+	left: 0.5rem;
+}
+.toTop-arrow::after {
+	transform: rotate(45deg) translate(0, -50%);
+	right: 0.5rem;
+}
+.toTop-arrow:focus {outline: none;}
+
 </style>
 <body>
+<button type="button" id="BackTop" class="toTop-arrow"></button>
 	<div class="Background">
 		<img src="<c:url value='/img/dashboardbackground.jpg'/>">
 	</div>
@@ -131,7 +181,7 @@ body {
 		</button>
 		<div class="navbar-collapse collapse" id="collapsingNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item active text-align-center" ><a class="nav-link" style="margin-left:480px"
+				<li class="nav-item active text-align-center" ><a class="nav-link" style="margin-left:440px"
 					href="<c:url value='/'/>">旅遊趣<span class="sr-only"></span></a></li>
 				<!-- <li class="nav-item">
                     <a class="nav-link" href="//www.codeply.com">Link</a>
@@ -273,7 +323,7 @@ body {
 					<img src="<c:url value='/img/TravelIcon.png'/>" class="img-fluid" />
 				</div>
 				<span class="lead d-none d-sm-block"
-					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">下一個旅程去邊好？選擇你的目的地並計劃行程吧！</span>
+					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">下一個旅程去哪邊好？選擇你的目的地並計劃行程吧！</span>
 				<center>
 					<button type="button" class="btn btn-warning btn-lg "
 						onclick="location.href=<c:url value='/'/>">返回首頁</button>
@@ -336,8 +386,8 @@ body {
 					style="text-align: center; display: block; font-family: 'Noto Serif TC', serif">
 					<div class="card-deck">
 						<div class="card">
-							<img class="card-img-top" src="<c:url value='/img/Tokyo.JPG'/>"
-								href="">
+							<a href="<c:url value='/Tokyotheme'/>"><img class="card-img-top" src="<c:url value='/img/Tokyo.JPG'/>"
+								href=""></a>
 							<div class="card-body">
 								<h5 class="card-title "></h5>
 								<p class="card-text">全世界最著名的現代大都會，每年有超過一千萬旅客到訪，其新舊並存的風情吸引更多人朝聖。只要一天的時間，就足夠你從最古老的寺院穿越到最摩登的大廈。</p>
@@ -345,16 +395,16 @@ body {
 							</div>
 						</div>
 						<div class="card">
-							<img class="card-img-top " src="<c:url value='/img/Osaka.JPG'/>"
-								href="">
+							<a href="<c:url value='/Osakatheme'/>"><img class="card-img-top " src="<c:url value='/img/Osaka.JPG'/>"
+								href=""></a>
 							<div class="card-body">
 								<h5 class="card-title"></h5>
 								<p class="card-text">作為日本第二大都市，大阪向世界各地的旅客保證，處處都是美食、美景和驚喜！歷史重地大阪城、世界最大水族館──大阪海遊館、高聳入雲的梅田藍天大廈都是必去景點。</p>
 							</div>
 						</div>
 						<div class="card">
-							<img class="card-img-top" src="<c:url value='/img/Kyoto.JPG'/>"
-								href="">
+							<a href="<c:url value='/Kyototheme'/>"><img class="card-img-top" src="<c:url value='/img/Kyoto.JPG'/>"
+								href=""></a>
 							<div class="card-body">
 								<h5 class="card-title"></h5>
 								<p class="card-text">雖然曾歷戰火，京都之美仍然遺世獨立。只要親自走訪，你就會發現京都把日本的「侘寂」美學詮釋得有多淋漓盡致。</p>
