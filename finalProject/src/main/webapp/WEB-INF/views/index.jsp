@@ -90,6 +90,8 @@ div#shoppingCartMenu {
 <%-- 						<li class="nav-item"><a href="<c:url value='/AddReviewDB'/>" class="nav-link">新增評價DB</a></li> --%>
 <%-- 						<li class="nav-item"><a href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li> --%>
 <%-- 						<li class="nav-item"><a href="<c:url value='/AddOrderDB'/>" class="nav-link">新增訂單DB</a></li> --%>
+						<li class="nav-item"><a href="<c:url value='/AddArticleDB'/>" class="nav-link">新增文章DB</a></li>
+							<li class="nav-item"><a href="<c:url value='/AddReplyDB'/>" class="nav-link">新增回覆DB</a></li>
 					</c:if>
 					<c:if test="${!empty LoginOK}">
 						<li class="nav-item"><a href="<c:url value='/ForumIndex/1'/>" class="nav-link">討論區</a></li>

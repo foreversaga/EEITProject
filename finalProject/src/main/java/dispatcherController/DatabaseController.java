@@ -38,4 +38,16 @@ public class DatabaseController {
 		dService.addOrderDB();
 		return "redirect:/";
 	}
+	// 建立文章資料庫
+	@RequestMapping("/AddArticleDB")
+	public String AddArticleDB() {
+		dService.addArticleDB();
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/AddReplyDB")
+	public String AddReplyDB() {
+		dService.addReplyDB();
+		return "redirect:/";
+	}
 }

@@ -197,7 +197,7 @@ function CheckOutButton(){
 					<div class="container mt-5 border">
 						<div class="row">
 							<div class="col-md-3 border">
-								<img style="margin: 6% 0" width="100%" src="<c:url value='/showmPic/${ArticleBean.mId}'/>">
+								<img style="margin: 6% 0;height: 120px;" width="100%" src="<c:url value='/showmPic/${ArticleBean.mId}'/>">
 								<div class="row">
 									<div style="text-align: center;" class="col-md-12">good button</div>
 								</div>

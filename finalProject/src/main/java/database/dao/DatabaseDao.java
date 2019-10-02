@@ -10,4 +10,8 @@ public interface DatabaseDao {
 	
 	public void addOrderDB();
 	
+	public void addArticleDB();
+	
+	public void addReplyDB();
+	
 }

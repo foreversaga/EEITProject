@@ -33,5 +33,14 @@ public class DatabaseServiceImpl implements DatabaseService {
 		dao.addOrderDB();
 	}
 
+	@Override
+	public void addArticleDB() {
+		dao.addArticleDB();
+	}
+
+	@Override
+	public void addReplyDB() {
+		dao.addReplyDB();
+	}
 
 }

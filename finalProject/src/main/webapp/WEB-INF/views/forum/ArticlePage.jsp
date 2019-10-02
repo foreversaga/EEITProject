@@ -247,7 +247,7 @@ function CheckOutButton(){
 		<c:if test="${!empty ReplyList}">
 			<c:forEach varStatus="vs" var="ReplyBean" items="${ReplyList}">
 				<div style="width: 800px;">
-					<div class="container mt-3 border">
+					<div class="container mt-3 mb-3 border">
 						<div class="row">
 							<div class="col-md-2 border">
 								<img style="margin: 6% 0" width="100%" src="<c:url value='/showmPic/${ReplyBean.mId}'/>">
@@ -280,7 +280,7 @@ function CheckOutButton(){
 								<div class="row border-bottom">
 									<div class="col-md-8"></div>
 								</div>
-								<div style="height: 80px;" class="col-md-9">
+								<div style="" class="col-md-9">
 									<p style="font-size: 20px;">${ReplyBean.arContent}</p>
 								</div>
 							</div>

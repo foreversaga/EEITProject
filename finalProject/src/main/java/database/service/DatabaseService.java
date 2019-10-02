@@ -9,5 +9,9 @@ public interface DatabaseService {
 	public void addMemberDB();
 
 	public void addOrderDB();
+	
+	public void addArticleDB();
+	
+	public void addReplyDB();
 
 }

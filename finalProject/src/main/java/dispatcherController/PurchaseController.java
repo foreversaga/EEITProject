@@ -166,8 +166,8 @@ public class PurchaseController {
 				AllInOne all = new AllInOne("");
 				String form = all.aioCheckOut(obj, null);
 				session.setAttribute("form", form);
-//				return "checkout/ECpage";
-				return "redirect:/";
+				return "checkout/ECpage";
+//				return "redirect:/";
 			}
 		} else {
 			session.setAttribute("requestURI", "/ConfirmOrder");

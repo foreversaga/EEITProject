@@ -21,6 +21,8 @@ import cart.model.orderBean;
 import cart.model.orderItemBean;
 import config.SystemUtils;
 import database.dao.DatabaseDao;
+import forum.model.ArticleBean;
+import forum.model.ArticleReplyBean;
 import product.model.productBean;
 import register.model.MemberBean;
 import review.model.reviewBean;
@@ -210,6 +212,85 @@ public class DatabaseDaoImpl implements DatabaseDao {
 				ob.setItemSet(items);
 				session.save(ob);
 				System.out.println("新增一筆訂單");
+			}
+			// 印出資料新增成功的訊息
+			System.out.println("評價資料新增成功");
+		} catch (Exception e) {
+			System.err.println("新建表格時發生例外: " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void addArticleDB() {
+		Session session = factory.getCurrentSession();
+		String line = "";
+		String UTF8_BOM = "\uFEFF";
+		String datPath = context.getRealPath("/WEB-INF/resource/data/article.dat");
+		File file = new File(datPath);
+		try (FileInputStream fis = new FileInputStream(file);
+				InputStreamReader isr = new InputStreamReader(fis, "UTF8");
+				BufferedReader br = new BufferedReader(isr);) {
+			while ((line = br.readLine()) != null) {
+				System.out.println("line=" + line);
+				// 去除 UTF8_BOM: \uFEFF
+				if (line.startsWith(UTF8_BOM)) {
+					line = line.substring(1);
+				}
+				String[] token = line.split("\\|");
+				ArticleBean ab = new ArticleBean();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+				Date dateRange = sdf.parse(token[0]);
+				java.sql.Timestamp addtime = new java.sql.Timestamp(dateRange.getTime());
+				ab.setaAddTime(addtime);
+				ab.setaDisplay(1);
+				ab.setaTitle(token[1]);
+				ab.setmId(Integer.parseInt(token[2]));
+				ab.setmName(token[3]);
+				ab.setaContent(token[4]);
+				ab.setaPreContent(token[5]);
+				session.save(ab);
+				System.out.println("新增一筆文章");
+			}
+			// 印出資料新增成功的訊息
+			System.out.println("評價資料新增成功");
+		} catch (Exception e) {
+			System.err.println("新建表格時發生例外: " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void addReplyDB() {
+		Session session = factory.getCurrentSession();
+		String line = "";
+		String UTF8_BOM = "\uFEFF";
+		String datPath = context.getRealPath("/WEB-INF/resource/data/reply.dat");
+		File file = new File(datPath);
+		try (FileInputStream fis = new FileInputStream(file);
+				InputStreamReader isr = new InputStreamReader(fis, "UTF8");
+				BufferedReader br = new BufferedReader(isr);) {
+			while ((line = br.readLine()) != null) {
+				System.out.println("line=" + line);
+				// 去除 UTF8_BOM: \uFEFF
+				if (line.startsWith(UTF8_BOM)) {
+					line = line.substring(1);
+				}
+				String[] token = line.split("\\|");
+				ArticleReplyBean arb = new ArticleReplyBean();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+				Date dateRange = sdf.parse(token[0]);
+				java.sql.Timestamp addtime = new java.sql.Timestamp(dateRange.getTime());
+				arb.setArAddTime(addtime);
+				arb.setArDisplay(1);
+				arb.setmId(Integer.parseInt(token[1]));
+				String hql="FROM ArticleBean ab WHERE ab.aId = :aId";
+				ArticleBean ab= (ArticleBean) session.createQuery(hql).setParameter("aId", Integer.parseInt(token[2])).uniqueResult();
+				arb.setArticleBean(ab);
+				arb.setmName(token[3]);
+				arb.setArContent(token[4]);
+				session.save(arb);
+				System.out.println("新增一筆回覆");
 			}
 			// 印出資料新增成功的訊息
 			System.out.println("評價資料新增成功");
