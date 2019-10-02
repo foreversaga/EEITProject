@@ -46,6 +46,8 @@
 <script src="http://malsup.github.io/jquery.form.js"></script>
 <script
 	src="<c:url value='/css/TableCss/vendor/perfect-scrollbar/perfect-scrollbar.min.js'/>"></script>
+    <!--引用dataTables.js-->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script>
 	$(document).ready(function() {
 
@@ -113,6 +115,20 @@ function CheckOutButton(){
 		$("#clicked_id").fadeIn();
 
 	};
+	//search bar功能
+	 $(function () {
+
+         $("#myDataTalbe").DataTable({
+             searching: true, //關閉filter功能
+             "lengthChange": false,
+             "bPaginate": false,
+             "info":	false,
+             columnDefs: [{
+                 targets: [3],
+                 orderable: false,                 
+             }]
+         });
+     });
 </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -160,6 +176,14 @@ body {
 .AutoNewlineforView {
 	word-break: break-all; /*必須*/
 }
+/* datatable searchbar往右移 */
+.dataTables_wrapper .dataTables_length {
+float: right;
+}
+.dataTables_wrapper .dataTables_filter {
+float: right;
+text-align: left;
+}
 </style>
 <body>
 	<div class="Background">
@@ -181,7 +205,7 @@ body {
 		</button>
 		<div class="navbar-collapse collapse" id="collapsingNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link" style="margin-left:520px"
+				<li class="nav-item active"><a class="nav-link" style="margin-left:470px"
 					href="<c:url value='/'/>">旅遊趣<span class="sr-only"></span></a></li>
 			</ul>
 
@@ -337,9 +361,9 @@ body {
 															</table>
 														</div>
 
-														<div class="container-fruid js-pscroll  scrollerbar"
+														<div class="container-fruid js-pscroll  scrollerbar " 
 															style="text-align: center;">
-															<table>
+															<table  id="myDataTalbe"  >
 																<tbody>
 																	<c:forEach varStatus="vs" var="productBean"
 																		items="${productList}">

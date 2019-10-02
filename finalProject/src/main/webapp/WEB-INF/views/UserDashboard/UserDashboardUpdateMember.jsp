@@ -84,7 +84,7 @@ function CheckOutButton(){
 	}(document, 'script', 'weatherwidget-io-js');
 </script>
 <meta charset="UTF-8">
-<title>會員中心</title>
+<title>Insert title here</title>
 </head>
 <style>
 .Background {
@@ -133,7 +133,7 @@ body {
 		</button>
 		<div class="navbar-collapse collapse" id="collapsingNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link"style="margin-left:480px"
+				<li class="nav-item active"><a class="nav-link"style="margin-left:440px"
 					href="<c:url value='/'/>">旅遊趣<span class="sr-only"></span></a></li>
 				<!-- <li class="nav-item">
                     <a class="nav-link" href="//www.codeply.com">Link</a>
@@ -275,7 +275,7 @@ body {
 			<div class="container col-md-9 p-0 "style="margin-top:150px">
 				<div class="container flex-column">
 
-					<div class="  pt-5">
+					<div class="  pt-5 mr-1">
 						<div class="card ">
 							<form:form method="POST" modelAttribute="MemberBean">
 								<div class="card-header card-header-primary">
