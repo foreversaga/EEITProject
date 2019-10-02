@@ -32,6 +32,15 @@ function CheckOutButton(){
 	}
 };
 </script>
+<style>
+*{
+font-family: Microsoft JhengHei;
+}
+a.thumb:hover{
+text-decoration: none;
+}
+
+</style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -210,8 +219,29 @@ function CheckOutButton(){
 				<div class="row">
 					<div class="col-md-3 border">
 						<img style="margin: 6% 0" width="100%" src="<c:url value='/showmPic/${ArticleBean.mId}'/>">
-						<div class="row">
-							<div style="text-align: center;" class="col-md-12">good button</div>
+						<div class="row mb-3">
+							<div style="text-align: center;" class="col-md-6">
+								<form:form method="post" modelAttribute="ThumbBean"
+									action="${pageContext.request.contextPath}/AddThumb/0" name="form1">
+									<form:input type="hidden" path="mId" value="${LoginOK.mId}" />
+									<form:input type="hidden" path="aId" value="${ArticleBean.aId}" />
+									<a class="thumb" href="javascript:document.form1.submit()"> <img width="26%"
+										src="<c:url value='/img/thumb.png'/>">
+									</a>
+									<span>${like}</span>
+								</form:form>
+							</div>
+							<div style="text-align: center;" class="col-md-6">
+								<form:form method="post" modelAttribute="ThumbBean"
+									action="${pageContext.request.contextPath}/AddThumb/1" name="form2">
+									<form:input type="hidden" path="mId" value="${LoginOK.mId}" />
+									<form:input type="hidden" path="aId" value="${ArticleBean.aId}" />
+									<a class="thumb" href="javascript:document.form2.submit()"> <img width="18%"
+										src="<c:url value='/img/dislike.jpg'/>">
+									</a>
+									<span>${dislike}</span>
+								</form:form>
+							</div>
 						</div>
 					</div>
 					<div class="col-md-9">
@@ -235,9 +265,9 @@ function CheckOutButton(){
 							</div>
 						</div>
 						<div class="row border-bottom">
-							<div class="col-md-9"></div>
+							<div class="col-md-12"></div>
 						</div>
-						<div style="height: 80px;" class="col-md-9">
+						<div style="height: 80px;" class="col-md-12">
 							<p style="font-size: 20px;">${ArticleBean.aContent}</p>
 						</div>
 					</div>
@@ -267,7 +297,8 @@ function CheckOutButton(){
 											<c:if test="${LoginOK.mId==ReplyBean.mId}">
 												<div class="col-md-4">
 													<button class="btn btn-danger" type="button" data-toggle="collapse"
-														data-target="#EditReply${ReplyBean.arId}" aria-expanded="false" aria-controls="EditReply${ReplyBean.arId}">修改文章</button>
+														data-target="#EditReply${ReplyBean.arId}" aria-expanded="false"
+														aria-controls="EditReply${ReplyBean.arId}">修改回覆</button>
 												</div>
 											</c:if>
 										</div>
@@ -297,7 +328,8 @@ function CheckOutButton(){
 									<div class="form-group row">
 										<label for="arContent" class="col-sm-2 col-form-label">內文</label>
 										<div class="col-sm-10">
-											<textarea rows="5" class="form-control" id="arContent" name="arContent" placeholder="文章內容">${ReplyBean.arContent}</textarea>
+											<textarea rows="5" class="form-control" id="arContent" name="arContent"
+												placeholder="文章內容">${ReplyBean.arContent}</textarea>
 										</div>
 									</div>
 									<div class="form-group row">

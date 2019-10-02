@@ -102,6 +102,9 @@
 			});
 </script>
 <style type="text/css">
+*{
+font-family: Microsoft JhengHei;
+}
 div.dropdown-menu {
 	width: 300px;
 	height: 423px;

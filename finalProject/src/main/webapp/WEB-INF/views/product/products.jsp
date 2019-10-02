@@ -81,6 +81,10 @@ $(document).ready(function() {
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/style.css'/>">
 
 <style type="text/css">
+* {
+	font-family: Microsoft JhengHei;
+}
+
 .PageButtonDiv {
 	margin: 10px;
 }
@@ -111,7 +115,7 @@ $(document).ready(function() {
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="<c:url value='/'/>">旅遊趣</a>
+			<a style="font-size:30px;" class="navbar-brand" href="<c:url value='/'/>">旅遊趣</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
@@ -119,19 +123,20 @@ $(document).ready(function() {
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="<c:url value='/'/>" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
+					<li class="nav-item active"><a style="font-size:20px;" href="<c:url value='/'/>" class="nav-link">Home</a></li>
+					<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
 					<c:if test="${empty LoginOK}">
-						<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
-						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
+						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/login'/>" class="nav-link">Login</a></li>
+						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
+						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li>
 					</c:if>
 					<c:if test="${!empty LoginOK}">
-						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
-						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
+						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
+						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 					</c:if>
 				</ul>
 				<ul class="navbar-nav mr-right">
-					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#ChangePage"
+					<li class="nav-item dropdown"><a style="font-size:20px;" class="nav-link dropdown-toggle" href="#ChangePage"
 						id="navbarDropdown" role="button" data-toggle="modal" aria-haspopup="true"
 						aria-expanded="false" data-target="#shoppingCartMenu">購物車</a></li>
 				</ul>
@@ -161,7 +166,7 @@ $(document).ready(function() {
 				</div>
 				<div class="modal-body">
 					<c:if test="${empty shoppingCart.content }">
-						<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
+						<p style="font-weight:8;font-size: 20px; text-align: center; margin-top: 5%">購物車內已無商品</p>
 					</c:if>
 					<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
 						<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;"
@@ -169,7 +174,7 @@ $(document).ready(function() {
 						<p style="line-height: 10px">${cart.value.pName}</p>
 						<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
 						<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button"
-							onclick="DeleteItem(this.id)" value="刪除" /> </span>
+								onclick="DeleteItem(this.id)" value="刪除" /> </span>
 						<c:choose>
 							<c:when test="${vs.last}">
 							</c:when>
@@ -258,9 +263,9 @@ $(document).ready(function() {
 										class="img img-2 d-flex justify-content-center align-items-center"
 										style="background-image: url(<c:url value='/showPic/${productBean.pId}'/>);"> </a>
 									<div class="text p-3">
-										<div class="d-flex" style="height: 100px;">
+										<div class="d-flex" style="height: 120px;">
 											<div class="one">
-												<h3 style="height: 70px;">
+												<h3 style="height: 100px;">
 													<a href="<c:url value='/ProductSingle/${productBean.pId}'/>">${productBean.pName}</a>
 												</h3>
 												<p class="rate">

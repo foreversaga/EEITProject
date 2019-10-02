@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import cart.model.orderBean;
-import cart.model.orderItem;
 import checkout.service.orderService;
+import forum.model.ArticleBean;
+import forum.service.ArticleService;
 import product.model.productBean;
 import product.service.productService;
 import register.model.MemberBean;
@@ -29,14 +30,18 @@ public class MainController {
 	orderService oService;
 	@Autowired
 	ReviewService rService;
+	@Autowired
+	ArticleService aService;
 
 	@RequestMapping("/")
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("index");
 		List<productBean> list1 = pService.getPopularFive();
-		List<reviewBean> list2 = rService.getIndexReview(5);
+		List<reviewBean> list2 = rService.getIndexReview(3);
+		List<ArticleBean> list3=aService.getIndexArticle(4);
 		mav.addObject("TopFiveList", list1);
 		mav.addObject("reviewList", list2);
+		mav.addObject("ArticleList", list3);
 		return mav;
 	}
 

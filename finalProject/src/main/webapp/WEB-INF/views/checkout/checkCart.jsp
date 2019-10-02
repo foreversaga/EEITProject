@@ -26,11 +26,14 @@
 	};
 </script>
 <style>
+*{
+font-family: Microsoft JhengHei;
+}
 </style>
 </head>
 <body>
 		<c:if test="${empty shoppingCart.content }">
-			<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
+			<p style="font-weight:8;font-size:20px;text-align: center; margin-top: 5%">購物車內已無商品</p>
 		</c:if>
 		<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
 			<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;"

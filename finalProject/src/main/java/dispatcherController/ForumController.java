@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import forum.model.ArticleBean;
 import forum.model.ArticleReplyBean;
+import forum.model.ThumbBean;
 import forum.service.ArticleService;
 import register.model.MemberBean;
 
@@ -79,9 +80,15 @@ public class ForumController {
 	public String ShowArticle(@PathVariable Integer aId, HttpSession session, Model model) {
 		ArticleBean ab = aService.getArticle(aId);
 		ArticleReplyBean arb = new ArticleReplyBean();
+		ThumbBean tb = new ThumbBean();
 		List<ArticleReplyBean> list = aService.getArticleReply(aId);
+		String like = aService.getThumbCount(aId, 0).toString();
+		String dislike = aService.getThumbCount(aId, 1).toString();
 		model.addAttribute("ReplyList", list);
+		model.addAttribute("like", like);
+		model.addAttribute("dislike", dislike);
 		model.addAttribute("ArticleBean", ab);
+		model.addAttribute("ThumbBean", tb);
 		model.addAttribute("ArticleReplyBean", arb);
 		return "forum/ArticlePage";
 	}
@@ -167,5 +174,29 @@ public class ForumController {
 		String aId = (String) request.getParameter("aId");
 		sb.append("redirect:/ShowArticle/").append(aId);
 		return sb.toString();
+	}
+
+	@RequestMapping("/AddThumb/{thumb}")
+	public String AddThumb(@PathVariable Integer thumb, @ModelAttribute("ThumbBean") ThumbBean tb,
+			HttpSession session) {
+		Integer aId = tb.getaId();
+		ThumbBean checkTb = aService.getThumb(aId, tb.getmId());
+		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
+		StringBuilder sb = new StringBuilder();
+		if (mb != null) {
+			if (checkTb != null) {
+				checkTb.setAtThumb(thumb);
+				aService.AddThumb(checkTb);
+			} else {
+				tb.setAtThumb(thumb);
+				aService.AddThumb(tb);
+			}
+			sb.append("redirect:/ShowArticle/").append(aId);
+			return sb.toString();
+		} else {
+			sb.append("/ShowArticle/").append(aId);
+			session.setAttribute("requestURI", sb.toString());
+			return "redirect:/login";
+		}
 	}
 }

@@ -20,42 +20,43 @@ public class ThumbBean implements Serializable {
 	private Integer aId;
 	private Integer arId;
 	private Integer atThumb;
-	private Integer atNotThumb;
-	
-	
+
 	public Integer getAtId() {
 		return atId;
 	}
+
 	public void setAtId(Integer atId) {
 		this.atId = atId;
 	}
+
 	public Integer getmId() {
 		return mId;
 	}
+
 	public void setmId(Integer mId) {
 		this.mId = mId;
 	}
+
 	public Integer getaId() {
 		return aId;
 	}
+
 	public void setaId(Integer aId) {
 		this.aId = aId;
 	}
+
 	public Integer getAtThumb() {
 		return atThumb;
 	}
+
 	public void setAtThumb(Integer atThumb) {
 		this.atThumb = atThumb;
 	}
-	public Integer getAtNotThumb() {
-		return atNotThumb;
-	}
-	public void setAtNotThumb(Integer atNotThumb) {
-		this.atNotThumb = atNotThumb;
-	}
+
 	public Integer getArId() {
 		return arId;
 	}
+
 	public void setArId(Integer arId) {
 		this.arId = arId;
 	}
@@ -63,5 +64,5 @@ public class ThumbBean implements Serializable {
 	public ThumbBean() {
 
 	}
-	
+
 }

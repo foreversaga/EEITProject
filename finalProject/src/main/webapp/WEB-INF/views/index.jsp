@@ -54,6 +54,10 @@
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/icomoon.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/style.css'/>">
 <style type="text/css">
+* {
+	font-family: Microsoft JhengHei;
+}
+
 div.dropdown-menu {
 	/* 	width: 300px; */
 	/* 	height: 423px; */
@@ -72,7 +76,7 @@ div#shoppingCartMenu {
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="<c:url value='/'/>">旅遊趣</a>
+			<a style="font-size: 30px;" class="navbar-brand" href="<c:url value='/'/>">旅遊趣</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
 				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
@@ -80,25 +84,37 @@ div#shoppingCartMenu {
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="<c:url value='/'/>" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="<c:url value='/shop/1'/>" class="nav-link">Products</a></li>
+					<li class="nav-item active"><a style="font-size: 20px;" href="<c:url value='/'/>"
+						class="nav-link">Home</a></li>
+					<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/shop/1'/>"
+						class="nav-link">Products</a></li>
 					<c:if test="${empty LoginOK}">
-						<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
-						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
-							<li class="nav-item"><a href="<c:url value='/ForumIndex/1'/>" class="nav-link">討論區</a></li>
-<%-- 						<li class="nav-item"><a href="<c:url value='/AddMemberDB'/>" class="nav-link">新增會員DB</a></li> --%>
-<%-- 						<li class="nav-item"><a href="<c:url value='/AddReviewDB'/>" class="nav-link">新增評價DB</a></li> --%>
-<%-- 						<li class="nav-item"><a href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li> --%>
-<%-- 						<li class="nav-item"><a href="<c:url value='/AddOrderDB'/>" class="nav-link">新增訂單DB</a></li> --%>
-						<li class="nav-item"><a href="<c:url value='/AddArticleDB'/>" class="nav-link">新增文章DB</a></li>
-							<li class="nav-item"><a href="<c:url value='/AddReplyDB'/>" class="nav-link">新增回覆DB</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/login'/>"
+							class="nav-link">Login</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/register/add'/>"
+							class="nav-link">Register</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/ForumIndex/1'/>"
+							class="nav-link">討論區</a></li>
+						<%-- 						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/AddMemberDB'/>" class="nav-link">新增會員DB</a></li> --%>
+						<%-- 						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/AddReviewDB'/>" class="nav-link">新增評價DB</a></li> --%>
+						<%-- 						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li> --%>
+						<%-- 						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/AddOrderDB'/>" class="nav-link">新增訂單DB</a></li> --%>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/AddArticleDB'/>"
+							class="nav-link">新增文章DB</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/AddReplyDB'/>"
+							class="nav-link">新增回覆DB</a></li>
 					</c:if>
 					<c:if test="${!empty LoginOK}">
-						<li class="nav-item"><a href="<c:url value='/ForumIndex/1'/>" class="nav-link">討論區</a></li>
-						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
-						<li class="nav-item"><a href="<c:url value='/OrderDetails'/>" class="nav-link">查詢訂單</a></li>
-						<li class="nav-item"><a href="<c:url value='/Dashboard'/>" class="nav-link">後臺系統</a></li>
-						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/ForumIndex/1'/>"
+							class="nav-link">討論區</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/UserDashboard'/>"
+							class="nav-link">會員中心</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/OrderDetails'/>"
+							class="nav-link">查詢訂單</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/Dashboard'/>"
+							class="nav-link">後臺系統</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/logout'/>"
+							class="nav-link">Logout</a></li>
 					</c:if>
 				</ul>
 				<!-- 				<ul class="navbar-nav mr-right"> -->
@@ -159,10 +175,12 @@ div#shoppingCartMenu {
 						<form action="<c:url value='/QueryProduct/1'/>" method="get" class="d-block d-flex">
 							<div class="fields d-block d-flex">
 								<div class="textfield-search one-third">
-									<input name="QueryString" type="text" class="form-control" placeholder="請輸入關鍵字">
+									<input style="font-size: 20px;" name="QueryString" type="text" class="form-control"
+										placeholder="請輸入關鍵字">
 								</div>
 							</div>
-							<input type="submit" class="search-submit btn btn-primary" value="搜尋">
+							<input style="font-size: 20px;" type="submit" class="search-submit btn btn-primary"
+								value="搜尋">
 						</form>
 					</div>
 				</div>
@@ -228,115 +246,7 @@ div#shoppingCartMenu {
 			</div>
 		</div>
 	</section>
-
-	<section class="ftco-section ftco-destination">
-		<div class="container">
-			<div class="row justify-content-start mb-5 pb-3">
-				<div class="col-md-7 heading-section ftco-animate">
-					<span class="subheading">Featured</span>
-					<h2 class="mb-4">
-						<strong>Featured</strong> Destination
-					</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="destination-slider owl-carousel ftco-animate">
-						<div class="item">
-							<div class="destination">
-								<a href="#" class="img d-flex justify-content-center align-items-center"
-									style="background-image: url(<c:url value='/css/RWDcss/images/destination-1.jpg'/>);">
-									<!-- 									<div class="icon d-flex justify-content-center align-items-center"> --> <!-- 										<span class="icon-search2"></span> -->
-									<!-- 									</div> -->
-								</a>
-								<div class="text p-3">
-									<h3>
-										<a href="#">Paris, Italy</a>
-									</h3>
-									<span class="listing">15 Listing</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="destination">
-								<a href="#" class="img d-flex justify-content-center align-items-center"
-									style="background-image: url(<c:url value='/css/RWDcss/images/destination-2.jpg'/>);">
-									<!-- 									<div class="icon d-flex justify-content-center align-items-center"> --> <!-- 										<span class="icon-search2"></span> -->
-									<!-- 									</div> -->
-								</a>
-								<div class="text p-3">
-									<h3>
-										<a href="#">San Francisco, USA</a>
-									</h3>
-									<span class="listing">20 Listing</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="destination">
-								<a href="#" class="img d-flex justify-content-center align-items-center"
-									style="background-image: url(<c:url value='/css/RWDcss/images/destination-3.jpg'/>;"> <!-- 									<div class="icon d-flex justify-content-center align-items-center"> -->
-									<!-- 										<span class="icon-search2"></span> --> <!-- 									</div> -->
-								</a>
-								<div class="text p-3">
-									<h3>
-										<a href="#">Lodon, UK</a>
-									</h3>
-									<span class="listing">10 Listing</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="destination">
-								<a href="#" class="img d-flex justify-content-center align-items-center"
-									style="background-image: url(<c:url value='/css/RWDcss/images/destination-4.jpg'/>);">
-									<!-- 									<div class="icon d-flex justify-content-center align-items-center"> --> <!-- 										<span class="icon-search2"></span> -->
-									<!-- 									</div> -->
-								</a>
-								<div class="text p-3">
-									<h3>
-										<a href="#">Lion, Singapore</a>
-									</h3>
-									<span class="listing">3 Listing</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="destination">
-								<a href="#" class="img d-flex justify-content-center align-items-center"
-									style="background-image: url(<c:url value='/css/RWDcss/images/destination-5.jpg'/>);">
-									<!-- 									<div class="icon d-flex justify-content-center align-items-center"> --> <!-- 										<span class="icon-search2"></span> -->
-									<!-- 									</div> -->
-								</a>
-								<div class="text p-3">
-									<h3>
-										<a href="#">Australia</a>
-									</h3>
-									<span class="listing">3 Listing</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="destination">
-								<a href="#" class="img d-flex justify-content-center align-items-center"
-									style="background-image: url(<c:url value='/css/RWDcss/images/destination-6.jpg'/>);">
-									<!-- 									<div class="icon d-flex justify-content-center align-items-center"> --> <!-- 										<span class="icon-search2"></span> -->
-									<!-- 									</div> -->
-								</a>
-								<div class="text p-3">
-									<h3>
-										<a href="#">Paris, Italy</a>
-									</h3>
-									<span class="listing">3 Listing</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section class="ftco-section bg-light">
+	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-start mb-5 pb-3">
 				<div class="col-md-7 heading-section ftco-animate">
@@ -421,7 +331,7 @@ div#shoppingCartMenu {
 		</div>
 	</section>
 
-	<section class="ftco-section testimony-section">
+	<section class="ftco-section testimony-section bg-light">
 		<div class="container">
 			<div class="row justify-content-start">
 				<div class="col-md-5 heading-section ftco-animate">
@@ -431,7 +341,7 @@ div#shoppingCartMenu {
 					</h2>
 					<h5>每一天，我們都在幫助旅客發掘全球最棒的景點、行程與最難忘的旅遊體驗！</h5>
 					<h5>你可以從所有熱門的目的地中開始探索，並用最優惠的價格預訂任何行程與服務：
-					從容不迫地搭上香港機場快綫、走進東京迪士尼滿足你的童趣之心，或在峇里島探索靜謐的海底世界⋯，專屬於你的旅程就此展開！</h5>
+						從容不迫地搭上香港機場快綫、走進東京迪士尼滿足你的童趣之心，或在峇里島探索靜謐的海底世界⋯，專屬於你的旅程就此展開！</h5>
 
 					<!-- 					<p> -->
 					<!-- 						<a href="#" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3">Read more</a> -->
@@ -470,25 +380,26 @@ div#shoppingCartMenu {
 		</div>
 	</section>
 
-	<section class="ftco-section bg-light">
+	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-start mb-5 pb-3">
 				<div class="col-md-7 heading-section ftco-animate">
-					<span class="subheading">Recent Blog</span>
+					<span class="subheading">最新文章</span>
 					<h2>
-						<strong>Tips</strong> &amp; Articles
+						<strong>分享</strong> 你的旅遊心得
 					</h2>
 				</div>
 			</div>
 			<div class="row d-flex">
+				<c:forEach varStatus="vs" var="ArticleBean" items="${ArticleList}">
 				<div class="col-md-3 d-flex ftco-animate">
 					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20"
-							style="background-image: url(<c:url value='/css/RWDcss/images/image_1.jpg'/>);"> </a>
+						<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>" class="block-20"
+							style="background-image: url(<c:url value='/showmPic/${ArticleBean.mId}'/>);"> </a>
 						<div class="text p-4 d-block">
-							<span class="tag">Tips, Travel</span>
+							<span class="tag">${ArticleBean.mName}</span>
 							<h3 class="heading mt-3">
-								<a href="#">8 Best homestay in Philippines that you don't miss out</a>
+								<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>">${ArticleBean.aContent}</a>
 							</h3>
 							<div class="meta mb-3">
 								<div>
@@ -504,75 +415,7 @@ div#shoppingCartMenu {
 						</div>
 					</div>
 				</div>
-				<div class="col-md-3 d-flex ftco-animate">
-					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20"
-							style="background-image: url(<c:url value='/css/RWDcss/images/image_2.jpg'/>);"> </a>
-						<div class="text p-4">
-							<span class="tag">Culture</span>
-							<h3 class="heading mt-3">
-								<a href="#">Even the all-powerful Pointing has no control about the blind texts</a>
-							</h3>
-							<div class="meta mb-3">
-								<div>
-									<a href="#">August 12, 2018</a>
-								</div>
-								<div>
-									<a href="#">Admin</a>
-								</div>
-								<div>
-									<a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 d-flex ftco-animate">
-					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20"
-							style="background-image: url(<c:url value='/css/RWDcss/images/image_3.jpg'/>);"> </a>
-						<div class="text p-4">
-							<span class="tag">Tips, Travel</span>
-							<h3 class="heading mt-3">
-								<a href="#">Even the all-powerful Pointing has no control about the blind texts</a>
-							</h3>
-							<div class="meta mb-3">
-								<div>
-									<a href="#">August 12, 2018</a>
-								</div>
-								<div>
-									<a href="#">Admin</a>
-								</div>
-								<div>
-									<a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 d-flex ftco-animate">
-					<div class="blog-entry align-self-stretch">
-						<a href="blog-single.html" class="block-20"
-							style="background-image: url(<c:url value='/css/RWDcss/images/image_4.jpg'/>);"> </a>
-						<div class="text p-4">
-							<span class="tag">Tips, Travel</span>
-							<h3 class="heading mt-3">
-								<a href="#">Even the all-powerful Pointing has no control about the blind texts</a>
-							</h3>
-							<div class="meta mb-3">
-								<div>
-									<a href="#">August 12, 2018</a>
-								</div>
-								<div>
-									<a href="#">Admin</a>
-								</div>
-								<div>
-									<a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+</c:forEach>
 			</div>
 		</div>
 	</section>

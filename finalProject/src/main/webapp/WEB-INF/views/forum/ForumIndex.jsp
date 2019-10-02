@@ -58,6 +58,9 @@ function CheckOutButton(){
 // };
 </script>
 <style>
+*{
+font-family: Microsoft JhengHei;
+}
 .PageButton {
 	color: #20bf6b !important;
 	text-transform: uppercase;

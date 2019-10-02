@@ -58,6 +58,9 @@
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/style.css'/>">
 
 <style type="text/css">
+*{
+font-family: Microsoft JhengHei;
+}
 p{
 font-size: 25px;
 }

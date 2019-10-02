@@ -11,6 +11,8 @@ import config.GlobalService;
 import forum.dao.ArticleDao;
 import forum.model.ArticleBean;
 import forum.model.ArticleReplyBean;
+import forum.model.ThumbBean;
+import review.model.reviewBean;
 
 @Repository
 public class ArticleDaoImpl implements ArticleDao {
@@ -94,6 +96,39 @@ public class ArticleDaoImpl implements ArticleDao {
 		Session session = factory.getCurrentSession();
 		session.update(arb);
 
+	}
+
+	@Override
+	public void AddThumb(ThumbBean tb) {
+		Session session = factory.getCurrentSession();
+		session.saveOrUpdate(tb);
+	}
+
+	@Override
+	public ThumbBean getThumb(Integer aId, Integer mId) {
+		ThumbBean tb = null;
+		Session session = factory.getCurrentSession();
+		String hql = "FROM ThumbBean tb WHERE tb.aId =:aId and tb.mId =:mId";
+		tb = (ThumbBean) session.createQuery(hql).setParameter("aId", aId).setParameter("mId", mId).uniqueResult();
+		return tb;
+	}
+
+	@Override
+	public Long getThumbCount(Integer aId, Integer Thumb) {
+		Session session = factory.getCurrentSession();
+		String hql = "SELECT COUNT(*) FROM ThumbBean tb WHERE tb.aId =:aId and tb.atThumb =:thumb";
+		Long n = (Long) session.createQuery(hql).setParameter("aId", aId).setParameter("thumb", Thumb).uniqueResult();
+		return n;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ArticleBean> getIndexArticle(Integer num) {
+		Session session = factory.getCurrentSession();
+		List<ArticleBean> list = null;
+		String hql = "FROM ArticleBean ORDER BY RAND(4)";
+		list = session.createQuery(hql).setMaxResults(num).list();
+		return list;
 	}
 
 }

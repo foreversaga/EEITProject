@@ -68,6 +68,10 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/TableCss/css/util.css'/>">
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/TableCss/css/main.css'/>">
 <style type="text/css">
+*{
+font-family: Microsoft JhengHei;
+}
+
 div.dropdown-menu {
 	width: 300px;
 	height: 423px;

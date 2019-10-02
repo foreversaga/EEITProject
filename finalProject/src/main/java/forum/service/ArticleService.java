@@ -4,6 +4,7 @@ import java.util.List;
 
 import forum.model.ArticleBean;
 import forum.model.ArticleReplyBean;
+import forum.model.ThumbBean;
 
 public interface ArticleService {
 
@@ -16,7 +17,7 @@ public interface ArticleService {
 	public Long getDataCount();
 
 	public ArticleBean getArticle(Integer aId);
-	
+
 	public ArticleReplyBean getOneReply(Integer arId);
 
 	public void EditReply(ArticleReplyBean arb);
@@ -28,4 +29,12 @@ public interface ArticleService {
 	public List<ArticleBean> getAllArticle();
 
 	public List<ArticleReplyBean> getArticleReply(Integer aId);
+
+	public void AddThumb(ThumbBean tb);
+
+	public ThumbBean getThumb(Integer aId, Integer mId);
+	
+	public Long getThumbCount(Integer aId,Integer Thumb);
+	
+	public List<ArticleBean> getIndexArticle(Integer num);
 }

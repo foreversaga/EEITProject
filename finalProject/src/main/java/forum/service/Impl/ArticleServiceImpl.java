@@ -10,6 +10,7 @@ import config.GlobalService;
 import forum.dao.ArticleDao;
 import forum.model.ArticleBean;
 import forum.model.ArticleReplyBean;
+import forum.model.ThumbBean;
 import forum.service.ArticleService;
 
 @Service
@@ -72,5 +73,25 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public void EditReply(ArticleReplyBean arb) {
 		dao.EditReply(arb);
+	}
+
+	@Override
+	public void AddThumb(ThumbBean tb) {
+		dao.AddThumb(tb);
+	}
+
+	@Override
+	public ThumbBean getThumb(Integer aId, Integer mId) {
+		return dao.getThumb(aId, mId);
+	}
+
+	@Override
+	public Long getThumbCount(Integer aId, Integer Thumb) {
+		return dao.getThumbCount(aId, Thumb);
+	}
+
+	@Override
+	public List<ArticleBean> getIndexArticle(Integer num) {
+		return dao.getIndexArticle(num);
 	}
 }
