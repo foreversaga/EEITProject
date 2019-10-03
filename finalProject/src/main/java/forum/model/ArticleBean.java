@@ -5,6 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,9 +26,12 @@ public class ArticleBean implements Serializable {
 	private String mName;
 	private Integer aDisplay;
 	private String aPreContent;
+	@Column(columnDefinition = "varchar(max)")
 	private String aContent;
 	private java.sql.Timestamp aAddTime;
 	private java.sql.Timestamp aEditTime;
+	private String aLike;
+	private String aDislike;
 	@OneToMany(mappedBy = "ArticleBean", cascade = CascadeType.ALL)
 	Set<ArticleReplyBean> ReplySet = new LinkedHashSet<>();
 	
@@ -132,6 +136,26 @@ public class ArticleBean implements Serializable {
 
 	public void setaContent(String aContent) {
 		this.aContent = aContent;
+	}
+
+
+	public String getaLike() {
+		return aLike;
+	}
+
+
+	public void setaLike(String aLike) {
+		this.aLike = aLike;
+	}
+
+
+	public String getaDislike() {
+		return aDislike;
+	}
+
+
+	public void setaDislike(String aDislike) {
+		this.aDislike = aDislike;
 	}
 
 

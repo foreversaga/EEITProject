@@ -7,8 +7,7 @@
 <title>${productBean.pName}</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
@@ -58,14 +57,18 @@
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/style.css'/>">
 
 <style type="text/css">
-*{
-font-family: Microsoft JhengHei;
+* {
+	font-family: Microsoft JhengHei;
 }
-p{
-font-size: 25px;
+
+p {
+	font-size: 25px;
 }
-span{font-size: 20px;
+
+span {
+	font-size: 20px;
 }
+
 div#ftco-nav li.nav-item {
 	margin: 0 20px;
 }
@@ -81,30 +84,29 @@ span#star-span {
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 		<div class="container">
 			<a class="navbar-brand" href="<c:url value='/'/>">旅遊趣</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false"
+				aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="<c:url value='/'/>" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
+					<li class="nav-item active"><a style="font-size: 20px;" href="<c:url value='/'/>" class="nav-link">Home</a></li>
+					<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
 					<c:if test="${empty LoginOK}">
-						<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
-						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/login'/>" class="nav-link">Login</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/ForumIndex/1'/>" class="nav-link">討論區</a></li>
 					</c:if>
 					<c:if test="${!empty LoginOK}">
-						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
-						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 					</c:if>
 				</ul>
 				<ul class="navbar-nav mr-right">
-					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdown" role="button" data-toggle="modal" aria-haspopup="true"
-						aria-expanded="false" data-target="#shoppingCartMenu">購物車</a> 
-<!-- 						<div id="shoppingCartMenu" class="dropdown-menu" aria-labelledby="navbarDropdown"></div> -->
-						</li>
+					<li class="nav-item dropdown"><a style="font-size: 20px;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="modal"
+						aria-haspopup="true" aria-expanded="false" data-target="#shoppingCartMenu">購物車</a> <!-- 						<div id="shoppingCartMenu" class="dropdown-menu" aria-labelledby="navbarDropdown"></div> -->
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -172,8 +174,7 @@ span#star-span {
 		</p>
 		<hr>
 		<p class="bottom-area d-flex">
-			<form:form method="POST" action="${pageContext.request.contextPath}/Buy"
-				modelAttribute="orderItem" id="idform">
+			<form:form method="POST" action="${pageContext.request.contextPath}/Buy" modelAttribute="orderItem" id="idform">
 				<c:if test="${productBean.pInstock==0 }">
 					<p>已售完</p>
 				</c:if>
@@ -194,8 +195,8 @@ span#star-span {
 		</p>
 
 		<!-- Modal -->
-		<div class="modal fade" id="shoppingCartMenu" tabindex="-1" role="dialog"
-			aria-labelledby="shoppingCartMenuTitle" aria-hidden="true" data-backdrop="false">
+		<div class="modal fade" id="shoppingCartMenu" tabindex="-1" role="dialog" aria-labelledby="shoppingCartMenuTitle" aria-hidden="true"
+			data-backdrop="false">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -215,15 +216,13 @@ span#star-span {
 					</div>
 					<div class="modal-body">
 						<c:if test="${empty shoppingCart.content }">
-							<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
+							<p style="text-align: center; margin-top: 5%">購物車內已無商品</p>
 						</c:if>
 						<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
-							<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;"
-								src="<c:url value='/showPic/${cart.value.pId}'/>">
+							<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;" src="<c:url value='/showPic/${cart.value.pId}'/>">
 							<p style="line-height: 10px">${cart.value.pName}</p>
 							<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
-							<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button"
-								onclick="DeleteItem(this.id)" value="刪除" /> </span>
+							<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)" value="刪除" /> </span>
 							<c:choose>
 								<c:when test="${vs.last}">
 								</c:when>
@@ -241,24 +240,27 @@ span#star-span {
 			</div>
 		</div>
 		<ul class="nav nav-tabs" id="myTab" role="tablist">
-			<li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
-				role="tab" aria-controls="home" aria-selected="true">商品說明</a></li>
-			<li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile"
-				role="tab" aria-controls="profile" aria-selected="false">用戶評價</a></li>
-			<li class="nav-item"><a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"
-				role="tab" aria-controls="contact" aria-selected="false">Google地圖</a></li>
+			<li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+				aria-selected="true">商品說明</a></li>
+			<li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+				aria-selected="false">用戶評價</a></li>
+			<li class="nav-item"><a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+				aria-selected="false">Google地圖</a></li>
 		</ul>
 		<div class="tab-content" id="myTabContent" style="height: 300px">
-			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><p>${productBean.pContent}</p></div>
+			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+				<p>${productBean.pContent}</p>
+			</div>
 			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 				<c:choose>
-					<c:when test="${empty reviewList}"><p>此商品尚無評價。</p></c:when>
+					<c:when test="${empty reviewList}">
+						<p>此商品尚無評價。</p>
+					</c:when>
 					<c:otherwise>
 						<c:forEach varStatus="vs" var="reviewBean" items="${reviewList}">
 							<div class="card border-light mb-3">
 								<h5 class="card-header">
-									<span style="width: 400px;">用戶:${reviewBean.mName}</span> <span class="rate"
-										style="margin-right: 10%"> <c:choose>
+									<span style="width: 400px;">用戶:${reviewBean.mName}</span> <span class="rate" style="margin-right: 10%"> <c:choose>
 											<c:when test="${reviewBean.rRating>=1&&reviewBean.rRating<2 }">
 												<i class="icon-star"></i>
 												<i class="icon-star-o"></i>
@@ -348,8 +350,7 @@ var infowindow = new google.maps.InfoWindow();
 
 
 </script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRbkV92eGVhHDqqN1xgXTGwHHH-XAX7HI&callback=initMap">
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRbkV92eGVhHDqqN1xgXTGwHHH-XAX7HI&callback=initMap">
 		
 	</script>
 </body>

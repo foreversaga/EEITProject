@@ -32,7 +32,9 @@ public interface ArticleService {
 
 	public void AddThumb(ThumbBean tb);
 
-	public ThumbBean getThumb(Integer aId, Integer mId);
+	public ThumbBean getArticleThumb(Integer aId, Integer mId);
+	
+	public ThumbBean getReplyThumb(Integer arId, Integer mId);
 	
 	public Long getThumbCount(Integer aId,Integer Thumb);
 	

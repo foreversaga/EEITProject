@@ -14,25 +14,27 @@ public interface ArticleDao {
 
 	public Long getDataCount();
 
-	public ArticleBean getArticle(Integer aId);
-
 	public void EditReply(ArticleReplyBean arb);
-
-	public ArticleReplyBean getOneReply(Integer arId);
 
 	public void PostArticle(ArticleBean ab);
 
 	public void ReplyArticle(ArticleBean ab);
 
+	public void AddThumb(ThumbBean tb);
+
+	public ArticleBean getArticle(Integer aId);
+
+	public ArticleReplyBean getOneReply(Integer arId);
+
+	public ThumbBean getArticleThumb(Integer aId, Integer mId);
+
+	public ThumbBean getReplyThumb(Integer arId, Integer mId);
+
+	public Long getThumbCount(Integer aId, Integer Thumb);
+
 	public List<ArticleBean> getAllArticle();
 
-	public List<ArticleReplyBean> getArticleReply(Integer aId);
-
-	public void AddThumb(ThumbBean tb);
-	
-	public ThumbBean getThumb(Integer aId, Integer mId);
-	
-	public Long getThumbCount(Integer aId,Integer Thumb);
-
 	public List<ArticleBean> getIndexArticle(Integer num);
+
+	public List<ArticleReplyBean> getArticleReply(Integer aId);
 }

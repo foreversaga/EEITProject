@@ -68,12 +68,7 @@ public class ReviewDaoImpl implements ReviewDao {
 	public List<reviewBean> getIndexReview(Integer num) {
 		Session session = factory.getCurrentSession();
 		List<reviewBean> list = null;
-		String hql = "FROM reviewBean ORDER BY RAND()";
-//		String hqlcount="SELECT COUNT(*) FROM reviewBean";
-//		long count=(Long) session.createQuery(hqlcount).uniqueResult();
-//		Random random=new Random();
-//		int number=random.nextInt((int)count);
-//		list=session.createQuery(hql).setFirstResult(number).setMaxResults(num).list();
+		String hql = "FROM reviewBean ORDER BY newID()";
 		list = session.createQuery(hql).setMaxResults(num).list();
 		return list;
 	}

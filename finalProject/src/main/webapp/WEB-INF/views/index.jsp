@@ -73,48 +73,33 @@ div#shoppingCartMenu {
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-		id="ftco-navbar">
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
 			<a style="font-size: 30px;" class="navbar-brand" href="<c:url value='/'/>">旅遊趣</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false"
+				aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a style="font-size: 20px;" href="<c:url value='/'/>"
-						class="nav-link">Home</a></li>
-					<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/shop/1'/>"
-						class="nav-link">Products</a></li>
+					<li class="nav-item active"><a style="font-size: 20px;" href="<c:url value='/'/>" class="nav-link">Home</a></li>
+					<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/shop/1'/>" class="nav-link">Products</a></li>
+					<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/ForumIndex/1'/>" class="nav-link">討論區</a></li>
 					<c:if test="${empty LoginOK}">
-						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/login'/>"
-							class="nav-link">Login</a></li>
-						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/register/add'/>"
-							class="nav-link">Register</a></li>
-						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/ForumIndex/1'/>"
-							class="nav-link">討論區</a></li>
-						<%-- 						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/AddMemberDB'/>" class="nav-link">新增會員DB</a></li> --%>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/login'/>" class="nav-link">Login</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
+						<%-- 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/AddMemberDB'/>" class="nav-link">新增會員DB</a></li> --%>
 						<%-- 						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/AddReviewDB'/>" class="nav-link">新增評價DB</a></li> --%>
-						<%-- 						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li> --%>
-						<%-- 						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/AddOrderDB'/>" class="nav-link">新增訂單DB</a></li> --%>
-						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/AddArticleDB'/>"
-							class="nav-link">新增文章DB</a></li>
-						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/AddReplyDB'/>"
-							class="nav-link">新增回覆DB</a></li>
+						<%-- 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li> --%>
+						<%-- 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/AddOrderDB'/>" class="nav-link">新增訂單DB</a></li> --%>
+						<%-- 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/AddArticleDB'/>" class="nav-link">新增文章DB</a></li> --%>
+						<%-- 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/AddReplyDB'/>" class="nav-link">新增回覆DB</a></li> --%>
 					</c:if>
 					<c:if test="${!empty LoginOK}">
-						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/ForumIndex/1'/>"
-							class="nav-link">討論區</a></li>
-						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/UserDashboard'/>"
-							class="nav-link">會員中心</a></li>
-						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/OrderDetails'/>"
-							class="nav-link">查詢訂單</a></li>
-						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/Dashboard'/>"
-							class="nav-link">後臺系統</a></li>
-						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/logout'/>"
-							class="nav-link">Logout</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/Dashboard'/>" class="nav-link">後臺系統</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 					</c:if>
 				</ul>
 				<!-- 				<ul class="navbar-nav mr-right"> -->
@@ -159,28 +144,23 @@ div#shoppingCartMenu {
 	</nav>
 	<!-- END nav -->
 
-	<div class="hero-wrap js-fullheight"
-		style="background-image: url(<c:url value='/css/RWDcss/images/bg_1.jpg'/>);">
+	<div class="hero-wrap js-fullheight" style="background-image: url(<c:url value='/css/RWDcss/images/bg_1.jpg'/>);">
 		<div class="overlay"></div>
 		<div class="container">
-			<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start"
-				data-scrollax-parent="true">
+			<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
 				<div class="col-md-9 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
 					<h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">
 						<strong>探索 <br></strong> 屬於你的城市
 					</h1>
-					<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find great places to
-						stay, eat, shop, or visit from local experts</p>
+					<p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find great places to stay, eat, shop, or visit from local experts</p>
 					<div class="block-17 my-4" style="width: 80%;">
 						<form action="<c:url value='/QueryProduct/1'/>" method="get" class="d-block d-flex">
 							<div class="fields d-block d-flex">
 								<div class="textfield-search one-third">
-									<input style="font-size: 20px;" name="QueryString" type="text" class="form-control"
-										placeholder="請輸入關鍵字">
+									<input style="font-size: 20px;" name="QueryString" type="text" class="form-control" placeholder="請輸入關鍵字">
 								</div>
 							</div>
-							<input style="font-size: 20px;" type="submit" class="search-submit btn btn-primary"
-								value="搜尋">
+							<input style="font-size: 20px;" type="submit" class="search-submit btn btn-primary" value="搜尋">
 						</form>
 					</div>
 				</div>
@@ -262,8 +242,7 @@ div#shoppingCartMenu {
 				<c:forEach varStatus="vs" var="Top5" items="${TopFiveList}">
 					<div class="col-sm col-md-6 col-lg ftco-animate">
 						<div class="destination">
-							<a href="<c:url value='/ProductSingle/${Top5.pId}'/>"
-								class="img img-2 d-flex justify-content-center align-items-center"
+							<a href="<c:url value='/ProductSingle/${Top5.pId}'/>" class="img img-2 d-flex justify-content-center align-items-center"
 								style="background-image: url(<c:url value='/showPic/${Top5.pId}'/>);"> <!-- 							<div class="icon d-flex justify-content-center align-items-center"> -->
 								<!-- 								<span class="icon-search2"></span> --> <!-- 							</div> -->
 							</a>
@@ -318,7 +297,7 @@ div#shoppingCartMenu {
 										<span class="price per-price">$${Top5.pPrice}<br></span>
 									</div>
 								</div>
-								<p style="height: 170px;">${Top5.pContent}</p>
+								<p style="height: 210px;">${Top5.pContent}</p>
 								<hr>
 								<p class="bottom-area d-flex">
 									<a class="btn btn-outline-info" href="<c:url value='/ProductSingle/${Top5.pId}'/>">詳細資訊</a>
@@ -340,8 +319,7 @@ div#shoppingCartMenu {
 						<strong>為什麼</strong> 選擇我們?
 					</h2>
 					<h5>每一天，我們都在幫助旅客發掘全球最棒的景點、行程與最難忘的旅遊體驗！</h5>
-					<h5>你可以從所有熱門的目的地中開始探索，並用最優惠的價格預訂任何行程與服務：
-						從容不迫地搭上香港機場快綫、走進東京迪士尼滿足你的童趣之心，或在峇里島探索靜謐的海底世界⋯，專屬於你的旅程就此展開！</h5>
+					<h5>你可以從所有熱門的目的地中開始探索，並用最優惠的價格預訂任何行程與服務： 從容不迫地搭上香港機場快綫、走進東京迪士尼滿足你的童趣之心，或在峇里島探索靜謐的海底世界⋯，專屬於你的旅程就此展開！</h5>
 
 					<!-- 					<p> -->
 					<!-- 						<a href="#" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3">Read more</a> -->
@@ -360,8 +338,7 @@ div#shoppingCartMenu {
 									<div class="item">
 										<div class="testimony-wrap d-flex">
 											<div class="user-img mb-5">
-												<span class="quote d-flex align-items-center justify-content-center"> <i
-													class="icon-quote-left"></i>
+												<span class="quote d-flex align-items-center justify-content-center"> <i class="icon-quote-left"></i>
 												</span>
 											</div>
 											<div class="text ml-md-4">
@@ -392,30 +369,30 @@ div#shoppingCartMenu {
 			</div>
 			<div class="row d-flex">
 				<c:forEach varStatus="vs" var="ArticleBean" items="${ArticleList}">
-				<div class="col-md-3 d-flex ftco-animate">
-					<div class="blog-entry align-self-stretch">
-						<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>" class="block-20"
-							style="background-image: url(<c:url value='/showmPic/${ArticleBean.mId}'/>);"> </a>
-						<div class="text p-4 d-block">
-							<span class="tag">${ArticleBean.mName}</span>
-							<h3 class="heading mt-3">
-								<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>">${ArticleBean.aContent}</a>
-							</h3>
-							<div class="meta mb-3">
-								<div>
-									<a href="#">August 12, 2018</a>
-								</div>
-								<div>
-									<a href="#">Admin</a>
-								</div>
-								<div>
-									<a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
+					<div class="col-md-3 d-flex ftco-animate">
+						<div class="blog-entry align-self-stretch">
+							<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>" class="block-20"
+								style="background-image: url(<c:url value='/showmPic/${ArticleBean.mId}'/>);"> </a>
+							<div class="text p-4 d-block">
+								<span class="tag">${ArticleBean.mName}</span>
+								<h3 class="heading mt-3">
+									<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>">${ArticleBean.aContent}</a>
+								</h3>
+								<div class="meta mb-3">
+									<div>
+										<a href="#">August 12, 2018</a>
+									</div>
+									<div>
+										<a href="#">Admin</a>
+									</div>
+									<div>
+										<a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-</c:forEach>
+				</c:forEach>
 			</div>
 		</div>
 	</section>
@@ -471,8 +448,7 @@ div#shoppingCartMenu {
 						<h2 class="ftco-heading-2">Have a Questions?</h2>
 						<div class="block-23 mb-3">
 							<ul>
-								<li><span class="icon icon-map-marker"></span><span class="text">106台北市大安區復興南路一段390號
-										2,3號</span></li>
+								<li><span class="icon icon-map-marker"></span><span class="text">106台北市大安區復興南路一段390號 2,3號</span></li>
 								<li><a href="#"><span class="icon icon-phone"></span><span class="text">02-23766198</span></a></li>
 								<li><a href="#"><span class="icon icon-envelope"></span><span class="text">TravleFun@outlook.com</span></a></li>
 							</ul>

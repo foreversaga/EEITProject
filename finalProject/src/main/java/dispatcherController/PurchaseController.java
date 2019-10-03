@@ -73,32 +73,27 @@ public class PurchaseController {
 			return mav;
 		}
 		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
-		if (mb != null) {
-			String mAccount = mb.getmAccount();
-			Integer total = sc.getTotal();
-			java.sql.Timestamp orderTime = new Timestamp(new java.util.Date().getTime());
-			orderBean ob = new orderBean();
-			ob.setmAccount(mAccount);
-			ob.setoTimestamp(orderTime);
-			ob.setoTotalAmount(total);
-			ob.setmName(mb.getmName());
-			Map<Integer, orderItem> cart = sc.getContent();
-			Set<Integer> set = cart.keySet();
-			Map<Integer, Integer> stockMap = new HashMap<>();
-			for (Integer i : set) {
-				orderItem oi = cart.get(i);
-				productBean pb = pService.getProduct(oi.getpId());
-				stockMap.put(oi.getpId(), pb.getpInstock());
-			}
-			mav.addObject("stockMap", stockMap);
-			mav.addObject("orderInfo", ob);
-			mav.setViewName("checkout/CheckOut");
-			return mav;
-		} else {
-			session.setAttribute("requestURI", "/CheckOut");
-			mav.setViewName("redirect:/login");
-			return mav;
+		String mAccount = mb.getmAccount();
+		Integer total = sc.getTotal();
+		java.sql.Timestamp orderTime = new Timestamp(new java.util.Date().getTime());
+		orderBean ob = new orderBean();
+		ob.setmAccount(mAccount);
+		ob.setoTimestamp(orderTime);
+		ob.setoTotalAmount(total);
+		ob.setmName(mb.getmName());
+		Map<Integer, orderItem> cart = sc.getContent();
+		Set<Integer> set = cart.keySet();
+		Map<Integer, Integer> stockMap = new HashMap<>();
+		for (Integer i : set) {
+			orderItem oi = cart.get(i);
+			productBean pb = pService.getProduct(oi.getpId());
+			stockMap.put(oi.getpId(), pb.getpInstock());
 		}
+		mav.addObject("stockMap", stockMap);
+		mav.addObject("orderInfo", ob);
+		mav.setViewName("checkout/CheckOut");
+		return mav;
+
 	}
 
 	// 送出訂單
@@ -109,7 +104,6 @@ public class PurchaseController {
 			return "redirect:/products/1";
 		}
 		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
-		if (mb != null) {
 			Map<String, String> errormsg = new HashMap<>();
 			if (ob.getoReceiveName() == null || ob.getoReceiveName().trim().length() == 0) {
 				errormsg.put("receivename", "請輸入收件人名稱");
@@ -134,7 +128,7 @@ public class PurchaseController {
 				for (Integer k : set) {
 					orderItem oi = cart.get(k);
 					Integer subtotal = (oi.getiQty() * oi.getpPrice());
-					String iDes = oi.getpName() + " 共 " + oi.getiQty().toString() + "個，金額小計:" + subtotal.toString();
+					String iDes = oi.getpName() + " 共 " + oi.getiQty().toString() + "個，金額小計:$" + subtotal.toString();
 					orderItemBean oib = new orderItemBean(null, oi.getpId(), iDes, oi.getiQty(), oi.getpPrice());
 					oib.setOrderBean(ob);
 					items.add(oib);
@@ -169,10 +163,6 @@ public class PurchaseController {
 				return "checkout/ECpage";
 //				return "redirect:/";
 			}
-		} else {
-			session.setAttribute("requestURI", "/ConfirmOrder");
-			return "redirect:/login";
-		}
 	}
 
 	// 綠界結帳完成頁面顯示
@@ -255,10 +245,6 @@ public class PurchaseController {
 			HttpServletRequest request) {
 		List<orderItemBean> list = oService.getOrderItem(oId);
 		MemberBean mb = (MemberBean) session.getAttribute("LoginOK");
-		if (mb == null) {
-			session.setAttribute("requestURI", "/showOrderItem/" + oId);
-			mav.setViewName("redirect:/login");
-		} else {
 			Map<Integer, reviewBean> map = new HashMap<Integer, reviewBean>();
 			for (orderItemBean ob : list) {
 				reviewBean rb = rService.getOrderItemReview(ob.getpId(), mb.getmAccount());
@@ -269,7 +255,6 @@ public class PurchaseController {
 			mav.addObject("review", map);
 			mav.addObject("orderItemList", list);
 			mav.setViewName("checkout/orderItem");
-		}
 		return mav;
 	}
 
@@ -299,7 +284,7 @@ public class PurchaseController {
 			}
 			session.setAttribute("stockMap", stockMap);
 			session.setAttribute("shoppingCart", sc);
-		}else {
+		} else {
 			session.removeAttribute("shoppingCart");
 			return "redirect:/products/1";
 		}

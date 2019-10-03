@@ -94,7 +94,7 @@ public class ArticleDaoImpl implements ArticleDao {
 	@Override
 	public void EditReply(ArticleReplyBean arb) {
 		Session session = factory.getCurrentSession();
-		session.update(arb);
+		session.saveOrUpdate(arb);
 
 	}
 
@@ -105,11 +105,20 @@ public class ArticleDaoImpl implements ArticleDao {
 	}
 
 	@Override
-	public ThumbBean getThumb(Integer aId, Integer mId) {
+	public ThumbBean getArticleThumb(Integer aId, Integer mId) {
 		ThumbBean tb = null;
 		Session session = factory.getCurrentSession();
 		String hql = "FROM ThumbBean tb WHERE tb.aId =:aId and tb.mId =:mId";
 		tb = (ThumbBean) session.createQuery(hql).setParameter("aId", aId).setParameter("mId", mId).uniqueResult();
+		return tb;
+	}
+	
+	@Override
+	public ThumbBean getReplyThumb(Integer arId, Integer mId) {
+		ThumbBean tb = null;
+		Session session = factory.getCurrentSession();
+		String hql = "FROM ThumbBean tb WHERE tb.arId =:arId and tb.mId =:mId";
+		tb = (ThumbBean) session.createQuery(hql).setParameter("arId", arId).setParameter("mId", mId).uniqueResult();
 		return tb;
 	}
 
@@ -126,9 +135,11 @@ public class ArticleDaoImpl implements ArticleDao {
 	public List<ArticleBean> getIndexArticle(Integer num) {
 		Session session = factory.getCurrentSession();
 		List<ArticleBean> list = null;
-		String hql = "FROM ArticleBean ORDER BY RAND(4)";
+		String hql = "FROM ArticleBean ORDER BY newID()";
 		list = session.createQuery(hql).setMaxResults(num).list();
 		return list;
 	}
+
+
 
 }

@@ -198,7 +198,7 @@ public class DatabaseDaoImpl implements DatabaseDao {
 				oib.setpId(Integer.parseInt(token[6].trim()));
 				oib.setUnitPrice(Integer.parseInt(token[7].trim()));
 				Integer subtotal = (oib.getiQty() * oib.getUnitPrice());
-				String iDes = token[8] + " 共 " + oib.getiQty().toString() + "個，金額小計:" + subtotal.toString();
+				String iDes = token[8] + " 共 " + oib.getiQty().toString() + "個，金額小計:$" + subtotal.toString();
 				oib.setiDes(iDes);
 				ob.setoReceiveName(token[9]);
 				ob.setoReceivePhone("0912345678");

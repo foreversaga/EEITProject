@@ -81,10 +81,14 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public ThumbBean getThumb(Integer aId, Integer mId) {
-		return dao.getThumb(aId, mId);
+	public ThumbBean getArticleThumb(Integer aId, Integer mId) {
+		return dao.getArticleThumb(aId, mId);
 	}
-
+	@Override
+	public ThumbBean getReplyThumb(Integer arId, Integer mId) {
+		return dao.getReplyThumb(arId, mId);
+	}
+	
 	@Override
 	public Long getThumbCount(Integer aId, Integer Thumb) {
 		return dao.getThumbCount(aId, Thumb);
@@ -94,4 +98,5 @@ public class ArticleServiceImpl implements ArticleService {
 	public List<ArticleBean> getIndexArticle(Integer num) {
 		return dao.getIndexArticle(num);
 	}
+
 }

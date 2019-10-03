@@ -33,41 +33,41 @@ function CheckOutButton(){
 };
 </script>
 <style>
-*{
-font-family: Microsoft JhengHei;
-}
-a.thumb:hover{
-text-decoration: none;
+* {
+	font-family: Microsoft JhengHei;
 }
 
+a.thumb:hover {
+	text-decoration: none;
+}
 </style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 		<div class="container">
 			<a class="navbar-brand" href="<c:url value='/'/>">旅遊趣</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false"
+				aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="<c:url value='/'/>" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
+					<li class="nav-item active"><a style="font-size: 20px;" href="<c:url value='/'/>" class="nav-link">Home</a></li>
+					<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
+					<li class="nav-item"><a style="font-size: 20px;" style="font-size: 20px;" href="<c:url value='/ForumIndex/1'/>" class="nav-link">討論區</a></li>
 					<c:if test="${empty LoginOK}">
-						<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
-						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/login'/>" class="nav-link">Login</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
 					</c:if>
 					<c:if test="${!empty LoginOK}">
-						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
-						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 					</c:if>
 				</ul>
 				<ul class="navbar-nav mr-right">
-					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdown" role="button" data-toggle="modal" aria-haspopup="true"
-						aria-expanded="false" data-target="#shoppingCartMenu">購物車</a> <!-- 						<div id="shoppingCartMenu" class="dropdown-menu" aria-labelledby="navbarDropdown"></div> -->
+					<li class="nav-item dropdown"><a style="font-size: 20px;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+						data-toggle="modal" aria-haspopup="true" aria-expanded="false" data-target="#shoppingCartMenu">購物車</a> <!-- 						<div id="shoppingCartMenu" class="dropdown-menu" aria-labelledby="navbarDropdown"></div> -->
 					</li>
 				</ul>
 			</div>
@@ -75,8 +75,8 @@ text-decoration: none;
 	</nav>
 
 	<!-- Modal -->
-	<div class="modal fade" id="shoppingCartMenu" tabindex="-1" role="dialog"
-		aria-labelledby="shoppingCartMenuTitle" aria-hidden="true" data-backdrop="false">
+	<div class="modal fade" id="shoppingCartMenu" tabindex="-1" role="dialog" aria-labelledby="shoppingCartMenuTitle" aria-hidden="true"
+		data-backdrop="false">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -99,12 +99,10 @@ text-decoration: none;
 						<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
 					</c:if>
 					<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
-						<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;"
-							src="<c:url value='/showPic/${cart.value.pId}'/>">
+						<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;" src="<c:url value='/showPic/${cart.value.pId}'/>">
 						<p style="line-height: 10px">${cart.value.pName}</p>
 						<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
-						<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button"
-								onclick="DeleteItem(this.id)" value="刪除" /> </span>
+						<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)" value="刪除" /> </span>
 						<c:choose>
 							<c:when test="${vs.last}">
 							</c:when>
@@ -122,20 +120,16 @@ text-decoration: none;
 		</div>
 	</div>
 	<div style="margin: 5% auto; width: 1000px;">
-		<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#NewArticle"
-			aria-expanded="false" aria-controls="NewArticle">發表新文章</button>
-		<button class="btn btn-success" type="button" data-toggle="collapse" data-target="#ReplyArticle"
-			aria-expanded="false" aria-controls="ReplyArticle">回覆文章</button>
+		<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#NewArticle" aria-expanded="false" aria-controls="NewArticle">發表新文章</button>
+		<button class="btn btn-success" type="button" data-toggle="collapse" data-target="#ReplyArticle" aria-expanded="false" aria-controls="ReplyArticle">回覆文章</button>
 		<c:if test="${LoginOK.mId==ArticleBean.mId}">
-			<button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#EditArticle"
-				aria-expanded="false" aria-controls="EditArticle">修改文章</button>
+			<button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#EditArticle" aria-expanded="false" aria-controls="EditArticle">修改文章</button>
 		</c:if>
 
 		<!-- 			發表文章表單 -->
 		<div class="collapse" id="NewArticle">
 			<div class="card card-body">
-				<form:form method="POST" action="${pageContext.request.contextPath}/PostArticle"
-					modelAttribute="ArticleBean">
+				<form:form method="POST" action="${pageContext.request.contextPath}/PostArticle" modelAttribute="ArticleBean">
 					<div class="form-group row">
 						<label for="aTitle" class="col-sm-2 col-form-label">標題</label>
 						<div class="col-sm-10">
@@ -145,7 +139,7 @@ text-decoration: none;
 					<div class="form-group row">
 						<label for="arContent" class="col-sm-2 col-form-label">內文</label>
 						<div class="col-sm-10">
-							<textarea rows="5" class="form-control" id="arContent" name="arContent" placeholder="文章內容"></textarea>
+							<form:textarea rows="5" class="form-control" id="aContent" path="aContent" placeholder="文章內容"></form:textarea>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -162,21 +156,19 @@ text-decoration: none;
 		<!-- 	回覆文章表單 -->
 		<div class="collapse" id="ReplyArticle">
 			<div class="card card-body">
-				<form:form method="POST" action="${pageContext.request.contextPath}/ReplyArticle"
-					modelAttribute="ArticleReplyBean">
+				<form:form method="POST" action="${pageContext.request.contextPath}/ReplyArticle/${ArticleBean.aId}" modelAttribute="ArticleReplyBean">
 					<div class="form-group row">
 						<label for="arContent" class="col-sm-2 col-form-label">回覆內容</label>
 						<div class="col-sm-10">
-							<textarea rows="5" class="form-control" id="arContent" name="arContent" placeholder="文章內容"></textarea>
+							<form:textarea rows="5" class="form-control" id="arContent" path="arContent" placeholder="文章內容"></form:textarea>
 						</div>
 					</div>
 					<div class="form-group row">
 						<div class="col-sm-10">
+							<form:input type="hidden" path="arDisplay" value="1" />
 							<button type="submit" class="btn btn-primary">回覆文章</button>
 						</div>
 					</div>
-					<form:input type="hidden" path="arDisplay" value="1" />
-					<input type="hidden" name="aId" value="${ArticleBean.aId}" />
 				</form:form>
 			</div>
 		</div>
@@ -184,8 +176,7 @@ text-decoration: none;
 		<!-- 			修改文章表單 -->
 		<div class="collapse" id="EditArticle">
 			<div class="card card-body">
-				<form:form method="POST" action="${pageContext.request.contextPath}/EditArticle"
-					modelAttribute="ArticleBean">
+				<form:form method="POST" action="${pageContext.request.contextPath}/EditArticle" modelAttribute="ArticleBean">
 					<div class="form-group row">
 						<label for="aTitle" class="col-sm-2 col-form-label">標題</label>
 						<div class="col-sm-10">
@@ -221,25 +212,19 @@ text-decoration: none;
 						<img style="margin: 6% 0" width="100%" src="<c:url value='/showmPic/${ArticleBean.mId}'/>">
 						<div class="row mb-3">
 							<div style="text-align: center;" class="col-md-6">
-								<form:form method="post" modelAttribute="ThumbBean"
-									action="${pageContext.request.contextPath}/AddThumb/0" name="form1">
+								<form:form method="post" modelAttribute="ThumbBean" action="${pageContext.request.contextPath}/AddThumb/0/${ArticleBean.aId}" name="form1">
 									<form:input type="hidden" path="mId" value="${LoginOK.mId}" />
-									<form:input type="hidden" path="aId" value="${ArticleBean.aId}" />
-									<a class="thumb" href="javascript:document.form1.submit()"> <img width="26%"
-										src="<c:url value='/img/thumb.png'/>">
+									<a class="thumb" href="javascript:document.form1.submit()"> <img width="26%" src="<c:url value='/img/thumb.png'/>">
 									</a>
-									<span>${like}</span>
+									<span>${ArticleBean.aLike}</span>
 								</form:form>
 							</div>
 							<div style="text-align: center;" class="col-md-6">
-								<form:form method="post" modelAttribute="ThumbBean"
-									action="${pageContext.request.contextPath}/AddThumb/1" name="form2">
+								<form:form method="post" modelAttribute="ThumbBean" action="${pageContext.request.contextPath}/AddThumb/1/${ArticleBean.aId}" name="form2">
 									<form:input type="hidden" path="mId" value="${LoginOK.mId}" />
-									<form:input type="hidden" path="aId" value="${ArticleBean.aId}" />
-									<a class="thumb" href="javascript:document.form2.submit()"> <img width="18%"
-										src="<c:url value='/img/dislike.jpg'/>">
+									<a class="thumb" href="javascript:document.form2.submit()"> <img width="18%" src="<c:url value='/img/dislike.jpg'/>">
 									</a>
-									<span>${dislike}</span>
+									<span>${ArticleBean.aDislike}</span>
 								</form:form>
 							</div>
 						</div>
@@ -254,7 +239,7 @@ text-decoration: none;
 								<div class="row">
 									<div class="col-md-4"></div>
 									<div class="col-md-4"></div>
-									<div class="col-md-4">test</div>
+									<div class="col-md-4"></div>
 								</div>
 								<div class="row">
 									<div class="col">
@@ -281,8 +266,27 @@ text-decoration: none;
 						<div class="row">
 							<div class="col-md-2 border">
 								<img style="margin: 6% 0" width="100%" src="<c:url value='/showmPic/${ReplyBean.mId}'/>">
-								<div class="row">
-									<div style="text-align: center;" class="col-md-12">good button</div>
+								<div class="row mb-3">
+									<div style="text-align: center;" class="col-md-6">
+										<form:form method="post" modelAttribute="ThumbBean" action="${pageContext.request.contextPath}/AddThumb/0/${ReplyBean.arId}/Reply"
+											name="ReplyLikeform${ReplyBean.arId}">
+											<form:input type="hidden" path="mId" value="${LoginOK.mId}" />
+											<a class="thumb" href="javascript:document.ReplyLikeform${ReplyBean.arId}.submit()"> <img width="52%"
+												src="<c:url value='/img/thumb.png'/>">
+											</a>
+											<span>${ReplyBean.arLike}</span>
+										</form:form>
+									</div>
+									<div style="text-align: center;" class="col-md-6">
+										<form:form method="post" modelAttribute="ThumbBean" action="${pageContext.request.contextPath}/AddThumb/1/${ReplyBean.arId}/Reply"
+											name="ReplyDislikeform${ReplyBean.arId}">
+											<form:input type="hidden" path="mId" value="${LoginOK.mId}" />
+											<a class="thumb" href="javascript:document.ReplyDislikform${ReplyBean.arId}.submit()"> <img width="36%"
+												src="<c:url value='/img/dislike.jpg'/>">
+											</a>
+											<span>${ReplyBean.arDislike}</span>
+										</form:form>
+									</div>
 								</div>
 							</div>
 							<div class="col-md-10">
@@ -296,8 +300,7 @@ text-decoration: none;
 											<div class="col-md-2"></div>
 											<c:if test="${LoginOK.mId==ReplyBean.mId}">
 												<div class="col-md-4">
-													<button class="btn btn-danger" type="button" data-toggle="collapse"
-														data-target="#EditReply${ReplyBean.arId}" aria-expanded="false"
+													<button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#EditReply${ReplyBean.arId}" aria-expanded="false"
 														aria-controls="EditReply${ReplyBean.arId}">修改回覆</button>
 												</div>
 											</c:if>
@@ -323,13 +326,11 @@ text-decoration: none;
 					<div style="width: 800px;">
 						<div class="collapse" id="EditReply${ReplyBean.arId}">
 							<div class="card card-body">
-								<form:form method="POST" action="${pageContext.request.contextPath}/EditReply"
-									modelAttribute="ArticleReplyBean">
+								<form:form method="POST" action="${pageContext.request.contextPath}/EditReply" modelAttribute="ArticleReplyBean">
 									<div class="form-group row">
 										<label for="arContent" class="col-sm-2 col-form-label">內文</label>
 										<div class="col-sm-10">
-											<textarea rows="5" class="form-control" id="arContent" name="arContent"
-												placeholder="文章內容">${ReplyBean.arContent}</textarea>
+											<textarea rows="5" class="form-control" id="arContent" name="arContent" placeholder="文章內容">${ReplyBean.arContent}</textarea>
 										</div>
 									</div>
 									<div class="form-group row">

@@ -122,7 +122,7 @@ p {
 }
 
 span {
-	font-size: 20px;
+	font-size: 15px;
 }
 </style>
 
@@ -159,8 +159,8 @@ span {
 		style="background-image: url(<c:url value='/css/RWDcss/images/bg_5.jpg'/>);">
 		<div style="margin: 0 10%;">
 
-			<div style="margin: 10% 2%; display: inline-block; width: 36%;" class="card">
-				<div class="card-header">購買人資訊</div>
+			<div style="margin: 10% 2%; display: inline-block; width: 38%;" class="card">
+				<div class="card-header"><span>購買人資訊</span></div>
 				<div class="card-body">
 					<form:form id="OrderForm" method="POST"
 						action="${pageContext.request.contextPath }/ConfirmOrder" modelAttribute="orderInfo">
@@ -171,17 +171,17 @@ span {
 							</tr>
 							<tr>
 								<td><h5 style="font-size: 20px">收件人姓名:</h5></td>
-								<td><form:input class="card-title" type="text" path="oReceiveName"
+								<td><form:input size="10" class="card-title" type="text" path="oReceiveName"
 										value="${orderBeanParam.oReceiveName}" /><span style="color: red">${errormsg.receivename}</span></td>
 							</tr>
 							<tr>
 								<td><h5 style="font-size: 20px">收件人地址:</h5></td>
-								<td><form:input class="card-title" type="text" path="oAddress"
+								<td><form:input size="20" class="card-title" type="text" path="oAddress"
 										value="${orderBeanParam.oAddress }" /><span style="color: red">${errormsg.receiveadr}</span></td>
 							</tr>
 							<tr>
 								<td><h5 style="font-size: 20px">收件人電話:</h5></td>
-								<td><form:input class="card-title" type="text" path="oReceivePhone"
+								<td><form:input size="10" class="card-title" type="text" path="oReceivePhone"
 										value="${orderBeanParam.oReceivePhone}" /><span style="color: red">${errormsg.receivephone}</span></td>
 							</tr>
 							<tr>
@@ -202,12 +202,12 @@ span {
 				</div>
 			</div>
 			<div id="UpdateDetail" style="margin: 20% 2%; display: inline-block; width: 50%" class="card">
-				<div class="card-header">購物明細</div>
+				<div class="card-header"><span>購物明細</span></div>
 				<div>
 					<table style="background-color: #99FF99; width: 100%;">
 						<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content}">
 							<tr>
-								<td style="width: 38%;"><p>${cart.value.pName}</p></td>
+								<td style="width: 32%;"><p>${cart.value.pName}</p></td>
 								<td><span>數量:</span></td>
 								<td>
 									<%-- 								<input style="width: 40px;" id="${cart.value.pId}" name="qty" type="number" --%>
@@ -218,7 +218,7 @@ span {
 								</select>
 								</td>
 								<td><span>單價:</span></td>
-								<td id="unit${cart.value.pId}"><span>${cart.value.pPrice}</span></td>
+								<td id="unit${cart.value.pId}"><span>$${cart.value.pPrice}</span></td>
 								<td><span>小計:</span></td>
 								<td style="width: 80px;" id="sub${cart.value.pId}"><span>$${cart.value.iQty *
 										cart.value.pPrice}</span></td>

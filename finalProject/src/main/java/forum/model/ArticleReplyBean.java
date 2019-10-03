@@ -24,6 +24,8 @@ public class ArticleReplyBean implements Serializable{
 	private Integer arDisplay;
 	private java.sql.Timestamp arAddTime;
 	private java.sql.Timestamp arEditTime;
+	private String arLike;
+	private String arDislike;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_ArticleId")
 	private ArticleBean ArticleBean;
@@ -109,6 +111,26 @@ public class ArticleReplyBean implements Serializable{
 
 	public void setArDisplay(Integer arDisplay) {
 		this.arDisplay = arDisplay;
+	}
+
+
+	public String getArLike() {
+		return arLike;
+	}
+
+
+	public void setArLike(String arLike) {
+		this.arLike = arLike;
+	}
+
+
+	public String getArDislike() {
+		return arDislike;
+	}
+
+
+	public void setArDislike(String arDislike) {
+		this.arDislike = arDislike;
 	}
 	
 }

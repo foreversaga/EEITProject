@@ -112,41 +112,39 @@ $(document).ready(function() {
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
-		id="ftco-navbar">
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
-			<a style="font-size:30px;" class="navbar-brand" href="<c:url value='/'/>">旅遊趣</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+			<a style="font-size: 30px;" class="navbar-brand" href="<c:url value='/'/>">旅遊趣</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false"
+				aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a style="font-size:20px;" href="<c:url value='/'/>" class="nav-link">Home</a></li>
-					<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
+					<li class="nav-item active"><a style="font-size: 20px;" href="<c:url value='/'/>" class="nav-link">Home</a></li>
+					<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
+					<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/ForumIndex/1'/>" class="nav-link">討論區</a></li>
 					<c:if test="${empty LoginOK}">
-						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/login'/>" class="nav-link">Login</a></li>
-						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
-						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/login'/>" class="nav-link">Login</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
 					</c:if>
 					<c:if test="${!empty LoginOK}">
-						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
-						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 					</c:if>
 				</ul>
 				<ul class="navbar-nav mr-right">
-					<li class="nav-item dropdown"><a style="font-size:20px;" class="nav-link dropdown-toggle" href="#ChangePage"
-						id="navbarDropdown" role="button" data-toggle="modal" aria-haspopup="true"
-						aria-expanded="false" data-target="#shoppingCartMenu">購物車</a></li>
+					<li class="nav-item dropdown"><a style="font-size: 20px;" class="nav-link dropdown-toggle" href="#ChangePage" id="navbarDropdown"
+						role="button" data-toggle="modal" aria-haspopup="true" aria-expanded="false" data-target="#shoppingCartMenu">購物車</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<!-- END nav -->
 	<!-- Modal -->
-	<div class="modal fade" id="shoppingCartMenu" tabindex="-1" role="dialog"
-		aria-labelledby="shoppingCartMenuTitle" aria-hidden="true" data-backdrop="false">
+	<div class="modal fade" id="shoppingCartMenu" tabindex="-1" role="dialog" aria-labelledby="shoppingCartMenuTitle" aria-hidden="true"
+		data-backdrop="false">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -166,15 +164,13 @@ $(document).ready(function() {
 				</div>
 				<div class="modal-body">
 					<c:if test="${empty shoppingCart.content }">
-						<p style="font-weight:8;font-size: 20px; text-align: center; margin-top: 5%">購物車內已無商品</p>
+						<p style="font-weight: 8; font-size: 20px; text-align: center; margin-top: 5%">購物車內已無商品</p>
 					</c:if>
 					<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
-						<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;"
-							src="<c:url value='/showPic/${cart.value.pId}'/>">
+						<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;" src="<c:url value='/showPic/${cart.value.pId}'/>">
 						<p style="line-height: 10px">${cart.value.pName}</p>
 						<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
-						<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button"
-								onclick="DeleteItem(this.id)" value="刪除" /> </span>
+						<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)" value="刪除" /> </span>
 						<c:choose>
 							<c:when test="${vs.last}">
 							</c:when>
@@ -191,14 +187,11 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
-	<div class="hero-wrap js-fullheight"
-		style="background-image: url(<c:url value='/css/RWDcss/images/bg_5.jpg'/>);">
+	<div class="hero-wrap js-fullheight" style="background-image: url(<c:url value='/css/RWDcss/images/bg_5.jpg'/>);">
 		<div class="overlay"></div>
 		<div class="container">
-			<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
-				data-scrollax-parent="true">
-				<div class="col-md-9 ftco-animate text-center"
-					data-scrollax=" properties: { translateY: '70%' }">
+			<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+				<div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
 					<h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">想去哪裡玩呢？</h1>
 				</div>
 			</div>
@@ -229,7 +222,7 @@ $(document).ready(function() {
 					<div class="row">
 						<div style="width: 100%; margin: 0 5% 5% 2%; border-bottom: 1px solid gray;">
 							<table>
-								<tr>
+								<tr style="font-size: 20px;">
 									<td style="width: 20%">排序方式:</td>
 									<td style="width: 22%"><a href="<c:url value='/PriceDesc/1'/>">價格高→低</a></td>
 									<td style="width: 22%"><a href="<c:url value='/PriceAsc/1'/>">價格低→高</a></td>
@@ -259,8 +252,7 @@ $(document).ready(function() {
 							</c:if>
 							<div class="col-md-4 ftco-animate">
 								<div class="destination">
-									<a href="<c:url value='/ProductSingle/${productBean.pId}'/>"
-										class="img img-2 d-flex justify-content-center align-items-center"
+									<a href="<c:url value='/ProductSingle/${productBean.pId}'/>" class="img img-2 d-flex justify-content-center align-items-center"
 										style="background-image: url(<c:url value='/showPic/${productBean.pId}'/>);"> </a>
 									<div class="text p-3">
 										<div class="d-flex" style="height: 120px;">
@@ -393,8 +385,7 @@ $(document).ready(function() {
 						<h2 class="ftco-heading-2">Have a Questions?</h2>
 						<div class="block-23 mb-3">
 							<ul>
-								<li><span class="icon icon-map-marker"></span><span class="text">106台北市大安區復興南路一段390號
-										2,3號</span></li>
+								<li><span class="icon icon-map-marker"></span><span class="text">106台北市大安區復興南路一段390號 2,3號</span></li>
 								<li><a href="#"><span class="icon icon-phone"></span><span class="text">02-23766198</span></a></li>
 								<li><a href="#"><span class="icon icon-envelope"></span><span class="text">TravleFun@outlook.com</span></a></li>
 							</ul>
@@ -411,8 +402,7 @@ $(document).ready(function() {
 	<div id="ftco-loader" class="show fullscreen">
 		<svg class="circular" width="48px" height="48px">
 			<circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
-			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
-				stroke="#F96D00" /></svg>
+			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
 
 

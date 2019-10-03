@@ -58,9 +58,10 @@ function CheckOutButton(){
 // };
 </script>
 <style>
-*{
-font-family: Microsoft JhengHei;
+* {
+	font-family: Microsoft JhengHei;
 }
+
 .PageButton {
 	color: #20bf6b !important;
 	text-transform: uppercase;
@@ -85,28 +86,28 @@ font-family: Microsoft JhengHei;
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 		<div class="container">
 			<a class="navbar-brand" href="<c:url value='/'/>">旅遊趣</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false"
+				aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="<c:url value='/'/>" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
+					<li class="nav-item active"><a style="font-size: 20px;" href="<c:url value='/'/>" class="nav-link">Home</a></li>
+					<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
+					<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/ForumIndex/1'/>" class="nav-link">討論區</a></li>
 					<c:if test="${empty LoginOK}">
-						<li class="nav-item"><a href="<c:url value='/login'/>" class="nav-link">Login</a></li>
-						<li class="nav-item"><a href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/login'/>" class="nav-link">Login</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
 					</c:if>
 					<c:if test="${!empty LoginOK}">
-						<li class="nav-item"><a href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
-						<li class="nav-item"><a href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
 					</c:if>
 				</ul>
 				<ul class="navbar-nav mr-right">
-					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-						id="navbarDropdown" role="button" data-toggle="modal" aria-haspopup="true"
-						aria-expanded="false" data-target="#shoppingCartMenu">購物車</a> <!-- 						<div id="shoppingCartMenu" class="dropdown-menu" aria-labelledby="navbarDropdown"></div> -->
+					<li class="nav-item dropdown"><a style="font-size: 20px;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="modal"
+						aria-haspopup="true" aria-expanded="false" data-target="#shoppingCartMenu">購物車</a> <!-- 						<div id="shoppingCartMenu" class="dropdown-menu" aria-labelledby="navbarDropdown"></div> -->
 					</li>
 				</ul>
 			</div>
@@ -114,8 +115,8 @@ font-family: Microsoft JhengHei;
 	</nav>
 
 	<!-- Modal -->
-	<div class="modal fade" id="shoppingCartMenu" tabindex="-1" role="dialog"
-		aria-labelledby="shoppingCartMenuTitle" aria-hidden="true" data-backdrop="false">
+	<div class="modal fade" id="shoppingCartMenu" tabindex="-1" role="dialog" aria-labelledby="shoppingCartMenuTitle" aria-hidden="true"
+		data-backdrop="false">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -138,12 +139,10 @@ font-family: Microsoft JhengHei;
 						<p style="text-align: center; margin-top: 10%">購物車內已無商品</p>
 					</c:if>
 					<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content }">
-						<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;"
-							src="<c:url value='/showPic/${cart.value.pId}'/>">
+						<img style="width: 80px; float: left; vertical-align: center; margin-right: 1%;" src="<c:url value='/showPic/${cart.value.pId}'/>">
 						<p style="line-height: 10px">${cart.value.pName}</p>
 						<span style="line-height: 5px">數量:${cart.value.iQty} 價格:${cart.value.pPrice}</span>
-						<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button"
-								onclick="DeleteItem(this.id)" value="刪除" /> </span>
+						<span><input class="btn btn-outline-danger" id="${cart.value.pId}" type="button" onclick="DeleteItem(this.id)" value="刪除" /> </span>
 						<c:choose>
 							<c:when test="${vs.last}">
 							</c:when>
@@ -161,23 +160,21 @@ font-family: Microsoft JhengHei;
 		</div>
 	</div>
 	<div style="margin: 5% auto; width: 1205px;">
-		<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#NewArticle"
-			aria-expanded="false" aria-controls="NewArticle">發表新文章</button>
+		<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#NewArticle" aria-expanded="false" aria-controls="NewArticle">發表新文章</button>
 		<div class="collapse" id="NewArticle">
 			<div class="card card-body">
 				<!-- 			發表文章表單 -->
-				<form:form method="POST" action="${pageContext.request.contextPath}/PostArticle"
-					modelAttribute="ArticleBean">
+				<form:form method="POST" action="${pageContext.request.contextPath}/PostArticle" modelAttribute="ArticleBean">
 					<div class="form-group row">
 						<label for="aTitle" class="col-sm-2 col-form-label">標題</label>
 						<div class="col-sm-10">
-							<form:input type="text" id="aTitle" class="form-control" path="aTitle" placeholder="標題" />
+							<input type="text" id="aTitle" class="form-control" name="aTitle" placeholder="標題" />
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="arContent" class="col-sm-2 col-form-label">內文</label>
 						<div class="col-sm-10">
-							<textarea rows="5" class="form-control" id="arContent" name="arContent" placeholder="文章內容"></textarea>
+							<textarea rows="5" class="form-control" id="aContent" name="aContent" placeholder="文章內容"></textarea>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -200,9 +197,29 @@ font-family: Microsoft JhengHei;
 					<div class="container mt-5 border">
 						<div class="row">
 							<div class="col-md-3 border">
-								<img style="margin: 6% 0;height: 120px;" width="100%" src="<c:url value='/showmPic/${ArticleBean.mId}'/>">
-								<div class="row">
-									<div style="text-align: center;" class="col-md-12">good button</div>
+								<img style="margin: 6% 0" width="100%" src="<c:url value='/showmPic/${ArticleBean.mId}'/>">
+								<div class="row mb-3">
+									<div style="text-align: center;" class="col-md-6">
+										<form:form method="post" modelAttribute="ThumbBean" action="${pageContext.request.contextPath}/AddThumb/0/${ArticleBean.aId}/Article"
+											name="likeform${ArticleBean.aId}">
+											<form:input type="hidden" path="mId" value="${LoginOK.mId}" />
+											<form:input type="hidden" path="aId" value="${ArticleBean.aId}" />
+											<a class="thumb" href="javascript:document.likeform${ArticleBean.aId}.submit()"> <img width="50%" src="<c:url value='/img/thumb.png'/>">
+											</a>
+											<span>${ArticleBean.aLike}</span>
+										</form:form>
+									</div>
+									<div style="text-align: center;" class="col-md-6">
+										<form:form method="post" modelAttribute="ThumbBean" action="${pageContext.request.contextPath}/AddThumb/1/${ArticleBean.aId}/Article"
+											name="dislikeform${ArticleBean.aId}">
+											<form:input type="hidden" path="mId" value="${LoginOK.mId}" />
+											<form:input type="hidden" path="aId" value="${ArticleBean.aId}" />
+											<a class="thumb" href="javascript:document.dislikeform${ArticleBean.aId}.submit()"> <img width="36%"
+												src="<c:url value='/img/dislike.jpg'/>">
+											</a>
+											<span>${ArticleBean.aDislike}</span>
+										</form:form>
+									</div>
 								</div>
 							</div>
 							<div class="col-md-9">
@@ -214,86 +231,30 @@ font-family: Microsoft JhengHei;
 									<div style="text-align: right; font-size: 15px;" class="col-md-5">
 										<div class="row">
 											<div class="col-md-2"></div>
-											<div class="col-md-2">
-											</div>
+											<div class="col-md-2"></div>
 											<div class="col-md-8">
 												<span>${ArticleBean.mName}</span>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-ml-3"></div>
-											<div class="col-mr-9">
-
-											</div>
+											<div class="col-mr-9"></div>
 										</div>
 									</div>
 								</div>
 								<div class="row border-bottom">
 									<div class="col-md-8"></div>
 								</div>
-								<div style="height: 80px;" id="PreContent${ArticleBean.aId}" class="col-md-9">
-									<p style="font-size: 15px;">${ArticleBean.aPreContent}</p>
+								<div class="row">
+									<div style="height: 80px;" id="PreContent${ArticleBean.aId}" class="col-md-12">
+										<p style="font-size: 15px;">${ArticleBean.aPreContent}</p>
+									</div>
 								</div>
-								<div style="display: none;" id="aContent${ArticleBean.aId}" class="col-md-9">
-									<span style="font-size: 15px;">${ArticleBean.aContent}</span>
-								</div>
-								<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>" class="ShowArticle${ArticleBean.aId}"
-									id="${ArticleBean.aId}"><span>顯示文章</span></a> 
-<!-- 									<a style="display: none" href="#" -->
-<%-- 									onclick="CloseArticle(this.id)" class="CloseArticle${ArticleBean.aId}" --%>
-<%-- 									id="${ArticleBean.aId}"><span>收起文章</span></a> --%>
+								<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>" class="ShowArticle${ArticleBean.aId}" id="${ArticleBean.aId}"><span>顯示文章</span></a>
 								<p style="font-size: 15px; text-align: right;">${ArticleBean.aAddTime}</p>
 							</div>
 						</div>
 					</div>
-					<!-- 					文章回覆 -->
-<%-- 					<div id="Reply${ArticleBean.aId}" style="display: none; width: 600px;" class="container mt-1"> --%>
-<!-- 						<div class="row"> -->
-<!-- 							<div class="col-md-3"></div> -->
-<!-- 							<div class="col-md-9 border"> -->
-<!-- 								<div class="row"> -->
-<!-- 									<div class="col-md-3 border"> -->
-<%-- 										<img style="margin: 6% 0" width="100%" src="<c:url value='/showmPic/${ArticleBean.mId}'/>"> --%>
-<!-- 										<div class="row"> -->
-<!-- 											<div style="text-align: center;" class="col-md-12">good button</div> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 									<div class="col-md-9"> -->
-<!-- 										<div class="row"> -->
-<!-- 											<div class="col-md-5"> -->
-<%-- 												<span>用戶:${ArticleBean.mName}</span> --%>
-<!-- 											</div> -->
-<!-- 											<div style="text-align: right; font-size: 15px;" class="col-md-7"> -->
-<!-- 												<div class="row"> -->
-<!-- 													<div class="col-md-4"></div> -->
-<!-- 													<div class="col-md-4"> -->
-<%-- 														<c:if test="${ArticleBean.mId==LoginOK.mId}"> --%>
-<!-- 															<a href="#">修改</a> -->
-<%-- 														</c:if> --%>
-<!-- 													</div> -->
-<!-- 													<div class="col-md-4"> -->
-<!-- 														<a href="#">回覆</a> -->
-<!-- 													</div> -->
-<!-- 												</div> -->
-<!-- 												<div class="row"> -->
-<!-- 													<div class="col-ml-3"></div> -->
-<!-- 													<div class="col-mr-9"></div> -->
-<!-- 												</div> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 										<div class="row border-bottom"> -->
-<!-- 											<div class="col-md-8"></div> -->
-<!-- 										</div> -->
-<%-- 										<div id="aContent${ArticleBean.aId}" class="col-md-9"> --%>
-<%-- 											<span style="font-size: 15px;">${ArticleBean.aContent}</span> --%>
-<!-- 										</div> -->
-<%-- 										<p style="font-size: 15px; text-align: right;">${ArticleBean.aAddTime}</p> --%>
-<!-- 									</div> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-					<!-- 					文章回覆 -->
 				</div>
 
 			</c:forEach>

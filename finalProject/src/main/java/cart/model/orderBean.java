@@ -28,7 +28,7 @@ public class orderBean implements Serializable {
 	private Integer oTotalAmount;
 	private java.sql.Timestamp oTimestamp;
 	private java.sql.Timestamp oPaymentDate;
-	@Column(columnDefinition = "String default 未付款")
+	@Column(columnDefinition = "varchar(255) default '未付款'")
 	private String oPaymentStatus;
 	private String oAddress;
 	private String mAccount;
