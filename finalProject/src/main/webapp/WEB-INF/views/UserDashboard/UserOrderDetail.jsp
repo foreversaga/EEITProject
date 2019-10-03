@@ -202,7 +202,7 @@ body {
 		</button>
 		<div class="navbar-collapse collapse" id="collapsingNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link" style="margin-left:440px"
+				<li class="nav-item active"><a class="nav-link" style="margin-left:180px"
 					href="<c:url value='/'/>">旅遊趣<span class="sr-only"></span></a></li>
 				<!-- <li class="nav-item">
                     <a class="nav-link" href="//www.codeply.com">Link</a>
@@ -285,7 +285,7 @@ body {
                     <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">About</a>
                 </li> -->
 				<!-- 用戶選單 -->
-				<ul class="navbar-nav ml-auto"style="color: white;margin-right:25%">
+				<ul class="navbar-nav ml-auto"style="color: white;margin-right:16%">
 				<li class="nav-item "><a class="nav-link dropdown-toggle"
 					href="#" id="userDropdown" role="button" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false"> <span
@@ -294,7 +294,7 @@ body {
 						<img src="<c:url value='/showmPic/${LoginOK.mId}'/>" class="img-circle " title="${LoginOK.mAccount}" style=" width:30px; height:30px; border-radius:50%; "/>
 				</a> <!-- Dropdown - User Information -->
 					<div
-						class="dropdown-menu dropdown-menu-right shadow animated--grow-in" style=" margin-right:510px"
+						class="dropdown-menu dropdown-menu-right shadow animated--grow-in" style=" margin-right:270px"
 						aria-labelledby="userDropdown">
 						<a class="dropdown-item" href="<c:url value='/UpdateMemberForm'/>">
 							<i class=" mr-2 text-gray-400 fa fa-cogs" style="color: gray;"></i>

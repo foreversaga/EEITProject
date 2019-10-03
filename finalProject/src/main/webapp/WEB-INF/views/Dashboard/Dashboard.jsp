@@ -145,7 +145,7 @@ body {
 		</button>
 		<div class="navbar-collapse collapse" id="collapsingNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item active"><a class="nav-link" style="margin-left:470px"
+				<li class="nav-item active"><a class="nav-link" style="margin-left:210px;width:80px"
 					href="<c:url value='/'/>">旅遊趣<span class="sr-only"></span></a></li>
 			</ul>
 
@@ -214,7 +214,7 @@ body {
 						style="width: 30px; height: 30px; border-radius: 50%;" />
 				</a> <!-- Dropdown - User Information -->
 					<div
-						class="dropdown-menu dropdown-menu-right shadow animated--grow-in mt-2" style=" margin-right:510px"
+						class="dropdown-menu dropdown-menu-right shadow animated--grow-in mt-2" style=" margin-right:238px"
 						aria-labelledby="userDropdown"
 						style="font-family: 'Noto Serif TC', serif;">
 						<a class="dropdown-item" href="<c:url value='/Dashboard'/>"> <i
