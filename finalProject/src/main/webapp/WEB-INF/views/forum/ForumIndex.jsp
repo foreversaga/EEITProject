@@ -80,6 +80,9 @@ function CheckOutButton(){
 	border-color: #494949 !important;
 	transition: all 0.3s ease 0s;
 }
+a.thumb:hover {
+	text-decoration: none;
+}
 </style>
 </head>
 <body>

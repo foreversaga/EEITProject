@@ -36,8 +36,8 @@ public class ForumController {
 		int totalPage = aService.getTotalPages();
 		List<ArticleBean> list = aService.getAllArticle();
 		for (ArticleBean ab : list) {
-			String NewLike = aService.getThumbCount(ab.getaId(), 0).toString();
-			String NewDislike = aService.getThumbCount(ab.getaId(), 1).toString();
+			String NewLike = aService.getArticleThumbCount(ab.getaId(), 0).toString();
+			String NewDislike = aService.getArticleThumbCount(ab.getaId(), 1).toString();
 			ab.setaLike(NewLike);
 			ab.setaDislike(NewDislike);
 			aService.ReplyArticle(ab);
@@ -91,19 +91,27 @@ public class ForumController {
 	@RequestMapping("/ShowArticle/{aId}")
 	public String ShowArticle(@PathVariable Integer aId, HttpSession session, Model model) {
 		ArticleBean ab = aService.getArticle(aId);
-		ArticleReplyBean arb = new ArticleReplyBean();
+		ArticleReplyBean newarb = new ArticleReplyBean();
 		ThumbBean tb = new ThumbBean();
+		String alike = aService.getArticleThumbCount(aId, 0).toString();
+		String adislike = aService.getArticleThumbCount(aId, 1).toString();
 		List<ArticleReplyBean> list = aService.getArticleReply(aId);
-		String like = aService.getThumbCount(aId, 0).toString();
-		String dislike = aService.getThumbCount(aId, 1).toString();
+		ab.setaLike(alike);
+		ab.setaDislike(adislike);
+		aService.ReplyArticle(ab);
+		for (ArticleReplyBean arb : list) {
+			String arlike = aService.getReplyThumbCount(arb.getArId(), 0).toString();
+			String ardislike = aService.getReplyThumbCount(arb.getArId(), 1).toString();
+			arb.setArLike(arlike);
+			arb.setArDislike(ardislike);
+			aService.EditReply(arb);
+		}
 		String ArticlePage = "ShowArticle";
 		session.setAttribute("ArticlePage", ArticlePage);
 		model.addAttribute("ReplyList", list);
-		model.addAttribute("like", like);
-		model.addAttribute("dislike", dislike);
 		model.addAttribute("ArticleBean", ab);
 		model.addAttribute("ThumbBean", tb);
-		model.addAttribute("ArticleReplyBean", arb);
+		model.addAttribute("ArticleReplyBean", newarb);
 		return "forum/ArticlePage";
 	}
 
@@ -198,8 +206,8 @@ public class ForumController {
 				tb.setaId(Id);
 				aService.AddThumb(tb);
 			}
-			String NewLike = aService.getThumbCount(Id, 0).toString();
-			String NewDislike = aService.getThumbCount(Id, 1).toString();
+			String NewLike = aService.getArticleThumbCount(Id, 0).toString();
+			String NewDislike = aService.getArticleThumbCount(Id, 1).toString();
 			ArticleBean ab = aService.getArticle(Id);
 			ab.setaLike(NewLike);
 			ab.setaDislike(NewDislike);
@@ -211,7 +219,7 @@ public class ForumController {
 				sb.append("redirect:/ForumIndex/1");
 			}
 			return sb.toString();
-		}else {
+		} else {
 			ThumbBean checkTb = aService.getReplyThumb(Id, mb.getmId());
 			if (checkTb != null) {
 				checkTb.setAtThumb(thumb);
@@ -222,16 +230,16 @@ public class ForumController {
 				tb.setArId(Id);
 				aService.AddThumb(tb);
 			}
-			String NewLike = aService.getThumbCount(Id, 0).toString();
-			String NewDislike = aService.getThumbCount(Id, 1).toString();
+			String NewLike = aService.getReplyThumbCount(Id, 0).toString();
+			String NewDislike = aService.getReplyThumbCount(Id, 1).toString();
 			ArticleReplyBean arb = aService.getOneReply(Id);
 			arb.setArLike(NewLike);
 			arb.setArDislike(NewDislike);
 			aService.EditReply(arb);
-			String page=(String) session.getAttribute("ArticlePage");
-			if(page.equals("ShowArticle")) {
+			String page = (String) session.getAttribute("ArticlePage");
+			if (page.equals("ShowArticle")) {
 				sb.append("redirect:/ShowArticle/").append(Id);
-			}else {
+			} else {
 				sb.append("redirect:/ForumIndex/1");
 			}
 		}

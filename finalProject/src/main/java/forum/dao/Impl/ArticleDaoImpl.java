@@ -112,7 +112,7 @@ public class ArticleDaoImpl implements ArticleDao {
 		tb = (ThumbBean) session.createQuery(hql).setParameter("aId", aId).setParameter("mId", mId).uniqueResult();
 		return tb;
 	}
-	
+
 	@Override
 	public ThumbBean getReplyThumb(Integer arId, Integer mId) {
 		ThumbBean tb = null;
@@ -123,10 +123,18 @@ public class ArticleDaoImpl implements ArticleDao {
 	}
 
 	@Override
-	public Long getThumbCount(Integer aId, Integer Thumb) {
+	public Long getArticleThumbCount(Integer aId, Integer Thumb) {
 		Session session = factory.getCurrentSession();
 		String hql = "SELECT COUNT(*) FROM ThumbBean tb WHERE tb.aId =:aId and tb.atThumb =:thumb";
 		Long n = (Long) session.createQuery(hql).setParameter("aId", aId).setParameter("thumb", Thumb).uniqueResult();
+		return n;
+	}
+
+	@Override
+	public Long getReplyThumbCount(Integer arId, Integer Thumb) {
+		Session session = factory.getCurrentSession();
+		String hql = "SELECT COUNT(*) FROM ThumbBean tb WHERE tb.arId =:arId and tb.atThumb =:thumb";
+		Long n = (Long) session.createQuery(hql).setParameter("arId", arId).setParameter("thumb", Thumb).uniqueResult();
 		return n;
 	}
 
@@ -139,7 +147,5 @@ public class ArticleDaoImpl implements ArticleDao {
 		list = session.createQuery(hql).setMaxResults(num).list();
 		return list;
 	}
-
-
 
 }

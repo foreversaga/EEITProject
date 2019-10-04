@@ -90,13 +90,18 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 	
 	@Override
-	public Long getThumbCount(Integer aId, Integer Thumb) {
-		return dao.getThumbCount(aId, Thumb);
+	public Long getArticleThumbCount(Integer aId, Integer Thumb) {
+		return dao.getArticleThumbCount(aId, Thumb);
 	}
 
 	@Override
 	public List<ArticleBean> getIndexArticle(Integer num) {
 		return dao.getIndexArticle(num);
+	}
+
+	@Override
+	public Long getReplyThumbCount(Integer arId, Integer Thumb) {
+		return dao.getReplyThumbCount(arId, Thumb);
 	}
 
 }

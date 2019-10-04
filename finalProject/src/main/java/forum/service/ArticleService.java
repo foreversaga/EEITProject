@@ -36,7 +36,9 @@ public interface ArticleService {
 	
 	public ThumbBean getReplyThumb(Integer arId, Integer mId);
 	
-	public Long getThumbCount(Integer aId,Integer Thumb);
+	public Long getArticleThumbCount(Integer aId,Integer Thumb);
+	
+	public Long getReplyThumbCount(Integer arId,Integer Thumb);
 	
 	public List<ArticleBean> getIndexArticle(Integer num);
 }
