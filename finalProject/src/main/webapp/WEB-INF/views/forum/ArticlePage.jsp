@@ -212,7 +212,7 @@ a.thumb:hover {
 						<img style="margin: 6% 0" width="100%" src="<c:url value='/showmPic/${ArticleBean.mId}'/>">
 						<div class="row mb-3">
 							<div style="text-align: center;" class="col-md-6">
-								<form:form method="post" modelAttribute="ThumbBean" action="${pageContext.request.contextPath}/AddThumb/0/${ArticleBean.aId}" name="form1">
+								<form:form method="post" modelAttribute="ThumbBean" action="${pageContext.request.contextPath}/AddThumb/0/${ArticleBean.aId}/Article" name="form1">
 									<form:input type="hidden" path="mId" value="${LoginOK.mId}" />
 									<a class="thumb" href="javascript:document.form1.submit()"> <img width="26%" src="<c:url value='/img/thumb.png'/>">
 									</a>
@@ -220,7 +220,7 @@ a.thumb:hover {
 								</form:form>
 							</div>
 							<div style="text-align: center;" class="col-md-6">
-								<form:form method="post" modelAttribute="ThumbBean" action="${pageContext.request.contextPath}/AddThumb/1/${ArticleBean.aId}" name="form2">
+								<form:form method="post" modelAttribute="ThumbBean" action="${pageContext.request.contextPath}/AddThumb/1/${ArticleBean.aId}/Article" name="form2">
 									<form:input type="hidden" path="mId" value="${LoginOK.mId}" />
 									<a class="thumb" href="javascript:document.form2.submit()"> <img width="18%" src="<c:url value='/img/dislike.jpg'/>">
 									</a>

@@ -41,6 +41,11 @@ public class ForumController {
 				String precontent = ab.getaContent().substring(0, 50) + "...";
 				ab.setaContent(precontent);
 			}
+			String NewLike = aService.getArticleThumbCount(ab.getaId(), 0).toString();
+			String NewDislike = aService.getArticleThumbCount(ab.getaId(), 1).toString();
+			ab.setaLike(NewLike);
+			ab.setaDislike(NewDislike);
+			
 		}
 		String ArticlePage = "ForumIndex";
 		session.setAttribute("ArticlePage", ArticlePage);

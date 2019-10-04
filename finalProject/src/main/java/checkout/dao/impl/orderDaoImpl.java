@@ -66,6 +66,12 @@ public class orderDaoImpl implements orderDao {
 	public orderBean updateOrderAfterCheckout(int TradeNoDB, Timestamp paymentDate, String mAccount) {
 		Session session = factory.getCurrentSession();
 		String hql = "FROM orderBean ob WHERE ob.mAccount=:account and ob.oId=:id";
+		if (mAccount == null || mAccount.trim().length() == 0) {
+			mAccount = "member01";
+		}
+		if (paymentDate == null) {
+			paymentDate = new Timestamp(System.currentTimeMillis());
+		}
 		orderBean ob = (orderBean) session.createQuery(hql).setParameter("account", mAccount)
 				.setParameter("id", TradeNoDB).uniqueResult();
 		ob.setoPaymentDate(paymentDate);

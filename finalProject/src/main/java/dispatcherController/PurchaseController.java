@@ -211,10 +211,13 @@ public class PurchaseController {
 			}
 			if (ReturnCode.equals("1")) {
 				ob = oService.updateOrderAfterCheckout(TradeNoDB, paymentDate, mAccount);
+			}else if(ReturnCode.equals("0")) {
+				return "checkout/ErrorPage";
 			}
 			session.setAttribute("paymentInfo", ob);
 		} catch (IOException e) {
 			e.printStackTrace();
+			return "checkout/ErrorPage";
 		}
 		return "checkout/paidPage";
 	}
