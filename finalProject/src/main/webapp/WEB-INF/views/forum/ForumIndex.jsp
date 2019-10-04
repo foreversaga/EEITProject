@@ -200,7 +200,7 @@ a.thumb:hover {
 					<div class="container mt-5 border">
 						<div class="row">
 							<div class="col-md-3 border">
-								<img style="margin: 6% 0" width="100%" src="<c:url value='/showmPic/${ArticleBean.mId}'/>">
+								<img style="margin: 6% 0;height: 120px;" width="100%"  src="<c:url value='/showmPic/${ArticleBean.mId}'/>">
 								<div class="row mb-3">
 									<div style="text-align: center;" class="col-md-6">
 										<form:form method="post" modelAttribute="ThumbBean" action="${pageContext.request.contextPath}/AddThumb/0/${ArticleBean.aId}/Article"
@@ -250,7 +250,7 @@ a.thumb:hover {
 								</div>
 								<div class="row">
 									<div style="height: 80px;" id="PreContent${ArticleBean.aId}" class="col-md-12">
-										<p style="font-size: 15px;">${ArticleBean.aPreContent}</p>
+										<p style="font-size: 15px;">${ArticleBean.aContent}</p>
 									</div>
 								</div>
 								<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>" class="ShowArticle${ArticleBean.aId}" id="${ArticleBean.aId}"><span>顯示文章</span></a>

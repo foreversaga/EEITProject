@@ -37,8 +37,20 @@ public class MainController {
 	public ModelAndView home() {
 		ModelAndView mav = new ModelAndView("index");
 		List<productBean> list1 = pService.getPopularFive();
-		List<reviewBean> list2 = rService.getIndexReview(3);
-		List<ArticleBean> list3=aService.getIndexArticle(4);
+		List<reviewBean> list2 = rService.getIndexReview(5);
+		List<ArticleBean> list3 = aService.getIndexArticle(4);
+		for (productBean pb : list1) {
+			if (pb.getpContent().length() > 50) {
+				String precontent = pb.getpContent().substring(0, 50) + "...";
+				pb.setpContent(precontent);
+			}
+		}
+		for (ArticleBean ab : list3) {
+			if (ab.getaContent().length() > 50) {
+				String precontent = ab.getaContent().substring(0, 50) + "...";
+				ab.setaContent(precontent);
+			}
+		}
 		mav.addObject("TopFiveList", list1);
 		mav.addObject("reviewList", list2);
 		mav.addObject("ArticleList", list3);
@@ -70,7 +82,6 @@ public class MainController {
 		return "/UserDashboard/UserDashboard";
 	}
 
-
 	@RequestMapping("/Dashboard")
 	public String Dashboard() {
 		return "/Dashboard/Dashboard";
@@ -88,23 +99,23 @@ public class MainController {
 	@RequestMapping("/Tokyotheme")
 	public ModelAndView Tokyotheme() {
 		ModelAndView mav = new ModelAndView("UserDashboard/Tokyotheme");
-		List<productBean>list=pService.getAllProductList();
+		List<productBean> list = pService.getAllProductList();
 		mav.addObject("productList", list);
 		return mav;
 	}
-	
+
 	@RequestMapping("/Kyototheme")
 	public ModelAndView Kyototheme() {
 		ModelAndView mav = new ModelAndView("UserDashboard/Kyototheme");
-		List<productBean>list=pService.getAllProductList();
+		List<productBean> list = pService.getAllProductList();
 		mav.addObject("productList", list);
 		return mav;
 	}
-	
+
 	@RequestMapping("/Osakatheme")
 	public ModelAndView Osakatheme() {
 		ModelAndView mav = new ModelAndView("UserDashboard/Osakatheme");
-		List<productBean>list=pService.getAllProductList();
+		List<productBean> list = pService.getAllProductList();
 		mav.addObject("productList", list);
 		return mav;
 	}

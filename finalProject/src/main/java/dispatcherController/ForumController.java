@@ -35,12 +35,12 @@ public class ForumController {
 		aService.setPageNo(pageNo);
 		int totalPage = aService.getTotalPages();
 		List<ArticleBean> list = aService.getAllArticle();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		for (ArticleBean ab : list) {
-			String NewLike = aService.getArticleThumbCount(ab.getaId(), 0).toString();
-			String NewDislike = aService.getArticleThumbCount(ab.getaId(), 1).toString();
-			ab.setaLike(NewLike);
-			ab.setaDislike(NewDislike);
-			aService.ReplyArticle(ab);
+			if (ab.getaContent().length() > 50) {
+				String precontent = ab.getaContent().substring(0, 50) + "...";
+				ab.setaContent(precontent);
+			}
 		}
 		String ArticlePage = "ForumIndex";
 		session.setAttribute("ArticlePage", ArticlePage);

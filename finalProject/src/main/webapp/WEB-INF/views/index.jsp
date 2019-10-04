@@ -297,7 +297,7 @@ div#shoppingCartMenu {
 										<span class="price per-price">$${Top5.pPrice}<br></span>
 									</div>
 								</div>
-								<p style="height: 210px;">${Top5.pContent}</p>
+								<p style="height: 170px; font-size: 20px;">${Top5.pContent}</p>
 								<hr>
 								<p class="bottom-area d-flex">
 									<a class="btn btn-outline-info" href="<c:url value='/ProductSingle/${Top5.pId}'/>">詳細資訊</a>
@@ -314,7 +314,7 @@ div#shoppingCartMenu {
 		<div class="container">
 			<div class="row justify-content-start">
 				<div class="col-md-5 heading-section ftco-animate">
-					<span class="subheading">Best Directory Website</span>
+					<span class="subheading">最好的旅遊資訊平台</span>
 					<h2 class="mb-4 pb-3">
 						<strong>為什麼</strong> 選擇我們?
 					</h2>
@@ -342,9 +342,9 @@ div#shoppingCartMenu {
 												</span>
 											</div>
 											<div class="text ml-md-4">
-												<p class="name">${reviewBean.rTitle}</p>
-												<p class="mb-5">${reviewBean.rReview}</p>
-												<span class="position">用戶:${reviewBean.mName}</span>
+												<p style="font-size: 25px;" class="name">${reviewBean.rTitle}</p>
+												<p style="font-size: 20px;" class="mb-5">${reviewBean.rReview}</p>
+												<span style="font-size: 20px;" class="position">用戶:${reviewBean.mName}</span>
 											</div>
 										</div>
 									</div>
@@ -374,19 +374,16 @@ div#shoppingCartMenu {
 							<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>" class="block-20"
 								style="background-image: url(<c:url value='/showmPic/${ArticleBean.mId}'/>);"> </a>
 							<div class="text p-4 d-block">
-								<span class="tag">${ArticleBean.mName}</span>
-								<h3 class="heading mt-3">
+								<span style="font-size: 20px;" class="tag">${ArticleBean.mName}</span>
+								<h3 style="height: 200px;" class="heading mt-3">
 									<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>">${ArticleBean.aContent}</a>
 								</h3>
 								<div class="meta mb-3">
 									<div>
-										<a href="#">August 12, 2018</a>
+										<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>">${ArticleBean.aAddTime}</a>
 									</div>
 									<div>
-										<a href="#">Admin</a>
-									</div>
-									<div>
-										<a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
+										<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>" class="meta-chat"><span class="icon-chat"></span> 3</a>
 									</div>
 								</div>
 							</div>

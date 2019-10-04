@@ -252,14 +252,14 @@ public class productDaoImpl implements productDao {
 		String hql1 = "FROM productBean pb WHERE pb.pId = :id";
 		String hql2 = "FROM productBean";
 		productBean pb = (productBean) session.createQuery(hql1).setParameter("id", pId).uniqueResult();
-		Double centerLat=Double.parseDouble(pb.getpLat());
-		Double centerLng=Double.parseDouble(pb.getpLng());
+		Double centerLat = Double.parseDouble(pb.getpLat());
+		Double centerLng = Double.parseDouble(pb.getpLng());
 		List<productBean> mapList = new ArrayList<>();
 		List<productBean> allList = session.createQuery(hql2).list();
 		for (productBean allListPb : allList) {
 			Double pbLat = Double.parseDouble(allListPb.getpLat());
 			Double pbLng = Double.parseDouble(allListPb.getpLng());
-			if (Math.abs(pbLat - centerLat) < 0.5&&Math.abs(pbLng - centerLng) < 0.5) {
+			if (Math.abs(pbLat - centerLat) < 0.5 && Math.abs(pbLng - centerLng) < 0.5) {
 				mapList.add(allListPb);
 			}
 		}
