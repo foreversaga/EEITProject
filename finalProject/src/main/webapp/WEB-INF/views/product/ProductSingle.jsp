@@ -334,7 +334,7 @@ var infowindow = new google.maps.InfoWindow();
   }
   function addMarker(e) {
 	  	var loc = new google.maps.LatLng(e.lat,e.lng);
-	  	var link = '<a href="<c:url value="/ProductSingle/'+e.pId+'"/>">'+e.label+'</a>';
+	  	var link = '<a style="font-size:20px" href="<c:url value="/ProductSingle/'+e.pId+'"/>">'+e.label+'</a>';
 		var marker = new google.maps.Marker({
 			position : loc,
 			map : map

@@ -95,6 +95,7 @@ div.dropdown-menu {
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a style="font-size: 20px;" href="<c:url value='/'/>" class="nav-link">Home</a></li>
 					<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/products/1'/>" class="nav-link">Products</a></li>
+					<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/ForumIndex/1'/>" class="nav-link">討論區</a></li>
 					<c:if test="${empty LoginOK}">
 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/login'/>" class="nav-link">Login</a></li>
 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>

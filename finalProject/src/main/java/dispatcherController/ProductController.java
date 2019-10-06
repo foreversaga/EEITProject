@@ -49,7 +49,7 @@ public class ProductController {
 	@RequestMapping(value = "/shop/{pageNo}")
 	public String productPage(HttpSession session, @PathVariable Integer pageNo, HttpServletRequest request) {
 		StringBuilder sb = new StringBuilder();
-		if (pageNo == 1) {
+		if (pageNo == 1 || pageNo == null) {
 			pageNo = 1;
 			sb.append("redirect:/products/").append(pageNo);
 			return sb.toString();
@@ -85,11 +85,11 @@ public class ProductController {
 		ModelAndView mav = new ModelAndView("product/ProductSingle");
 		productBean pb = pService.getProduct(pId);
 		List<reviewBean> reviewList = rService.getProductReview(pId);
-		List<productBean> mapList=pService.getProductMap(pId);
+		List<productBean> mapList = pService.getProductMap(pId);
 		orderItem oi = new orderItem();
 		JsonObject ProductMap = new JsonObject();
 		JsonArray array = new JsonArray();
-		for (productBean mapPb:mapList) {
+		for (productBean mapPb : mapList) {
 			ProductMap.addProperty("label", mapPb.getpName());
 			ProductMap.addProperty("lat", mapPb.getpLat());
 			ProductMap.addProperty("lng", mapPb.getpLng());
@@ -98,7 +98,7 @@ public class ProductController {
 			ProductMap = new JsonObject();
 		}
 		System.out.println(array);
-		mav.addObject("mapList",array);
+		mav.addObject("mapList", array);
 		mav.addObject("orderItem", oi);
 		mav.addObject("productBean", pb);
 		mav.addObject("reviewList", reviewList);
