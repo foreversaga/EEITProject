@@ -398,8 +398,8 @@ div#shoppingCartMenu {
 			</div>
 		</div>
 		<center>
-			<a href="<c:url value='/shop/1'/>"><input type="button"
-				class="btn btn-outline-warning btn btn-lg mt-5" value="探索更多"></a>
+			<a href="<c:url value='/shop/1'/>"><button type="button"
+				class="btn btn-outline-warning btn btn-lg mt-5" >探索更多</button></a>
 		</center>
 	</section>
 
