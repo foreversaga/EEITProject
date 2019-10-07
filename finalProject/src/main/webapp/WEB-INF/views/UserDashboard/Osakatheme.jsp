@@ -122,7 +122,7 @@ div#shoppingCartMenu {
 							class="nav-link">討論區</a></li>
 					</c:if>
 					<c:if test="${!empty LoginOK}">
-						<li class="nav-item"><a  href="<c:url value='/ForumIndex/1'/>"
+						<li class="nav-item"><a href="<c:url value='/ForumIndex/1'/>"
 							class="nav-link">討論區</a></li>
 						<li class="nav-item"><a
 							href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
@@ -398,8 +398,8 @@ div#shoppingCartMenu {
 			</div>
 		</div>
 		<center>
-			<a href="<c:url value='/shop/1'/>"><input type="button"
-				class="btn btn-outline-warning btn btn-lg mt-5" value="探索更多"></a>
+			<a href="<c:url value='/shop/1'/>"><button type="button"
+					class="btn btn-outline-warning btn btn-lg mt-5">探索更多</button></a>
 		</center>
 	</section>
 
