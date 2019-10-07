@@ -62,7 +62,7 @@ public class ReviewController {
 			rService.InsertNewReview(rb);
 			pService.updateRating(rb.getpId(), rb.getrRating());
 			pService.updateAvgRating(rb.getpId());
-			sb.append("redirect:/showOrderItem/").append(rb.getoId()).append("#orderitem");
+			sb.append("redirect:/showOrderItem/").append(rb.getoId()).append("#ChangePage");
 			session.removeAttribute("reviewBeanParam");
 			return sb.toString();
 		}
@@ -82,7 +82,7 @@ public class ReviewController {
 		pService.updateAmendRating(pId, oldRating, newRating);
 		pService.updateAvgRating(pId);
 		StringBuilder sb = new StringBuilder();
-		sb.append("redirect:/showOrderItem/").append(rb.getoId()).append("#orderitem");
+		sb.append("redirect:/showOrderItem/").append(rb.getoId()).append("#ChangePage");
 		return sb.toString();
 	}
 

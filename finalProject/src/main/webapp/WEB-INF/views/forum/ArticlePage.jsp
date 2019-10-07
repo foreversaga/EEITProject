@@ -60,9 +60,12 @@ a.thumb:hover {
 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/login'/>" class="nav-link">Login</a></li>
 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
 					</c:if>
-					<c:if test="${!empty LoginOK}">
+						<c:if test="${!empty LoginOK}">
 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
+					</c:if>
+					<c:if test="${LoginOK.mAccount=='admin'}">
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/Dashboard'/>" class="nav-link">後臺系統</a></li>
 					</c:if>
 				</ul>
 				<ul class="navbar-nav mr-right">

@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,7 +33,7 @@ public class ArticleBean implements Serializable {
 	private java.sql.Timestamp aEditTime;
 	private String aLike;
 	private String aDislike;
-	@OneToMany(mappedBy = "ArticleBean", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "ArticleBean", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	Set<ArticleReplyBean> ReplySet = new LinkedHashSet<>();
 	
 	

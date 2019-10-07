@@ -33,8 +33,7 @@
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/icomoon.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/RWDcss/css/style.css'/>">
 <!--===============================================================================================-->
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/css/TableCss/vendor/perfect-scrollbar/perfect-scrollbar.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/TableCss/vendor/perfect-scrollbar/perfect-scrollbar.css'/>">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/TableCss/css/util.css'/>">
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/TableCss/css/main.css'/>">
@@ -61,7 +60,7 @@
 
 	$(document).ready(
 			function() {
-				$("input[name='qty']").on(
+				$("select[name='qty']").on(
 						"change paste keyup",
 						function() {
 							// 			var qty = this.value;
@@ -102,9 +101,10 @@
 			});
 </script>
 <style type="text/css">
-*{
-font-family: Microsoft JhengHei;
+* {
+	font-family: Microsoft JhengHei;
 }
+
 div.dropdown-menu {
 	width: 300px;
 	height: 423px;
@@ -118,7 +118,7 @@ div#ftco-nav li.nav-item {
 }
 
 p {
-	font-size: 25px;
+	font-size: 20px;
 }
 
 span {
@@ -132,8 +132,8 @@ span {
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 		<div class="container">
 			<a class="navbar-brand" href="<c:url value='/'/>">旅遊趣</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false"
+				aria-label="Toggle navigation">
 				<span class="oi oi-menu"></span> Menu
 			</button>
 
@@ -155,15 +155,15 @@ span {
 	</nav>
 	<!-- END nav -->
 
-	<div class="hero-wrap js-fullheight"
-		style="background-image: url(<c:url value='/css/RWDcss/images/bg_5.jpg'/>);">
+	<div class="hero-wrap js-fullheight" style="background-image: url(<c:url value='/css/RWDcss/images/bg_5.jpg'/>);">
 		<div style="margin: 0 10%;">
 
-			<div style="margin: 10% 2%; display: inline-block; width: 38%;" class="card">
-				<div class="card-header"><span>購買人資訊</span></div>
+			<div style="margin: 8% 2%; display: inline-block; width: 38%;" class="card">
+				<div class="card-header">
+					<span>購買人資訊</span>
+				</div>
 				<div class="card-body">
-					<form:form id="OrderForm" method="POST"
-						action="${pageContext.request.contextPath }/ConfirmOrder" modelAttribute="orderInfo">
+					<form:form id="OrderForm" method="POST" action="${pageContext.request.contextPath }/ConfirmOrder" modelAttribute="orderInfo">
 						<table>
 							<tr>
 								<td><h5 class="card-title">購買人姓名:</h5></td>
@@ -171,23 +171,21 @@ span {
 							</tr>
 							<tr>
 								<td><h5 style="font-size: 20px">收件人姓名:</h5></td>
-								<td><form:input size="10" class="card-title" type="text" path="oReceiveName"
-										value="${orderBeanParam.oReceiveName}" /><span style="color: red">${errormsg.receivename}</span></td>
+								<td><form:input size="10" class="card-title" type="text" path="oReceiveName" value="${orderBeanParam.oReceiveName}" /><span
+									style="color: red">${errormsg.receivename}</span></td>
 							</tr>
 							<tr>
 								<td><h5 style="font-size: 20px">收件人地址:</h5></td>
-								<td><form:input size="20" class="card-title" type="text" path="oAddress"
-										value="${orderBeanParam.oAddress }" /><span style="color: red">${errormsg.receiveadr}</span></td>
+								<td><form:input size="20" class="card-title" type="text" path="oAddress" value="${orderBeanParam.oAddress }" /><span style="color: red">${errormsg.receiveadr}</span></td>
 							</tr>
 							<tr>
 								<td><h5 style="font-size: 20px">收件人電話:</h5></td>
-								<td><form:input size="10" class="card-title" type="text" path="oReceivePhone"
-										value="${orderBeanParam.oReceivePhone}" /><span style="color: red">${errormsg.receivephone}</span></td>
+								<td><form:input size="10" class="card-title" type="text" path="oReceivePhone" value="${orderBeanParam.oReceivePhone}" /><span
+									style="color: red">${errormsg.receivephone}</span></td>
 							</tr>
 							<tr>
 								<td><h5 style="font-size: 20px">備註:</h5></td>
-								<td><form:input class="card-title" type="text" path="oNote"
-										value="${orderBeanParam.oNote }" /></td>
+								<td><form:input class="card-title" type="text" path="oNote" value="${orderBeanParam.oNote }" /></td>
 							</tr>
 							<tr>
 								<td><input id="SubmitOrder" type="submit" class="btn btn-outline-primary" value="送出"></td>
@@ -202,28 +200,35 @@ span {
 				</div>
 			</div>
 			<div id="UpdateDetail" style="margin: 20% 2%; display: inline-block; width: 50%" class="card">
-				<div class="card-header"><span>購物明細</span></div>
+				<div class="card-header">
+					<span>購物明細</span>
+				</div>
 				<div>
 					<table style="background-color: #99FF99; width: 100%;">
 						<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content}">
 							<tr>
-								<td style="width: 32%;"><p>${cart.value.pName}</p></td>
+								<td style="width: 30%;"><p>${cart.value.pName}</p></td>
 								<td><span>數量:</span></td>
 								<td>
-									<%-- 								<input style="width: 40px;" id="${cart.value.pId}" name="qty" type="number" --%>
-									<%-- 										value="${cart.value.iQty}" min="1" /> --%> <select name="qty">
+									<%-- 								<input style="width: 40px;" id="${cart.value.pId}" name="qty" type="number" --%> <%-- 										value="${cart.value.iQty}" min="1" /> --%>
+									<select id="${cart.value.pId}" name="qty">
 										<c:forEach var="stock" begin="1" end="${stockMap[cart.value.pId]}">
-											<option value="${stock}">${stock}</option>
+											<c:choose>
+												<c:when test="${stock==cart.value.iQty }">
+													<option selected="selected" value="${stock}">${stock}</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${stock}">${stock}</option>
+												</c:otherwise>
+											</c:choose>
 										</c:forEach>
 								</select>
 								</td>
 								<td><span>單價:</span></td>
 								<td id="unit${cart.value.pId}"><span>$${cart.value.pPrice}</span></td>
 								<td><span>小計:</span></td>
-								<td style="width: 80px;" id="sub${cart.value.pId}"><span>$${cart.value.iQty *
-										cart.value.pPrice}</span></td>
-								<td><button class="btn btn-outline-danger" onclick="DelCart(this.id)"
-										id="${cart.value.pId}">刪除</button></td>
+								<td style="width: 80px;" id="sub${cart.value.pId}"><span>$${cart.value.iQty * cart.value.pPrice}</span></td>
+								<td><button class="btn btn-outline-danger" onclick="DelCart(this.id)" id="${cart.value.pId}">刪除</button></td>
 							</tr>
 						</c:forEach>
 						<tr>

@@ -9,13 +9,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <style type="text/css">
-*{
-font-family: Microsoft JhengHei;
+* {
+	font-family: Microsoft JhengHei;
 }
-p{
-font-size: 25px;
+
+p {
+	font-size: 20px;
 }
-span{font-size: 20px;
+
+span {
+	font-size: 15px;
 }
 </style>
 <script type="text/javascript">
@@ -25,22 +28,22 @@ span{font-size: 20px;
 			type : "POST",
 			url : url,
 			success : function(data) {
-				var count=0;
+				var count = 0;
 				<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content}">
 				count = count + 1;
 				</c:forEach>
-				if(count==1){			
-					alert("購物車內已無商品。");	
+				if (count == 1) {
+					alert("購物車內已無商品。");
 					location.href = "<c:url value='/products/1'/>";
-					}else{
+				} else {
 					$("div#UpdateDetail").html(data);
-					}
+				}
 			}
 		});
 	}
 	$(document).ready(
 			function() {
-				$("input[name='qty']").on(
+				$("select[name='qty']").on(
 						"change paste keyup",
 						function() {
 							// 			var qty = this.value;
@@ -68,25 +71,30 @@ span{font-size: 20px;
 	<div>
 		<table style="background-color: #99FF99; width: 100%;">
 			<c:forEach varStatus="vs" var="cart" items="${shoppingCart.content}">
-			<tr>
-						<td style="width: 38%;"><p>${cart.value.pName}</p></td>
-								<td><span>數量:</span></td>
-								<td>
-									<%-- 								<input style="width: 40px;" id="${cart.value.pId}" name="qty" type="number" --%>
-									<%-- 										value="${cart.value.iQty}" min="1" /> --%> <select name="qty">
-										<c:forEach var="stock" begin="1" end="${stockMap[cart.value.pId]}">
-											<option value="${stock}">${stock}</option>
-										</c:forEach>
-								</select>
-								</td>
-								<td><span>單價:</span></td>
-								<td id="unit${cart.value.pId}"><span>${cart.value.pPrice}</span></td>
-								<td><span>小計:</span></td>
-								<td style="width: 80px;" id="sub${cart.value.pId}"><span>$${cart.value.iQty *
-										cart.value.pPrice}</span></td>
-								<td><button class="btn btn-outline-danger" onclick="DelCart(this.id)"
-										id="${cart.value.pId}">刪除</button></td>
-							</tr>
+				<tr>
+					<td style="width: 30%;"><p>${cart.value.pName}</p></td>
+					<td><span>數量:</span></td>
+					<td>
+						<%-- 								<input style="width: 40px;" id="${cart.value.pId}" name="qty" type="number" --%> <%-- 										value="${cart.value.iQty}" min="1" /> --%>
+						<select id="${cart.value.pId}" name="qty">
+							<c:forEach var="stock" begin="1" end="${stockMap[cart.value.pId]}">
+								<c:choose>
+									<c:when test="${stock==cart.value.iQty }">
+										<option selected="selected" value="${stock}">${stock}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${stock}">${stock}</option>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+					</select>
+					</td>
+					<td><span>單價:</span></td>
+					<td id="unit${cart.value.pId}"><span>${cart.value.pPrice}</span></td>
+					<td><span>小計:</span></td>
+					<td style="width: 80px;" id="sub${cart.value.pId}"><span>$${cart.value.iQty * cart.value.pPrice}</span></td>
+					<td><button class="btn btn-outline-danger" onclick="DelCart(this.id)" id="${cart.value.pId}">刪除</button></td>
+				</tr>
 			</c:forEach>
 			<tr>
 				<td></td>
@@ -94,8 +102,8 @@ span{font-size: 20px;
 				<td></td>
 				<td></td>
 				<td></td>
-				<td><p>金額總計:</td>
-				<td><p>$${shoppingCart.total}</td>
+				<td><span>金額總計:</span></td>
+				<td><span>$${shoppingCart.total}</span></td>
 				<td></td>
 			</tr>
 		</table>

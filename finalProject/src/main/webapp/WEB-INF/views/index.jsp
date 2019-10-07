@@ -89,7 +89,7 @@ div#shoppingCartMenu {
 					<c:if test="${empty LoginOK}">
 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/login'/>" class="nav-link">Login</a></li>
 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
-						<%-- 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/AddMemberDB'/>" class="nav-link">新增會員DB</a></li> --%>
+						<%-- s						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/AddMemberDB'/>" class="nav-link">新增會員DB</a></li> --%>
 						<%-- 						<li class="nav-item"><a style="font-size:20px;" href="<c:url value='/AddReviewDB'/>" class="nav-link">新增評價DB</a></li> --%>
 						<%-- 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/AddProductDB'/>" class="nav-link">新增商品DB</a></li> --%>
 						<%-- 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/AddOrderDB'/>" class="nav-link">新增訂單DB</a></li> --%>
@@ -98,8 +98,10 @@ div#shoppingCartMenu {
 					</c:if>
 					<c:if test="${!empty LoginOK}">
 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
-						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/Dashboard'/>" class="nav-link">後臺系統</a></li>
 						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/logout'/>" class="nav-link">Logout</a></li>
+					</c:if>
+					<c:if test="${LoginOK.mAccount=='admin'}">
+						<li class="nav-item"><a style="font-size: 20px;" href="<c:url value='/Dashboard'/>" class="nav-link">後臺系統</a></li>
 					</c:if>
 				</ul>
 				<!-- 				<ul class="navbar-nav mr-right"> -->
@@ -218,8 +220,8 @@ div#shoppingCartMenu {
 							</div>
 						</div>
 						<div class="media-body p-2 mt-2">
-							<h3 class="heading mb-3">24小時客服</h3>
-							<p>讓旅行中的你遇到疑問時，不用擔心任何時差。</p>
+							<h3 class="heading mb-3">互動討論區</h3>
+							<p>讓您分享印象最深刻的旅遊心得。</p>
 						</div>
 					</div>
 				</div>
@@ -383,7 +385,7 @@ div#shoppingCartMenu {
 										<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>">${ArticleBean.aAddTime}</a>
 									</div>
 									<div>
-										<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>" class="meta-chat"><span class="icon-chat"></span> 3</a>
+										<a href="<c:url value='/ShowArticle/${ArticleBean.aId}'/>" class="meta-chat"><span class="icon-chat"></span> ${ArticleBean.replySet.size()}</a>
 									</div>
 								</div>
 							</div>
