@@ -113,25 +113,23 @@ div#shoppingCartMenu {
 						class="nav-link">Home</a></li>
 					<li class="nav-item"><a href="<c:url value='/shop/1'/>"
 						class="nav-link">Products</a></li>
+					<li class="nav-item"><a href="<c:url value='/ForumIndex/1'/>"
+						class="nav-link">討論區</a></li>
 					<c:if test="${empty LoginOK}">
-						<li class="nav-item"><a href="<c:url value='/login'/>"
-							class="nav-link">Login</a></li>
-						<li class="nav-item"><a href="<c:url value='/register/add'/>"
-							class="nav-link">Register</a></li>
-						<li class="nav-item"><a href="<c:url value='/ForumIndex'/>"
-							class="nav-link">討論區</a></li>
+						<li class="nav-item"><a style="font-size: 20px;"
+							href="<c:url value='/login'/>" class="nav-link">Login</a></li>
+						<li class="nav-item"><a style="font-size: 20px;"
+							href="<c:url value='/register/add'/>" class="nav-link">Register</a></li>
 					</c:if>
 					<c:if test="${!empty LoginOK}">
-						<li class="nav-item"><a  href="<c:url value='/ForumIndex/1'/>"
-							class="nav-link">討論區</a></li>
 						<li class="nav-item"><a
 							href="<c:url value='/UserDashboard'/>" class="nav-link">會員中心</a></li>
-						<li class="nav-item"><a href="<c:url value='/OrderDetails'/>"
-							class="nav-link">查詢訂單</a></li>
-						<li class="nav-item"><a href="<c:url value='/Dashboard'/>"
-							class="nav-link">後臺系統</a></li>
 						<li class="nav-item"><a href="<c:url value='/logout'/>"
 							class="nav-link">Logout</a></li>
+					</c:if>
+					<c:if test="${LoginOK.mAccount=='admin'}">
+						<li class="nav-item"><a href="<c:url value='/Dashboard'/>"
+							class="nav-link">後臺系統</a></li>
 					</c:if>
 				</ul>
 			</div>
@@ -399,7 +397,7 @@ div#shoppingCartMenu {
 		</div>
 		<center>
 			<a href="<c:url value='/shop/1'/>"><button type="button"
-				class="btn btn-outline-warning btn btn-lg mt-5" >探索更多</button></a>
+					class="btn btn-outline-warning btn btn-lg mt-5">探索更多</button></a>
 		</center>
 	</section>
 
@@ -415,14 +413,16 @@ div#shoppingCartMenu {
 				</div>
 			</div>
 			<div class="row">
-			<div class=" view col-md-3">
-				<a href="<c:url value='/Osakatheme'/>"><img src="<c:url value='/img/Osaka.JPG'/>" class="img-fluid" alt=""></a>
-				<div class="mask flex-center rgba-black-strong"></div>
-			</div>
-			<div class=" view col-md-3">
-				<a href="<c:url value='/Kyototheme'/>"><img src="<c:url value='/img/Kyoto.JPG'/>" class="img-fluid" alt=""></a>
-				<div class="mask flex-center rgba-black-strong"></div>
-			</div>
+				<div class=" view col-md-3">
+					<a href="<c:url value='/Osakatheme'/>"><img
+						src="<c:url value='/img/Osaka.JPG'/>" class="img-fluid" alt=""></a>
+					<div class="mask flex-center rgba-black-strong"></div>
+				</div>
+				<div class=" view col-md-3">
+					<a href="<c:url value='/Kyototheme'/>"><img
+						src="<c:url value='/img/Kyoto.JPG'/>" class="img-fluid" alt=""></a>
+					<div class="mask flex-center rgba-black-strong"></div>
+				</div>
 			</div>
 		</div>
 	</section>
